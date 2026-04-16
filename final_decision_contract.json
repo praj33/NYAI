@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NyayaDecisionContract",
+  "description": "Canonical decision object contract — used by Decision Engine, Enforcement, Observer, Frontend",
+  "version": "1.0.0",
+
+  "request": {
+    "type": "object",
+    "required": ["query", "user_context"],
+    "properties": {
+      "query": { "type": "string", "description": "Legal query text" },
+      "jurisdiction_hint": { "type": "string", "enum": ["India", "UK", "UAE"], "description": "Optional jurisdiction" },
+      "domain_hint": { "type": "string", "enum": ["criminal", "civil", "family", "commercial", "constitutional"], "description": "Optional domain" },
+      "user_context": {
+        "type": "object",
+        "required": ["role"],
+        "properties": {
+          "role": { "type": "string", "enum": ["citizen", "lawyer", "judge", "researcher"] },
+          "confidence_required": { "type": "boolean", "default": true }
+        }
+      }
+    }
+  },
+
+  "response": {
+    "type": "object",
+    "required": ["domain", "jurisdiction", "confidence", "statutes", "enforcement_decision", "trace_id"],
+    "properties": {
+      "domain": { "type": "string", "description": "Detected legal domain" },
+      "domains": { "type": "array", "items": { "type": "string" }, "description": "All applicable domains" },
+      "jurisdiction": { "type": "string", "description": "Resolved jurisdiction code (IN/UK/UAE)" },
+      "jurisdiction_detected": { "type": "string", "description": "Human-readable jurisdiction name" },
+      "jurisdiction_confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+
+      "confidence": {
+        "type": "object",
+        "required": ["overall", "jurisdiction", "domain", "statute_match", "procedural_match"],
+        "properties": {
+          "overall": { "type": "number", "minimum": 0, "maximum": 1 },
+          "jurisdiction": { "type": "number", "minimum": 0, "maximum": 1 },
+          "domain": { "type": "number", "minimum": 0, "maximum": 1 },
+          "statute_match": { "type": "number", "minimum": 0, "maximum": 1 },
+          "procedural_match": { "type": "number", "minimum": 0, "maximum": 1 }
+        }
+      },
+
+      "enforcement_decision": {
+        "type": "string",
+        "enum": ["ALLOW", "ALLOW_INFORMATIONAL", "SAFE_REDIRECT", "RESTRICT"],
+        "description": "Sovereign enforcement decision — SINGLE SOURCE OF TRUTH for gating"
+      },
+
+      "statutes": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["act", "section", "title"],
+          "properties": {
+            "act": { "type": "string" },
+            "year": { "type": "integer" },
+            "section": { "type": "string" },
+            "title": { "type": "string" }
+          }
+        }
+      },
+
+      "case_laws": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "title": { "type": "string" },
+            "court": { "type": "string" },
+            "year": { "type": "integer" },
+            "principle": { "type": "string" }
+          }
+        }
+      },
+
+      "legal_route": {
+        "type": "array",
+        "items": { "type": "string" },
+        "description": "Ordered list of processing stages the query traversed"
+      },
+
+      "provenance_chain": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "timestamp": { "type": "string", "format": "date-time" },
+            "event": { "type": "string" },
+            "agent": { "type": "string" },
+            "sections_found": { "type": "integer" },
+            "case_laws_found": { "type": "integer" },
+            "jurisdiction_detected": { "type": "string" },
+            "jurisdiction_confidence": { "type": "number" }
+          }
+        }
+      },
+
+      "reasoning_trace": {
+        "type": "object",
+        "properties": {
+          "legal_analysis": { "type": "string" },
+          "procedural_steps": { "type": "array", "items": { "type": "string" } },
+          "remedies": { "type": "array", "items": { "type": "string" } }
+        }
+      },
+
+      "timeline": { "type": "array", "items": { "type": "object" } },
+      "glossary": { "type": "array", "items": { "type": "object" } },
+      "evidence_requirements": { "type": "array", "items": { "type": "string" } },
+
+      "answer": { "type": "string", "description": "LLM-generated explanation text" },
+      "answer_source": { "type": "string", "enum": ["groq_llm", "local_fallback", "skipped"] },
+      "answer_model": { "type": ["string", "null"] },
+
+      "trace_id": { "type": "string", "description": "Unique trace identifier for audit trail" }
+    }
+  },
+
+  "enforcement_rules": [
+    { "id": "INTENT-001", "type": "IntentClassificationRule", "source": "Governance", "action": "Blocks malicious intent, classifies informational" },
+    { "id": "CONST-001", "type": "ConstitutionalComplianceRule", "source": "Constitutional", "action": "Constitutional domain requires confidence >= 0.8" },
+    { "id": "JURIS-001", "type": "JurisdictionBoundaryRule", "source": "Governance", "action": "Country must match routed jurisdiction" },
+    { "id": "SAFETY-001", "type": "SystemSafetyRule", "source": "System Safety", "action": "Blocks bypass/circumvent attempts" },
+    { "id": "CONF-001", "type": "ConfidenceThresholdRule", "source": "System Safety", "action": "Criminal/constitutional min 0.3, general min 0.2" },
+    { "id": "PROC-001", "type": "ProcedureIntegrityRule", "source": "Compliance", "action": "Appeals require confidence >= 0.75" },
+    { "id": "RAJ-FAILURE-001", "type": "RajFailurePathRule", "source": "Compliance", "action": "Failure path schema validation" },
+    { "id": "RAJ-EVIDENCE-001", "type": "RajEvidenceReadinessRule", "source": "Compliance", "action": "Evidence readiness check" },
+    { "id": "RAJ-COMPLIANCE-001", "type": "RajComplianceRule", "source": "Compliance", "action": "Jurisdiction compliance validation" }
+  ],
+
+  "rl_signal": {
+    "request": {
+      "type": "object",
+      "required": ["trace_id"],
+      "properties": {
+        "trace_id": { "type": "string" },
+        "signal_type": { "type": "string", "default": "feedback" },
+        "user_feedback": { "type": "string", "enum": ["positive", "negative", "neutral"] },
+        "outcome_tag": { "type": "string" }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "accepted": { "type": "boolean" },
+        "reward_computed": { "type": "number" },
+        "reason": { "type": "string" },
+        "trace_id": { "type": "string" }
+      }
+    }
+  }
+}
