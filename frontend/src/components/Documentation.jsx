@@ -22,7 +22,7 @@ const Documentation = ({ onBack }) => {
     overview: {
       title: 'Platform Overview',
       content: [
-        { heading: 'What is Nyaya AI?', text: 'Nyaya AI is a sovereign-compliant multi-agent legal intelligence platform that provides transparent, auditable legal analysis across India, UK, and UAE jurisdictions.' },
+        { heading: 'What is NYAI?', text: 'NYAI is a sovereign-compliant multi-agent legal intelligence platform that provides transparent, auditable legal analysis across India, UK, and UAE jurisdictions.' },
         { heading: 'Key Features', text: 'AI-powered legal question answering, jurisdiction-specific procedures, case timeline generation, and comprehensive legal glossary.' },
         { heading: 'How It Works', text: 'Ask your legal question, receive AI-powered analysis with confidence scores, get suggested next steps, and view jurisdiction-specific procedures.' }
       ]
@@ -58,8 +58,8 @@ const Documentation = ({ onBack }) => {
     faq: {
       title: 'FAQ',
       content: [
-        { heading: 'Is this legal advice?', text: 'No. Nyaya AI provides legal information and analysis, not legal advice. Always consult a qualified lawyer for specific legal advice on your situation.' },
-        { heading: 'Which jurisdictions are supported?', text: 'Currently, Nyaya AI supports India, United Kingdom, and United Arab Emirates. Each jurisdiction has specific procedures and legal frameworks.' },
+        { heading: 'Is this legal advice?', text: 'No. NYAI provides legal information and analysis, not legal advice. Always consult a qualified lawyer for specific legal advice on your situation.' },
+        { heading: 'Which jurisdictions are supported?', text: 'Currently, NYAI supports India, United Kingdom, and United Arab Emirates. Each jurisdiction has specific procedures and legal frameworks.' },
         { heading: 'How accurate is the AI?', text: 'The AI provides confidence scores with each analysis. Higher confidence (>80%) indicates stronger analysis, but always verify with legal professionals.' },
         { heading: 'Can I save my queries?', text: 'Each query generates a trace ID for tracking. You can reference this ID for follow-up questions or to retrieve analysis history.' },
         { heading: 'What case types are covered?', text: 'Contract disputes, property disputes, criminal matters, civil litigation, family law, employment law, and more across all supported jurisdictions.' }
@@ -100,7 +100,7 @@ const Documentation = ({ onBack }) => {
       }}>
         <h1 style={{ color: '#fff', fontSize: '32px', marginBottom: '12px' }}>Documentation</h1>
         <p style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '16px', marginBottom: '32px' }}>
-          Learn how to use Nyaya AI and understand legal procedures across jurisdictions
+          Learn how to use NYAI and understand legal procedures across jurisdictions
         </p>
 
         {/* Navigation Tabs */}

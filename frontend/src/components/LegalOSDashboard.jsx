@@ -50,7 +50,7 @@ const LegalOSDashboard = ({ onModuleSelect }) => {
           WebkitTextFillColor: 'transparent',
           backgroundClip: 'text'
         }}>
-          Nyaya AI
+          NYAI
         </h1>
         <p style={{ 
           fontSize: '18px', 
