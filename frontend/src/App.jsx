@@ -536,7 +536,7 @@ function App() {
         >
           <img 
             src="/03.svg" 
-            alt="Nyaya AI Logo" 
+            alt="NYAI Logo" 
             style={{ 
               width: '40px', 
               height: '40px', 
@@ -551,7 +551,7 @@ function App() {
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text'
           }}>
-            Nyaya AI
+            NYAI
           </span>
         </div>
         <button

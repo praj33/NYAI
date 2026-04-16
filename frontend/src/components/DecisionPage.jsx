@@ -106,7 +106,7 @@ function DecisionPage() {
     <div className="decision-page">
       {/* Header */}
       <div className="decision-header">
-        <h1>Nyaya Legal Agent</h1>
+        <h1>NYAI Legal Agent</h1>
         <p>Real-time structured legal decisions with enforcement authority</p>
       </div>
 

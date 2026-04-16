@@ -102,9 +102,9 @@ const AuthPage = ({ onAuthSuccess, onSkipAuth }) => {
       }}>
         <div style={{ textAlign: 'center', marginBottom: '32px' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '8px' }}>
-            <img src="/03.svg" alt="Nyaya AI Logo" style={{ width: '40px', height: '40px', objectFit: 'contain' }} />
+            <img src="/03.svg" alt="NYAI Logo" style={{ width: '40px', height: '40px', objectFit: 'contain' }} />
             <h1 style={{ color: '#fff', fontSize: '32px', fontWeight: '700', margin: 0 }}>
-              Nyaya AI
+              NYAI
             </h1>
           </div>
           <p style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '14px' }}>
