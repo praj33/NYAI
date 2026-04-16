@@ -1,0 +1,27 @@
+{
+  "code": "Federal Law No. (5) of 1985 - Civil Transactions Law",
+  "scope": "Governs civil transactions and contractual relations, applies to general civil matters, covers contractual obligations",
+  "contract_formation": {
+    "essential_elements": {
+      "Articles_106-127": "Mutual Consent (Ijab & Qabul), Legal Capacity (18+ years), Lawful Object, Legal Cause/Consideration"
+    }
+  },
+  "key_provisions": {
+    "Article_296": "Cannot limit tort liability (VOID)",
+    "Article_390": "Liquidated damages modifiable by court",
+    "Article_1231": "Breach = damages liability"
+  },
+  "remedies_for_breach": [
+    "Specific Performance",
+    "Damages (direct + consequential)",
+    "Rescission",
+    "Restitution"
+  ],
+  "contract_types": [
+    "Sale contracts",
+    "Lease agreements",
+    "Service contracts",
+    "Construction contracts",
+    "Agency agreements"
+  ]
+}

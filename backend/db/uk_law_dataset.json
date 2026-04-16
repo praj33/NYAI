@@ -1,0 +1,1569 @@
+{
+  "jurisdiction": "UK",
+  "version": "2.0",
+  "last_updated": "2024-12-02",
+  "criminal_law": {
+    "theft_act_1968": {
+      "section_1_theft": {
+        "offence": "Theft",
+        "elements_required": [
+          "Dishonestly appropriates property belonging to another",
+          "With intention permanently to deprive the other of it"
+        ],
+        "punishment": "Maximum 7 years imprisonment and/or unlimited fine",
+        "process_steps": [
+          "Police investigation",
+          "Charging by Crown Prosecution Service",
+          "Trial in Magistrates' Court or Crown Court",
+          "Sentencing based on culpability and harm"
+        ]
+      },
+      "section_8_robbery": {
+        "offence": "Robbery",
+        "elements_required": [
+          "Theft of property",
+          "Accompanied by force or threat of force",
+          "Used to steal or immediately after stealing"
+        ],
+        "punishment": "Life imprisonment",
+        "process_steps": [
+          "Police investigation and arrest",
+          "Crown Court trial (indictable only)",
+          "Sentencing based on aggravating factors"
+        ]
+      },
+      "section_9_burglary": {
+        "offence": "Burglary",
+        "elements_required": [
+          "Entry to building or part of building as trespasser",
+          "With intent to steal, inflict grievous bodily harm, or do unlawful damage"
+        ],
+        "punishment": "Maximum 14 years imprisonment",
+        "process_steps": [
+          "Forensic investigation",
+          "Trial in Magistrates' or Crown Court",
+          "Sentencing guidelines application"
+        ]
+      },
+      "section_12_handling_stolen_goods": {
+        "offence": "Handling Stolen Goods",
+        "elements_required": [
+          "Receives stolen property",
+          "Knowing or believing it to be stolen",
+          "Intention to deprive owner permanently"
+        ],
+        "punishment": "Maximum 14 years imprisonment",
+        "process_steps": [
+          "Police investigation",
+          "Prosecution for money laundering if applicable",
+          "Court proceedings"
+        ]
+      }
+    },
+    "fraud_act_2006": {
+      "section_1_fraud_by_false_representation": {
+        "offence": "Fraud by False Representation",
+        "elements_required": [
+          "Dishonestly makes false representation",
+          "Intention that victim acts on representation",
+          "Victim acts on representation to own detriment"
+        ],
+        "punishment": "Maximum 10 years imprisonment and/or unlimited fine",
+        "process_steps": [
+          "Financial investigation by police or FCA",
+          "Crown Prosecution Service review",
+          "Trial in Magistrates' or Crown Court",
+          "Confiscation proceedings under Proceeds of Crime Act"
+        ]
+      },
+      "section_2_fraud_by_failure_to_disclose": {
+        "offence": "Fraud by Failing to Disclose Information",
+        "elements_required": [
+          "Legal duty to disclose information",
+          "Dishonestly fails to disclose",
+          "Intention to make gain or cause loss"
+        ],
+        "punishment": "Maximum 10 years imprisonment and/or unlimited fine",
+        "process_steps": [
+          "Investigation by relevant regulatory authority",
+          "Prosecution by CPS or SFO",
+          "Complex fraud trials in Crown Court"
+        ]
+      },
+      "section_3_fraud_by_abuse_of_position": {
+        "offence": "Fraud by Abuse of Position",
+        "elements_required": [
+          "Position of trust or authority",
+          "Dishonestly abuses position",
+          "Intention to make gain or cause loss"
+        ],
+        "punishment": "Maximum 10 years imprisonment and/or unlimited fine",
+        "process_steps": [
+          "Investigation by police or regulatory bodies",
+          "Crown Court trial",
+          "Professional disqualification proceedings"
+        ]
+      }
+    },
+    "offences_against_the_person_act_1861": {
+      "section_18_wounding_with_intent": {
+        "offence": "Wounding with Intent to Cause Grievous Bodily Harm",
+        "elements_required": [
+          "Causes grievous bodily harm",
+          "With intent to cause grievous bodily harm",
+          "Or with intent to resist arrest"
+        ],
+        "punishment": "Life imprisonment",
+        "process_steps": [
+          "Police investigation and medical evidence",
+          "Crown Court trial",
+          "Sentencing based on harm caused"
+        ]
+      },
+      "section_20_malicious_wounding": {
+        "offence": "Malicious Wounding",
+        "elements_required": [
+          "Unlawfully and maliciously wounds or causes grievous bodily harm",
+          "Without intent to cause such harm"
+        ],
+        "punishment": "Maximum 5 years imprisonment and/or unlimited fine",
+        "process_steps": [
+          "Medical examination and evidence",
+          "Trial in Magistrates' or Crown Court",
+          "Compensation orders possible"
+        ]
+      },
+      "section_39_common_assault": {
+        "offence": "Common Assault",
+        "elements_required": [
+          "Intentionally or recklessly causes another to apprehend immediate unlawful violence"
+        ],
+        "punishment": "Maximum 6 months imprisonment and/or fine up to £5,000",
+        "process_steps": [
+          "Police investigation",
+          "Summary trial in Magistrates' Court",
+          "Conditional discharge common for first offenses"
+        ]
+      }
+    },
+    "sexual_offences_act_2003": {
+      "section_1_rape": {
+        "offence": "Rape",
+        "elements_required": [
+          "Intentionally penetrates vagina, anus or mouth with penis",
+          "Without consent of victim",
+          "Without reasonable belief that victim consented"
+        ],
+        "punishment": "Life imprisonment",
+        "process_steps": [
+          "Specialist police investigation (Operation Hydrant)",
+          "Crown Court trial",
+          "Victim support throughout process",
+          "Sentencing based on culpability and harm"
+        ]
+      },
+      "section_2_assault_by_penetration": {
+        "offence": "Assault by Penetration",
+        "elements_required": [
+          "Penetrates vagina or anus with object or body part",
+          "Without consent",
+          "Without reasonable belief in consent"
+        ],
+        "punishment": "Life imprisonment",
+        "process_steps": [
+          "Forensic medical examination",
+          "Crown Court trial",
+          "Special measures for vulnerable witnesses"
+        ]
+      },
+      "section_3_sexual_assault": {
+        "offence": "Sexual Assault",
+        "elements_required": [
+          "Intentionally touches another person sexually",
+          "Without consent",
+          "Without reasonable belief in consent"
+        ],
+        "punishment": "Maximum 10 years imprisonment",
+        "process_steps": [
+          "Police investigation with medical support",
+          "Trial in Magistrates' or Crown Court",
+          "Sexual Harm Prevention Orders possible"
+        ]
+      }
+    },
+    "misuse_of_drugs_act_1971": {
+      "section_4_production_and_supply": {
+        "offence": "Production or Supply of Controlled Drugs",
+        "elements_required": [
+          "Produces or supplies controlled drug",
+          "Without lawful authority",
+          "Knowing or believing it to be controlled drug"
+        ],
+        "punishment": "Up to life imprisonment depending on drug class and quantity",
+        "process_steps": [
+          "Police investigation and seizure",
+          "Forensic testing",
+          "Crown Court trial",
+          "Confiscation of assets"
+        ]
+      },
+      "section_5_possession": {
+        "offence": "Possession of Controlled Drugs",
+        "elements_required": [
+          "Knowingly possesses controlled drug",
+          "Without lawful authority"
+        ],
+        "punishment": "Up to 7 years imprisonment depending on drug class",
+        "process_steps": [
+          "Police stop and search or arrest",
+          "Drug testing",
+          "Trial in Magistrates' or Crown Court",
+          "Treatment orders possible"
+        ]
+      }
+    },
+    "computer_misuse_act_1990": {
+      "section_1_unauthorised_access": {
+        "offence": "Unauthorised Access to Computer Material",
+        "elements_required": [
+          "Causes computer to perform function",
+          "Intention to secure access to program or data",
+          "Access unauthorised and known to be unauthorised"
+        ],
+        "punishment": "Maximum 2 years imprisonment and/or unlimited fine",
+        "process_steps": [
+          "Digital forensics investigation",
+          "Specialist police units",
+          "Trial in Magistrates' or Crown Court"
+        ]
+      },
+      "section_2_unauthorised_access_with_intent": {
+        "offence": "Unauthorised Access with Further Criminal Intent",
+        "elements_required": [
+          "Unauthorised access to computer",
+          "Intent to commit further offence",
+          "Or intent to facilitate commission of further offence"
+        ],
+        "punishment": "Maximum 5 years imprisonment and/or unlimited fine",
+        "process_steps": [
+          "Joint investigation with other agencies",
+          "Complex digital evidence handling",
+          "Crown Court trial"
+        ]
+      },
+      "section_3_unauthorised_modification": {
+        "offence": "Unauthorised Acts with Intent to Impair",
+        "elements_required": [
+          "Unauthorised modification of computer material",
+          "Intent to impair operation of computer",
+          "Intent to prevent or hinder access to computer",
+          "Intent to impair operation of program or data"
+        ],
+        "punishment": "Maximum 10 years imprisonment and/or unlimited fine",
+        "process_steps": [
+          "Specialist cybercrime investigation",
+          "International cooperation if applicable",
+          "Crown Court trial"
+        ]
+      }
+    },
+    "road_traffic_act_1988": {
+      "section_1_causing_death_by_dangerous_driving": {
+        "offence": "Causing Death by Dangerous Driving",
+        "elements_required": [
+          "Driving vehicle dangerously",
+          "Causing death of another person"
+        ],
+        "punishment": "Maximum 14 years imprisonment and disqualification",
+        "process_steps": [
+          "Police investigation and reconstruction",
+          "Crown Court trial",
+          "Extended driving ban",
+          "Vehicle forfeiture possible"
+        ]
+      },
+      "section_2_dangerous_driving": {
+        "offence": "Dangerous Driving",
+        "elements_required": [
+          "Driving vehicle dangerously",
+          "Not falling within section 1"
+        ],
+        "punishment": "Maximum 2 years imprisonment and disqualification",
+        "process_steps": [
+          "Police investigation",
+          "Trial in Magistrates' or Crown Court",
+          "Driving disqualification"
+        ]
+      },
+      "section_4_driving_with_excess_alcohol": {
+        "offence": "Driving with Excess Alcohol",
+        "elements_required": [
+          "Driving or attempting to drive motor vehicle",
+          "Alcohol level above legal limit (80mg/100ml blood or 35mcg/100ml breath)"
+        ],
+        "punishment": "Maximum 6 months imprisonment, £5,000 fine, and disqualification",
+        "process_steps": [
+          "Breath test or blood test",
+          "Police station procedure",
+          "Trial in Magistrates' Court",
+          "Drink driving rehabilitation course"
+        ]
+      }
+    }
+  },
+  "civil_law": {
+    "contract_law": {
+      "sale_of_goods_act_1979": {
+        "section_14_implied_terms": {
+          "offence": "Breach of Implied Terms - Satisfactory Quality",
+          "elements_required": [
+            "Contract for sale of goods",
+            "Goods not of satisfactory quality",
+            "Consumer contract (business to consumer)"
+          ],
+          "civil_remedies": [
+            "Repair of goods",
+            "Replacement of goods",
+            "Price reduction (partial refund)",
+            "Rescission (full refund)",
+            "Damages for consequential loss"
+          ],
+          "process_steps": [
+            "Inform seller of breach within reasonable time",
+            "Request repair, replacement, or refund",
+            "Mediation through Consumer Rights helpline",
+            "County Court claim if unresolved",
+            "Appeal to Circuit Judge"
+          ]
+        },
+        "section_15_description": {
+          "offence": "Breach of Implied Terms - Description",
+          "elements_required": [
+            "Goods sold by description",
+            "Goods do not match description",
+            "Description became term of contract"
+          ],
+          "civil_remedies": [
+            "Rejection of goods",
+            "Price reduction",
+            "Damages for breach"
+          ],
+          "process_steps": [
+            "Reject goods within reasonable time",
+            "Claim refund or damages",
+            "Court proceedings if disputed"
+          ]
+        }
+      },
+      "consumer_rights_act_2015": {
+        "section_62_unfair_contract_terms": {
+          "offence": "Unfair Contract Terms",
+          "elements_required": [
+            "Consumer contract",
+            "Term causes significant imbalance between parties",
+            "Term not individually negotiated",
+            "Contrary to good faith"
+          ],
+          "civil_remedies": [
+            "Term declared void or unenforceable",
+            "Court may substitute fair term",
+            "Damages for loss caused"
+          ],
+          "process_steps": [
+            "Complaint to Citizens Advice",
+            "County Court proceedings",
+            "Reference to Trading Standards",
+            "Injunction to prevent use of unfair terms"
+          ]
+        },
+        "section_75_liability_for_credit_agreements": {
+          "offence": "Credit Agreement Disputes",
+          "elements_required": [
+            "Goods or services purchased on credit",
+            "Faulty goods or unsatisfactory service",
+            "Credit agreement over £100, under £30,000"
+          ],
+          "civil_remedies": [
+            "Claim against credit card company",
+            "Up to £30,000 compensation",
+            "Same remedies as against supplier"
+          ],
+          "process_steps": [
+            "Complain to supplier first",
+            "Claim against credit card company within 6 months",
+            "Financial Ombudsman Service arbitration",
+            "County Court proceedings if necessary"
+          ]
+        }
+      },
+      "supply_of_goods_and_services_act_1982": {
+        "section_13_satisfactory_quality": {
+          "offence": "Services Not Carried Out with Reasonable Skill",
+          "elements_required": [
+            "Contract for supply of services",
+            "Services not performed with reasonable care and skill",
+            "Consumer contract"
+          ],
+          "civil_remedies": [
+            "Repeat performance of service",
+            "Price reduction",
+            "Damages for loss suffered"
+          ],
+          "process_steps": [
+            "Inform service provider of breach",
+            "Request repeat performance or refund",
+            "Mediation through Consumer Rights helpline",
+            "County Court claim"
+          ]
+        }
+      }
+    },
+    "family_law": {
+      "children_act_1989": {
+        "section_1_welfare_checklist": {
+          "offence": "Child Welfare Disputes",
+          "elements_required": [
+            "Dispute about child's upbringing",
+            "Court must consider child's welfare as paramount",
+            "No delay in proceedings"
+          ],
+          "civil_remedies": [
+            "Child arrangements orders (custody/access)",
+            "Specific issue orders",
+            "Prohibited steps orders",
+            "Parental responsibility orders"
+          ],
+          "process_steps": [
+            "Mediation Information and Assessment Meeting (MIAM)",
+            "Family Court proceedings",
+            "CAFCASS (Children and Family Court Advisory Service) involvement",
+            "First Hearing Dispute Resolution (FHDRA)",
+            "Final hearing with judgment"
+          ]
+        },
+        "section_8_child_arrangements_orders": {
+          "offence": "Child Arrangements Disputes",
+          "elements_required": [
+            "Dispute about where child lives or spends time",
+            "Best interests of child paramount consideration"
+          ],
+          "civil_remedies": [
+            "Child lives with order",
+            "Child spends time with order",
+            "Other contact orders",
+            "Conditions attached to orders"
+          ],
+          "process_steps": [
+            "Mandatory mediation attempt",
+            "Court application under Part 19 Family Procedure Rules",
+            "Safeguarding checks",
+            "Fact-finding hearing if domestic abuse alleged",
+            "Final welfare hearing"
+          ]
+        }
+      },
+      "matrimonial_causes_act_1973": {
+        "section_1_divorce_petitions": {
+          "offence": "Petition for Divorce",
+          "elements_required": [
+            "Marriage has broken down irretrievably",
+            "One of five facts proven:",
+            "Adultery",
+            "Unreasonable behaviour",
+            "Desertion for 2+ years",
+            "2 years separation with consent",
+            "5 years separation without consent"
+          ],
+          "civil_remedies": [
+            "Decree nisi (conditional divorce)",
+            "Decree absolute (final divorce)",
+            "Financial remedies",
+            "Property adjustment orders",
+            "Pension sharing orders"
+          ],
+          "process_steps": [
+            "File divorce petition at court",
+            "Serve petition on respondent",
+            "Acknowledgment of service",
+            "Decree nisi granted after 6 weeks",
+            "Decree absolute after 6 weeks (or 3 months if contested)"
+          ]
+        },
+        "section_25_financial_remedies": {
+          "offence": "Financial Settlement Disputes",
+          "elements_required": [
+            "Ancillary relief proceedings",
+            "Division of matrimonial assets",
+            "Fair distribution based on needs and contributions"
+          ],
+          "civil_remedies": [
+            "Lump sum orders",
+            "Property transfer orders",
+            "Periodic payment orders (maintenance)",
+            "Pension attachment orders",
+            "Clean break orders"
+          ],
+          "process_steps": [
+            "Form E financial disclosure",
+            "First directions appointment",
+            "Financial dispute resolution hearing",
+            "Final hearing with judgment",
+            "Variation possible if circumstances change"
+          ]
+        }
+      },
+      "family_law_act_1996": {
+        "section_42_domestic_violence_injunctions": {
+          "offence": "Domestic Violence Protection",
+          "elements_required": [
+            "Associated persons (spouses, cohabitants, family)",
+            "Molestation (violence or threats of violence)"
+          ],
+          "civil_remedies": [
+            "Non-molestation orders",
+            "Occupation orders",
+            "Undertakings accepted by court",
+            "Power of arrest attached to orders"
+          ],
+          "process_steps": [
+            "Without notice application in urgent cases",
+            "On notice application with 2 weeks' notice",
+            "Interim orders granted immediately",
+            "Final hearing within 14 days",
+            "Breach proceedings if violated"
+          ]
+        }
+      }
+    },
+    "property_law": {
+      "land_registration_act_2002": {
+        "section_97_adverse_possession": {
+          "offence": "Adverse Possession Claims",
+          "elements_required": [
+            "Factual possession of registered land for 10 years",
+            "Intention to possess",
+            "Possession must be adverse to paper owner",
+            "No consent from owner"
+          ],
+          "civil_remedies": [
+            "Registration of title in squatter's name",
+            "Possessory title granted"
+          ],
+          "process_steps": [
+            "Application to Land Registry",
+            "HM Land Registry investigation",
+            "Objection period (65 business days)",
+            "Registration if no valid objection",
+            "Appeal to Property Chamber"
+          ]
+        }
+      },
+      "leasehold_property_repairing_act_1938": {
+        "section_1_leasehold_duties": {
+          "offence": "Breach of Leasehold Covenants",
+          "elements_required": [
+            "Leasehold property",
+            "Breach of repair covenant",
+            "Failure to maintain property"
+          ],
+          "civil_remedies": [
+            "Specific performance (court orders repairs)",
+            "Damages for breach",
+            "Forfeiture of lease possible"
+          ],
+          "process_steps": [
+            "Serve section 146 notice",
+            "County Court proceedings",
+            "Appointment of receiver",
+            "Enforcement of court orders"
+          ]
+        }
+      }
+    },
+    "employment_law": {
+      "employment_rights_act_1996": {
+        "section_94_unfair_dismissal": {
+          "offence": "Unfair Dismissal",
+          "elements_required": [
+            "Employee with 2 years' continuous service",
+            "Dismissal not for potentially fair reason",
+            "Or dismissal procedurally unfair"
+          ],
+          "civil_remedies": [
+            "Re-instatement to job",
+            "Re-engagement in suitable alternative",
+            "Compensation up to statutory maximum (£93,878 for 2024/25)",
+            "Basic award for redundancy element"
+          ],
+          "process_steps": [
+            "Early conciliation through ACAS",
+            "ET1 claim to Employment Tribunal",
+            "Case management discussion",
+            "Preliminary hearing",
+            "Full merits hearing",
+            "Appeal to Employment Appeal Tribunal"
+          ]
+        },
+        "section_98_redundancy": {
+          "offence": "Unfair Redundancy Selection",
+          "elements_required": [
+            "Redundancy situation exists",
+            "Employee selected unfairly",
+            "No genuine redundancy or improper procedure"
+          ],
+          "civil_remedies": [
+            "Re-engagement or re-instatement",
+            "Compensation based on age, length of service, weekly pay",
+            "Basic award (up to 12 weeks' pay)",
+            "Statutory redundancy pay"
+          ],
+          "process_steps": [
+            "ACAS early conciliation",
+            "Tribunal claim within 3 months",
+            "Case management",
+            "Merits hearing",
+            "Compensation calculation"
+          ]
+        }
+      },
+      "equality_act_2010": {
+        "section_39_direct_discrimination": {
+          "offence": "Direct Discrimination",
+          "elements_required": [
+            "Protected characteristic (age, sex, race, disability, etc.)",
+            "Less favourable treatment because of protected characteristic",
+            "No justification for treatment"
+          ],
+          "civil_remedies": [
+            "Declaration of discrimination",
+            "Compensation (no upper limit)",
+            "Recommendations to employer",
+            "Injunctions against future discrimination"
+          ],
+          "process_steps": [
+            "Grievance procedure with employer",
+            "ACAS early conciliation",
+            "ET1 claim to Employment Tribunal",
+            "Case management preliminary hearing",
+            "Full merits hearing",
+            "Appeal to Employment Appeal Tribunal"
+          ]
+        },
+        "section_64_indirect_discrimination": {
+          "offence": "Indirect Discrimination",
+          "elements_required": [
+            "Policy, criterion, or practice (PCP)",
+            "PCP disadvantages people with protected characteristic",
+            "No justification for PCP",
+            "Claimant disadvantaged by PCP"
+          ],
+          "civil_remedies": [
+            "Declaration of discrimination",
+            "Compensation for injury to feelings",
+            "Recommendations to end discriminatory practice",
+            "Injunctions"
+          ],
+          "process_steps": [
+            "Internal grievance procedure",
+            "ACAS conciliation",
+            "Tribunal proceedings",
+            "Statistical evidence often required"
+          ]
+        }
+      },
+      "working_time_regulations_1998": {
+        "regulation_4_weekly_rest_period": {
+          "offence": "Breach of Weekly Rest Period",
+          "elements_required": [
+            "Worker entitled to 24 hours' uninterrupted rest per week",
+            "Employer fails to provide rest period",
+            "No opt-out agreement"
+          ],
+          "civil_remedies": [
+            "Payment for work during rest period (double time)",
+            "Injunction to prevent future breaches",
+            "Compensation for detriment"
+          ],
+          "process_steps": [
+            "Report to Health and Safety Executive",
+            "Employment Tribunal claim",
+            "Enforcement through civil courts"
+          ]
+        },
+        "regulation_13_annual_leave": {
+          "offence": "Denial of Annual Leave",
+          "elements_required": [
+            "Worker with 3 months' service",
+            "Entitled to 5.6 weeks' paid annual leave",
+            "Employer refuses to allow leave or pay for untaken leave"
+          ],
+          "civil_remedies": [
+            "Payment for untaken leave",
+            "Carry forward of leave",
+            "Additional compensation for detriment"
+          ],
+          "process_steps": [
+            "Formal request for leave",
+            "ACAS early conciliation",
+            "Employment Tribunal claim",
+            "Holiday pay calculations"
+          ]
+        }
+      }
+    },
+    "tort_law": {
+      "law_of_torts": {
+        "negligence_duty_of_care": {
+          "offence": "Negligence - Breach of Duty",
+          "elements_required": [
+            "Defendant owed claimant duty of care",
+            "Defendant breached that duty",
+            "Breach caused claimant's damage",
+            "Damage not too remote (foreseeable)"
+          ],
+          "civil_remedies": [
+            "Damages for pain and suffering",
+            "Loss of earnings",
+            "Medical expenses",
+            "Future care costs"
+          ],
+          "process_steps": [
+            "Pre-action protocol compliance",
+            "Letter of claim",
+            "Court proceedings in County Court or High Court",
+            "Quantum assessment",
+            "Appeal to Court of Appeal"
+          ]
+        },
+        "defamation_publication": {
+          "offence": "Defamation by Publication",
+          "elements_required": [
+            "Statement referring to claimant",
+            "Statement lowers claimant in estimation of right-thinking people",
+            "Statement published to third party",
+            "No defence available (truth, privilege, honest opinion, etc.)"
+          ],
+          "civil_remedies": [
+            "Damages (compensatory and/or aggravated)",
+            "Injunction to prevent further publication",
+            "Declaration that statement is defamatory"
+          ],
+          "process_steps": [
+            "Letter of claim demanding correction/apology",
+            "Pre-action protocol compliance",
+            "County Court or High Court proceedings",
+            "Trial with jury for quantum",
+            "Appeal possible"
+          ]
+        },
+        "nuisance_unlawful_interference": {
+          "offence": "Private Nuisance",
+          "elements_required": [
+            "Unlawful interference with claimant's use of land",
+            "Substantial interference",
+            "Interference unreasonable"
+          ],
+          "civil_remedies": [
+            "Injunction to stop nuisance",
+            "Damages for past interference",
+            "Abatement (claimant may remove nuisance)"
+          ],
+          "process_steps": [
+            "Letter before action",
+            "County Court claim",
+            "Injunction application (interim and final)",
+            "Assessment of damages"
+          ]
+        },
+        "trespass_to_land": {
+          "offence": "Trespass to Land",
+          "elements_required": [
+            "Direct physical interference with claimant's land",
+            "Without lawful justification",
+            "Without claimant's consent"
+          ],
+          "civil_remedies": [
+            "Injunction to prevent trespass",
+            "Damages for loss suffered",
+            "Mesne profits (value of unauthorised use)"
+          ],
+          "process_steps": [
+            "Letter demanding cessation",
+            "County Court proceedings",
+            "Possessory remedies available",
+            "Self-help remedies in some cases"
+          ]
+        }
+      }
+    },
+    "human_rights_law": {
+      "human_rights_act_1998": {
+        "article_2_right_to_life": {
+          "offence": "Right to Life Protection",
+          "elements_required": [
+            "Protection of life by law",
+            "No arbitrary deprivation of life",
+            "Effective investigation of deaths"
+          ],
+          "civil_remedies": [
+            "Judicial review of state actions",
+            "Compensation for violations",
+            "Injunctions against harmful policies",
+            "Declaration of incompatibility"
+          ],
+          "process_steps": [
+            "Application for judicial review",
+            "Permission stage",
+            "Substantive hearing",
+            "Appeal to Court of Appeal",
+            "Supreme Court final appeal"
+          ]
+        },
+        "article_3_prohibition_of_torture": {
+          "offence": "Protection from Torture and Inhuman Treatment",
+          "elements_required": [
+            "Absolute prohibition of torture",
+            "No exceptions even in emergency",
+            "Protection from inhuman and degrading treatment"
+          ],
+          "civil_remedies": [
+            "Damages for violations",
+            "Judicial review proceedings",
+            "Injunctions against deportation",
+            "Declaration of unlawfulness"
+          ],
+          "process_steps": [
+            "Urgent application to High Court",
+            "Interim relief possible",
+            "Full judicial review hearing",
+            "Appeal procedures"
+          ]
+        },
+        "article_5_right_to_liberty": {
+          "offence": "Right to Liberty and Security",
+          "elements_required": [
+            "No arbitrary arrest or detention",
+            "Right to be informed of reasons",
+            "Right to challenge lawfulness",
+            "Right to compensation for unlawful detention"
+          ],
+          "civil_remedies": [
+            "Habeas corpus applications",
+            "Judicial review of detention",
+            "Damages for false imprisonment",
+            "Compensation claims"
+          ],
+          "process_steps": [
+            "Application for habeas corpus",
+            "Urgent court hearing",
+            "Review of detention grounds",
+            "Release or continued detention order"
+          ]
+        },
+        "article_6_right_to_fair_trial": {
+          "offence": "Right to Fair Trial",
+          "elements_required": [
+            "Independent and impartial tribunal",
+            "Determination within reasonable time",
+            "Public hearing in criminal cases",
+            "Right to legal assistance"
+          ],
+          "civil_remedies": [
+            "Stay of proceedings",
+            "Quashing of convictions",
+            "Compensation for delay",
+            "Judicial review of court procedures"
+          ],
+          "process_steps": [
+            "Application to European Court of Human Rights",
+            "Domestic judicial review",
+            "Appeal against conviction",
+            "Compensation proceedings"
+          ]
+        },
+        "article_8_right_to_private_life": {
+          "offence": "Right to Private and Family Life",
+          "elements_required": [
+            "Respect for private life",
+            "Protection of family life",
+            "Protection of home",
+            "Protection of correspondence"
+          ],
+          "civil_remedies": [
+            "Injunctions against privacy invasions",
+            "Damages for breach",
+            "Judicial review of surveillance",
+            "Data protection claims"
+          ],
+          "process_steps": [
+            "Claim for breach of privacy",
+            "Application for injunction",
+            "Judicial review proceedings",
+            "Compensation claims"
+          ]
+        },
+        "article_10_freedom_of_expression": {
+          "offence": "Freedom of Expression",
+          "elements_required": [
+            "Freedom to hold opinions",
+            "Freedom to receive and impart information",
+            "Restrictions must be prescribed by law",
+            "Necessary in democratic society"
+          ],
+          "civil_remedies": [
+            "Injunctions against censorship",
+            "Damages for defamation",
+            "Judicial review of restrictions",
+            "Declaration of rights violation"
+          ],
+          "process_steps": [
+            "Pre-action correspondence",
+            "Court proceedings for injunction",
+            "Appeal against restrictions",
+            "European Court of Human Rights"
+          ]
+        }
+      }
+    },
+    "data_protection_law": {
+      "uk_gdpr_and_data_protection_act_2018": {
+        "article_5_principles": {
+          "offence": "Data Protection Principles",
+          "elements_required": [
+            "Lawful, fair and transparent processing",
+            "Purpose limitation",
+            "Data minimisation",
+            "Accuracy of data",
+            "Storage limitation",
+            "Integrity and confidentiality",
+            "Accountability"
+          ],
+          "civil_remedies": [
+            "Compensation for damage",
+            "Rectification of inaccurate data",
+            "Erasure of data (right to be forgotten)",
+            "Restriction of processing",
+            "Data portability"
+          ],
+          "process_steps": [
+            "Complaint to Information Commissioner",
+            "Investigation by ICO",
+            "Enforcement notice",
+            "Tribunal appeal",
+            "Court proceedings"
+          ]
+        },
+        "article_17_right_to_erasure": {
+          "offence": "Right to Erasure (Right to be Forgotten)",
+          "elements_required": [
+            "Personal data no longer necessary",
+            "Consent withdrawn",
+            "Unlawful processing",
+            "Public interest grounds"
+          ],
+          "civil_remedies": [
+            "Erasure of personal data",
+            "Restriction of processing",
+            "Compensation for non-compliance",
+            "Injunctions against further processing"
+          ],
+          "process_steps": [
+            "Subject access request",
+            "Erasure request to controller",
+            "ICO complaint if refused",
+            "Tribunal proceedings",
+            "Court enforcement"
+          ]
+        },
+        "article_82_liability_and_right_to_compensation": {
+          "offence": "Compensation for Data Protection Breaches",
+          "elements_required": [
+            "Material or non-material damage",
+            "Breach of GDPR provisions",
+            "Causation link between breach and damage",
+            "No exclusion of liability"
+          ],
+          "civil_remedies": [
+            "Compensation for material damage",
+            "Compensation for non-material damage (distress)",
+            "Punitive damages possible",
+            "Legal costs recovery"
+          ],
+          "process_steps": [
+            "Pre-action correspondence",
+            "County Court claim",
+            "Assessment of damages",
+            "Appeal procedures"
+          ]
+        }
+      }
+    },
+    "immigration_law": {
+      "immigration_act_1971": {
+        "section_3_general_prohibition": {
+          "offence": "Immigration Control",
+          "elements_required": [
+            "Non-EEA national entering UK",
+            "Without leave to enter or remain",
+            "Subject to immigration control"
+          ],
+          "civil_remedies": [
+            "Leave to remain",
+            "Judicial review of decisions",
+            "Protection from deportation",
+            "Family life considerations"
+          ],
+          "process_steps": [
+            "Immigration application",
+            "Refusal decision",
+            "Administrative review",
+            "Judicial review in High Court",
+            "Appeal to Upper Tribunal"
+          ]
+        },
+        "section_10_carriers_liability": {
+          "offence": "Carrier Liability for Unlawful Entry",
+          "elements_required": [
+            "Carrier brings passenger to UK",
+            "Passenger does not have entry clearance",
+            "Carrier failed to check documents"
+          ],
+          "civil_remedies": [
+            "Repatriation costs recovery",
+            "Civil penalties up to £2,000 per passenger",
+            "Injunctions against carriers",
+            "Asset seizure"
+          ],
+          "process_steps": [
+            "Immigration enforcement action",
+            "Penalty notice",
+            "Appeal to magistrates court",
+            "Recovery proceedings"
+          ]
+        }
+      }
+    },
+    "environmental_law": {
+      "environmental_protection_act_1990": {
+        "section_33_control_of_pollution": {
+          "offence": "Statutory Nuisance Control",
+          "elements_required": [
+            "Premises in such state as to be prejudicial to health",
+            "Unreasonable interference with enjoyment of premises",
+            "Accumulation of waste causing nuisance"
+          ],
+          "civil_remedies": [
+            "Abatement notice",
+            "Court injunction",
+            "Damages for nuisance",
+            "Cleanup costs recovery"
+          ],
+          "process_steps": [
+            "Complaint to local authority",
+            "Investigation and inspection",
+            "Abatement notice service",
+            "Appeal to magistrates court",
+            "Enforcement proceedings"
+          ]
+        },
+        "section_80_waste_management": {
+          "offence": "Waste Management Licensing",
+          "elements_required": [
+            "Carrying on waste management activity",
+            "Without appropriate licence",
+            "Deposit of controlled waste"
+          ],
+          "civil_remedies": [
+            "Stop notices",
+            "Cleanup notices",
+            "Financial penalties",
+            "Cost recovery"
+          ],
+          "process_steps": [
+            "Environment Agency investigation",
+            "Enforcement notice",
+            "Appeal to Secretary of State",
+            "Court proceedings for non-compliance"
+          ]
+        }
+      }
+    },
+    "consumer_law": {
+      "consumer_credits_act_1974": {
+        "section_127_unfair_relationship": {
+          "offence": "Unfair Credit Relationships",
+          "elements_required": [
+            "Credit agreement with individual",
+            "Relationship unfair to consumer",
+            "Court finds relationship unfair"
+          ],
+          "civil_remedies": [
+            "Setting aside of agreement",
+            "Return of goods or money paid",
+            "Compensation for losses",
+            "Penalty charges repayment"
+          ],
+          "process_steps": [
+            "Complaint to Financial Ombudsman",
+            "County Court claim",
+            "Assessment of unfairness",
+            "Remedial order by court"
+          ]
+        },
+        "section_140_enforcement_of_agreements": {
+          "offence": "Enforcement of Credit Agreements",
+          "elements_required": [
+            "Creditor seeking to enforce agreement",
+            "Agreement improperly executed",
+            "Consumer prejudiced by irregularity"
+          ],
+          "civil_remedies": [
+            "Enforcement prevented",
+            "Damages for harassment",
+            "Compensation for losses",
+            "Legal costs recovery"
+          ],
+          "process_steps": [
+            "Defence filed in court",
+            "Evidence of improper execution",
+            "Court determination",
+            "Appeal procedures"
+          ]
+        }
+      }
+    },
+    "housing_law": {
+      "housing_act_1988": {
+        "section_11_security_of_tenure": {
+          "offence": "Assured Tenancy Security",
+          "elements_required": [
+            "Assured shorthold tenancy",
+            "Fixed term expired",
+            "Continued occupation",
+            "No steps to end tenancy"
+          ],
+          "civil_remedies": [
+            "Statutory continuation",
+            "Security of tenure",
+            "Rent increase restrictions",
+            "Deposit protection"
+          ],
+          "process_steps": [
+            "Tenancy agreement review",
+            "Notice to quit service",
+            "Court possession proceedings",
+            "Appeal against possession order"
+          ]
+        },
+        "section_21_eviction": {
+          "offence": "Section 21 Eviction Notice",
+          "elements_required": [
+            "Assured shorthold tenancy",
+            "Fixed term expired",
+            "Landlord serves section 21 notice",
+            "Minimum notice period given"
+          ],
+          "civil_remedies": [
+            "Court possession order",
+            "Compensation for harassment",
+            "Rent repayment orders",
+            "Damages for disrepair"
+          ],
+          "process_steps": [
+            "Section 21 notice service",
+            "Court proceedings if tenant doesn't leave",
+            "Possession hearing",
+            "Warrant for possession"
+          ]
+        }
+      }
+    },
+    "company_law": {
+      "companies_act_2006": {
+        "section_172_directors_duties": {
+          "offence": "Directors' Duty to Promote Success",
+          "elements_required": [
+            "Director of UK company",
+            "Duty to act in good faith",
+            "Promotion of company success",
+            "Consideration of stakeholders"
+          ],
+          "civil_remedies": [
+            "Shareholder derivative claims",
+            "Unfair prejudice petitions",
+            "Director disqualification",
+            "Compensation for breach"
+          ],
+          "process_steps": [
+            "Shareholder resolution",
+            "Court petition",
+            "Investigation by Insolvency Service",
+            "Disqualification proceedings"
+          ]
+        },
+        "section_994_unfair_prejudice": {
+          "offence": "Unfair Prejudice to Shareholders",
+          "elements_required": [
+            "Company conduct unfairly prejudicial",
+            "To interests of shareholders",
+            "Affairs conducted in discriminatory manner",
+            "Equitable considerations"
+          ],
+          "civil_remedies": [
+            "Share purchase order",
+            "Company winding up",
+            "Director removal",
+            "Compensation payment"
+          ],
+          "process_steps": [
+            "Petition to court",
+            "Evidence of unfair prejudice",
+            "Court valuation",
+            "Remedial order"
+          ]
+        }
+      }
+    },
+    "intellectual_property_law": {
+      "copyright_designs_and_patents_act_1988": {
+        "section_16_infringement": {
+          "offence": "Copyright Infringement",
+          "elements_required": [
+            "Work protected by copyright",
+            "Defendant copied substantial part",
+            "Without licence or permission",
+            "Infringing act done in UK"
+          ],
+          "civil_remedies": [
+            "Injunction to prevent infringement",
+            "Damages or account of profits",
+            "Delivery up of infringing copies",
+            "Legal costs recovery"
+          ],
+          "process_steps": [
+            "Letter before action",
+            "Court proceedings",
+            "Evidence of ownership",
+            "Assessment of damages"
+          ]
+        },
+        "section_60_criminal_offences": {
+          "offence": "Criminal Copyright Infringement",
+          "elements_required": [
+            "Making copies for sale or hire",
+            "Exposing for sale infringing copies",
+            "Possession of illicit recording equipment",
+            "Commercial scale infringement"
+          ],
+          "punishment": "Up to 10 years imprisonment and/or unlimited fine",
+          "process_steps": [
+            "Police investigation",
+            "Search and seizure",
+            "Crown Prosecution Service review",
+            "Crown Court trial"
+          ]
+        }
+      }
+    },
+    "medical_negligence_law": {
+      "law_of_torts": {
+        "negligence_duty_of_care": {
+          "offence": "Medical Negligence",
+          "elements_required": [
+            "Doctor-patient relationship",
+            "Breach of duty of care",
+            "Reasonable foreseeability of harm",
+            "Causation between breach and harm"
+          ],
+          "civil_remedies": [
+            "Compensation for pain and suffering",
+            "Loss of earnings",
+            "Medical expenses",
+            "Future care costs"
+          ],
+          "process_steps": [
+            "Letter of claim to defendant",
+            "Medical expert reports",
+            "Pre-action protocol compliance",
+            "Court proceedings",
+            "Quantum assessment"
+          ]
+        },
+        "bolam_test_standard": {
+          "offence": "Medical Treatment Standards",
+          "elements_required": [
+            "Treatment fell below acceptable standard",
+            "Bolam test: would reasonable body of professionals agree",
+            "Patient suffered harm",
+            "Harm reasonably foreseeable"
+          ],
+          "civil_remedies": [
+            "Damages for substandard treatment",
+            "Corrective surgery costs",
+            "Rehabilitation expenses",
+            "Loss of amenity compensation"
+          ],
+          "process_steps": [
+            "Medical expert evidence",
+            "Court assessment of standard",
+            "Causation analysis",
+            "Damages calculation"
+          ]
+        }
+      }
+    },
+    "insurance_law": {
+      "marine_insurance_act_1906": {
+        "section_17_breach_of_warranty": {
+          "offence": "Insurance Contract Disputes",
+          "elements_required": [
+            "Valid insurance contract",
+            "Breach of warranty or condition",
+            "Material fact not disclosed",
+            "Claim denied due to breach"
+          ],
+          "civil_remedies": [
+            "Policy avoidance",
+            "Claim payment",
+            "Damages for breach",
+            "Contract rescission"
+          ],
+          "process_steps": [
+            "Complaint to insurer",
+            "Financial Ombudsman Service",
+            "County Court proceedings",
+            "Appeal procedures"
+          ]
+        },
+        "section_39_misrepresentation": {
+          "offence": "Insurance Misrepresentation",
+          "elements_required": [
+            "Material fact misrepresented",
+            "Induced insurer to enter contract",
+            "Misrepresentation fraudulent or negligent",
+            "Affected insurer's decision"
+          ],
+          "civil_remedies": [
+            "Contract voidable",
+            "Damages for misrepresentation",
+            "Claim denial",
+            "Premium return"
+          ],
+          "process_steps": [
+            "Insurer investigation",
+            "Disclosure of misrepresentation",
+            "Court proceedings",
+            "Remedial orders"
+          ]
+        }
+      }
+    },
+    "succession_law": {
+      "administration_of_estates_act_1925": {
+        "section_1_grant_of_representation": {
+          "offence": "Estate Administration",
+          "elements_required": [
+            "Death of person leaving estate",
+            "Estate requires administration",
+            "Personal representatives needed",
+            "Grant of probate or letters of administration"
+          ],
+          "civil_remedies": [
+            "Grant of probate",
+            "Letters of administration",
+            "Estate distribution",
+            "Protection of beneficiaries"
+          ],
+          "process_steps": [
+            "Death certificate registration",
+            "Will search",
+            "Inheritance tax assessment",
+            "Grant application to court",
+            "Estate administration"
+          ]
+        },
+        "section_9_duties_of_personal_representatives": {
+          "offence": "Executor and Administrator Duties",
+          "elements_required": [
+            "Appointment as executor/administrator",
+            "Duty to collect and preserve estate",
+            "Duty to pay debts and taxes",
+            "Duty to distribute according to will/intestacy"
+          ],
+          "civil_remedies": [
+            "Removal of personal representative",
+            "Court-ordered administration",
+            "Compensation for breach of duty",
+            "Beneficiary claims"
+          ],
+          "process_steps": [
+            "Estate inventory",
+            "Asset valuation",
+            "Debt payment",
+            "Distribution to beneficiaries",
+            "Final accounts submission"
+          ]
+        }
+      }
+    },
+    "trust_law": {
+      "trustee_act_1925": {
+        "section_1_trustee_powers": {
+          "offence": "Trust Administration Disputes",
+          "elements_required": [
+            "Valid trust established",
+            "Trustee breach of duty",
+            "Failure to act in beneficiaries' interests",
+            "Loss to trust property"
+          ],
+          "civil_remedies": [
+            "Trustee removal",
+            "Account of profits",
+            "Compensation for losses",
+            "Restitution of property"
+          ],
+          "process_steps": [
+            "Beneficiary complaint",
+            "Court application",
+            "Trustee substitution",
+            "Property recovery"
+          ]
+        },
+        "section_31_trustee_liability": {
+          "offence": "Trustee Liability for Breach",
+          "elements_required": [
+            "Trustee acted negligently",
+            "Failed to exercise reasonable care",
+            "Trust property diminished",
+            "Breach of fiduciary duty"
+          ],
+          "civil_remedies": [
+            "Personal liability for losses",
+            "Indemnity from trust property",
+            "Beneficiary compensation",
+            "Trustee exoneration in some cases"
+          ],
+          "process_steps": [
+            "Investigation of trustee conduct",
+            "Evidence of breach",
+            "Court determination",
+            "Remedial orders"
+          ]
+        }
+      }
+    },
+    "family_law_additional": {
+      "adoption_and_children_act_2002": {
+        "section_1_eligibility_criteria": {
+          "offence": "Adoption Proceedings",
+          "elements_required": [
+            "Child under 18 years",
+            "Cannot be cared for by birth parents",
+            "Adoptive parents suitable",
+            "Best interests of child paramount"
+          ],
+          "civil_remedies": [
+            "Adoption order",
+            "Parental responsibility transfer",
+            "Name change",
+            "Inheritance rights"
+          ],
+          "process_steps": [
+            "Social work assessment",
+            "Panel recommendation",
+            "Court application",
+            "Placement order",
+            "Adoption order hearing"
+          ]
+        },
+        "section_46_placement_orders": {
+          "offence": "Child Placement for Adoption",
+          "elements_required": [
+            "Child in care proceedings",
+            "Adoption in child's best interests",
+            "No parent consent or consent dispensed with",
+            "Placement with approved adopters"
+          ],
+          "civil_remedies": [
+            "Placement order",
+            "Parental responsibility shared",
+            "Contact arrangements",
+            "Adoption leave to proceed"
+          ],
+          "process_steps": [
+            "Care proceedings",
+            "Placement application",
+            "Guardian assessment",
+            "Court approval"
+          ]
+        }
+      }
+    },
+    "landlord_and_tenant_law": {
+      "landlord_and_tenant_act_1985": {
+        "section_11_security_of_tenure": {
+          "offence": "Security of Tenure",
+          "elements_required": [
+            "Statutory continuation of tenancy",
+            "No fault eviction possible",
+            "Tenant pays rent regularly",
+            "Landlord follows correct procedure"
+          ],
+          "civil_remedies": [
+            "Continued tenancy",
+            "Rent assessment",
+            "Repair obligations",
+            "Compensation for harassment"
+          ],
+          "process_steps": [
+            "Notice to quit service",
+            "Court possession proceedings",
+            "Grounds for possession",
+            "Warrant for possession"
+          ]
+        },
+        "section_25_mortgagee_possession": {
+          "offence": "Mortgagee Possession",
+          "elements_required": [
+            "Property mortgaged",
+            "Mortgagee exercising power of sale",
+            "Tenant's rights protected",
+            "Notice requirements met"
+          ],
+          "civil_remedies": [
+            "Possession order",
+            "Compensation for improvements",
+            "Moving expenses",
+            "Alternative accommodation"
+          ],
+          "process_steps": [
+            "Mortgage default",
+            "Notice to tenant",
+            "Court proceedings",
+            "Possession execution"
+          ]
+        }
+      }
+    }
+  },
+  "scraped_data": [
+    {
+      "scraped_at": "2025-12-05T11:15:41.601190",
+      "source": "UK Legislation Website",
+      "data": {
+        "jurisdiction": "UK",
+        "scraped_at": "2025-12-05T11:15:41.601190",
+        "source": "UK Legislation Website",
+        "acts": {
+          "uk_act_1": {
+            "title": "UK Statutory Instruments (2)",
+            "year": "Unknown",
+            "url": "https://www.legislation.gov.uk/new/uksi",
+            "category": "general_law",
+            "scraped_at": "2025-12-05T11:15:41.918428"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "code": "Companies Act, 2013",
+  "scope": "Governs incorporation, management, and winding up of companies in India",
+  "company_types": {
+    "private_company": {
+      "definition": "Section 2(68) - Company with minimum 2 and maximum 200 members",
+      "features": [
+        "Cannot invite public to subscribe shares",
+        "Cannot accept deposits from public",
+        "Minimum paid-up capital: ₹1 lakh",
+        "Minimum 2 directors",
+        "Can commence business immediately after incorporation"
+      ]
+    },
+    "public_company": {
+      "definition": "Section 2(71) - Company with minimum 7 members, no maximum limit",
+      "features": [
+        "Can invite public to subscribe shares",
+        "Can accept deposits from public",
+        "Minimum paid-up capital: ₹5 lakh",
+        "Minimum 3 directors",
+        "Cannot commence business until certificate of commencement obtained"
+      ]
+    },
+    "one_person_company": {
+      "definition": "Section 2(62) - Company with only one member",
+      "features": [
+        "Member can be individual or nominee",
+        "Minimum paid-up capital: ₹1 lakh",
+        "Separate legal entity",
+        "Limited liability protection"
+      ]
+    }
+  },
+  "incorporation_process": {
+    "step_1": "Obtain Digital Signature Certificate (DSC)",
+    "step_2": "Obtain Director Identification Number (DIN)",
+    "step_3": "Reserve company name through RUN service",
+    "step_4": "File incorporation documents (SPICe+ form)",
+    "step_5": "Obtain Certificate of Incorporation",
+    "step_6": "Obtain PAN and TAN",
+    "step_7": "Open bank account",
+    "step_8": "Obtain professional tax registration"
+  },
+  "key_provisions": {
+    "board_of_directors": {
+      "Section_149": "Minimum directors: 3 for public, 2 for private",
+      "Section_164": "Disqualifications for appointment of director",
+      "Section_166": "Duties of directors",
+      "Section_167": "Vacation of office of director",
+      "Section_168": "Resignation of director"
+    },
+    "annual_compliance": {
+      "Section_92": "Annual return",
+      "Section_137": "Filing of financial statements",
+      "Section_139": "Appointment of auditors",
+      "Section_173": "Meetings of Board",
+      "Section_177": "Audit committee"
+    },
+    "share_capital": {
+      "Section_43": "Kinds of share capital",
+      "Section_52": "Issue of share at premium",
+      "Section_61": "Power of limited company to alter its share capital",
+      "Section_62": "Further issue of share capital",
+      "Section_68": "Power of company to purchase its own securities"
+    },
+    "meetings": {
+      "Section_96": "Annual general meeting",
+      "Section_100": "Calling of extraordinary general meeting",
+      "Section_101": "Notice of meeting",
+      "Section_103": "Quorum for meetings",
+      "Section_114": "Ordinary and special resolutions"
+    },
+    "winding_up": {
+      "Section_270": "Modes of winding up",
+      "Section_271": "Commencement of voluntary winding up",
+      "Section_272": "Effect of voluntary winding up",
+      "Section_304": "Winding up of company on report of Registrar"
+    }
+  }
+}

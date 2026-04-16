@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Signed Sovereign Provenance Event Schema",
+  "description": "Schema for cryptographically signed provenance events",
+  "type": "object",
+  "properties": {
+    "event": {
+      "$ref": "event_schema.json",
+      "description": "The original event data"
+    },
+    "signature": {
+      "type": "string",
+      "description": "Base64-encoded cryptographic signature"
+    },
+    "key_id": {
+      "type": "string",
+      "description": "Identifier of the signing key used"
+    },
+    "prev_hash": {
+      "type": "string",
+      "description": "SHA256 hash of the previous event in the chain"
+    }
+  },
+  "required": [
+    "event",
+    "signature",
+    "key_id",
+    "prev_hash"
+  ]
+}

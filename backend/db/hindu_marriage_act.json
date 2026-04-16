@@ -1,0 +1,47 @@
+{
+  "code": "Hindu Marriage Act, 1955",
+  "scope": "Governs marriage and divorce among Hindus, Buddhists, Jains, and Sikhs",
+  "key_provisions": {
+    "conditions_for_marriage": {
+      "Section_5": [
+        "Neither party has a spouse living at the time of marriage",
+        "Neither party is incapable of giving valid consent due to unsoundness of mind",
+        "Neither party has been subject to recurrent attacks of insanity",
+        "Bridegroom has completed 21 years, bride 18 years",
+        "Parties are not within prohibited degrees of relationship",
+        "Parties are not sapindas of each other"
+      ]
+    },
+    "ceremony_and_registration": {
+      "Section_7": "Marriage ceremony requirements - saptapadi (seven steps)",
+      "Section_8": "Registration of Hindu marriages"
+    },
+    "divorce_grounds": {
+      "Section_13": [
+        "Adultery",
+        "Cruelty",
+        "Desertion for 2+ years",
+        "Conversion to another religion",
+        "Mental disorder/insanity",
+        "Venereal disease in communicable form",
+        "Renunciation of world by spouse",
+        "Not heard alive for 7+ years"
+      ]
+    },
+    "judicial_separation": {
+      "Section_10": "Same grounds as divorce, spouse can live separately"
+    },
+    "maintenance_and_alimony": {
+      "Section_25": "Court can grant alimony/expenses during proceedings",
+      "Section_27": "Court can grant maintenance to wife after divorce"
+    },
+    "custody_and_guardianship": {
+      "Section_26": "Court can pass orders for custody of children"
+    }
+  },
+  "procedure": {
+    "jurisdiction": "District Court where marriage solemnized or parties last resided",
+    "appeals": "High Court within 30 days",
+    "foreign_marriages": "Section 4 - Applies to Hindus married outside India"
+  }
+}

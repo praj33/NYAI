@@ -1,0 +1,45 @@
+{
+  "code": "Human Rights Act 1998",
+  "jurisdiction": "United Kingdom",
+  "scope": "Incorporates the European Convention on Human Rights into UK domestic law",
+  "key_provisions": {
+    "articles_incorporated": {
+      "Article_2": "Right to life",
+      "Article_3": "Prohibition of torture and inhuman treatment",
+      "Article_4": "Prohibition of slavery and forced labour",
+      "Article_5": "Right to liberty and security",
+      "Article_6": "Right to a fair trial",
+      "Article_7": "No punishment without law",
+      "Article_8": "Right to respect for private and family life",
+      "Article_9": "Freedom of thought, conscience and religion",
+      "Article_10": "Freedom of expression",
+      "Article_11": "Freedom of assembly and association",
+      "Article_12": "Right to marry and found a family",
+      "Article_14": "Prohibition of discrimination"
+    },
+    "section_3": "Interpretation of legislation - Courts must interpret legislation compatibly with Convention rights where possible",
+    "section_4": "Declaration of incompatibility - Courts can declare legislation incompatible with Convention rights",
+    "section_6": "Acts of public authorities - Must not act incompatibly with Convention rights",
+    "section_7": "Proceedings - Right to bring proceedings for breach of Convention rights",
+    "section_8": "Judicial remedies - Courts can grant appropriate relief",
+    "section_10": "Remedial orders - Power to amend legislation declared incompatible"
+  },
+  "horizontal_effect": {
+    "public_authorities": "Directly binding on all public authorities",
+    "private_individuals": "Indirect effect through interpretation of other laws",
+    "courts_and_tribunals": "Must act compatibly with Convention rights"
+  },
+  "key_cases": {
+    "hirst_v_united_kingdom": "Prisoner voting rights",
+    "chelsea_v_news_group": "Privacy rights of celebrities",
+    "belmarsh_detention_case": "Indefinite detention without trial",
+    "animal_defenders_case": "Freedom of expression restrictions"
+  },
+  "remedies": [
+    "Damages for breach",
+    "Declaration of incompatibility",
+    "Quashing orders",
+    "Mandatory orders",
+    "Prohibition orders"
+  ]
+}

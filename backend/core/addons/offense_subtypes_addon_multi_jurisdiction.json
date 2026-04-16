@@ -1,0 +1,1025 @@
+{
+  "traffic_violations_india": {
+    "jurisdiction": "IN",
+    "keywords": [
+      "traffic",
+      "traffic rules",
+      "traffic violation",
+      "broke traffic",
+      "traffic signal",
+      "red light",
+      "jumped signal",
+      "broke signal",
+      "ran red light",
+      "traffic light violation",
+      "signal violation",
+      "speeding",
+      "overspeeding",
+      "drunk driving",
+      "driving without license",
+      "no helmet",
+      "no seatbelt",
+      "wrong side driving",
+      "rash driving",
+      "negligent driving",
+      "challan",
+      "traffic fine"
+    ],
+    "domains": ["criminal"],
+    "statutes": [
+      {
+        "act": "Motor Vehicles Act",
+        "year": 1988,
+        "section": "177",
+        "title": "General provision for punishment of offences - Disobeying traffic signals, rules"
+      },
+      {
+        "act": "Motor Vehicles Act",
+        "year": 1988,
+        "section": "183",
+        "title": "Driving at excessive speed - Overspeeding"
+      },
+      {
+        "act": "Motor Vehicles Act",
+        "year": 1988,
+        "section": "184",
+        "title": "Driving dangerously - Rash and negligent driving"
+      },
+      {
+        "act": "Motor Vehicles Act",
+        "year": 1988,
+        "section": "185",
+        "title": "Driving under influence of alcohol or drugs - Drunk driving"
+      },
+      {
+        "act": "Motor Vehicles Act",
+        "year": 1988,
+        "section": "181",
+        "title": "Driving without license"
+      },
+      {
+        "act": "Bharatiya Nyaya Sanhita",
+        "year": 2023,
+        "section": "281",
+        "title": "Rash driving or riding on a public way - Causing danger to life"
+      }
+    ],
+    "enforcement_decision": "ALLOW"
+  },
+
+  "traffic_violations_uae": {
+    "jurisdiction": "UAE",
+    "keywords": [
+      "traffic signal",
+      "red light",
+      "jumped signal",
+      "broke signal",
+      "ran red light",
+      "traffic light violation",
+      "signal violation",
+      "speeding",
+      "overspeeding",
+      "drunk driving",
+      "driving without license",
+      "no helmet",
+      "no seatbelt",
+      "wrong side driving",
+      "rash driving",
+      "negligent driving"
+    ],
+    "domains": ["criminal"],
+    "statutes": [
+      {
+        "act": "UAE Traffic Law",
+        "year": 1995,
+        "section": "Article 49",
+        "title": "Jumping red light - Fine AED 1,000 and 12 black points"
+      },
+      {
+        "act": "UAE Traffic Law",
+        "year": 1995,
+        "section": "Article 53",
+        "title": "Exceeding speed limit - Fine AED 300-3,000 depending on excess speed"
+      },
+      {
+        "act": "UAE Traffic Law",
+        "year": 1995,
+        "section": "Article 49(1)",
+        "title": "Reckless driving endangering lives - Fine AED 2,000 and 23 black points"
+      },
+      {
+        "act": "UAE Penal Code",
+        "year": 1987,
+        "section": "Article 384",
+        "title": "Driving under influence of alcohol - Imprisonment and/or fine"
+      },
+      {
+        "act": "UAE Traffic Law",
+        "year": 1995,
+        "section": "Article 50",
+        "title": "Driving without valid license - Fine AED 5,000-50,000"
+      },
+      {
+        "act": "UAE Traffic Law",
+        "year": 1995,
+        "section": "Article 52",
+        "title": "Not wearing seatbelt - Fine AED 400 and 4 black points"
+      }
+    ],
+    "enforcement_decision": "ALLOW"
+  },
+
+  "traffic_violations_uk": {
+    "jurisdiction": "UK",
+    "keywords": [
+      "traffic signal",
+      "red light",
+      "jumped signal",
+      "broke signal",
+      "ran red light",
+      "traffic light violation",
+      "signal violation",
+      "speeding",
+      "overspeeding",
+      "drunk driving",
+      "driving without license",
+      "no helmet",
+      "no seatbelt",
+      "wrong side driving",
+      "dangerous driving",
+      "careless driving"
+    ],
+    "domains": ["criminal"],
+    "statutes": [
+      {
+        "act": "Road Traffic Act",
+        "year": 1988,
+        "section": "Section 36",
+        "title": "Failing to comply with traffic signs - Fine up to £1,000 and 3 penalty points"
+      },
+      {
+        "act": "Road Traffic Regulation Act",
+        "year": 1984,
+        "section": "Section 89",
+        "title": "Speeding offences - Fine and 3-6 penalty points or disqualification"
+      },
+      {
+        "act": "Road Traffic Act",
+        "year": 1988,
+        "section": "Section 2",
+        "title": "Dangerous driving - Up to 2 years imprisonment and mandatory disqualification"
+      },
+      {
+        "act": "Road Traffic Act",
+        "year": 1988,
+        "section": "Section 5",
+        "title": "Driving with excess alcohol - Up to 6 months imprisonment, unlimited fine, minimum 12 months ban"
+      },
+      {
+        "act": "Road Traffic Act",
+        "year": 1988,
+        "section": "Section 87",
+        "title": "Driving without license - Fine up to £1,000 and 3-6 penalty points"
+      },
+      {
+        "act": "Road Traffic Act",
+        "year": 1988,
+        "section": "Section 14",
+        "title": "Not wearing seatbelt - Fine up to £500"
+      }
+    ],
+    "enforcement_decision": "ALLOW"
+  },
+
+  "traffic_violations_ksa": {
+    "jurisdiction": "KSA",
+    "keywords": [
+      "traffic signal",
+      "red light",
+      "jumped signal",
+      "broke signal",
+      "ran red light",
+      "traffic light violation",
+      "signal violation",
+      "speeding",
+      "overspeeding",
+      "drunk driving",
+      "driving without license",
+      "no helmet",
+      "no seatbelt",
+      "wrong side driving",
+      "rash driving",
+      "negligent driving"
+    ],
+    "domains": ["criminal"],
+    "statutes": [
+      {
+        "act": "Saudi Traffic Law",
+        "year": 2007,
+        "section": "Article 65",
+        "title": "Jumping red light - Fine SAR 3,000-6,000"
+      },
+      {
+        "act": "Saudi Traffic Law",
+        "year": 2007,
+        "section": "Article 61",
+        "title": "Exceeding speed limit - Fine SAR 300-3,000 depending on violation"
+      },
+      {
+        "act": "Saudi Traffic Law",
+        "year": 2007,
+        "section": "Article 67",
+        "title": "Reckless driving - Fine SAR 500-900 and possible vehicle impoundment"
+      },
+      {
+        "act": "Saudi Traffic Law",
+        "year": 2007,
+        "section": "Article 66",
+        "title": "Driving under influence - Imprisonment and fine, vehicle confiscation"
+      },
+      {
+        "act": "Saudi Traffic Law",
+        "year": 2007,
+        "section": "Article 4",
+        "title": "Driving without valid license - Fine SAR 300-500"
+      },
+      {
+        "act": "Saudi Traffic Law",
+        "year": 2007,
+        "section": "Article 71",
+        "title": "Not wearing seatbelt - Fine SAR 150-300"
+      }
+    ],
+    "enforcement_decision": "ALLOW"
+  },
+
+  "rape_uk": {
+    "jurisdiction": "UK",
+    "keywords": [
+      "rape",
+      "sexual assault",
+      "sexual violence",
+      "raped"
+    ],
+    "domains": ["criminal"],
+    "statutes": [
+      {
+        "act": "Sexual Offences Act",
+        "year": 2003,
+        "section": "Section 1",
+        "title": "Rape - Intentional penetration without consent - Life imprisonment"
+      },
+      {
+        "act": "Sexual Offences Act",
+        "year": 2003,
+        "section": "Section 2",
+        "title": "Assault by penetration - Intentional sexual penetration without consent - Life imprisonment"
+      },
+      {
+        "act": "Sexual Offences Act",
+        "year": 2003,
+        "section": "Section 3",
+        "title": "Sexual assault - Intentional sexual touching without consent - Up to 10 years imprisonment"
+      },
+      {
+        "act": "Sexual Offences Act",
+        "year": 2003,
+        "section": "Section 4",
+        "title": "Causing sexual activity without consent - Up to life imprisonment depending on activity"
+      }
+    ],
+    "enforcement_decision": "ESCALATE"
+  },
+
+  "rape_uae": {
+    "jurisdiction": "UAE",
+    "keywords": [
+      "rape",
+      "sexual assault",
+      "sexual violence",
+      "raped"
+    ],
+    "domains": ["criminal"],
+    "statutes": [
+      {
+        "act": "UAE Penal Code",
+        "year": 1987,
+        "section": "Article 354",
+        "title": "Rape - Sexual intercourse without consent - Death penalty or life imprisonment"
+      },
+      {
+        "act": "UAE Penal Code",
+        "year": 1987,
+        "section": "Article 355",
+        "title": "Rape of minor under 14 - Death penalty"
+      },
+      {
+        "act": "UAE Penal Code",
+        "year": 1987,
+        "section": "Article 356",
+        "title": "Attempted rape - Imprisonment minimum 1 year"
+      },
+      {
+        "act": "UAE Penal Code",
+        "year": 1987,
+        "section": "Article 359",
+        "title": "Sexual harassment - Imprisonment and/or fine"
+      }
+    ],
+    "enforcement_decision": "ESCALATE"
+  },
+
+  "divorce_uae": {
+    "jurisdiction": "UAE",
+    "keywords": [
+      "divorce",
+      "talaq",
+      "khula",
+      "marriage dissolution",
+      "separation"
+    ],
+    "domains": ["family"],
+    "statutes": [
+      {
+        "act": "UAE Personal Status Law",
+        "year": 2005,
+        "section": "Article 99",
+        "title": "Divorce by mutual consent - Khula - Wife may seek divorce by returning mahr"
+      },
+      {
+        "act": "UAE Personal Status Law",
+        "year": 2005,
+        "section": "Article 110",
+        "title": "Judicial divorce - Grounds including harm, abandonment, non-maintenance"
+      },
+      {
+        "act": "UAE Personal Status Law",
+        "year": 2005,
+        "section": "Article 115",
+        "title": "Child custody after divorce - Mother has priority for young children"
+      },
+      {
+        "act": "UAE Personal Status Law",
+        "year": 2005,
+        "section": "Article 140",
+        "title": "Maintenance obligations - Husband must provide financial support during marriage and iddah"
+      }
+    ],
+    "enforcement_decision": "ALLOW"
+  },
+
+  "divorce_uk": {
+    "jurisdiction": "UK",
+    "keywords": [
+      "divorce",
+      "dissolution of marriage",
+      "separation",
+      "decree absolute"
+    ],
+    "domains": ["family"],
+    "statutes": [
+      {
+        "act": "Matrimonial Causes Act",
+        "year": 1973,
+        "section": "Section 1",
+        "title": "Divorce - Irretrievable breakdown of marriage - No-fault divorce available"
+      },
+      {
+        "act": "Matrimonial Causes Act",
+        "year": 1973,
+        "section": "Section 23",
+        "title": "Financial provision orders - Court may order maintenance, lump sum, property adjustment"
+      },
+      {
+        "act": "Children Act",
+        "year": 1989,
+        "section": "Section 8",
+        "title": "Child arrangements orders - Residence and contact with children"
+      },
+      {
+        "act": "Divorce, Dissolution and Separation Act",
+        "year": 2020,
+        "section": "Section 1",
+        "title": "No-fault divorce - 20-week reflection period - Simplified divorce process"
+      }
+    ],
+    "enforcement_decision": "ALLOW"
+  },
+
+  "divorce_india": {
+    "jurisdiction": "IN",
+    "keywords": [
+      "divorce",
+      "talaq",
+      "khula",
+      "marriage dissolution",
+      "separation",
+      "judicial separation"
+    ],
+    "domains": ["family"],
+    "statutes": [
+      {
+        "act": "Hindu Marriage Act",
+        "year": 1955,
+        "section": "13",
+        "title": "Divorce - Grounds including adultery, cruelty, desertion, conversion, mental disorder (Hindu Marriage Act 1955)"
+      },
+      {
+        "act": "Special Marriage Act",
+        "year": 1954,
+        "section": "27",
+        "title": "Divorce - Grounds including adultery, cruelty, desertion, unsound mind (Special Marriage Act 1954)"
+      },
+      {
+        "act": "Hindu Marriage Act",
+        "year": 1955,
+        "section": "13B",
+        "title": "Divorce by mutual consent - Both parties agree to dissolve marriage after 1 year separation"
+      },
+      {
+        "act": "Hindu Marriage Act",
+        "year": 1955,
+        "section": "24",
+        "title": "Maintenance pendente lite - Interim maintenance during divorce proceedings"
+      },
+      {
+        "act": "Hindu Marriage Act",
+        "year": 1955,
+        "section": "25",
+        "title": "Permanent alimony - Court may order maintenance after divorce"
+      }
+    ],
+    "enforcement_decision": "ALLOW"
+  },
+
+  "assault_uae": {
+    "jurisdiction": "UAE",
+    "keywords": [
+      "assault",
+      "beating",
+      "domestic violence",
+      "violence",
+      "hit",
+      "attack",
+      "hurt",
+      "harm"
+    ],
+    "domains": ["criminal", "family"],
+    "statutes": [
+      {
+        "act": "UAE Penal Code",
+        "year": 1987,
+        "section": "Article 333",
+        "title": "Assault - Physical violence causing harm - Imprisonment up to 1 year and/or fine up to AED 10,000"
+      },
+      {
+        "act": "UAE Penal Code",
+        "year": 1987,
+        "section": "Article 334",
+        "title": "Aggravated assault - Assault causing permanent disability - Imprisonment up to 5 years"
+      },
+      {
+        "act": "UAE Penal Code",
+        "year": 1987,
+        "section": "Article 335",
+        "title": "Assault causing death - Unintentional killing through assault - Imprisonment and/or fine"
+      }
+    ],
+    "enforcement_decision": "ALLOW"
+  },
+
+  "assault_uk": {
+    "jurisdiction": "UK",
+    "keywords": [
+      "assault",
+      "beating",
+      "domestic violence",
+      "violence",
+      "hit",
+      "attack",
+      "hurt",
+      "harm",
+      "abh",
+      "gbh"
+    ],
+    "domains": ["criminal", "family"],
+    "statutes": [
+      {
+        "act": "Offences Against the Person Act",
+        "year": 1861,
+        "section": "Section 18",
+        "title": "Wounding with intent - Causing grievous bodily harm with intent - Life imprisonment"
+      },
+      {
+        "act": "Offences Against the Person Act",
+        "year": 1861,
+        "section": "Section 20",
+        "title": "Malicious wounding - Unlawfully inflicting grievous bodily harm - Up to 5 years imprisonment"
+      },
+      {
+        "act": "Offences Against the Person Act",
+        "year": 1861,
+        "section": "Section 47",
+        "title": "Actual bodily harm (ABH) - Assault causing actual bodily harm - Up to 5 years imprisonment"
+      },
+      {
+        "act": "Criminal Justice Act",
+        "year": 1988,
+        "section": "Section 39",
+        "title": "Common assault - Assault or battery - Up to 6 months imprisonment and/or fine"
+      }
+    ],
+    "enforcement_decision": "ALLOW"
+  },
+
+  "extortion_uae": {
+    "jurisdiction": "UAE",
+    "keywords": [
+      "extortion",
+      "demanding",
+      "demanding money",
+      "blackmail",
+      "threat",
+      "coercion"
+    ],
+    "domains": ["criminal"],
+    "statutes": [
+      {
+        "act": "UAE Penal Code",
+        "year": 1987,
+        "section": "Article 399",
+        "title": "Extortion - Obtaining property by threat or intimidation - Imprisonment and/or fine"
+      },
+      {
+        "act": "UAE Penal Code",
+        "year": 1987,
+        "section": "Article 400",
+        "title": "Aggravated extortion - Extortion with violence or weapons - Enhanced penalties"
+      }
+    ],
+    "enforcement_decision": "ALLOW"
+  },
+
+  "extortion_uk": {
+    "jurisdiction": "UK",
+    "keywords": [
+      "extortion",
+      "demanding",
+      "demanding money",
+      "blackmail",
+      "threat",
+      "coercion"
+    ],
+    "domains": ["criminal"],
+    "statutes": [
+      {
+        "act": "Theft Act",
+        "year": 1968,
+        "section": "Section 21",
+        "title": "Blackmail - Making unwarranted demands with menaces - Up to 14 years imprisonment"
+      }
+    ],
+    "enforcement_decision": "ALLOW"
+  },
+
+  "land_dispute_uk": {
+    "jurisdiction": "UK",
+    "keywords": [
+      "land dispute",
+      "property dispute",
+      "land",
+      "property",
+      "boundary",
+      "title deed",
+      "encroachment",
+      "easement",
+      "ownership",
+      "possession",
+      "real estate",
+      "landlord",
+      "tenant",
+      "eviction",
+      "lease",
+      "freehold",
+      "leasehold"
+    ],
+    "domains": ["civil"],
+    "statutes": [
+      {
+        "act": "Land Registration Act",
+        "year": 2002,
+        "section": "Section 58",
+        "title": "Boundary disputes - Determination of exact line of boundary between properties"
+      },
+      {
+        "act": "Law of Property Act",
+        "year": 1925,
+        "section": "Section 52",
+        "title": "Conveyances to be by deed - Requirements for valid transfer of land"
+      },
+      {
+        "act": "Limitation Act",
+        "year": 1980,
+        "section": "Section 15",
+        "title": "Time limit for actions to recover land - 12 years for adverse possession claims"
+      },
+      {
+        "act": "Housing Act",
+        "year": 1988,
+        "section": "Section 21",
+        "title": "Recovery of possession - Landlord's right to evict assured shorthold tenants"
+      },
+      {
+        "act": "Landlord and Tenant Act",
+        "year": 1985,
+        "section": "Section 11",
+        "title": "Repairing obligations - Landlord's duty to maintain structure and installations"
+      },
+      {
+        "act": "Party Wall Act",
+        "year": 1996,
+        "section": "Section 1",
+        "title": "Party wall rights - Rights and obligations regarding shared walls and boundaries"
+      }
+    ],
+    "enforcement_decision": "ALLOW"
+  },
+
+  "land_dispute_uae": {
+    "jurisdiction": "UAE",
+    "keywords": [
+      "land dispute",
+      "property dispute",
+      "land",
+      "property",
+      "boundary",
+      "title deed",
+      "encroachment",
+      "ownership",
+      "possession",
+      "real estate",
+      "landlord",
+      "tenant",
+      "eviction",
+      "lease",
+      "ejari",
+      "rera"
+    ],
+    "domains": ["civil"],
+    "statutes": [
+      {
+        "act": "UAE Civil Code",
+        "year": 1985,
+        "section": "Article 1191",
+        "title": "Ownership rights - Right to use, exploit and dispose of property"
+      },
+      {
+        "act": "UAE Civil Code",
+        "year": 1985,
+        "section": "Article 1320",
+        "title": "Adverse possession - Acquisition of ownership through continuous possession"
+      },
+      {
+        "act": "UAE Civil Code",
+        "year": 1985,
+        "section": "Article 1340",
+        "title": "Boundary disputes - Resolution of disputes over property boundaries"
+      },
+      {
+        "act": "UAE Law No. 26",
+        "year": 2007,
+        "section": "Article 25",
+        "title": "Landlord-tenant relations - Rights and obligations in rental agreements"
+      },
+      {
+        "act": "UAE Law No. 26",
+        "year": 2007,
+        "section": "Article 26",
+        "title": "Eviction procedures - Legal process for evicting tenants"
+      },
+      {
+        "act": "Dubai Law No. 7",
+        "year": 2006,
+        "section": "Article 1",
+        "title": "Real estate registration - Requirements for property registration and title deeds"
+      },
+      {
+        "act": "UAE Federal Law No. 5",
+        "year": 1985,
+        "section": "Article 1235",
+        "title": "Encroachment - Liability for unlawful occupation or use of another's property"
+      }
+    ],
+    "enforcement_decision": "ALLOW"
+  },
+
+  "murder_uk": {
+    "jurisdiction": "UK",
+    "keywords": [
+      "murder",
+      "killed",
+      "murdered",
+      "homicide",
+      "killing",
+      "unlawful killing"
+    ],
+    "domains": ["criminal"],
+    "statutes": [
+      {
+        "act": "Homicide Act",
+        "year": 1957,
+        "section": "Section 1",
+        "title": "Murder - Unlawful killing with intent to kill or cause grievous bodily harm - Mandatory life imprisonment"
+      },
+      {
+        "act": "Coroners and Justice Act",
+        "year": 2009,
+        "section": "Section 54",
+        "title": "Loss of control - Partial defense to murder reducing to manslaughter"
+      },
+      {
+        "act": "Homicide Act",
+        "year": 1957,
+        "section": "Section 2",
+        "title": "Diminished responsibility - Partial defense to murder where mental functioning impaired"
+      },
+      {
+        "act": "Criminal Justice Act",
+        "year": 2003,
+        "section": "Schedule 21",
+        "title": "Murder sentencing - Minimum terms for life sentences (15-30 years or whole life)"
+      }
+    ],
+    "enforcement_decision": "ESCALATE"
+  },
+
+  "murder_uae": {
+    "jurisdiction": "UAE",
+    "keywords": [
+      "murder",
+      "killed",
+      "murdered",
+      "homicide",
+      "killing",
+      "unlawful killing"
+    ],
+    "domains": ["criminal"],
+    "statutes": [
+      {
+        "act": "UAE Penal Code",
+        "year": 1987,
+        "section": "Article 332",
+        "title": "Murder - Intentional killing - Death penalty or life imprisonment"
+      },
+      {
+        "act": "UAE Penal Code",
+        "year": 1987,
+        "section": "Article 339",
+        "title": "Manslaughter - Unintentional killing - Imprisonment and/or blood money (diya)"
+      },
+      {
+        "act": "UAE Penal Code",
+        "year": 1987,
+        "section": "Article 340",
+        "title": "Causing death by negligence - Negligent act resulting in death - Imprisonment and/or fine"
+      },
+      {
+        "act": "UAE Penal Code",
+        "year": 1987,
+        "section": "Article 341",
+        "title": "Premeditated murder - Murder with planning and intent - Death penalty"
+      }
+    ],
+    "enforcement_decision": "ESCALATE"
+  },
+
+  "robbery_uk": {
+    "jurisdiction": "UK",
+    "keywords": [
+      "robbery",
+      "robbed",
+      "mugging",
+      "mugged",
+      "armed robbery",
+      "gunpoint",
+      "knifepoint"
+    ],
+    "domains": ["criminal"],
+    "statutes": [
+      {
+        "act": "Theft Act",
+        "year": 1968,
+        "section": "Section 8",
+        "title": "Robbery - Theft with force or threat of force - Life imprisonment"
+      },
+      {
+        "act": "Theft Act",
+        "year": 1968,
+        "section": "Section 1",
+        "title": "Theft - Dishonestly appropriating property - Up to 7 years imprisonment"
+      },
+      {
+        "act": "Firearms Act",
+        "year": 1968,
+        "section": "Section 17",
+        "title": "Possession of firearm with intent to commit robbery - Minimum 5 years imprisonment"
+      },
+      {
+        "act": "Prevention of Crime Act",
+        "year": 1953,
+        "section": "Section 1",
+        "title": "Possession of offensive weapon - Up to 4 years imprisonment"
+      }
+    ],
+    "enforcement_decision": "ALLOW"
+  },
+
+  "robbery_uae": {
+    "jurisdiction": "UAE",
+    "keywords": [
+      "robbery",
+      "robbed",
+      "mugging",
+      "mugged",
+      "armed robbery",
+      "gunpoint",
+      "knifepoint",
+      "theft with force"
+    ],
+    "domains": ["criminal"],
+    "statutes": [
+      {
+        "act": "UAE Penal Code",
+        "year": 1987,
+        "section": "Article 383",
+        "title": "Robbery - Theft using force or threat - Imprisonment minimum 5 years"
+      },
+      {
+        "act": "UAE Penal Code",
+        "year": 1987,
+        "section": "Article 384",
+        "title": "Armed robbery - Robbery with weapon - Imprisonment minimum 7 years or life imprisonment"
+      },
+      {
+        "act": "UAE Penal Code",
+        "year": 1987,
+        "section": "Article 385",
+        "title": "Aggravated robbery - Robbery causing injury or death - Life imprisonment or death penalty"
+      },
+      {
+        "act": "UAE Penal Code",
+        "year": 1987,
+        "section": "Article 399",
+        "title": "Theft - Taking property without consent - Imprisonment and/or fine"
+      }
+    ],
+    "enforcement_decision": "ALLOW"
+  },
+
+  "commercial_india": {
+    "jurisdiction": "IN",
+    "keywords": [
+      "contract breach",
+      "business partner",
+      "company dispute",
+      "shareholder",
+      "partnership",
+      "commercial contract",
+      "business agreement"
+    ],
+    "domains": ["commercial", "civil"],
+    "statutes": [
+      {
+        "act": "Indian Contract Act",
+        "year": 1872,
+        "section": "73",
+        "title": "Compensation for breach of contract - Damages for loss or damage naturally arising"
+      },
+      {
+        "act": "Indian Contract Act",
+        "year": 1872,
+        "section": "74",
+        "title": "Compensation for breach of contract with penalty clause - Reasonable compensation"
+      },
+      {
+        "act": "Companies Act",
+        "year": 2013,
+        "section": "241",
+        "title": "Oppression and mismanagement - Application to Tribunal for relief"
+      },
+      {
+        "act": "Companies Act",
+        "year": 2013,
+        "section": "242",
+        "title": "Powers of Tribunal - Orders for oppression and mismanagement cases"
+      },
+      {
+        "act": "Partnership Act",
+        "year": 1932,
+        "section": "42",
+        "title": "Rights and duties of partners - Mutual rights and obligations"
+      },
+      {
+        "act": "Specific Relief Act",
+        "year": 1963,
+        "section": "10",
+        "title": "Specific performance of contracts - When granted"
+      }
+    ],
+    "enforcement_decision": "ALLOW"
+  },
+
+  "commercial_uk": {
+    "jurisdiction": "UK",
+    "keywords": [
+      "contract breach",
+      "business partner",
+      "company dispute",
+      "shareholder",
+      "partnership",
+      "commercial contract",
+      "business agreement"
+    ],
+    "domains": ["commercial", "civil"],
+    "statutes": [
+      {
+        "act": "Contract Law",
+        "year": 1979,
+        "section": "Common Law",
+        "title": "Breach of contract - Damages for loss arising from breach"
+      },
+      {
+        "act": "Sale of Goods Act",
+        "year": 1979,
+        "section": "Section 14",
+        "title": "Implied terms - Goods must be of satisfactory quality and fit for purpose"
+      },
+      {
+        "act": "Companies Act",
+        "year": 2006,
+        "section": "Section 994",
+        "title": "Unfair prejudice - Petition for relief from unfairly prejudicial conduct"
+      },
+      {
+        "act": "Companies Act",
+        "year": 2006,
+        "section": "Section 171",
+        "title": "Directors' duties - Duty to act within powers"
+      },
+      {
+        "act": "Partnership Act",
+        "year": 1890,
+        "section": "Section 24",
+        "title": "Partners' rights and duties - Rules for partnership relations"
+      }
+    ],
+    "enforcement_decision": "ALLOW"
+  },
+
+  "commercial_uae": {
+    "jurisdiction": "UAE",
+    "keywords": [
+      "contract breach",
+      "business partner",
+      "company dispute",
+      "shareholder",
+      "partnership",
+      "commercial contract",
+      "business agreement"
+    ],
+    "domains": ["commercial", "civil"],
+    "statutes": [
+      {
+        "act": "UAE Civil Code",
+        "year": 1985,
+        "section": "Article 246",
+        "title": "Breach of contract - Compensation for damages resulting from breach"
+      },
+      {
+        "act": "UAE Civil Code",
+        "year": 1985,
+        "section": "Article 389",
+        "title": "Specific performance - Court may order performance of contractual obligations"
+      },
+      {
+        "act": "UAE Commercial Companies Law",
+        "year": 2015,
+        "section": "Article 318",
+        "title": "Shareholder disputes - Resolution of disputes between shareholders"
+      },
+      {
+        "act": "UAE Commercial Companies Law",
+        "year": 2015,
+        "section": "Article 194",
+        "title": "Directors' duties - Fiduciary duties and liability"
+      },
+      {
+        "act": "UAE Commercial Transactions Law",
+        "year": 1993,
+        "section": "Article 10",
+        "title": "Partnership - Rights and obligations of partners"
+      }
+    ],
+    "enforcement_decision": "ALLOW"
+  }
+}

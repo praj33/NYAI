@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Sovereign Provenance Event Schema",
+  "description": "Master schema for all Sovereign provenance events",
+  "type": "object",
+  "properties": {
+    "trace_id": {
+      "type": "string",
+      "description": "Unique trace identifier for request lineage"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 formatted timestamp of when the event occurred"
+    },
+    "agent_id": {
+      "type": "string",
+      "description": "Unique identifier of the agent that emitted the event"
+    },
+    "jurisdiction": {
+      "type": "string",
+      "description": "Jurisdiction/region of authority for the agent"
+    },
+    "event_name": {
+      "type": "string",
+      "enum": [
+        "query_received",
+        "agent_classified",
+        "jurisdiction_resolved",
+        "reasoning_explained",
+        "evidence_chain_generated",
+        "trace_completed",
+        "RL_FEEDBACK_RECEIVED"
+      ],
+      "description": "Type of event that occurred"
+    },
+    "request_hash": {
+      "type": "string",
+      "description": "Deterministic hash of request content"
+    },
+    "nonce": {
+      "type": "string",
+      "description": "One-time nonce for anti-replay protection"
+    },
+    "details": {
+      "type": "object",
+      "description": "Event-specific details",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "trace_id",
+    "timestamp",
+    "agent_id",
+    "event_name",
+    "request_hash",
+    "nonce"
+  ]
+}

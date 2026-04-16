@@ -1,0 +1,461 @@
+import React, { useState } from 'react'
+import { legalQueryService } from '../services/nyayaApi.js'
+import './DecisionPage.css'
+
+/**
+ * DecisionPage - Standalone Legal Decision Display
+ * 
+ * This is a standalone page that queries the real Nyaya backend
+ * and displays structured legal decisions as authority, not chat.
+ * 
+ * Debug Mode: Press 'Ctrl+Shift+D' to toggle debug information
+ */
+function DecisionPage() {
+  const [query, setQuery] = useState('')
+  const [decision, setDecision] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const [expandedSections, setExpandedSections] = useState({})
+  const [debugMode, setDebugMode] = useState(false)
+
+  // Debug mode keyboard shortcut - Ctrl+Shift+D
+  React.useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.ctrlKey && e.shiftKey && e.key === 'D') {
+        e.preventDefault()
+        setDebugMode(prev => !prev)
+      }
+    }
+    window.addEventListener('keydown', handleKeyPress)
+    return () => window.removeEventListener('keydown', handleKeyPress)
+  }, [])
+
+  const handleSubmitQuery = async (e) => {
+    e.preventDefault()
+    
+    if (!query.trim()) {
+      setError('Please enter a legal query')
+      return
+    }
+
+    setLoading(true)
+    setError(null)
+    setDecision(null)
+    setExpandedSections({})
+
+    try {
+      const result = await legalQueryService.submitQuery({ query: query.trim(), jurisdiction_hint: 'India' })
+      
+      if (!result.success) {
+        throw new Error(result.error)
+      }
+
+      setDecision(result.data)
+      console.log('Decision received:', result.data.trace_id)
+    } catch (err) {
+      setError(err.message || 'Failed to fetch decision. Please try again.')
+      console.error('Query error:', err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const toggleSection = (section) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }))
+  }
+
+  const getEnforcementColor = (state) => {
+    switch (state) {
+      case 'ALLOW':
+        return '#28a745'
+      case 'BLOCK':
+        return '#dc3545'
+      case 'ESCALATE':
+        return '#fd7e14'
+      case 'SAFE_REDIRECT':
+        return '#6f42c1'
+      default:
+        return '#6c757d'
+    }
+  }
+
+  const getEnforcementLabel = (state) => {
+    switch (state) {
+      case 'ALLOW':
+        return '✅ ALLOWED'
+      case 'BLOCK':
+        return '🚫 BLOCKED'
+      case 'ESCALATE':
+        return '📈 ESCALATION REQUIRED'
+      case 'SAFE_REDIRECT':
+        return '↩️ SAFE REDIRECT'
+      default:
+        return '⚠️ PENDING'
+    }
+  }
+
+  const parseProceduralSteps = (stepsString) => {
+    if (!stepsString) return []
+    return stepsString.split('|').map(step => step.trim()).filter(Boolean)
+  }
+
+  return (
+    <div className="decision-page">
+      {/* Header */}
+      <div className="decision-header">
+        <h1>Nyaya Legal Agent</h1>
+        <p>Real-time structured legal decisions with enforcement authority</p>
+      </div>
+
+      {/* Query Section */}
+      <div className="decision-query-section">
+        <div className="query-container">
+          <form onSubmit={handleSubmitQuery}>
+            <div className="form-group">
+              <label htmlFor="query">Enter Your Legal Query</label>
+              <textarea
+                id="query"
+                className="query-textarea"
+                placeholder="Example: What are the procedures for filing a civil suit in India?"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                disabled={loading}
+                rows={4}
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="query-button"
+              disabled={loading || !query.trim()}
+            >
+              {loading ? 'Processing Decision...' : 'Get Legal Decision'}
+            </button>
+          </form>
+
+          {error && (
+            <div className="error-message">
+              <span>⚠️</span>
+              <p>{error}</p>
+              <button onClick={() => setError(null)}>×</button>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Decision Display */}
+      {decision && (
+        <div className="decision-display">
+          {/* Enforcement Status Banner */}
+          <div 
+            className="enforcement-banner"
+            style={{ borderLeftColor: getEnforcementColor(decision.enforcement_decision) }}
+          >
+            <div className="enforcement-content">
+              <h2 style={{ color: getEnforcementColor(decision.enforcement_decision) }}>
+                {getEnforcementLabel(decision.enforcement_decision)}
+              </h2>
+              <p className="enforcement-state">{decision.enforcement_decision}</p>
+            </div>
+          </div>
+
+          {/* Decision Summary */}
+          <div className="decision-section header-section">
+            <div className="section-info">
+              <div className="info-grid">
+                <div className="info-item">
+                  <div className="info-label">Domain</div>
+                  <div className="info-value">{decision.domain.toUpperCase()}</div>
+                </div>
+                <div className="info-item">
+                  <div className="info-label">Jurisdiction</div>
+                  <div className="info-value">{decision.jurisdiction_detected || decision.jurisdiction}</div>
+                </div>
+                <div className="info-item">
+                  <div className="info-label">Confidence</div>
+                  <div className="info-value">
+                    {Math.round(decision.confidence.overall * 100)}%
+                  </div>
+                </div>
+                <div className="info-item">
+                  <div className="info-label">Trace ID</div>
+                  <div className="info-value trace-id">{decision.trace_id}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Legal Analysis */}
+          <div className="decision-section">
+            <h3 className="section-title">Legal Analysis</h3>
+            <div className="section-content">
+              <p>{decision.reasoning_trace?.legal_analysis || 'No analysis available'}</p>
+            </div>
+          </div>
+
+          {/* Procedural Steps */}
+          <div className="decision-section">
+            <button
+              className="section-toggle"
+              onClick={() => toggleSection('procedural')}
+            >
+              <h3 className="section-title">Procedural Steps</h3>
+              <span className={`toggle-icon ${expandedSections.procedural ? 'open' : ''}`}>▼</span>
+            </button>
+            {expandedSections.procedural && (
+              <div className="section-content">
+                <ol className="procedural-list">
+                  {parseProceduralSteps(decision.reasoning_trace?.procedural_steps?.join(' | ')).map((step, idx) => (
+                    <li key={idx}>{step}</li>
+                  ))}
+                </ol>
+              </div>
+            )}
+          </div>
+
+          {/* Timeline */}
+          {decision.timeline && decision.timeline.length > 0 && (
+            <div className="decision-section">
+              <button
+                className="section-toggle"
+                onClick={() => toggleSection('timeline')}
+              >
+                <h3 className="section-title">Timeline</h3>
+                <span className={`toggle-icon ${expandedSections.timeline ? 'open' : ''}`}>▼</span>
+              </button>
+              {expandedSections.timeline && (
+                <div className="section-content">
+                  <div className="timeline">
+                    {decision.timeline.map((event, idx) => (
+                      <div key={idx} className="timeline-item">
+                        <div className="timeline-marker"></div>
+                        <div className="timeline-content">
+                          <h4>{event.step}</h4>
+                          <p>{event.eta}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Evidence Requirements */}
+          {decision.evidence_requirements && decision.evidence_requirements.length > 0 && (
+            <div className="decision-section">
+              <button
+                className="section-toggle"
+                onClick={() => toggleSection('evidence')}
+              >
+                <h3 className="section-title">Evidence Requirements</h3>
+                <span className={`toggle-icon ${expandedSections.evidence ? 'open' : ''}`}>▼</span>
+              </button>
+              {expandedSections.evidence && (
+                <div className="section-content">
+                  <ul className="evidence-list">
+                    {decision.evidence_requirements.map((req, idx) => (
+                      <li key={idx}>{req}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Remedies Available */}
+          {decision.reasoning_trace?.remedies && decision.reasoning_trace.remedies.length > 0 && (
+            <div className="decision-section">
+              <button
+                className="section-toggle"
+                onClick={() => toggleSection('remedies')}
+              >
+                <h3 className="section-title">Available Remedies</h3>
+                <span className={`toggle-icon ${expandedSections.remedies ? 'open' : ''}`}>▼</span>
+              </button>
+              {expandedSections.remedies && (
+                <div className="section-content">
+                  <ul className="remedies-list">
+                    {decision.reasoning_trace.remedies.map((remedy, idx) => (
+                      <li key={idx}>{remedy}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Legal Route */}
+          {decision.legal_route && decision.legal_route.length > 0 && (
+            <div className="decision-section">
+              <button
+                className="section-toggle"
+                onClick={() => toggleSection('route')}
+              >
+                <h3 className="section-title">Legal Route</h3>
+                <span className={`toggle-icon ${expandedSections.route ? 'open' : ''}`}>▼</span>
+              </button>
+              {expandedSections.route && (
+                <div className="section-content">
+                  <div className="legal-route">
+                    {decision.legal_route.map((agent, idx) => (
+                      <React.Fragment key={idx}>
+                        <div className="route-step">{agent}</div>
+                        {idx < decision.legal_route.length - 1 && (
+                          <div className="route-arrow">→</div>
+                        )}
+                      </React.Fragment>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Provenance Chain */}
+          {decision.provenance_chain && decision.provenance_chain.length > 0 && (
+            <div className="decision-section">
+              <button
+                className="section-toggle"
+                onClick={() => toggleSection('provenance')}
+              >
+                <h3 className="section-title">Decision Provenance</h3>
+                <span className={`toggle-icon ${expandedSections.provenance ? 'open' : ''}`}>▼</span>
+              </button>
+              {expandedSections.provenance && (
+                <div className="section-content">
+                  <div className="provenance-chain">
+                    {decision.provenance_chain.map((event, idx) => (
+                      <div key={idx} className="provenance-item">
+                        <div className="provenance-time">
+                          {new Date(event.timestamp).toLocaleTimeString()}
+                        </div>
+                        <div className="provenance-event">
+                          <p><strong>{event.event}</strong></p>
+                          <p>Agent: {event.agent}</p>
+                          {event.domains && <p>Domains: {event.domains.join(', ')}</p>}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Confidence Breakdown */}
+          {decision.confidence && (
+            <div className="decision-section">
+              <button
+                className="section-toggle"
+                onClick={() => toggleSection('confidence')}
+              >
+                <h3 className="section-title">Confidence Analysis</h3>
+                <span className={`toggle-icon ${expandedSections.confidence ? 'open' : ''}`}>▼</span>
+              </button>
+              {expandedSections.confidence && (
+                <div className="section-content">
+                  <div className="confidence-breakdown">
+                    <div className="confidence-item">
+                      <div className="confidence-label">Overall</div>
+                      <div className="confidence-bar">
+                        <div 
+                          className="confidence-fill"
+                          style={{ width: `${decision.confidence.overall * 100}%` }}
+                        ></div>
+                      </div>
+                      <span>{Math.round(decision.confidence.overall * 100)}%</span>
+                    </div>
+                    {Object.entries(decision.confidence).map(([key, value]) => 
+                      key !== 'overall' ? (
+                        <div key={key} className="confidence-item">
+                          <div className="confidence-label">{key.replace(/_/g, ' ')}</div>
+                          <div className="confidence-bar">
+                            <div 
+                              className="confidence-fill"
+                              style={{ width: `${value * 100}%` }}
+                            ></div>
+                          </div>
+                          <span>{Math.round(value * 100)}%</span>
+                        </div>
+                      ) : null
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Footer Actions */}
+          <div className="decision-footer">
+            <button 
+              className="action-button"
+              onClick={() => {
+                const dataStr = JSON.stringify(decision, null, 2)
+                const dataBlob = new Blob([dataStr], { type: 'application/json' })
+                const url = URL.createObjectURL(dataBlob)
+                const link = document.createElement('a')
+                link.href = url
+                link.download = `decision-${decision.trace_id}.json`
+                link.click()
+              }}
+            >
+              📥 Export Decision
+            </button>
+            <button 
+              className="action-button secondary"
+              onClick={() => {
+                setDecision(null)
+                setQuery('')
+                setError(null)
+              }}
+            >
+              🔄 New Query
+            </button>
+          </div>
+
+          {/* Debug Mode - Development Only */}
+          {debugMode && (
+            <div style={{
+              marginTop: '30px',
+              padding: '16px',
+              background: '#f8f9fa',
+              border: '1px solid #dee2e6',
+              borderRadius: '8px',
+              fontSize: '0.85rem',
+              fontFamily: 'monospace',
+              color: '#666'
+            }}>
+              <strong>DEBUG INFO:</strong><br/>
+              Enforcement State: <strong>{decision.enforcement_decision}</strong><br/>
+              Trace ID: <strong>{decision.trace_id}</strong><br/>
+              Confidence: <strong>{Math.round(decision.confidence?.overall * 100)}%</strong><br/>
+              Fields: <strong>{Object.keys(decision).length}/12</strong><br/>
+              Timestamp: {new Date().toISOString()}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Loading State */}
+      {loading && (
+        <div className="decision-loading">
+          <div className="spinner"></div>
+          <p>Analyzing legal decision...</p>
+        </div>
+      )}
+
+      {/* Empty State */}
+      {!decision && !loading && !error && (
+        <div className="decision-empty">
+          <p>Submit a legal query to receive a structured legal decision</p>
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default DecisionPage

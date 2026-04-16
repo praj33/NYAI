@@ -1,0 +1,34 @@
+{
+  "code": "Federal Decree-Law No. (42) of 2022 - Civil Procedure Code",
+  "scope": "Governs civil procedures before all courts in the UAE, applies to civil cases and disputes, controls jurisdiction, competence, and procedural rules",
+  "structure": {
+    "GENERAL_PROVISIONS": {
+      "Article_1": "Scope of application to civil courts",
+      "Article_2-8": "Interpretation and general provisions"
+    },
+    "JURISDICTION_AND_COMPETENCE": {
+      "Article_9-25": "Jurisdiction and territorial competence"
+    },
+    "COURT_COMPOSITION": {
+      "Article_26-50": "Court composition and judge qualifications"
+    },
+    "CASE_MANAGEMENT": {
+      "Article_51-100": "Case management and pleadings"
+    },
+    "EVIDENCE": {
+      "Article_101-150": "Evidence and examination of witnesses"
+    },
+    "JUDGMENT_AND_DECISIONS": {
+      "Article_151-200": "Judgment and decision-making procedures"
+    },
+    "APPEALS_AND_ENFORCEMENT": {
+      "Article_200+": "Appeals and enforcement procedures"
+    }
+  },
+  "important_provisions": [
+    "Remote communication technology in civil procedures",
+    "Mediation and settlement mechanisms",
+    "Enforcement of judgments",
+    "Appellate procedures"
+  ]
+}

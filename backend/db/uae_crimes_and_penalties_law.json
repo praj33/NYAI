@@ -1,0 +1,54 @@
+{
+  "code": "Federal Decree-Law No. (31) of 2021 - Crimes and Penalties Law",
+  "scope": "Defines criminal offences and prescribed penalties, establishes substantive criminal law in the UAE, applies to all criminal conduct",
+  "categories": {
+    "LIBEL_AND_SLANDER": {
+      "Articles_371-380": "Defamation, slander, and libel offences with punishment provisions for various categories"
+    },
+    "PERSONAL_STATUS_AND_FAMILY_MATTERS": {
+      "description": "Provisions governing family law, inheritance and succession matters"
+    },
+    "PROPERTY_CRIMES": {
+      "description": "Theft and burglary provisions, fraud and embezzlement offences"
+    },
+    "VIOLENT_CRIMES": {
+      "description": "Assault and battery provisions, homicide and murder offences"
+    }
+  },
+  "key_offences": {
+    "murder": {
+      "premeditated": "Article 384 - Life/Death Penalty (Diya possible if pardoned)",
+      "intentional_unplanned": "Article 385 - Life Imprisonment (7+ years if pardoned)",
+      "manslaughter": "Articles 387-390 - Up to 10 years + Fine"
+    },
+    "kidnapping": {
+      "simple": "Article 347 - Up to 5 years",
+      "aggravated_violence": "Articles 348-349 - 7-15 years",
+      "child_kidnapping": "Article 348 - Minimum 7 years"
+    },
+    "sexual_offences": {
+      "rape": "5-15 years (Death if minor)",
+      "sexual_harassment": "6 months-1 year + AED 20,000 fine"
+    },
+    "assault_battery": {
+      "simple_injury": "3 months/fine",
+      "serious_injury": "1 year/fine",
+      "grievous_injury": "2 years/fine",
+      "torture": "Up to 15 years"
+    },
+    "cybercrime": {
+      "hacking": "AED 150,000-750,000 + 6+ months imprisonment",
+      "cyber_fraud": "AED 250,000-1,000,000 + 1+ year imprisonment",
+      "data_theft": "AED 250,000-1,500,000 + 5+ years imprisonment",
+      "fake_website": "AED 50,000-200,000 + imprisonment"
+    },
+    "drug_trafficking": "10 years to Death penalty",
+    "money_laundering": "5-15 years + AED 500,000-5,000,000 fine"
+  },
+  "key_elements": [
+    "Intent, premeditation, causation",
+    "Diya (blood money) provisions",
+    "Enhanced penalties for repeat offenders",
+    "Corporate criminal liability"
+  ]
+}

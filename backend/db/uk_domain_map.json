@@ -1,0 +1,59 @@
+{
+  "jurisdiction": "UK",
+  "version": "1.0",
+  "domain_mapping": {
+    "criminal": {
+      "subdomains": [
+        "property_crimes",
+        "violent_crimes",
+        "drug_offences",
+        "sexual_offences",
+        "fraud_and_deception",
+        "cyber_crimes"
+      ],
+      "confidence_threshold": 0.8
+    },
+    "civil": {
+      "subdomains": [
+        "contract_disputes",
+        "family_matters",
+        "property_disputes",
+        "employment_issues",
+        "personal_injury",
+        "defamation_and_privacy",
+        "medical_negligence",
+        "insurance_disputes",
+        "succession_law",
+        "trust_disputes",
+        "family_law_additional",
+        "landlord_and_tenant_law"
+      ],
+      "confidence_threshold": 0.7
+    }
+  },
+  "keyword_mapping": {
+    "property_crimes": ["theft", "burglary", "robbery", "criminal damage"],
+    "violent_crimes": ["assault", "battery", "grievous bodily harm", "murder"],
+    "drug_offences": ["possession", "supply", "trafficking", "controlled substances"],
+    "sexual_offences": ["rape", "sexual assault", "indecent assault"],
+    "fraud_and_deception": ["fraud", "false representation", "theft by deception"],
+    "cyber_crimes": ["unauthorised access", "computer misuse", "hacking"],
+    "contract_disputes": ["breach of contract", "faulty goods", "unfair terms"],
+    "family_matters": ["divorce", "custody", "child arrangements", "matrimonial"],
+    "property_disputes": ["land registration", "adverse possession", "boundary disputes"],
+    "employment_issues": ["unfair dismissal", "discrimination", "wrongful dismissal"],
+    "personal_injury": ["negligence", "accident", "duty of care"],
+    "defamation_and_privacy": ["libel", "slander", "privacy breach", "nuisance"],
+    "medical_negligence": ["medical negligence", "clinical negligence", "doctor malpractice", "hospital liability"],
+    "insurance_disputes": ["insurance claim", "policy dispute", "claim denial", "insurance fraud"],
+    "succession_law": ["estate", "will", "probate", "inheritance", "letters of administration"],
+    "trust_disputes": ["trust", "trustee", "beneficiary", "fiduciary duty", "trust administration"],
+    "family_law_additional": ["adoption", "placement order", "parental responsibility", "family proceedings"],
+    "landlord_and_tenant_law": ["tenancy", "rent", "eviction", "possession order", "assured shorthold"]
+  },
+  "fallback_rules": {
+    "default_domain": "civil",
+    "uncertainty_threshold": 0.5,
+    "escalation_path": ["civil", "criminal"]
+  }
+}

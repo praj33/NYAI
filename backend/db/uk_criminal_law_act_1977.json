@@ -1,0 +1,24 @@
+{
+  "code": "Criminal Law Act 1977",
+  "jurisdiction": "England & Wales",
+  "structure": {
+    "PART_I": {
+      "title": "Conspiracy",
+      "Section_1": "The offence of conspiracy",
+      "Section_1A": "Conspiracy to commit offences (as amended by Criminal Justice (Terrorism and Conspiracy) Act 1998)",
+      "Sections_2-5": "Requirements and conditions for conspiracy: Jurisdiction requirements, Geographical conditions for criminal conspiracy"
+    },
+    "PART_II": {
+      "title": "Protection of Property",
+      "Section_6": "Use of property to facilitate criminal purposes",
+      "Sections_7-12": "Premises and access provisions"
+    },
+    "PART_III": {
+      "title": "Criminal Procedure and Penalties",
+      "Section_15": "Determination of triable offences",
+      "Sections_19-26": "Mode of trial procedures (now repealed by Magistrates' Courts Act 1980)",
+      "Section_30": "Mandatory life sentences for murder",
+      "Schedule_1": "Offences triable summarily only"
+    }
+  }
+}

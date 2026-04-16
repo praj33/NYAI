@@ -1,0 +1,145 @@
+import json
+import os
+from typing import Dict, List, Any, Optional
+
+class AddonSubtypeResolver:
+    def __init__(self):
+        addon_path = os.path.join(os.path.dirname(__file__), "offense_subtypes_addon.json")
+        with open(addon_path, 'r', encoding='utf-8') as f:
+            self.addon_subtypes = json.load(f)
+        
+        # Load multi-jurisdiction addons
+        multi_jurisdiction_path = os.path.join(os.path.dirname(__file__), "offense_subtypes_addon_multi_jurisdiction.json")
+        if os.path.exists(multi_jurisdiction_path):
+            with open(multi_jurisdiction_path, 'r', encoding='utf-8') as f:
+                multi_jurisdiction_addons = json.load(f)
+                self.addon_subtypes.update(multi_jurisdiction_addons)
+        
+        # Statute completeness overlay mapping
+        self.statute_overlay = {
+            "Bharatiya Nyaya Sanhita": {"year": 2023},
+            "Indian Penal Code": {"year": 1860},
+            "Information Technology Act": {"year": 2000},
+            "Minimum Wages Act": {"year": 1948},
+            "Immoral Traffic (Prevention) Act": {"year": 1956},
+            "Child and Adolescent Labour (Prohibition and Regulation) Act": {"year": 1986},
+            "Maintenance and Welfare of Parents and Senior Citizens Act": {"year": 2007},
+            "Transplantation of Human Organs and Tissues Act": {"year": 1994},
+            "Prohibition of Child Marriage Act": {"year": 2006},
+            "Dowry Prohibition Act": {"year": 1961},
+            "Protection of Women from Domestic Violence Act": {"year": 2005},
+            "Sexual Harassment of Women at Workplace Act": {"year": 2013},
+            "Hindu Marriage Act": {"year": 1955},
+            "Special Marriage Act": {"year": 1954},
+            "Protection of Children from Sexual Offences Act": {"year": 2012}
+        }
+    
+    def detect_addon_subtype(self, query: str, jurisdiction: str = None) -> Optional[str]:
+        """Detect addon offense subtype from query with exclude/require logic and jurisdiction matching"""
+        query_lower = query.lower()
+
+        def keyword_matches(keyword: str) -> bool:
+            if not keyword:
+                return False
+            keyword_lower = keyword.lower().strip()
+            if not keyword_lower:
+                return False
+            if " " in keyword_lower:
+                tokens = [token for token in keyword_lower.split() if token]
+                return all(token in query_lower for token in tokens)
+            return keyword_lower in query_lower
+        
+        for subtype_name, subtype_data in self.addon_subtypes.items():
+            # Check jurisdiction match if specified in addon
+            addon_jurisdiction = subtype_data.get('jurisdiction')
+            if addon_jurisdiction and jurisdiction and addon_jurisdiction != jurisdiction:
+                continue
+            
+            keywords = subtype_data.get('keywords', [])
+            exclude_keywords = subtype_data.get('exclude_keywords', [])
+            require_keywords = subtype_data.get('require_keywords', [])
+            trigger_verbs = subtype_data.get('trigger_verbs', [])
+            
+            # Check if any keyword matches
+            if not any(keyword_matches(kw) for kw in keywords):
+                continue
+
+            # If trigger verbs are provided (e.g., for assault/violence), require at least one verb match
+            if trigger_verbs and not any(verb in query_lower for verb in trigger_verbs):
+                continue
+            
+            # Check exclude keywords
+            if any(ex_kw in query_lower for ex_kw in exclude_keywords):
+                continue
+            
+            # Check require keywords (if specified, at least one must be present)
+            if require_keywords and not any(req_kw in query_lower for req_kw in require_keywords):
+                continue
+            
+            return subtype_name
+        
+        return None
+    
+    def _complete_statute_metadata(self, statute: Dict[str, Any]) -> Dict[str, Any]:
+        """Complete missing statute metadata using overlay mapping"""
+        completed = statute.copy()
+        act_name = statute.get('act', '')
+        
+        if act_name in self.statute_overlay:
+            overlay_data = self.statute_overlay[act_name]
+            if 'year' not in completed or not completed['year']:
+                completed['year'] = overlay_data['year']
+        
+        return completed
+    
+    def enhance_response(self, base_response: Dict[str, Any], query: str, confidence: Dict[str, float] = None, jurisdiction: str = None) -> Dict[str, Any]:
+        """Enhance response with addon subtypes if base resolver has low confidence or empty results"""
+        
+        # Check if we should apply addon logic
+        should_apply = False
+        
+        # Apply if no statutes found
+        if not base_response.get('statutes', []):
+            should_apply = True
+        
+        # Apply if confidence is low
+        if confidence and confidence.get('statute_match', 1.0) < 0.5:
+            should_apply = True
+        
+        if not should_apply:
+            return base_response
+        
+        # Detect addon subtype with jurisdiction
+        addon_subtype = self.detect_addon_subtype(query, jurisdiction)
+        if not addon_subtype:
+            return base_response
+        
+        addon_data = self.addon_subtypes[addon_subtype]
+        
+        # Append addon statutes with completed metadata
+        addon_statutes = []
+        for statute in addon_data.get('statutes', []):
+            completed_statute = self._complete_statute_metadata(statute)
+            addon_statutes.append({
+                "act": completed_statute["act"],
+                "section": completed_statute["section"],
+                "title": completed_statute["title"],
+                "year": completed_statute.get("year")
+            })
+        
+        if 'statutes' not in base_response:
+            base_response['statutes'] = []
+        base_response['statutes'].extend(addon_statutes)
+        
+        # Override domains
+        base_response['domains'] = addon_data.get('domains', ['criminal'])
+        
+        # Set enforcement decision if not already set
+        if 'enforcement_decision' not in base_response:
+            base_response['enforcement_decision'] = addon_data.get('enforcement_decision', 'ALLOW')
+        
+        # Mark as addon enhanced
+        base_response['addon_enhanced'] = True
+        base_response['addon_subtype'] = addon_subtype
+        
+        return base_response

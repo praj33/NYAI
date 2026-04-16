@@ -1,0 +1,947 @@
+{
+  "code": "Code of Civil Procedure, 1908",
+  "structure": {
+    "PRELIMINARY": {
+      "1": "Short title, commencement and extent.",
+      "2": "Definitions.",
+      "3": "Subordination of Courts.",
+      "4": "Savings.",
+      "5": "Application of the Code to Revenue Courts.",
+      "6": "Pecuniary jurisdiction.",
+      "7": "Provincial Small Cause Courts.",
+      "8": "Presidency Small Cause Courts."
+    },
+    "PART I": {
+      "SUITS IN GENERAL": {
+        "JURISDICTION OF THE COURTS AND Res judicata": {
+          "9": "Courts to try all civil suits unless barred.",
+          "10": "Stay of suit.",
+          "11": "Res judicata.",
+          "12": "Bar to further suit.",
+          "13": "When foreign judgment not conclusive.",
+          "14": "Presumption as to foreign judgments."
+        },
+        "PLACE OF SUING": {
+          "15": "Court in which suits to be instituted.",
+          "16": "Suits to be instituted where subject-matter situate.",
+          "17": "Suits for immovable property situate within jurisdiction of different Courts.",
+          "18": "Place of Institution of suit where local limits of jurisdiction of Courts are uncertain.",
+          "19": "Suits for compensation for wrongs to person or movables.",
+          "20": "Other suits to be instituted where defendants reside or cause of action arises.",
+          "21": "Objections to jurisdiction.",
+          "21A": "Bar on suit to set aside decree on objection as to place of suing."
+        },
+        "INSTITUTION OF SUITS": {
+          "26": "Institution of suits."
+        },
+        "SUMMONS AND DISCOVERY": {
+          "27": "Summons to defendants.",
+          "28": "Service of summons where defendant resides in another State.",
+          "29": "Service of foreign summonses.",
+          "30": "Power to order discovery and the like.",
+          "31": "Summons to witness.",
+          "32": "Penalty for default."
+        },
+        "JUDGMENT AND DECREE": {
+          "33": "Judgment and decree."
+        },
+        "INTEREST": {
+          "34": "Interest."
+        },
+        "COSTS": {
+          "35": "Costs.",
+          "35A": "Compensatory costs in respect of false or vexatious claims or defences.",
+          "35B": "Costs for causing delay."
+        }
+      }
+
+    },
+    "PART II": {
+      "EXECUTION": {
+        "GENERAL": {
+          "36": "Application to orders.",
+          "37": "Definition of Court which passed a decree."
+        },
+        "COURTS BY WHICH DECREES MAY BE EXECUTED": {
+          "38": "Court by which decree may be executed.",
+          "39": "Transfer of decree.",
+          "40": "Transfer of decree to Court in another State.",
+          "41": "Result of execution proceedings to be certified.",
+          "42": "Powers of Court in executing transferred decree.",
+          "43": "Execution of decrees passed by Civil Courts in places to which this Code does not extend.",
+          "44": "Execution of decrees passed by Revenue Courts in places to which this Code does not extend.",
+          "44A": "Execution of decrees passed by Courts in reciprocating territory.",
+          "45": "Execution of decrees outside India.",
+          "46": "Precepts."
+        },
+        "QUESTIONS TO BE DETERMINED BY COURT EXECUTING DECREE": {
+          "47": "Questions to be determined by the Court executing decree."
+        },
+        "LIMIT OF TIME FOR EXECUTION": {
+          "48": "[Repealed.]."
+        },
+        "TRANSFEREES AND LEGAL REPRESENTATIVES": {
+          "49": "Transferee.",
+          "50": "Legal representative."
+        },
+        "PROCEDURE IN EXECUTION": {
+          "51": "Powers of Court to enforce execution.",
+          "52": "Enforcement of decree against legal representative.",
+          "53": "Liability of ancestral property.",
+          "54": "Partition of estate or separation of share."
+        },
+        "ARREST AND DETENTION": {
+          "55": "Arrest and detention.",
+          "56": "Prohibition of arrest or detention of women in execution of decree for money.",
+          "57": "Subsistence-allowance.",
+          "58": "Detention and release.",
+          "59": "Release on ground of illness."
+        },
+        "ATTACHMENT": {
+          "60": "Property liable to attachment and sale in execution of decree.",
+          "61": "Partial exemption of agricultural produce.",
+          "62": "Seizure of property in dwelling house.",
+          "63": "Property attached in execution of decrees of several Courts.",
+          "64": "Private alienation of property after attachment to be void."
+        },
+        "SALE": {
+          "65": "Purchaser's title.",
+          "66": "[Repealed.].",
+          "67": "Power for State Government to make rules as to sales of land in execution of decrees for payment of money."
+        },
+        "DELEGATION TO COLLECTOR OF POWER TO EXECUTE DECREES AGAINST IMMOVABLE PROPERTY": {
+          "68": "[Repealed.].",
+          "69": "[Repealed.].",
+          "70": "[Repealed.].",
+          "71": "[Repealed.].",
+          "72": "[Repealed.]."
+        },
+        "DISTRIBUTION OF ASSETS": {
+          "73": "Proceeds of execution-sale to be rateably distributed among decree-holders."
+        },
+        "RESISTANCE TO EXECUTION": {
+          "74": "Resistance to execution."
+        }
+      }
+    },
+    "PART III": {
+      "INCIDENTAL PROCEEDINGS": {
+        "COMMISSIONS": {
+          "75": "Power of Court to issue commissions.",
+          "76": "Commission to another Court.",
+          "77": "Letter of request.",
+          "78": "Commissions issued by foreign Courts."
+        }
+      }
+    },
+    "PART IV": {
+      "SUITS IN PARTICULAR CASES": {
+        "SUITS BY OR AGAINST THE GOVERNMENT OR PUBLIC OFFICERS IN THEIR OFFICIAL CAPACITY": {
+          "79": "Suits by or against Government.",
+          "80": "Notice.",
+          "81": "Exemption from arrest and personal appearance.",
+          "82": "Execution of decree."
+        },
+        "SUITS BY ALIENS AND BY OR AGAINST FOREIGN RULERS, AMBASSADORS AND ENVOYS": {
+          "83": "When aliens may sue.",
+          "84": "When foreign States may sue.",
+          "85": "Persons specially appointed by Government to prosecute or defend on behalf of foreign Rulers.",
+          "86": "Suits against foreign Rulers, Ambassadors and Envoys.",
+          "87": "Style of foreign Rulers as parties to suits.",
+          "87A": "Definitions of \"foreign State\" and \"Ruler\"."
+        },
+        "SUITS AGAINST RULERS OF FORMER INDIAN STATES": {
+          "87B": "Application of sections 85 and 86 to Rulers of former Indian States."
+        },
+        "INTERPLEADER": {
+          "88": "Where interpleader-suit may be instituted."
+        }
+      }
+    },
+    "PART V": {
+      "SPECIAL PROCEEDINGS": {
+        "ARBITRATION": {
+          "89": "Settlement of disputes outside the Court."
+        },
+        "SPECIAL CASE": {
+          "90": "Power to state case for opinion of Court."
+        },
+        "PUBLIC NUISANCES AND OTHER WRONGFUL ACTS AFFECTING THE PUBLIC": {
+          "91": "Public nuisances and other wrongful acts affecting the public.",
+          "92": "Public charities.",
+          "93": "Exercise of powers of Advocate-General outside presidency-towns."
+        }
+      }
+    },
+    "PART VI": {
+      "SUPPLEMENTAL PROCEEDINGS": {
+        "94": "Supplemental proceedings.",
+        "95": "Compensation for obtaining arrest, attachment or injunction on insufficient ground."
+      }
+    },
+    "PART VII": {
+      "APPEALS": {
+        "APPEALS FROM ORIGINAL DECREES": {
+          "96": "Appeal from original decree.",
+          "97": "Appeal from final decree where no appeal from preliminary decree.",
+          "98": "Decision where appeal heard by two or more Judges.",
+          "99": "No decree to be reversed or modified for error or irregularity not affecting merits or jurisdiction.",
+          "99A": "No order under section 47 to be reversed or modified unless decision of the case is prejudicially affected."
+        },
+        "APPEALS FROM APPELLATE DECREES": {
+          "100": "Second appeal.",
+          "100A": "No further appeal in certain cases.",
+          "101": "Second appeal on no other grounds.",
+          "102": "No second appeal in certain cases.",
+          "103": "Power of High Court to determine issues of fact."
+        },
+        "APPEALS FROM ORDERS": {
+          "104": "Orders from which appeal lies.",
+          "105": "Other orders.",
+          "106": "What Courts to hear appeals."
+        },
+        "GENERAL PROVISIONS RELATING TO APPEALS": {
+          "107": "Powers of Appellate Court.",
+          "108": "Procedure in appeals from appellate decrees and orders."
+        },
+        "APPEALS TO THE SUPREME COURT": {
+          "109": "When appeals lie to the Supreme Court.",
+          "110": "[Value of subject matters.] Omitted by the Code of Civil Procedure (Amendment) Act, 1973 (49 of 1973), s. 3 (w.e.f. 29-11-1973).",
+          "111": "[Bar of certain appeals.] omitted by the A.O. 1950.",
+          "111A": "[Appeals to Federal Court] Rep. by the Federal Court Act, 1941 (21 of 1941), s. 2 (w.e.f. 1-9-1942).",
+          "112": "Savings."
+        }
+      }
+    },
+    "PART VIII": {
+      "REFERENCE, REVIEW AND REVISION": {
+        "113": "Reference to High Court.",
+        "114": "Review.",
+        "115": "Revision."
+      }
+    },
+    "PART IX": {
+      "SPECIAL PROVISIONS RELATING TO THE HIGH COURTS NOT BEING THE COURT OF A JUDICIAL COMMISSIONER": {
+        "116": "Part to apply only to certain High Courts.",
+        "117": "Application of Code to High Courts.",
+        "118": "Execution of decree before ascertainment of costs.",
+        "119": "Unauthorized persons not to address Court.",
+        "120": "Provisions not applicable to High Court in original civil jurisdiction."
+      }
+    },
+    "PART X": {
+      "RULES": {
+        "121": "Effect of rules in First Schedule.",
+        "122": "Power of certain High Courts to make rules.",
+        "123": "Constitution of Rules Committees in certain States.",
+        "124": "Committee to report to High Court.",
+        "125": "Power of other High Courts to make rules.",
+        "126": "Rules to be subject to approval.",
+        "127": "Publication of rules.",
+        "128": "Matters for which rules may provide.",
+        "129": "Power of High Courts to make rules as to their original civil procedure.",
+        "130": "Power of other High Courts to make rules as to matters other than procedure.",
+        "131": "Publication of rules."
+      }
+    },
+    "PART XI": {
+      "MISCELLANEOUS": {
+        "132": "Exemption of certain women from personal appearance.",
+        "133": "Exemption of other persons.",
+        "134": "Arrest other than in execution of decree.",
+        "135": "Exemption from arrest under civil process.",
+        "135A": "Exemption of members of legislative bodies from arrest and detention under civil process.",
+        "136": "Procedure where person to be arrested or property to be attached is outside district.",
+        "137": "Language of subordinate Courts.",
+        "138": "Power of High Court to require evidence to be recorded in English.",
+        "139": "Oath on affidavit by whom to be administered.",
+        "140": "Assessors in causes of salvage, etc.",
+        "141": "Miscellaneous proceedings.",
+        "142": "Orders and notices to be in writing.",
+        "143": "Postage.",
+        "144": "Application for restitution.",
+        "145": "Enforcement of liability of surety.",
+        "146": "Proceedings by or against representatives.",
+        "147": "Consent or agreement by persons under disability.",
+        "148": "Enlargement of time.",
+        "148A": "Right to lodge a caveat.",
+        "149": "Power to make up deficiency of court-fees.",
+        "150": "Transfer of business.",
+        "151": "Saving of inherent powers of Court.",
+        "152": "Amendment of judgments, decrees or orders.",
+        "153": "General power to amend.",
+        "153A": "Power to amend decree or order where appeal is summarily dismissed.",
+        "153B": "Place of trial to be deemed to be open Court.",
+        "154": "[Repealed.].",
+        "155": "[Repealed.].",
+        "156": "[Repealed.].",
+        "157": "Continuance of orders under repealed enactments.",
+        "158": "Reference to Code of Civil Procedure and other repealed enactments."
+      }
+    },
+    "THE FIRST SCHEDULE": {
+      "ORDER I": {
+        "Parties to Suits": {
+          "1": "Who may be joined as plaintiffs.",
+          "2": "Power of Court to order separate trial.",
+          "3": "Who may be joined as defendants.",
+          "3A": "Power to order separate trials where joinder of defendants may embarrass or delay trial.",
+          "4": "Court may give judgment for or against one or more of joint parties.",
+          "5": "Defendant need not be interested in all the relief claimed.",
+          "6": "Joinder of parties liable on same contract.",
+          "7": "When plaintiff in doubt from whom redress is to be sought.",
+          "8": "One person may sue or defend on behalf of all in same interest.",
+          "8A": "Power of Court to permit a person or body of persons to present opinion or to take part in the proceedings.",
+          "9": "Misjoinder and non-joinder.",
+          "10": "Suit in name of wrong plaintiff.",
+          "10A": "Power of Court to request any pleader to address it.",
+          "11": "Conduct of suit.",
+          "12": "Appearance of one of several plaintiffs or defendants for others.",
+          "13": "Objections as to non-joinder or misjoinder."
+        }
+      },
+      "ORDER II": {
+        "Frame of Suit": {
+          "1": "Frame of suit.",
+          "2": "Suit to include the whole claim.",
+          "3": "Joinder of causes of action.",
+          "4": "Only certain claims to be joined for recovery of immovable property.",
+          "5": "Claims by or against executor, administrator or heir.",
+          "6": "Power of Court to order separate trials.",
+          "7": "Objections as to misjoinder."
+        }
+      },
+      "ORDER III": {
+        "Recognized Agents and Pleaders": {
+          "1": "Appearances, etc., may be in person, by recognised agent or by pleader.",
+          "2": "Recognised agents.",
+          "3": "Service of process on recognised agent.",
+          "4": "Appointment of pleader.",
+          "5": "Service of process on pleader.",
+          "6": "Agent to accept service."
+        }
+      },
+      "ORDER IV": {
+        "Institution of suits": {
+          "1": "Suit to be commenced by plaint.",
+          "2": "Register of suits."
+        }
+      },
+      "ORDER V": {
+        "Issue and Service of Summons": {
+          "Issue of summons": {
+            "1": "Summons.",
+            "2": "Copy of plaint annexed to summons.",
+            "3": "Court may order defendant or plaintiff to appear in person.",
+            "4": "No party to be ordered to appear in person unless resident within certain limits.",
+            "5": "Summons to order defendant to produce documents relied on by him.",
+            "6": "On issue of summons for final disposal, defendant to be directed to produce his witnesses.",
+            "7": "Summons to order defendant to produce documents relied on by him.",
+            "8": "On issue of summons for final disposal, defendant to be directed to produce his witnesses."
+          },
+          "Service of Summons": {
+            "9": "Delivery of summons by Court.",
+            "9A": "Summons given to the plaintiff for service.",
+            "10": "Mode of service.",
+            "11": "Service on several defendants.",
+            "12": "Service to be on defendant in person when practicable, or on his agent.",
+            "13": "Service on agent by whom defendant carries on business.",
+            "14": "Service on agent in charge in suits for immovable property.",
+            "15": "Where service may be on an adult member of defendant's family.",
+            "16": "Person served to sign acknowledgement.",
+            "17": "Procedure when defendant refuses to accept service, or cannot be found.",
+            "18": "Endorsement of time and manner of service.",
+            "19": "Examination of serving officer.",
+            "19A": "[Omitted.].",
+            "20": "Substituted service.",
+            "20A": "[Repealed.].",
+            "21": "Service of summons where defendant resides within jurisdiction of another Court.",
+            "22": "Service within presidency-towns of summons issued by Courts outside.",
+            "23": "Duty of Court to which summons is sent.",
+            "24": "Service on defendant in prison.",
+            "25": "Service where defendant resides out of India and has no agent.",
+            "26": "Service in foreign territory through Political Agent or Court.",
+            "26A": "Summonses to be sent to officers to foreign countries.",
+            "27": "Service on civil public officer or on servant of railway company or local authority.",
+            "28": "Service on soldiers, sailors or airmen.",
+            "29": "Duty of person to whom summons is delivered or sent for service.",
+            "30": "Substitution of letter for summons."
+          }
+        }
+      },
+      "ORDER VI": {
+        "Pleadings Generally": {
+          "1": "Pleading.",
+          "2": "Pleading to state material facts and not evidence.",
+          "3": "Forms of pleading.",
+          "4": "Particulars to be given where necessary.",
+          "5": "[Omitted.].",
+          "6": "Condition precedent.",
+          "7": "Departure.",
+          "8": "Denial of contract.",
+          "9": "Effect of document to be stated.",
+          "10": "Malice, knowledge, etc.",
+          "11": "Notice.",
+          "12": "Implied contract, or relation.",
+          "13": "Presumptions of law.",
+          "14": "Pleading to be signed.",
+          "14A": "Address for service of notice.",
+          "15": "Verification of pleadings.",
+          "16": "Striking out pleadings.",
+          "17": "Amendment of pleadings.",
+          "18": "Failure to amend after order."
+        }
+      },
+      "ORDER VII": {
+        "Plaint": {
+          "1": "Particulars to be contained in plaint.",
+          "2": "In money suits.",
+          "3": "Where the subject-matter of the suit is immovable property.",
+          "4": "When plaintiff sues as representative.",
+          "5": "Defendant's interest and liability to be shown.",
+          "6": "Grounds of exemption from limitation law.",
+          "7": "Relief to be specifically stated.",
+          "8": "Relief founded on separate grounds.",
+          "9": "Procedure on admitting plaint.",
+          "10": "Return of plaint.",
+          "11": "Rejection of plaint.",
+          "12": "Procedure on rejecting plaint.",
+          "13": "Where rejection of plaint does not preclude presentation of fresh plaint.",
+          "Documents relied on in Plaint": {
+            "14": "Production of document on which plaintiff sues or relies.",
+            "15": "[Omitted.].",
+            "16": "Suits on lost negotiable instruments.",
+            "17": "Production of shop-book.",
+            "18": "[Omitted.]."
+          }
+        }
+      },
+      "ORDER VIII": {
+        "Written statement, set-off and counter-claim": {
+          "1": "Written statement.",
+          "1A": "Duty of defendant to produce documents upon which relief is claimed or relied upon by him.",
+          "2": "New facts must be specially pleaded.",
+          "3": "Denial to be specific.",
+          "4": "Evasive denial.",
+          "5": "Specific denial.",
+          "6": "Particulars of set-off to be given in written statement.",
+          "6A": "Counter-claim by defendant.",
+          "6B": "Counter-claim to be stated.",
+          "6C": "Exclusion of counter-claim.",
+          "6D": "Effect of discontinuance of suit.",
+          "6E": "Default of plaintiff to reply to counter-claim.",
+          "6F": "Relief to defendant where counter-claim succeeds.",
+          "6G": "Rules relating to written statement to apply.",
+          "7": "Defence or set-off founded upon separate grounds.",
+          "8": "New ground of defence.",
+          "8A": "[Omitted.].",
+          "9": "Subsequent pleadings.",
+          "10": "Procedure when party fails to present written statement called for by Court."
+        }
+      },
+      "ORDER IX": {
+        "Appearance of Parties and Consequence of non-Appearance": {
+          "1": "Parties to appear on day fixed in summons for defendant to appear and answer.",
+          "2": "Dismissal of suit where summons not served in consequence of plaintiff's failure to pay costs.",
+          "3": "Where neither party appears suit to be dismissed.",
+          "4": "Plaintiff may bring fresh suit or Court may restore suit to file.",
+          "5": "Dismissal of suit where plaintiff after summons returned unserved, fails for seven days to apply for fresh summons.",
+          "6": "Procedure when only plaintiff appears.",
+          "7": "Procedure where defendant appears on day of adjourned hearing and assigns good cause for previous non-appearance.",
+          "8": "Procedure where defendant only appears.",
+          "9": "Decree against plaintiff by default bars fresh suit.",
+          "10": "Procedure in case of non-attendance of one or more of several plaintiffs.",
+          "11": "Procedure in case of non-attendance of one or more of several defendants.",
+          "12": "Consequence of non-attendance, without sufficient cause shown, of party ordered to appear in person.",
+          "Setting aside Decree ex parte": {
+            "13": "Setting aside decree ex parte against defendant.",
+            "14": "No decree to be set aside without notice to opposite party."
+          }
+        }
+      },
+      "ORDER X": {
+        "Examination of Parties by the Court": {
+          "1": "Ascertainment whether allegations in pleadings are admitted or denied.",
+          "1A": "Direction of the court to opt for any one mode of alternative dispute resolution.",
+          "1B": "Appearance before the conciliatory forum or authority.",
+          "1C": "Appearance before the court consequent to the failure of efforts of conciliation.",
+          "2": "Oral examination of party, or companion of party.",
+          "3": "Substance of examination to be written.",
+          "4": "Consequence of refusal or inability of pleader to answer."
+        }
+      },
+      "ORDER XI": {
+        "Discovery and Inspection": {
+          "1": "Discovery by interrogatories.",
+          "2": "Particular interrogatories to be submitted.",
+          "3": "Costs of interrogatories.",
+          "4": "Form of interrogatories.",
+          "5": "Corporations.",
+          "6": "Objections to interrogatories by answer.",
+          "7": "Setting aside and striking out interrogatories.",
+          "8": "Affidavit in answer, filing.",
+          "9": "Form of affidavit in answer.",
+          "10": "No exception to be taken.",
+          "11": "Order to answer or answer further.",
+          "12": "Application for discovery of documents.",
+          "13": "Affidavit of documents.",
+          "14": "Production of documents.",
+          "15": "Inspection of documents referred to in pleadings or affidavits.",
+          "16": "Notice to produce.",
+          "17": "Time for inspection when notice given.",
+          "18": "Order for inspection.",
+          "19": "Verified copies.",
+          "20": "Premature discovery.",
+          "21": "Non-compliance with order for discovery.",
+          "22": "Using answers to interrogatories at trial.",
+          "23": "Order to apply to minors."
+        }
+      },
+      "ORDER XII": {
+        "Admissions": {
+          "1": "Notice of admission of case.",
+          "2": "Notice to admit documents.",
+          "2A": "Document to be deemed to be admitted if not denied after service of notice to admit documents.",
+          "3": "Form of notice.",
+          "3A": "Power of Court to record admission.",
+          "4": "Notice to admit acts.",
+          "5": "Form of admissions.",
+          "6": "Judgment on admissions.",
+          "7": "Affidavit of signature.",
+          "8": "Notice to produce documents.",
+          "9": "Costs."
+        }
+      },
+      "ORDER XIII": {
+        "Production, Impounding and Return of Documents": {
+          "1": "Original documents to be produced at or before the settlement of issues.",
+          "2": "[Omitted.].",
+          "3": "Rejection of irrelevant or inadmissible documents.",
+          "4": "Endorsements on documents admitted in evidence.",
+          "5": "Endorsements on copies of admitted entries in books, accounts and records.",
+          "6": "Endorsements on documents rejected an inadmissible in evidence.",
+          "7": "Recording of admitted and return of rejected documents.",
+          "8": "Court may order any document to be impounded.",
+          "9": "Return of admitted documents.",
+          "10": "Court may sent for papers from its own records or from other Courts.",
+          "11": "Provisions as to documents applied to material objects."
+        }
+      },
+      "ORDER XIV": {
+        "Settlement of issues and determination of suit on issues of law or on Issues agreed upon": {
+          "1": "Framing of issues.",
+          "2": "Court to pronounce judgment on all issues.",
+          "3": "Materials from which issues may be framed.",
+          "4": "Court may examine witnesses or documents before framing issues.",
+          "5": "Power to amend and strike out, issues.",
+          "6": "Questions of fact or law may by agreement be stated in form of issues.",
+          "7": "Court, if satisfied that agreement was executed in good faith, may pronounce judgment."
+        }
+      },
+      "ORDER XV": {
+        "Disposal of the Suit at the First Hearing": {
+          "1": "Parties not at issue.",
+          "2": "One of several defendants not at issue.",
+          "3": "Parties at issue.",
+          "4": "Failure to produce evidence."
+        }
+      },
+      "ORDER XVI": {
+        "Summoning and Attendance of Witnesses": {
+          "1": "List of witnesses and summons to witnesses.",
+          "1A": "Production of witnesses without summons.",
+          "2": "Expenses of witness to be paid into Court on applying for summons.",
+          "3": "Tender of expenses to witness.",
+          "4": "Procedure where insufficient sum paid in.",
+          "5": "Time, place and purpose of attendance to be specified in summons.",
+          "6": "Summons to produce document.",
+          "7": "Power to require persons present in Court to give evidence or produce document.",
+          "7A": "Summons given to the party for service.",
+          "8": "Summons how served.",
+          "9": "Time for serving summons.",
+          "10": "Procedure where witness fails to comply with summons.",
+          "11": "If witness appears, attachment may be withdrawn.",
+          "12": "Procedure if witness fails to appear.",
+          "13": "Mode of attachment.",
+          "14": "Court may of its own accord summon as witnesses strangers to suit.",
+          "15": "Duty of persons summoned to give evidence or produce document.",
+          "16": "When they may depart.",
+          "17": "Application of rules 10 to 13.",
+          "18": "Procedure where witness apprehended cannot give evidence or produce document.",
+          "19": "No witness to be ordered to attend in person unless resident within certain limits.",
+          "20": "Consequence of refusal of party to give evidence when called on by Court.",
+          "21": "Rules as to witnesses to apply to parties summoned."
+        }
+      },
+      "ORDER XVI-A": {
+        "Attendance of Witnesses Confined or Detained in Prisons": {
+          "1": "Definitions.",
+          "2": "Power to require attendance of prisoners to give evidence.",
+          "3": "Expenses to be paid into Court.",
+          "4": "Power of State Government to exclude certain persons from the operation of rule 2.",
+          "5": "Officer in charge of prison to abstain from carrying out order in certain contingencies.",
+          "6": "Prisoner to be brought to Court in custody.",
+          "7": "Power to issue commission for examination of witness in prison."
+        }
+      },
+      "ORDER XVII": {
+        "Adjournment": {
+          "1": "Court may grant time and adjourn hearing.",
+          "2": "Procedure if parties fail to appear on day fixed.",
+          "3": "Court may proceed notwithstanding either party fails to produce evidence, etc."
+        }
+      },
+      "ORDER XVIII": {
+        "Hearing of the Suit and Examination of Witnesses": {
+          "1": "Right to begin.",
+          "2": "Statement and production of evidence.",
+          "3": "Evidence where several issues.",
+          "3A": "Party to appear before other witnesses.",
+          "4": "Recording of evidence.",
+          "5": "How evidence shall be taken in appealable cases.",
+          "6": "When deposition to be interpreted.",
+          "7": "Evidence under section 138.",
+          "8": "Memorandum when evidence not taken down by Judge.",
+          "9": "When evidence may be taken in English.",
+          "10": "Any particular question and answer may be taken down.",
+          "11": "Questions objected to and allowed by Court.",
+          "12": "Remarks on demeanour of witnesses.",
+          "13": "Memorandum of evidence in unappealable cases.",
+          "14": "[Omitted.].",
+          "15": "Power to deal with evidence taken before another Judge.",
+          "16": "Power to examine witness immediately.",
+          "17": "Court may recall and examine witness.",
+          "17A": "[Omitted.].",
+          "18": "Power of Court to inspect.",
+          "19": "Power to get statements recorded on commission."
+        }
+      },
+      "ORDER XIX": {
+        "Affidavits": {
+          "1": "Power to order any point to be proved by affidavit.",
+          "2": "Power to order attendance of deponent for cross-examination.",
+          "3": "Matters to which affidavits shall be confined."
+        }
+      },
+      "ORDER XX": {
+        "Judgment and Decree": {
+          "1": "Judgment when pronounced.",
+          "2": "Power to pronounce judgment written by Judge's predecessor.",
+          "3": "Judgment to be signed.",
+          "4": "Judgments of Small Cause Courts.",
+          "5": "Court to state its decision on each issue.",
+          "5A": "Court to inform parties as to where an appeal lies in cases where parties are not represented by pleaders.",
+          "6": "Contents of decree.",
+          "6A": "Preparation of Decree.",
+          "6B": "Copies of judgments when to be made available.",
+          "7": "Date of decree.",
+          "8": "Procedure where Judge has vacated office before signing decree.",
+          "9": "Decree for recovery of immovable property.",
+          "10": "Decree for delivery of movable property.",
+          "11": "Decree may direct payment by instalments.",
+          "12": "Decree for possession and mesne profits.",
+          "12A": "Decree for specific performance of contract for the sale or lease of immovable property.",
+          "13": "Decree in administration-suit.",
+          "14": "Decree in pre-emption-suit.",
+          "15": "Decree in suit for dissolution of partnership.",
+          "16": "Decree in suit for account between principal and agent.",
+          "17": "Special directions as to accounts.",
+          "18": "Decree in suit for partition of property or separate possession of a share therein.",
+          "19": "Decree when set-off or counter-claim is allowed.",
+          "20": "Certified copies of judgment and decree to be furnished."
+        }
+      },
+      "ORDER XXA": {
+        "Costs": {
+          "1": "Provisions relating to certain items.",
+          "2": "Costs to be awarded in accordance with the rules made by High Court."
+        }
+      },
+      "ORDER XXI": {
+        "Execution of Decrees and Orders": {
+          "Payment under decree": {
+            "1": "Modes of paying money under decree.",
+            "2": "Payment out of Court to decree-holder."
+          },
+          "Courts executing decrees": {
+            "3": "Lands situate in more than one jurisdiction.",
+            "4": "Transfer to Court of Small Causes.",
+            "5": "Mode of transfer.",
+            "6": "Procedure where Court desires that its own decree shall be executed by another Court.",
+            "7": "Court receiving copies of decree, etc., to file same without proof.",
+            "8": "Execution of decree or order by Court to which it is sent.",
+            "9": "Execution by High court of decree transferred by other Court."
+          },
+          "Application for execution": {
+            "10": "Application for execution.",
+            "11": "Oral application.",
+            "11A": "Application for arrest to state grounds.",
+            "12": "Application for attachment of movable property not in judgment-debtor's possession.",
+            "13": "Application for attachment of immovable property to contain certain particulars.",
+            "14": "Power to require certified extract from Collector's register in certain cases.",
+            "15": "Application for execution by joint decree-holders.",
+            "16": "Application for execution by transferee of decree.",
+            "17": "Procedure on receiving application for execution of decree.",
+            "18": "Execution in case of cross-decrees.",
+            "19": "Execution in case of cross-claims under same decree.",
+            "20": "Execution in case of cross-claims under same decree.",
+            "21": "Simultaneous execution.",
+            "22": "Notice to show cause against execution in certain cases.",
+            "22A": "Sale not to be set aside on the death of the judgment-debtor before the sale but after the service of the proclamation of sale.",
+            "23": "Procedure after issue of notice.",
+            "Process for execution": {
+              "24": "Process for execution.",
+              "25": "Endorsement on process."
+            },
+            "Stay of execution": {
+              "26": "When Court may stay execution.",
+              "27": "Liability of judgment-debtor discharged.",
+              "28": "Order of Court which passed decree or of Appellate Court to be binding upon Court applied to.",
+              "29": "Stay of execution pending suit between decree-holder and judgment-debtors."
+            },
+            "Mode of execution": {
+              "30": "Decree for payment of money.",
+              "31": "Decree for specific movable property.",
+              "32": "Decree for specific performance for restitution of conjugal rights, or for an injunction.",
+              "33": "Discretion of Court in executing decrees for restitution of conjugal rights.",
+              "34": "Decree for execution of document, or endorsement of negotiable instrument.",
+              "35": "Decree for immovable property.",
+              "36": "Decree for delivery of immovable property when in occupancy of tenant.",
+              "37": "Discretionary power to permit judgment-debtor to show cause against detention in prison.",
+              "38": "Warrant for arrest to direct judgment-debtor to be brought up.",
+              "39": "Subsistence-allowance.",
+              "40": "Proceedings on appearance of judgment-debtor in obedience to notice or after arrest."
+            },
+            "Attachment of property": {
+              "41": "Examination of judgment-debtor as to his property.",
+              "42": "Attachment in case of decree for rent or mesne profits or other matter, amount of which to be subsequently determined.",
+              "43": "Attachment of movable property, other than agricultural produce, in possession of judgment debtor.",
+              "43A": "Custody of movable property.",
+              "44": "Attachment of agricultural produce.",
+              "45": "Provisions as to agricultural produce under attachment.",
+              "46": "Attachment of debt, share and other property not in possession of judgment-debtor.",
+              "46A": "Notice to garnishee.",
+              "46B": "Order against garnishee.",
+              "46C": "Trial of disputed questions.",
+              "46D": "Procedure where debt belongs to third person.",
+              "46E": "Order as regards third person.",
+              "46F": "Payment by garnishee to be valid discharge.",
+              "46G": "Costs.",
+              "46H": "Appeals.",
+              "46I": "Application to negotiable instruments.",
+              "47": "Attachment of share in movables.",
+              "48": "Attachment of salary or allowances of servant of the Government or railway company or local authority.",
+              "48A": "Attachment of salary or allowances of private employees.",
+              "49": "Attachment of partnership property.",
+              "50": "Execution of decree against firm.",
+              "51": "Attachment of negotiable instruments.",
+              "52": "Attachment of property in custody of Court or public officer.",
+              "53": "Attachment of decrees.",
+              "54": "Attachment of immovable property.",
+              "55": "Removal of attachment after satisfaction of decree.",
+              "56": "Order for payment of coin or currency notes to party entitled under decree.",
+              "57": "Determination of attachment."
+            },
+            "Adjudication of claims and objections": {
+              "58": "Adjudication of claims to, or objections to attachment, of property.",
+              "59": "[Omitted.].",
+              "60": "[Omitted.].",
+              "61": "[Omitted.].",
+              "62": "[Omitted.].",
+              "63": "[Omitted.]."
+            },
+            "Sale generally": {
+              "64": "Power to order property attached to be sold and proceeds to be paid to person entitled.",
+              "65": "Sales by whom conducted and how made.",
+              "66": "Proclamation of sales by public auction.",
+              "67": "Mode of making proclamation.",
+              "68": "Time of sale.",
+              "69": "Adjournment or stoppage of sale.",
+              "70": "[Omitted.].",
+              "71": "Defaulting purchaser answerable for loss on re-sale.",
+              "72": "Decree-holder not to bid for or buy property without permission.",
+              "72A": "Mortgagee not to bid at sale without the leave of the Court.",
+              "73": "Restriction on bidding or purchase by officers."
+            },
+            "Sale of movable property": {
+              "74": "Sale of agricultural produce.",
+              "75": "Special provisions relating to growing crops.",
+              "76": "Negotiable instruments and shares in corporations.",
+              "77": "Sale by public auction.",
+              "78": "Irregularity not to vitiate sale, but any person injured may sue.",
+              "79": "Delivery of movable property, debts and shares.",
+              "80": "Transfer of negotiable instruments and shares.",
+              "81": "Vesting order in case of other property."
+            },
+            "Sale of immovable property.": {
+              "82": "What Courts may order sales.",
+              "83": "Postponement of sale to enable judgment-debtor to raise amount of decree.",
+              "84": "Deposit by purchaser and re-sale on default.",
+              "85": "Time for payment in full of purchase-money.",
+              "86": "Procedure in default of payment.",
+              "87": "Notification on re-sale.",
+              "88": "Bid of co-sharer to have preference.",
+              "89": "Application to set aside sale on deposit.",
+              "90": "Application to set aside sale on ground of irregularity or fraud.",
+              "91": "Application by purchaser to set aside sale on ground of judgment-debtor having no saleable interest.",
+              "92": "Sale when to become absolute or be set aside.",
+              "93": "Return of purchaser-money in certain cases.",
+              "94": "Certificate to purchaser.",
+              "95": "Delivery of property in occupancy of judgment-debtor.",
+              "96": "Delivery of property in occupancy of tenant."
+            },
+            "Resistance to delivery of possession to decree-holder or purchaser": {
+              "97": "Resistance or obstruction to possession of immovable property.",
+              "98": "Orders after adjudication.",
+              "99": "Dispossession by decree-holder or purchaser.",
+              "100": "Order to be passed upon application complaining of dispossession.",
+              "101": "Question to be determined.",
+              "102": "Rules not applicable to transferee pendente lite.",
+              "103": "Orders to be treated as decrees.",
+              "104": "Orders under rule 101 or rule 103 to be subject to the result of pending suit.",
+              "105": "Hearing of application.",
+              "106": "Setting aside orders passed ex parte, etc."
+            }
+          }
+        }
+      },
+      "ORDER XXII": {
+        "Death, Marriage and Insolvency of Parties": {
+          "1": "No abatement by party's death if right to sue survives.",
+          "2": "Procedure where one of several plaintiffs or defendants dies and right to sue survives.",
+          "3": "Procedure in case of death of one of several plaintiffs or of sole plaintiff.",
+          "4": "Procedure in case of death of one of several defendants or of sole defendant.",
+          "4A": "Procedure where there is no legal representative.",
+          "5": "Determination of question as to legal representative.",
+          "6": "No abatement by reason of death after hearing.",
+          "7": "Suit not abated by marriage of female party.",
+          "8": "When plaintiffs insolvency bars suit.",
+          "9": "Effect of abatement or dismissal.",
+          "10": "Procedure in case of assignment before final order in suit.",
+          "10A": "Duty of pleader to communicate to Court death of a party.",
+          "11": "Application of Order to appeals.",
+          "12": "Application of Order to proceedings."
+        }
+      },
+      "ORDER XXIII": {
+        "Withdrawal and Adjustment of Suits": {
+          "1": "Withdrawal of suit or abandonment of part of claim.",
+          "1A": "When transposition of defendants as plaintiffs may be permitted.",
+          "2": "Limitation law not affected by first suit.",
+          "3": "Compromise of suit.",
+          "3A": "Bar to suit.",
+          "3B": "No agreement or compromise to be entered in a representative suit without leave of Court.",
+          "4": "Proceedings in execution of decrees not affected."
+        }
+      },
+      "ORDER XXIV": {
+        "Payment into Court": {
+          "1": "Deposit by defendant of amount in satisfaction of claim.",
+          "2": "Notice of deposit.",
+          "3": "Interest on deposit not allowed to plaintiff after notice.",
+          "4": "Procedure where plaintiff accepts deposit as satisfaction in part.",
+          "5": "Procedure where he accepts it as satisfaction in full."
+        }
+      },
+      "ORDER XXV": {
+        "Security for Costs": {
+          "1": "When security for costs may be required from plaintiff.",
+          "2": "Effect of failure to furnish security."
+        }
+      },
+      "ORDER XXVI": {
+        "Commissions": {
+          "Commissions to examine witnesses": {
+            "1": "Cases in which Court may issue commission to examine witness.",
+            "2": "Order for commission.",
+            "3": "Where witness resides within Court's jurisdiction.",
+            "4": "Persons for whose examination commission may issue.",
+            "4A": "Commission for examination of any person resident within the local limits of the jurisdiction of the Court.",
+            "5": "Commission or request to examine witness not within India.",
+            "6": "Court to examine witness pursuant to commission.",
+            "7": "Return of commission with depositions of witnesses.",
+            "8": "When depositions may be read in evidence."
+          },
+          "Commissions for local investigations": {
+            "9": "Commissions to make local investigations.",
+            "10": "Procedure of Commissioner."
+          },
+          "Commissions for scientific investigation, performance of ministerial act and sale of movable property": {
+            "10A": "Commission for scientific investigation.",
+            "10B": "Commission for performance of a ministerial act.",
+            "10C": "Commission for the sale of movable property."
+          },
+          "Commissions to examine accounts": {
+            "11": "Commission to examine or adjust accounts.",
+            "12": "Court to give Commissioner necessary instructions."
+          },
+          "Commissions to make partitions.": {
+            "13": "Commission to make partition of immovable property.",
+            "14": "Procedure of Commissioner."
+          },
+          "General Provisions": {
+            "15": "Expenses of commission to be paid into Court.",
+            "16": "Powers of Commissioners.",
+            "16A": "Questions objected to before the Commissioner.",
+            "17": "Attendance and examination of witnesses before Commissioner.",
+            "18": "Parties to appear before Commissioner.",
+            "18A": "Application of order to execution proceedings.",
+            "18B": "Court to fix a time for return of Commission."
+          }
+        }
+      },
+      "ORDER XXVII": {
+        "Suits by or against the Government or Public Officers in their Official Capacity": {
+          "1": "Suits by or against Government.",
+          "2": "Persons authorised to act for Government.",
+          "3": "Plaints in suits by or against Government.",
+          "4": "Agent for Government to receive process.",
+          "5": "Fixing of day for appearance on behalf of Government.",
+          "5A": "Government to be joined as a party in a suit against a public officer.",
+          "5B": "Duty of Court in suits against the Government or a public officer to assist in arriving at a settlement.",
+          "6": "Attendance of person able to answer questions relating to suit against Government.",
+          "7": "Extension of time to enable public officer to make reference to Government.",
+          "8": "Procedure in suits against public officer.",
+          "8A": "No security to be required from Government or a public officer in certain cases.",
+          "8B": "Definitions of \"Government\" and \"Government pleader\"."
+        }
+      },
+      "ORDER XXVII-A": {
+        "Suits Involving a Substantial Question of Law as to the Interpretation of the Constitution or as to the Validity of any Statutory Instrument": {
+          "1": "Notice to the Attorney General or the Advocate-General.",
+          "1A": "Procedure in suits involving validity of any statutory instrument.",
+          "2": "Court may add Government as party.",
+          "2A": "Power of Court to add Government or other authority as a defendant in a suit relating to the validity of any statutory instrument.",
+          "3": "Costs.",
+          "4": "Application of Order to appeals."
+        }
+      },
+      "ORDER XXVIII": {
+        "Suits by or Against Military or Naval men or Airmen": {
+          "1": "Officers, soldiers, sailors or airmen who cannot obtain leave may authorise any person to sue or defend for them.",
+          "2": "Person so authorised may act personally or appoint pleader.",
+          "3": "Service on person so authorised, or on his pleader, to be good service."
+        }
+      },
+      "ORDER XXIX": {
+        "Suits by or against corporations": {
+          "1": "Subscription and verification of plaints.",
+          "2": "Verification of plaints.",
+          "3": "Production of documents on which corporation sues or relies.",
+          "4": "Service on corporation.",
+          "5": "Power of Court to require personal attendance of representative of corporation.",
+          "6": "Service on firm.",
+          "7": "Suits by or against firms under disability.",
+          "8": "Suits by or against trustees, executors or administrators.",
+          "9": "Suits by or against minors.",
+          "10": "Suits by or against persons of unsound mind.",
+          "11": "Suits by next friend or guardian.",
+          "12": "Where suit may proceed in name of dead person.",
+          "13": "Duty of pleader to supply court with copies of authorities.",
+          "14": "Change of pleader.",
+          "15": "Payment into Court in suits by or against firm."
+        }
+      }
+    }
+  }
+}

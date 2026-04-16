@@ -1,0 +1,35 @@
+{
+  "name": "nyaya-ai-frontend",
+  "version": "1.0.0",
+  "description": "Nyaya AI Frontend - Consultation-Grade Legal Intelligence Interface",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "node node_modules/vite/bin/vite.js build",
+    "preview": "vite preview",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "gsap": "^3.14.2",
+    "ogl": "^1.0.11",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.6.0"
+  },
+  "devDependencies": {
+    "@storybook/addon-a11y": "^10.1.11",
+    "@storybook/addon-docs": "^10.1.11",
+    "@storybook/addon-onboarding": "^10.1.11",
+    "@storybook/react-vite": "^10.1.11",
+    "@vitejs/plugin-react": "^4.0.0",
+    "prop-types": "^15.8.1",
+    "storybook": "^10.1.11",
+    "vite": "^7.3.1"
+  },
+  "engines": {
+    "node": "24.x",
+    "npm": ">=9"
+  }
+}

@@ -1,0 +1,431 @@
+{
+	"info": {
+		"_postman_id": "nyaya-ai-backend",
+		"name": "Nyaya_AI_Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"description": "Nyaya AI - Sovereign Legal Intelligence Platform API Collection"
+	},
+	"item": [
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/health",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"health"
+					]
+				},
+				"description": "Health check endpoint to verify API is running"
+			},
+			"response": []
+		},
+		{
+			"name": "Root Endpoint",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						""
+					]
+				},
+				"description": "Root endpoint with API information"
+			},
+			"response": []
+		},
+		{
+			"name": "Single Jurisdiction Query",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-Nonce",
+						"value": "{{nonce}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": \"What are the penalties for theft under Indian law?\",\n  \"jurisdiction_hint\": \"India\",\n  \"domain_hint\": \"criminal\",\n  \"user_context\": {\n    \"role\": \"citizen\",\n    \"confidence_required\": true\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/nyaya/query",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"nyaya",
+						"query"
+					]
+				},
+				"description": "Execute a single-jurisdiction legal query"
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"query\": \"What are the penalties for theft under Indian law?\",\n  \"jurisdiction_hint\": \"India\",\n  \"domain_hint\": \"criminal\",\n  \"user_context\": {\n    \"role\": \"citizen\",\n    \"confidence_required\": true\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/nyaya/query",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"nyaya",
+								"query"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"domain\": \"criminal\",\n  \"jurisdiction\": \"IN\",\n  \"confidence\": 0.85,\n  \"legal_route\": [\"jurisdiction_router_agent\", \"india_legal_agent\"],\n  \"constitutional_articles\": [\"Article 14\", \"Article 21\"],\n  \"provenance_chain\": [],\n  \"reasoning_trace\": {\n    \"routing_decision\": {\n      \"target_jurisdiction\": \"IN\",\n      \"target_agent\": \"india_legal_agent\"\n    },\n    \"agent_processing\": {\n      \"response\": \"Theft is penalized under Section 378 of IPC with imprisonment up to 3 years and fine.\",\n      \"confidence\": 0.85\n    }\n  },\n  \"trace_id\": \"abc123-def456-ghi789\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Multi-Jurisdiction Query",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-Nonce",
+						"value": "{{nonce}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": \"What are the rights of employees?\",\n  \"jurisdictions\": [\"India\", \"UK\", \"UAE\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/nyaya/multi_jurisdiction",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"nyaya",
+						"multi_jurisdiction"
+					]
+				},
+				"description": "Execute parallel legal analysis across multiple jurisdictions"
+			},
+			"response": [
+				{
+					"name": "Multi-Jurisdiction Success Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"query\": \"What are the rights of employees?\",\n  \"jurisdictions\": [\"India\", \"UK\", \"UAE\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/nyaya/multi_jurisdiction",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"nyaya",
+								"multi_jurisdiction"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"comparative_analysis\": {\n    \"India\": {\n      \"domain\": \"labor\",\n      \"jurisdiction\": \"IN\",\n      \"confidence\": 0.82,\n      \"legal_route\": [\"india_legal_agent\"],\n      \"constitutional_articles\": [\"Article 23\", \"Article 39\"],\n      \"provenance_chain\": [],\n      \"reasoning_trace\": {},\n      \"trace_id\": \"abc123-india\"\n    },\n    \"UK\": {\n      \"domain\": \"labor\",\n      \"jurisdiction\": \"UK\",\n      \"confidence\": 0.78,\n      \"legal_route\": [\"uk_legal_agent\"],\n      \"constitutional_articles\": [],\n      \"provenance_chain\": [],\n      \"reasoning_trace\": {},\n      \"trace_id\": \"abc123-uk\"\n    },\n    \"UAE\": {\n      \"domain\": \"labor\",\n      \"jurisdiction\": \"UAE\",\n      \"confidence\": 0.80,\n      \"legal_route\": [\"uae_legal_agent\"],\n      \"constitutional_articles\": [],\n      \"provenance_chain\": [],\n      \"reasoning_trace\": {},\n      \"trace_id\": \"abc123-uae\"\n    }\n  },\n  \"confidence\": 0.80,\n  \"trace_id\": \"abc123\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Explain Reasoning",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"trace_id\": \"abc123-def456-ghi789\",\n  \"explanation_level\": \"detailed\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/nyaya/explain_reasoning",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"nyaya",
+						"explain_reasoning"
+					]
+				},
+				"description": "Explain reasoning without re-executing agents"
+			},
+			"response": [
+				{
+					"name": "Explain Reasoning Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"trace_id\": \"abc123-def456-ghi789\",\n  \"explanation_level\": \"detailed\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/nyaya/explain_reasoning",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"nyaya",
+								"explain_reasoning"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"trace_id\": \"abc123-def456-ghi789\",\n  \"explanation\": {\n    \"level\": \"detailed\",\n    \"trace_data\": {\n      \"trace_id\": \"abc123-def456-ghi789\",\n      \"chain_valid\": true,\n      \"events\": [\n        {\n          \"index\": 1,\n          \"timestamp\": \"2024-12-30T10:00:00Z\",\n          \"signed_event\": {\n            \"event\": {\n              \"timestamp\": \"2024-12-30T10:00:00Z\",\n              \"agent_id\": \"jurisdiction_router_agent\",\n              \"jurisdiction\": \"global\",\n              \"event_name\": \"jurisdiction_resolved\",\n              \"request_hash\": 12345678,\n              \"details\": {\n                \"resolved_jurisdiction\": \"IN\",\n                \"confidence\": 0.9\n              },\n              \"trace_id\": \"abc123-def456-ghi789\"\n            },\n            \"signature\": \"base64-signature\",\n            \"key_id\": \"primary-key-2025\"\n          }\n        }\n      ]\n    }\n  },\n  \"reasoning_tree\": {\n    \"full_timeline\": [\n      {\n        \"index\": 1,\n        \"timestamp\": \"2024-12-30T10:00:00Z\",\n        \"signed_event\": {\n          \"event\": {\n            \"timestamp\": \"2024-12-30T10:00:00Z\",\n            \"agent_id\": \"jurisdiction_router_agent\",\n            \"jurisdiction\": \"global\",\n            \"event_name\": \"jurisdiction_resolved\",\n            \"request_hash\": 12345678,\n            \"details\": {\n              \"resolved_jurisdiction\": \"IN\",\n              \"confidence\": 0.9\n            },\n            \"trace_id\": \"abc123-def456-ghi789\"\n          },\n          \"signature\": \"base64-signature\",\n          \"key_id\": \"primary-key-2025\"\n        }\n      }\n    ],\n    \"agent_interactions\": [\n      {\n        \"agent\": \"jurisdiction_router_agent\",\n        \"action\": \"jurisdiction_resolved\",\n        \"details\": {\n          \"resolved_jurisdiction\": \"IN\",\n          \"confidence\": 0.9\n        }\n      }\n    ]\n  },\n  \"constitutional_articles\": [\"Article 14\", \"Article 21\"]\n}"
+				}
+			]
+		},
+		{
+			"name": "Submit Feedback",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-Nonce",
+						"value": "{{nonce}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"trace_id\": \"abc123-def456-ghi789\",\n  \"rating\": 4,\n  \"feedback_type\": \"correctness\",\n  \"comment\": \"The response was accurate and helpful\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/nyaya/feedback",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"nyaya",
+						"feedback"
+					]
+				},
+				"description": "Submit system-level RL feedback"
+			},
+			"response": [
+				{
+					"name": "Feedback Success Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"trace_id\": \"abc123-def456-ghi789\",\n  \"rating\": 4,\n  \"feedback_type\": \"correctness\",\n  \"comment\": \"The response was accurate and helpful\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/nyaya/feedback",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"nyaya",
+								"feedback"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"status\": \"recorded\",\n  \"trace_id\": \"abc123-def456-ghi789\",\n  \"message\": \"Feedback recorded successfully\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Trace",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/nyaya/trace/abc123-def456-ghi789",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"nyaya",
+						"trace",
+						"abc123-def456-ghi789"
+					]
+				},
+				"description": "Get full sovereign audit trail"
+			},
+			"response": [
+				{
+					"name": "Trace Response",
+					"originalRequest": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/nyaya/trace/abc123-def456-ghi789",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"nyaya",
+								"trace",
+								"abc123-def456-ghi789"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"trace_id\": \"abc123-def456-ghi789\",\n  \"event_chain\": [\n    {\n      \"index\": 1,\n      \"timestamp\": \"2024-12-30T10:00:00Z\",\n      \"event_hash\": \"a1b2c3d4e5f6...\",\n      \"prev_hash\": \"000000000000...\",\n      \"signed_event\": {\n        \"event\": {\n          \"timestamp\": \"2024-12-30T10:00:00Z\",\n          \"agent_id\": \"api_gateway\",\n          \"jurisdiction\": \"global\",\n          \"event_name\": \"query_received\",\n          \"request_hash\": 12345678,\n          \"details\": {\n            \"query\": \"What are the penalties for theft under Indian law?\"\n          },\n          \"trace_id\": \"abc123-def456-ghi789\"\n        },\n        \"signature\": \"base64-signature\",\n        \"key_id\": \"primary-key-2025\"\n      }\n    },\n    {\n      \"index\": 2,\n      \"timestamp\": \"2024-12-30T10:00:01Z\",\n      \"event_hash\": \"f6e5d4c3b2a1...\",\n      \"prev_hash\": \"a1b2c3d4e5f6...\",\n      \"signed_event\": {\n        \"event\": {\n          \"timestamp\": \"2024-12-30T10:00:01Z\",\n          \"agent_id\": \"jurisdiction_router_agent\",\n          \"jurisdiction\": \"global\",\n          \"event_name\": \"jurisdiction_resolved\",\n          \"request_hash\": 12345678,\n          \"details\": {\n            \"resolved_jurisdiction\": \"IN\",\n            \"confidence\": 0.9\n          },\n          \"trace_id\": \"abc123-def456-ghi789\"\n        },\n        \"signature\": \"base64-signature\",\n        \"key_id\": \"primary-key-2025\"\n      }\n    }\n  ],\n  \"agent_routing_tree\": {\n    \"root\": \"api_gateway\",\n    \"children\": {\n      \"jurisdiction_router_agent\": {\n        \"jurisdiction\": \"global\",\n        \"events\": [\"jurisdiction_resolved\"]\n      },\n      \"india_legal_agent\": {\n        \"jurisdiction\": \"India\",\n        \"events\": [\"agent_processed\"]\n      }\n    }\n  },\n  \"jurisdiction_hops\": [\"global\", \"India\"],\n  \"rl_reward_snapshot\": {\n    \"placeholder\": \"RL data would be fetched here\"\n  },\n  \"context_fingerprint\": \"placeholder_fingerprint\",\n  \"nonce_verification\": true,\n  \"signature_verification\": true\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Generate a random nonce for each request",
+					"pm.globals.set(\"nonce\", Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15));"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		},
+		{
+			"key": "nonce",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

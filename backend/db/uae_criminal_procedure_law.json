@@ -1,0 +1,56 @@
+{
+  "code": "Federal Decree-Law No. (38) of 2022 - Criminal Procedure Law",
+  "scope": "Governs procedures relating to offences under the Crimes and Penalties Law, applies to all criminal proceedings at all court levels, establishes rules for investigation, prosecution, trial, and judgment",
+  "structure": {
+    "BOOK_1": {
+      "title": "Proceedings Before Criminal Courts",
+      "Article_1-8": "Scope and interpretation",
+      "Article_9-22": "Institution of criminal actions and complaints"
+    },
+    "BOOK_2": {
+      "title": "Civil Action Related to Criminal Action",
+      "Article_23-30": "Filing civil actions in criminal courts"
+    },
+    "BOOK_3": {
+      "title": "Investigation and Court Jurisdiction",
+      "Article_140-150": "Investigation procedures"
+    },
+    "BOOK_4": {
+      "title": "Special Criminal Procedures",
+      "CHAPTER_1": {
+        "title": "Criminal Order (Articles 336-347)",
+        "Article_336": "Concept and effect of criminal orders",
+        "Article_337": "Scope of application",
+        "Article_338": "Offences excluded from criminal order",
+        "Article_339-343": "Prosecutor's issuance and amendment procedures",
+        "Article_344-347": "Civil action and enforcement provisions"
+      },
+      "CHAPTER_2": {
+        "title": "Criminal Conciliation (Articles 348-350)",
+        "Article_348": "Criminal conciliation procedures",
+        "Article_349": "Applicable offences",
+        "Article_350": "Establishment of criminal conciliation"
+      }
+    }
+  },
+  "key_procedures": {
+    "institution_of_actions": {
+      "Article_9": "Institution of criminal actions",
+      "Article_10": "Discontinuance of criminal actions",
+      "Article_11": "Cases of complaint-based criminal action",
+      "Article_12-14": "Filing and admission of complaints"
+    },
+    "civil_actions": {
+      "Article_23": "Filing civil action",
+      "Article_24": "Appointment of attorney",
+      "Article_25": "Instituting civil actions in criminal courts",
+      "Article_26": "Compensation for false accusations",
+      "Article_27-30": "Transfer and discontinuance of civil action"
+    },
+    "investigation": {
+      "Article_144": "Determination of crime scene",
+      "Article_145": "Overseas perpetration governed by national law",
+      "Article_146-147": "Jurisdiction on interrelated crimes"
+    }
+  }
+}

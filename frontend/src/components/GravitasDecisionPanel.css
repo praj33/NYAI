@@ -1,0 +1,661 @@
+/* ============================================================================
+   Gravitas Decision Panel - Production-Grade Legal Decision Display
+   ============================================================================ */
+
+.gravitas-panel {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  animation: panelFadeIn 0.6s ease-out;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  margin: 20px 0;
+}
+
+@keyframes panelFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.gravitas-panel.high-confidence {
+  border-left: 5px solid #28a745;
+}
+
+.gravitas-panel.medium-confidence {
+  border-left: 5px solid #ffc107;
+}
+
+.gravitas-panel.low-confidence {
+  border-left: 5px solid #dc3545;
+}
+
+/* ============================================================================
+   Empty State
+   ============================================================================ */
+
+.gravitas-empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.empty-state-content {
+  text-align: center;
+  color: white;
+}
+
+.empty-state-content h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.empty-state-content p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* ============================================================================
+   Header Section
+   ============================================================================ */
+
+.gravitas-header {
+  background: linear-gradient(135deg, #2c3e50 0%, #3d5a6c 100%);
+  color: white;
+  padding: 30px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.gravitas-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(52, 152, 219, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.header-titles {
+  flex: 1;
+}
+
+.gravitas-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+  color: #ecf0f1;
+  letter-spacing: -0.5px;
+}
+
+.gravitas-subtitle {
+  font-size: 1rem;
+  color: #bdc3c7;
+  margin: 10px 0 0 0;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+.confidence-widget {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  min-width: 280px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================================================
+   Enforcement Section
+   ============================================================================ */
+
+.gravitas-enforcement-section {
+  padding: 20px 40px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* ============================================================================
+   Main Content Grid
+   ============================================================================ */
+
+.gravitas-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  padding: 40px;
+  background: white;
+}
+
+@media (max-width: 1024px) {
+  .gravitas-content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 30px;
+  }
+}
+
+.gravitas-column-primary,
+.gravitas-column-secondary {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ============================================================================
+   Card Styling
+   ============================================================================ */
+
+.gravitas-card {
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border: 1px solid #e9ecef;
+  border-radius: 10px;
+  padding: 24px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.gravitas-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border-color: #dee2e6;
+  transform: translateY(-2px);
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0 0 16px 0;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+}
+
+.card-icon {
+  font-size: 1.4rem;
+  opacity: 0.8;
+}
+
+.card-content {
+  color: #495057;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* ============================================================================
+   Card-Specific Styles
+   ============================================================================ */
+
+/* Jurisdiction Card */
+.jurisdiction-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .jurisdiction-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.jurisdiction-item {
+  padding: 12px;
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+}
+
+.item-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #6c757d;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.item-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.domain-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.confidence-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Route Card */
+.route-path {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.route-step {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.route-arrow {
+  color: #667eea;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+/* Articles List */
+.articles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.article-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  background: #f8f9fa;
+  border-left: 3px solid #667eea;
+  border-radius: 6px;
+}
+
+.article-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.article-text {
+  flex: 1;
+  color: #495057;
+  line-height: 1.5;
+}
+
+/* Provenance Chain */
+.provenance-chain {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 10px;
+  position: relative;
+}
+
+.provenance-item {
+  display: flex;
+  gap: 16px;
+  position: relative;
+  padding-left: 16px;
+}
+
+.provenance-step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 50%;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.provenance-content {
+  flex: 1;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.provenance-source {
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 6px;
+}
+
+.provenance-description {
+  color: #495057;
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+}
+
+.provenance-timestamp {
+  color: #adb5bd;
+  font-size: 0.8rem;
+}
+
+.provenance-chain-line {
+  position: absolute;
+  left: 17px;
+  top: 36px;
+  bottom: -8px;
+  width: 2px;
+  background: linear-gradient(180deg, #667eea 0%, transparent 100%);
+}
+
+/* Reasoning Trace */
+.reasoning-trace {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.reasoning-entry {
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 3px solid #667eea;
+}
+
+.reasoning-key {
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+}
+
+.reasoning-value {
+  color: #495057;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.5;
+  background: white;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+/* ============================================================================
+   Expandable Section Controls
+   ============================================================================ */
+
+.card-title-button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  margin: 0 0 16px 0;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2c3e50;
+  cursor: pointer;
+  text-align: left;
+  transition: color 0.2s;
+}
+
+.card-title-button:hover {
+  color: #667eea;
+}
+
+.expand-icon {
+  margin-left: auto;
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.6;
+  font-size: 0.8rem;
+}
+
+.expand-icon.expanded {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+
+/* ============================================================================
+   Footer Section
+   ============================================================================ */
+
+.gravitas-footer {
+  background: linear-gradient(135deg, #f8f9fa 0%, #ecf0f1 100%);
+  padding: 24px 40px;
+  border-top: 1px solid #e9ecef;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .gravitas-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.footer-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.action-button.primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.action-button.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.5);
+}
+
+.action-button.secondary {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(245, 87, 108, 0.3);
+}
+
+.action-button.secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(245, 87, 108, 0.5);
+}
+
+.action-button.tertiary {
+  background: white;
+  color: #667eea;
+  border: 2px solid #667eea;
+}
+
+.action-button.tertiary:hover {
+  background: #667eea;
+  color: white;
+}
+
+.button-icon {
+  font-size: 1.1rem;
+}
+
+.footer-metadata {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+}
+
+.trace-id {
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  color: #6c757d;
+  letter-spacing: 0.5px;
+}
+
+/* ============================================================================
+   Responsive Design
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  .gravitas-panel {
+    border-radius: 8px;
+  }
+
+  .gravitas-header {
+    padding: 24px 20px;
+  }
+
+  .header-top {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .gravitas-title {
+    font-size: 1.8rem;
+  }
+
+  .gravitas-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .confidence-widget {
+    min-width: auto;
+    width: 100%;
+  }
+
+  .gravitas-content {
+    padding: 20px;
+  }
+
+  .gravitas-card {
+    padding: 16px;
+  }
+
+  .card-title {
+    font-size: 1rem;
+  }
+
+  .gravitas-footer {
+    padding: 16px 20px;
+    flex-direction: column;
+  }
+
+  .jurisdiction-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .route-path {
+    justify-content: center;
+  }
+}
+
+/* ============================================================================
+   Dark Mode Support (future enhancement)
+   ============================================================================ */
+
+@media (prefers-color-scheme: dark) {
+  .gravitas-panel {
+    background: linear-gradient(135deg, #1a1a2a 0%, #2d2d44 100%);
+  }
+
+  .gravitas-header {
+    background: linear-gradient(135deg, #0f0f18 0%, #1a1a2a 100%);
+  }
+
+  .gravitas-content {
+    background: #1a1a2a;
+  }
+
+  .gravitas-card {
+    background: linear-gradient(135deg, #2d2d44 0%, #252531 100%);
+    border-color: #3d3d54;
+  }
+
+  .card-title,
+  .gravitas-title,
+  .item-value,
+  .provenance-source,
+  .reasoning-key {
+    color: #ecf0f1;
+  }
+
+  .gravitas-subtitle,
+  .item-label,
+  .card-content,
+  .provenance-description,
+  .reasoning-value {
+    color: #bdc3c7;
+  }
+
+  .gravitas-footer {
+    background: linear-gradient(135deg, #2d2d44 0%, #252531 100%);
+    border-top-color: #3d3d54;
+  }
+
+  .footer-metadata {
+    background: #3d3d54;
+    border-color: #4d4d64;
+  }
+}

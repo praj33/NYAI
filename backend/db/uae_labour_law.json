@@ -1,0 +1,101 @@
+{
+  "code": "Federal Decree-Law No. (33) of 2021 - Labour Law",
+  "scope": "Regulates employment relationships between employers and employees in the UAE",
+  "employment_contracts": {
+    "types": {
+      "limited_term": "Fixed duration contract",
+      "unlimited_term": "Indefinite duration contract",
+      "part_time": "Less than full working hours",
+      "temporary": "For specific projects or seasonal work"
+    },
+    "essential_terms": [
+      "Job title and description",
+      "Work location",
+      "Working hours and days",
+      "Basic salary and allowances",
+      "Contract duration",
+      "Probation period (max 6 months)",
+      "Notice period",
+      "Annual leave entitlement"
+    ]
+  },
+  "working_conditions": {
+    "working_hours": {
+      "maximum_daily": "8 hours",
+      "maximum_weekly": "48 hours",
+      "overtime_rate": "125% of basic salary",
+      "rest_period": "Minimum 12 hours between shifts"
+    },
+    "weekly_rest": {
+      "days": "One full day per week (usually Friday)",
+      "payment": "Full pay for rest day"
+    },
+    "annual_leave": {
+      "entitlement": "30 days per year after 1 year service",
+      "accumulation": "Up to 90 days",
+      "payment": "Basic salary + housing allowance"
+    },
+    "sick_leave": {
+      "entitlement": "90 days per year with full pay",
+      "after_90_days": "50% of basic salary",
+      "medical_certificate": "Required for absences over 2 days"
+    },
+    "maternity_leave": {
+      "duration": "60 calendar days",
+      "payment": "Full salary",
+      "extension": "Additional 30 days without pay"
+    },
+    "paternity_leave": {
+      "duration": "5 working days",
+      "payment": "Full salary"
+    }
+  },
+  "wages_and_benefits": {
+    "minimum_wage": "AED 5,000 per month (effective 2025)",
+    "payment_frequency": "Monthly, by 4th of following month",
+    "gratuity": {
+      "calculation": "21 days basic salary per year of service",
+      "maximum": "2 years basic salary",
+      "payment": "On termination or resignation after 1 year"
+    },
+    "allowances": {
+      "housing": "Employer must provide or pay allowance",
+      "transportation": "AED 400-600 per month",
+      "utilities": "Up to AED 500 per month"
+    }
+  },
+  "termination": {
+    "notice_periods": {
+      "less_than_5_years": "30 days",
+      "5-10_years": "60 days",
+      "more_than_10_years": "90 days"
+    },
+    "severance_pay": {
+      "redundancy": "3 months basic salary per year (max 2 years)",
+      "without_cause": "Half of redundancy pay"
+    },
+    "unfair_dismissal": {
+      "compensation": "Up to 3 months salary per year of service",
+      "reinstatement": "Possible in some cases"
+    }
+  },
+  "special_categories": {
+    "domestic_workers": {
+      "contract": "Must be in Arabic and English",
+      "working_hours": "No restrictions, but rest periods required",
+      "leave": "30 days annual leave",
+      "termination": "30 days notice"
+    },
+    "seafaring_workers": {
+      "governed_by": "Maritime Labour Convention",
+      "working_hours": "Maximum 14 hours per day",
+      "leave": "30 days annual leave"
+    }
+  },
+  "dispute_resolution": {
+    "conciliation": "Mandatory before court proceedings",
+    "labour_courts": "Specialized courts for labour disputes",
+    "appeals": "To Federal Supreme Court",
+    "time_limits": "1 year from dispute occurrence"
+  }
+}

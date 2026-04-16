@@ -1,0 +1,66 @@
+{
+  "code": "Limitation Act, 1963",
+  "scope": "Prescribes time limits for different types of civil suits and applications",
+  "key_provisions": {
+    "general_principles": {
+      "Section_2": "Definitions - 'applicant', 'application', 'bill of exchange', etc.",
+      "Section_3": "Bar of limitation - Court shall dismiss suit/application if filed after prescribed period",
+      "Section_4": "Where court is closed on last day of limitation",
+      "Section_5": "Extension of prescribed period in certain cases - sufficient cause",
+      "Section_6": "Legal disability",
+      "Section_7": "Disability of one of several persons",
+      "Section_8": "Special exceptions - fraud, mistake, discovery of new facts",
+      "Section_9": "Continuous running of time",
+      "Section_10": "Suits against trustees and their representatives",
+      "Section_11": "Suits on contracts entered into outside India",
+      "Section_12": "Effect of death on or before the accrual of cause of action",
+      "Section_13": "Effect of defendant's death on or before the accrual of cause of action",
+      "Section_14": "Exclusion of time of proceeding bona fide in wrong court or forum",
+      "Section_15": "Exclusion of time in cases where leave to sue or appeal as pauper is applied for",
+      "Section_16": "Exclusion of time in certain other cases",
+      "Section_17": "Effect of acknowledgment in writing",
+      "Section_18": "Effect of payment on account of debt or of interest on legacy",
+      "Section_19": "Effect of acknowledgment or payment by another person",
+      "Section_20": "Effect of acknowledgment or payment in case of succession to property or rights",
+      "Section_21": "Effect of substituting or adding new plaintiff or defendant",
+      "Section_22": "Continuing contracts and torts",
+      "Section_23": "Suits for compensation for acts not actionable without special damage",
+      "Section_24": "Computation of time mentioned in instruments",
+      "Section_25": "Acquisition of easement by prescription",
+      "Section_26": "Computation of time",
+      "Section_27": "Cesser of limitation"
+    }
+  },
+  "limitation_periods": {
+    "civil_suits": {
+      "recovery_of_possession_of_immovable_property": "12 years (Article 64)",
+      "recovery_of_possession_of_movable_property": "3 years (Article 72)",
+      "money_recovery_suits": "3 years (Article 1)",
+      "specific_performance": "3 years (Article 54)",
+      "declaration": "3 years (Article 58)",
+      "injunction": "3 years (Article 56)",
+      "partition_suits": "12 years (Article 106)",
+      "pre-emption_suits": "1 year (Article 97)",
+      "suits_for_accounts": "3 years (Article 55)",
+      "suits_by_or_against_minors": "3 years from attaining majority (Article 120)",
+      "suits_by_government": "30 years (Article 112)"
+    },
+    "special_applications": {
+      "execution_of_decree": "12 years (Article 136)",
+      "appeal_to_high_court": "90 days (Article 116)",
+      "appeal_to_supreme_court": "90 days (Article 145)",
+      "review_application": "30 days (Article 124)",
+      "application_for_certiorari": "90 days (Article 131)",
+      "application_for_mandamus": "90 days (Article 137)",
+      "application_for_quashing": "90 days (Article 131)"
+    }
+  },
+  "important_notes": [
+    "Limitation is a matter of procedure, not substantive law",
+    "Court cannot extend limitation period except in cases of sufficient cause (Section 5)",
+    "Acknowledgment in writing interrupts limitation period (Section 18)",
+    "Part payment of debt interrupts limitation (Section 19)",
+    "Limitation period runs from date cause of action accrues",
+    "Court must dismiss suit if filed after limitation period, even if not pleaded by defendant"
+  ]
+}

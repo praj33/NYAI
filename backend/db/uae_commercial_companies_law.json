@@ -1,0 +1,81 @@
+{
+  "code": "Federal Decree-Law No. (32) of 2021 - Commercial Companies Law",
+  "scope": "Governs commercial companies and business entities in the UAE",
+  "company_types": {
+    "civil_company": {
+      "definition": "Partnership between two or more natural or legal persons",
+      "liability": "Unlimited joint and several liability",
+      "minimum_partners": 2,
+      "maximum_partners": "No limit"
+    },
+    "simple_commandite_company": {
+      "definition": "Partnership with both general and limited partners",
+      "general_partners": "Unlimited liability",
+      "limited_partners": "Liability limited to capital contribution",
+      "minimum_partners": "At least one general and one limited partner"
+    },
+    "public_joint_stock_company": {
+      "definition": "Company whose capital is divided into shares offered to public",
+      "minimum_capital": "AED 30 million",
+      "minimum_shareholders": 10,
+      "liability": "Limited to share value"
+    },
+    "private_joint_stock_company": {
+      "definition": "Company whose shares are not offered to public",
+      "minimum_capital": "AED 2 million",
+      "minimum_shareholders": 2,
+      "maximum_shareholders": 50,
+      "liability": "Limited to share value"
+    },
+    "limited_liability_company": {
+      "definition": "Company with liability limited to capital contribution",
+      "minimum_capital": "AED 150,000",
+      "maximum_shareholders": 50,
+      "liability": "Limited to capital contribution"
+    },
+    "single_person_company": {
+      "definition": "Company owned by a single shareholder",
+      "minimum_capital": "AED 1 million",
+      "shareholder": "Natural or legal person",
+      "liability": "Limited to capital contribution"
+    }
+  },
+  "incorporation_requirements": {
+    "name_reservation": "Check availability through Department of Economic Development (DED)",
+    "shareholder_resolution": "Approval of incorporation documents",
+    "capital_deposit": "Minimum capital must be deposited in bank",
+    "trade_license": "Obtain from relevant authority",
+    "registration": "Register with DED and obtain incorporation certificate"
+  },
+  "key_provisions": {
+    "board_of_directors": {
+      "appointment": "Appointed by general assembly",
+      "term": "Up to 3 years, renewable",
+      "powers": "Day-to-day management and representation",
+      "minimum_members": "3 for public companies, 1 for LLC"
+    },
+    "general_assembly": {
+      "ordinary_meeting": "Annual meeting within 4 months of fiscal year end",
+      "extraordinary_meeting": "Called when necessary",
+      "quorum": "Majority of shareholders with majority of capital",
+      "decisions": "Simple majority for ordinary, 75% for extraordinary"
+    },
+    "auditing": {
+      "requirement": "Mandatory for all companies except single person",
+      "appointment": "By general assembly",
+      "term": "1 year, renewable",
+      "reports": "Annual audit report submitted to DED"
+    },
+    "dissolution": {
+      "voluntary": "By general assembly decision (75% majority)",
+      "compulsory": "By court order for illegal activities",
+      "liquidation": "Appointed liquidator manages asset distribution"
+    }
+  },
+  "foreign_investment": {
+    "foreign_ownership": "Up to 100% in most sectors",
+    "free_zones": "100% foreign ownership allowed",
+    "mainland": "49% foreign ownership in some sectors",
+    "licensing": "Through relevant authorities"
+  }
+}

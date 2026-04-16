@@ -1,0 +1,98 @@
+{
+  "code": "Indian Evidence Act, 1872",
+  "scope": "Governs admissibility of evidence in judicial proceedings in India",
+  "key_provisions": {
+    "relevancy_of_facts": {
+      "Section_5": "Evidence may be given of facts in issue and relevant facts",
+      "Section_6": "Relevancy of facts forming part of same transaction",
+      "Section_7": "Facts which are occasion, cause or effect of facts in issue",
+      "Section_8": "Facts which are motive, preparation or conduct",
+      "Section_9": "Facts necessary to explain or introduce relevant facts"
+    },
+    "admissions_and_confessions": {
+      "Section_17": "Admission defined",
+      "Section_18": "Admission by party to proceeding",
+      "Section_24": "Confession caused by inducement, threat or promise - irrelevant",
+      "Section_25": "Confession to police officer not admissible",
+      "Section_26": "Confession by accused while in custody of police - not admissible"
+    },
+    "oral_evidence": {
+      "Section_59": "Oral evidence must be direct",
+      "Section_60": "Oral evidence in respect to documents"
+    },
+    "documentary_evidence": {
+      "Section_61": "Proof of contents of documents",
+      "Section_62": "Primary and secondary evidence",
+      "Section_63": "Proof of documents by primary evidence",
+      "Section_64": "Proof of documents by secondary evidence",
+      "Section_65A": "Special provisions as to evidence relating to electronic record",
+      "Section_65B": "Admissibility of electronic records"
+    },
+    "burden_of_proof": {
+      "Section_101": "Burden of proof",
+      "Section_102": "On whom burden of proof lies",
+      "Section_103": "Burden of proof as to particular fact",
+      "Section_104": "Burden of proving fact to be proved to make evidence admissible",
+      "Section_105": "Burden of proving that case of accused comes within exceptions",
+      "Section_106": "Burden of proving fact especially within knowledge"
+    },
+    "witnesses": {
+      "Section_118": "Who may testify",
+      "Section_119": "Dumb witnesses",
+      "Section_120": "Parties to civil suit, and their wives or husbands",
+      "Section_121": "Judges and Magistrates",
+      "Section_122": "Communications during marriage",
+      "Section_123": "Evidence as to affairs of State",
+      "Section_124": "Official communications",
+      "Section_125": "Information as to commission of offences",
+      "Section_126": "Professional communications",
+      "Section_127": "Section 126 does not apply to civil proceedings, etc.",
+      "Section_128": "Privilege not waived by volunteering evidence",
+      "Section_129": "Confidential communications with legal advisers"
+    },
+    "character_evidence": {
+      "Section_52": "Character when relevant",
+      "Section_53": "Previous good character relevant",
+      "Section_54": "Previous bad character not relevant, except in reply",
+      "Section_55": "Character as affecting damages"
+    },
+    "hearsay_evidence": {
+      "Section_59": "Oral evidence must be direct",
+      "Section_60": "In respect to documents"
+    },
+    "expert_evidence": {
+      "Section_45": "Opinions of experts",
+      "Section_46": "Facts bearing upon opinions of experts"
+    }
+  },
+  "important_sections": {
+    "Section_3": "Interpretation clause",
+    "Section_4": "May presume existence of course of business",
+    "Section_14": "When oral admissions as to contents of documents are relevant",
+    "Section_27": "How much of information received from accused may be proved",
+    "Section_30": "Consideration of proved confession affecting person making it and others jointly under trial for same offence",
+    "Section_32": "Cases in which statement of relevant fact by person who is dead or cannot be found, etc., is relevant",
+    "Section_41": "Relevancy of certain evidence for proving, in subsequent proceeding, the truth of facts therein stated",
+    "Section_57": "Facts of which Court must take judicial notice",
+    "Section_58": "Facts admitted need not be proved",
+    "Section_136": "Production of documents",
+    "Section_137": "Giving, as evidence, of document called for and produced on notice",
+    "Section_138": "Power of Court to permit a person to produce any document",
+    "Section_139": "Impeaching credit of witness",
+    "Section_141": "Leading questions",
+    "Section_142": "When they must not be asked",
+    "Section_143": "When they may be asked",
+    "Section_144": "Questions lawful in cross-examination",
+    "Section_145": "When witness to be compelled to answer",
+    "Section_146": "Questions not to be asked without reasonable grounds",
+    "Section_147": "Court to decide when question shall be asked and when witness compelled to answer",
+    "Section_148": "Immaterial questions",
+    "Section_149": "Questions tending to corroborate evidence of relevant fact, admissible",
+    "Section_150": "Questions tending to contradict evidence of relevant fact, admissible",
+    "Section_151": "Re-examination",
+    "Section_152": "Direction of Court to re-examine",
+    "Section_153": "Permission to recall witness for further cross-examination",
+    "Section_154": "Witness to character",
+    "Section_155": "Impeaching credit of witness by evidence of general reputation"
+  }
+}

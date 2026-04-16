@@ -1,0 +1,69 @@
+{
+  "code": "Criminal Procedure Rules 2025 (Latest Edition)",
+  "jurisdiction": "England & Wales",
+  "offence_classification": {
+    "triable_only_on_indictment": "Most serious offences tried in Crown Court",
+    "either_way_offences": "Can be tried in magistrates' court or Crown Court",
+    "summary_offences": "Least serious offences tried in magistrates' court only"
+  },
+  "key_procedural_rules": {
+    "PART_7": {
+      "title": "Starting Prosecution",
+      "description": "Commencing proceedings in magistrates' court, filing procedures"
+    },
+    "PART_9": {
+      "title": "Allocation and Sending",
+      "description": "Determining appropriate court level, procedure for sending to Crown Court"
+    },
+    "PART_10": {
+      "title": "The Indictment",
+      "description": "Drafting and filing indictments, procedural requirements"
+    },
+    "PART_14": {
+      "title": "Bail",
+      "description": "Bail applications and conditions, custody time limits"
+    },
+    "PART_15": {
+      "title": "Disclosure",
+      "description": "Crown's disclosure obligations, defence disclosure"
+    },
+    "PART_16": {
+      "title": "Witness Statements",
+      "description": "Documentary evidence procedures, written examination of witnesses"
+    },
+    "PART_19": {
+      "title": "Expert Evidence",
+      "description": "Expert qualification standards, opinion evidence admissibility"
+    },
+    "PART_20": {
+      "title": "Hearsay",
+      "description": "Admissibility of out-of-court statements, exceptions to hearsay rule"
+    },
+    "PART_21": {
+      "title": "Bad Character Evidence",
+      "description": "Admissibility of defendant's previous convictions, non-defendant bad character evidence"
+    },
+    "PART_25": {
+      "title": "Trial in Crown Court",
+      "description": "Pre-trial procedures, trial conduct, verdict and sentencing"
+    },
+    "PART_39": {
+      "title": "Appeal to Court of Appeal",
+      "description": "Appeal procedures, grounds for appeal, evidence on appeal"
+    }
+  },
+  "court_structure": {
+    "criminal_courts": {
+      "magistrates_courts": "Handle ~95% of criminal cases; summary and preliminary hearings",
+      "crown_court": "Tries indictable offences and hears appeals from magistrates",
+      "court_of_appeal_criminal_division": "Reviews convictions and sentences",
+      "supreme_court": "Final appellate court (limited jurisdiction)"
+    },
+    "civil_courts": {
+      "county_courts": "Handle most civil cases (lower value/complexity)",
+      "high_court": "Superior civil court; appeals and judicial review",
+      "court_of_appeal_civil_division": "Reviews civil judgments",
+      "supreme_court": "Final appellate court"
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "jurisdiction": "India",
+  "version": "1.0",
+  "domain_mapping": {
+    "criminal": {
+      "subdomains": [
+        "violent_crimes",
+        "sexual_offences",
+        "property_crimes",
+        "fraud_and_deception",
+        "cyber_crimes",
+        "procedural_matters"
+      ],
+      "confidence_threshold": 0.8
+    },
+    "civil": {
+      "subdomains": [
+        "contract_disputes",
+        "arbitration_matters",
+        "property_disputes",
+        "family_matters",
+        "tort_law",
+        "tax_matters",
+        "employment_matters"
+      ],
+      "confidence_threshold": 0.7
+    }
+  },
+  "keyword_mapping": {
+    "violent_crimes": ["murder", "attempt to murder", "culpable homicide", "assault", "hurt", "grievous hurt"],
+    "sexual_offences": ["rape", "sexual assault", "outraging modesty", "indecent representation"],
+    "property_crimes": ["theft", "robbery", "dacoity", "criminal breach of trust", "cheat", "mischief"],
+    "fraud_and_deception": ["cheat", "criminal breach of trust", "forgery", "counterfeiting"],
+    "cyber_crimes": ["unauthorized access", "computer misuse", "cyber theft", "data theft"],
+    "procedural_matters": ["fir", "investigation", "charge sheet", "trial", "bail", "arrest"],
+    "contract_disputes": ["breach of contract", "void agreement", "consideration", "damages"],
+    "arbitration_matters": ["arbitration agreement", "arbitral award", "setting aside award", "enforcement"],
+    "property_disputes": ["adverse possession", "easement", "partition", "specific performance", "builder delay", "building not built", "not built in time", "project delay", "delay in possession", "possession delay", "construction delay", "builder not giving possession", "rera", "flat handover delay"],
+    "family_matters": ["divorce", "custody", "maintenance", "adoption"],
+    "tort_law": ["negligence", "defamation", "nuisance", "trespass"],
+    "tax_matters": ["tax", "income tax", "gst", "cgst", "igst", "tds", "input tax credit", "itc", "assessment", "tax evasion", "tax avoidance", "fake invoice"],
+    "employment_matters": ["salary not paid", "unpaid wages", "wages not paid", "employer not paying", "boss not paying", "boss is not paying me", "payment of wages", "salary delay", "pending salary", "minimum wages", "withheld wages"]
+  },
+  "fallback_rules": {
+    "default_domain": "civil",
+    "uncertainty_threshold": 0.5,
+    "escalation_path": ["civil", "criminal"]
+  }
+}

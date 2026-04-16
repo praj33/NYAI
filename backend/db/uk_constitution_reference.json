@@ -1,0 +1,94 @@
+{
+  "jurisdiction": "UK",
+  "constitutional_framework": "Unwritten Constitution",
+  "version": "1.0",
+  "key_principles": {
+    "parliamentary_sovereignty": {
+      "description": "Parliament can make or unmake any law, no body can override or set aside legislation",
+      "source": "Common law principle, established in cases like Factortame"
+    },
+    "rule_of_law": {
+      "description": "Everyone is subject to the law, including government officials",
+      "source": "Dicey's constitutional theory"
+    },
+    "separation_of_powers": {
+      "description": "Executive, legislative, and judicial functions are separate but interdependent",
+      "source": "Montesquieu's theory, adapted in UK context"
+    }
+  },
+  "human_rights_act_1998": {
+    "incorporation": "Incorporates European Convention on Human Rights into UK domestic law",
+    "key_articles": {
+      "article_2": {
+        "right": "Right to life",
+        "application": "Protection from unlawful killing, positive obligations on state"
+      },
+      "article_3": {
+        "right": "Prohibition of torture and inhuman treatment",
+        "application": "Absolute right, no derogations allowed"
+      },
+      "article_5": {
+        "right": "Right to liberty and security",
+        "application": "Protection from arbitrary detention"
+      },
+      "article_6": {
+        "right": "Right to fair trial",
+        "application": "Criminal and civil proceedings must be fair"
+      },
+      "article_8": {
+        "right": "Right to respect for private and family life",
+        "application": "Privacy, family relationships, home"
+      },
+      "article_9": {
+        "right": "Freedom of thought, conscience and religion",
+        "application": "Includes right to change religion or belief"
+      },
+      "article_10": {
+        "right": "Freedom of expression",
+        "application": "Includes freedom of press, subject to restrictions"
+      },
+      "article_11": {
+        "right": "Freedom of assembly and association",
+        "application": "Right to peaceful assembly and join trade unions"
+      }
+    }
+  },
+  "common_law_principles": {
+    "precedent": {
+      "description": "Decisions of higher courts bind lower courts (stare decisis)",
+      "hierarchy": "Supreme Court > Court of Appeal > High Court > County Courts"
+    },
+    "equality_before_law": {
+      "description": "All persons are equal before the law",
+      "application": "No discrimination in legal proceedings"
+    },
+    "due_process": {
+      "description": "Fair procedures must be followed in legal matters",
+      "application": "Natural justice principles"
+    }
+  },
+  "devolution_settlements": {
+    "scotland": {
+      "description": "Scotland Act 1998 establishes Scottish Parliament",
+      "reserved_matters": ["Defence", "Foreign affairs", "Economic policy"]
+    },
+    "wales": {
+      "description": "Government of Wales Act 2006",
+      "powers": "Primary law-making powers in devolved areas"
+    },
+    "northern_ireland": {
+      "description": "Northern Ireland Act 1998",
+      "powers": "Assembly can legislate on transferred matters"
+    }
+  },
+  "eu_withdrawal": {
+    "brexit": {
+      "description": "UK withdrew from EU on 31 January 2020",
+      "impact": "European Convention remains, but EU law no longer directly applicable"
+    },
+    "retained_eu_law": {
+      "description": "Certain EU laws retained in UK law via EU Withdrawal Act 2018",
+      "status": "Can be amended or repealed by Parliament"
+    }
+  }
+}

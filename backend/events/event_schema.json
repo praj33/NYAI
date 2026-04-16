@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Nyaya AI Event Schema",
+  "description": "Schema for events in the Nyaya AI system that integrate with the Sovereign provenance ledger",
+  "type": "object",
+  "properties": {
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 formatted timestamp of when the event occurred"
+    },
+    "agent_id": {
+      "type": "string",
+      "description": "Unique identifier of the agent that emitted the event"
+    },
+    "jurisdiction": {
+      "type": "string",
+      "description": "Jurisdiction/region of authority for the agent"
+    },
+    "event_name": {
+      "type": "string",
+      "enum": [
+        "query_received",
+        "agent_classified",
+        "jurisdiction_resolved",
+        "reasoning_explained",
+        "evidence_chain_generated",
+        "trace_completed"
+      ],
+      "description": "Type of event that occurred"
+    },
+    "request_hash": {
+      "type": "integer",
+      "description": "Hash of the original request for traceability"
+    },
+    "details": {
+      "type": "object",
+      "description": "Micro-trace details specific to the event type",
+      "properties": {
+        "classification": {
+          "type": "string",
+          "description": "Classification result for agent_classified events"
+        },
+        "target_agent": {
+          "type": "string",
+          "description": "Target agent name for routing events"
+        },
+        "target_jurisdiction": {
+          "type": "string",
+          "description": "Target jurisdiction for jurisdiction resolution events"
+        },
+        "articles_referenced": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Constitutional articles referenced"
+        },
+        "reasoning_steps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Steps in the reasoning process"
+        },
+        "evidence_items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "source": {
+                "type": "string"
+              },
+              "confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          },
+          "description": "Items in the evidence chain"
+        }
+      }
+    }
+  },
+  "required": [
+    "timestamp",
+    "agent_id",
+    "event_name",
+    "request_hash"
+  ]
+}

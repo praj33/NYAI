@@ -1,0 +1,134 @@
+{
+  "jurisdiction": "UAE",
+  "law_reference": "Federal Law No. 28 of 2005 (Personal Status) and Federal Law No. 41 of 2022 (Non-Muslims)",
+  "version": "1.0",
+  "islamic_personal_status_law": {
+    "applicable_to": "Muslims",
+    "marriage": {
+      "requirements": [
+        "Islamic marriage contract (Aqd al-Nikah)",
+        "Consent of both parties",
+        "Guardian consent (wali) for women",
+        "Dowry (mahr) payment",
+        "Two Muslim witnesses",
+        "Registration with Sharia court"
+      ],
+      "types": {
+        "permanent_marriage": "Nikah",
+        "temporary_marriage": "Mutah (not recognized in UAE)"
+      },
+      "prohibited_marriages": [
+        "Between close relatives (mahram)",
+        "Polygamy without court permission",
+        "During iddah period"
+      ]
+    },
+    "divorce": {
+      "husband_initiated": {
+        "method": "Talaq (repudiation)",
+        "conditions": "Pronounced verbally or in writing, revocable within 3 months",
+        "requirements": "Notification to wife, registration with court"
+      },
+      "wife_initiated": {
+        "method": "Khula (redemption)",
+        "conditions": "Return of dowry or compensation",
+        "court_approval": "Required"
+      },
+      "mutual_divorce": {
+        "method": "Mubara'ah",
+        "conditions": "Mutual agreement with compensation"
+      }
+    },
+    "maintenance": {
+      "wife_entitlement": "During marriage and iddah period",
+      "children_entitlement": "Until age 18 or completion of education",
+      "amount": "Based on husband's financial capacity",
+      "enforcement": "Through Sharia courts"
+    },
+    "child_custody": {
+      "primary_custodian": "Mother until age 11 (boys) or 13 (girls)",
+      "father_rights": "Visitation and financial support",
+      "best_interest": "Court determines based on Islamic principles",
+      "relocation": "Requires court permission"
+    },
+    "inheritance": {
+      "governed_by": "Islamic Sharia law",
+      "shares": {
+        "sons": "Twice the share of daughters",
+        "daughters": "Half share if no sons",
+        "wife": "1/8 if children, 1/4 if no children",
+        "husband": "1/4 if children, 1/2 if no children"
+      },
+      "disinheritance": "Not allowed, fixed shares"
+    }
+  },
+  "non_muslim_personal_status_law_2022": {
+    "applicable_to": "Christians, Hindus, Sikhs, Buddhists, and other non-Muslims",
+    "marriage": {
+      "requirements": [
+        "Civil marriage contract",
+        "Minimum age: 18 for both parties",
+        "Medical certificate",
+        "No legal impediments",
+        "Registration with civil court"
+      ],
+      "religious_ceremony": "Can be performed after civil registration",
+      "interfaith_marriage": "Allowed with court approval"
+    },
+    "divorce": {
+      "grounds": [
+        "Mutual consent",
+        "Adultery",
+        "Cruelty",
+        "Desertion for 3 years",
+        "Mental illness",
+        "Imprisonment for 5+ years"
+      ],
+      "procedure": "Court petition, mandatory reconciliation attempts",
+      "cooling_period": "3 months for contested divorces"
+    },
+    "maintenance": {
+      "entitlement": "During marriage and after divorce if unable to support self",
+      "factors": "Earning capacity, standard of living during marriage",
+      "duration": "Until remarriage or financial independence"
+    },
+    "child_custody": {
+      "best_interest_standard": "Child's welfare paramount",
+      "joint_custody": "Possible",
+      "relocation": "Requires court permission",
+      "age_considerations": "Child's wishes considered from age 12"
+    },
+    "property_division": {
+      "marital_property": "Equal division unless prenuptial agreement",
+      "separate_property": "Remains with owner",
+      "compensation": "For homemaking contributions"
+    },
+    "inheritance": {
+      "governed_by": "Civil law, not religious law",
+      "freedom_of_testament": "Can dispose of estate by will",
+      "intestate_succession": "Follows civil code rules",
+      "forced_heirship": "No mandatory shares for children"
+    }
+  },
+  "jurisdiction_rules": {
+    "sharia_courts": {
+      "handle": "Muslim personal status matters",
+      "appeals": "To higher Sharia courts"
+    },
+    "civil_courts": {
+      "handle": "Non-Muslim personal status matters",
+      "appeals": "To federal courts"
+    },
+    "conflict_resolution": {
+      "religious_identity": "Determined by ID or declaration",
+      "choice_of_law": "Cannot choose different system",
+      "international_elements": "UAE law applies to UAE residents"
+    }
+  },
+  "special_provisions": {
+    "expatriates": "Subject to UAE personal status laws if resident",
+    "dual_nationality": "UAE law takes precedence",
+    "international_conventions": "UAE not party to many family law treaties",
+    "recognition_foreign_judgments": "Limited, requires reciprocity"
+  }
+}

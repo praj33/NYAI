@@ -1,0 +1,1707 @@
+{
+  "jurisdiction": "India",
+  "version": "1.0",
+  "last_updated": "2024-12-01",
+  "bns_sections": {
+    "rape": {
+      "section": "63-66",
+      "offence": "Rape and related offences",
+      "elements_required": [
+        "Penetration of penis into vagina, mouth, urethra or anus",
+        "Without consent",
+        "With or without deceitful means",
+        "Gang rape provisions"
+      ],
+      "punishment": "Rigorous imprisonment 10 years to life, depending on circumstances",
+      "process_steps": [
+        "FIR under Section 154 CrPC",
+        "Medical examination under Section 164A CrPC",
+        "Trial in Sessions Court",
+        "Fast track courts for rape cases"
+      ]
+    },
+    "murder": {
+      "section": "101-103",
+      "offence": "Culpable homicide and murder",
+      "elements_required": [
+        "Causing death with intention to cause death",
+        "Knowledge that act likely to cause death",
+        "Causing death of person other than intended"
+      ],
+      "punishment": "Death penalty or life imprisonment",
+      "process_steps": [
+        "FIR and investigation",
+        "Post-mortem examination",
+        "Charge sheet under Section 173 CrPC",
+        "Sessions Court trial"
+      ]
+    },
+    "theft": {
+      "section": "303-307",
+      "offence": "Theft and related offences",
+      "elements_required": [
+        "Dishonestly taking movable property",
+        "Without owner's consent",
+        "Moving property to effect taking"
+      ],
+      "punishment": "Up to 3 years imprisonment, enhanced for special circumstances",
+      "process_steps": [
+        "Police complaint",
+        "Investigation and recovery",
+        "Trial in Magistrate's Court",
+        "Enhanced punishment for subsequent offences"
+      ]
+    },
+    "cheating": {
+      "section": "318-319",
+      "offence": "Cheating and fraud",
+      "elements_required": [
+        "Deceiving person to deliver property",
+        "Fraudulent inducement to act or omit",
+        "Damage or harm to deceived person"
+      ],
+      "punishment": "Up to 3 years imprisonment, enhanced for special cases",
+      "process_steps": [
+        "Complaint to police or Magistrate",
+        "Investigation of financial transactions",
+        "Trial and recovery of property"
+      ]
+    },
+    "criminal_force": {
+      "section": "128-136",
+      "offence": "Criminal force and assault",
+      "elements_required": [
+        "Intentional use of force",
+        "Causing apprehension of harm",
+        "Assault with or without weapon"
+      ],
+      "punishment": "Up to 3 months to 7 years depending on circumstances",
+      "process_steps": [
+        "Police intervention",
+        "Medical examination",
+        "Magistrate's Court trial",
+        "Enhanced for public servants"
+      ]
+    },
+    "domestic_violence": {
+      "section": "85-86",
+      "offence": "Cruelty by husband or relatives",
+      "elements_required": [
+        "Willful conduct causing harm or injury",
+        "Causing woman to commit suicide",
+        "Dowry demand and harassment"
+      ],
+      "punishment": "Up to 3 years imprisonment and fine",
+      "process_steps": [
+        "Protection order under DV Act",
+        "Criminal complaint",
+        "Magistrate's Court proceedings",
+        "Maintenance orders"
+      ]
+    },
+    "dowry_death": {
+      "section": "80",
+      "offence": "Dowry death",
+      "elements_required": [
+        "Death within 7 years of marriage",
+        "Soon before death subjected to cruelty",
+        "Cruelty related to dowry demand"
+      ],
+      "punishment": "Imprisonment not less than 7 years, may extend to life",
+      "process_steps": [
+        "FIR mandatory",
+        "Investigation by police",
+        "Autopsy and evidence collection",
+        "Fast track court trial"
+      ]
+    },
+    "kidnapping": {
+      "section": "137-141",
+      "offence": "Kidnapping and abduction",
+      "elements_required": [
+        "Taking or enticing minor unlawfully",
+        "Wrongful confinement",
+        "Taking with intent to steal from person"
+      ],
+      "punishment": "Up to 7 years to life imprisonment",
+      "process_steps": [
+        "Immediate police action",
+        "Search and rescue operations",
+        "Investigation and evidence",
+        "Sessions Court trial"
+      ]
+    },
+    "extortion": {
+      "section": "308",
+      "offence": "Extortion",
+      "elements_required": [
+        "Putting person in fear of injury",
+        "Dishonest inducement to deliver property",
+        "Threat of accusation or injury"
+      ],
+      "punishment": "Up to 7-10 years imprisonment",
+      "process_steps": [
+        "Police complaint",
+        "Investigation of threats",
+        "Evidence collection",
+        "Trial in Sessions Court"
+      ]
+    },
+    "robbery": {
+      "section": "309-313",
+      "offence": "Robbery and dacoity",
+      "elements_required": [
+        "Theft with violence or threat",
+        "Use of deadly weapons",
+        "Five or more persons committing robbery"
+      ],
+      "punishment": "Rigorous imprisonment 7-14 years, life for dacoity",
+      "process_steps": [
+        "Immediate police response",
+        "Forensic evidence collection",
+        "Investigation of gang involvement",
+        "Special court trial"
+      ]
+    },
+    "criminal_trespass": {
+      "section": "329-334",
+      "offence": "Criminal trespass and house-breaking",
+      "elements_required": [
+        "Entering property with criminal intent",
+        "House-trespass with preparation",
+        "Breaking open receptacles"
+      ],
+      "punishment": "Up to 3 years imprisonment",
+      "process_steps": [
+        "Police complaint",
+        "Evidence of trespass",
+        "Magistrate's Court trial",
+        "Enhanced for subsequent offences"
+      ]
+    },
+    "mischief": {
+      "section": "324-328",
+      "offence": "Mischief and property damage",
+      "elements_required": [
+        "Intent to cause wrongful loss or damage",
+        "Destruction or diminution of property value",
+        "Mischief by fire or explosive"
+      ],
+      "punishment": "Up to 5-7 years depending on damage",
+      "process_steps": [
+        "Police report",
+        "Damage assessment",
+        "Investigation of intent",
+        "Civil and criminal remedies"
+      ]
+    },
+    "forgery": {
+      "section": "335-343",
+      "offence": "Forgery and counterfeiting",
+      "elements_required": [
+        "Making false documents",
+        "Using forged documents as genuine",
+        "Counterfeiting seals or marks"
+      ],
+      "punishment": "Up to 7 years to life imprisonment",
+      "process_steps": [
+        "Fraud detection",
+        "Forensic document examination",
+        "Investigation of intent",
+        "Specialized court trial"
+      ]
+    },
+    "defamation": {
+      "section": "356",
+      "offence": "Criminal defamation",
+      "elements_required": [
+        "Imputation harming reputation",
+        "Publication in spoken/written form",
+        "Intent to harm or knowledge of likely harm"
+      ],
+      "punishment": "Up to 2 years imprisonment or fine",
+      "process_steps": [
+        "Private complaint",
+        "Evidence of publication",
+        "Magistrate's Court trial",
+        "Civil defamation also available"
+      ]
+    },
+    "criminal_intimidation": {
+      "section": "351",
+      "offence": "Criminal intimidation",
+      "elements_required": [
+        "Threat of injury to person/property",
+        "Intent to cause alarm or unlawful act",
+        "Anonymous threats"
+      ],
+      "punishment": "Up to 2-7 years imprisonment",
+      "process_steps": [
+        "Police complaint",
+        "Recording of threats",
+        "Investigation of intent",
+        "Magistrate's Court trial"
+      ]
+    },
+    "causing_hurt": {
+      "section": "122-127",
+      "offence": "Voluntarily causing hurt",
+      "elements_required": [
+        "Causing bodily pain or disease",
+        "Voluntary act",
+        "With or without weapon"
+      ],
+      "punishment": "Up to 1-7 years depending on severity",
+      "process_steps": [
+        "Medical examination",
+        "Police complaint",
+        "Magistrate's Court trial"
+      ]
+    },
+    "grievous_hurt": {
+      "section": "114-121",
+      "offence": "Voluntarily causing grievous hurt",
+      "elements_required": [
+        "Causing permanent disability",
+        "Dangerous weapons used",
+        "Acid attacks",
+        "Permanent disfigurement"
+      ],
+      "punishment": "Up to 7 years to life imprisonment",
+      "process_steps": [
+        "Medical examination and disability assessment",
+        "Forensic evidence",
+        "Sessions Court trial"
+      ]
+    },
+    "wrongful_confinement": {
+      "section": "340-348",
+      "offence": "Wrongful restraint and confinement",
+      "elements_required": [
+        "Preventing free movement",
+        "Wrongful restraint",
+        "Confinement against will"
+      ],
+      "punishment": "Up to 1-3 years imprisonment",
+      "process_steps": [
+        "Habeas corpus petition",
+        "Police investigation",
+        "Magistrate's Court trial"
+      ]
+    },
+    "criminal_misappropriation": {
+      "section": "403-404",
+      "offence": "Criminal misappropriation of property",
+      "elements_required": [
+        "Lawful possession of property",
+        "Misappropriating for own use",
+        "Without owner's consent"
+      ],
+      "punishment": "Up to 2-7 years imprisonment",
+      "process_steps": [
+        "Complaint to police",
+        "Investigation of possession",
+        "Recovery of property",
+        "Magistrate's Court trial"
+      ]
+    },
+    "criminal_breach_of_trust": {
+      "section": "405-409",
+      "offence": "Criminal breach of trust",
+      "elements_required": [
+        "Entrustment of property",
+        "Dishonest misappropriation",
+        "Violation of contract or direction"
+      ],
+      "punishment": "Up to 3-7 years imprisonment",
+      "process_steps": [
+        "FIR and investigation",
+        "Financial transaction analysis",
+        "Recovery proceedings",
+        "Sessions Court trial"
+      ]
+    },
+    "receiving_stolen_property": {
+      "section": "424-425",
+      "offence": "Dishonestly receiving stolen property",
+      "elements_required": [
+        "Receiving stolen property",
+        "Knowledge or belief of theft",
+        "Dishonest retention"
+      ],
+      "punishment": "Same as theft punishment",
+      "process_steps": [
+        "Police investigation",
+        "Property identification",
+        "Link to original theft",
+        "Joint trial"
+      ]
+    },
+    "cheating_by_personation": {
+      "section": "318-319",
+      "offence": "Cheating by personation",
+      "elements_required": [
+        "Personating another person",
+        "Inducing delivery of property",
+        "Fraudulent representation"
+      ],
+      "punishment": "Up to 3-7 years imprisonment",
+      "process_steps": [
+        "Identity verification",
+        "Investigation of impersonation",
+        "Documentary evidence",
+        "Sessions Court trial"
+      ]
+    },
+    "arson": {
+      "section": "435-438",
+      "offence": "Mischief by fire or explosive substance",
+      "elements_required": [
+        "Setting fire to property",
+        "Using explosive substances",
+        "Intent to cause damage"
+      ],
+      "punishment": "Up to life imprisonment",
+      "process_steps": [
+        "Fire department investigation",
+        "Forensic evidence collection",
+        "Arson investigation",
+        "Special court trial"
+      ]
+    },
+    "riot": {
+      "section": "141-160",
+      "offence": "Being member of unlawful assembly",
+      "elements_required": [
+        "Assembly of 5+ persons",
+        "Common object to commit offence",
+        "Knowledge of likelihood of offence"
+      ],
+      "punishment": "Up to 2-7 years imprisonment",
+      "process_steps": [
+        "Police intervention",
+        "Identification of participants",
+        "Evidence of common object",
+        "Sessions Court trial"
+      ]
+    },
+    "rioting": {
+      "section": "143-145",
+      "offence": "Rioting",
+      "elements_required": [
+        "Use of criminal force in prosecution of common object",
+        "Assembly becoming violent",
+        "Destruction of public property"
+      ],
+      "punishment": "Up to 2-7 years imprisonment",
+      "process_steps": [
+        "Immediate police action",
+        "Crowd control",
+        "Identification of leaders",
+        "Fast track trial"
+      ]
+    },
+    "public_nuisance": {
+      "section": "268-294",
+      "offence": "Public nuisance",
+      "elements_required": [
+        "Act causing annoyance to public",
+        "Obstructing public way",
+        "Danger to human life/health/safety"
+      ],
+      "punishment": "Up to 6 months imprisonment or fine",
+      "process_steps": [
+        "Complaint to police or Magistrate",
+        "Evidence of nuisance",
+        "Injunction orders",
+        "Summary trial"
+      ]
+    },
+    "obscenity": {
+      "section": "292-294",
+      "offence": "Obscene acts and songs",
+      "elements_required": [
+        "Obscene songs or acts in public",
+        "Distributing obscene matter",
+        "Intent to corrupt public morals"
+      ],
+      "punishment": "Up to 3 years imprisonment or fine",
+      "process_steps": [
+        "Police complaint",
+        "Content examination",
+        "Morality assessment",
+        "Magistrate's Court trial"
+      ]
+    },
+    "abetment": {
+      "section": "44-53",
+      "offence": "Abetment of offence",
+      "elements_required": [
+        "Instigating commission of offence",
+        "Engaging in conspiracy",
+        "Aiding commission of offence"
+      ],
+      "punishment": "Same as abetted offence",
+      "process_steps": [
+        "Investigation of involvement",
+        "Evidence of instigation",
+        "Joint trial with principal offender",
+        "Same court jurisdiction"
+      ]
+    },
+    "conspiracy": {
+      "section": "120A-120B",
+      "offence": "Criminal conspiracy",
+      "elements_required": [
+        "Agreement between two or more persons",
+        "To commit unlawful act",
+        "Some overt act in pursuance"
+      ],
+      "punishment": "Up to 6 months to life imprisonment",
+      "process_steps": [
+        "Investigation of agreement",
+        "Evidence of overt acts",
+        "Joint conspiracy trial",
+        "Enhanced punishment for serious offences"
+      ]
+    },
+    "attempt": {
+      "section": "511",
+      "offence": "Attempt to commit offence",
+      "elements_required": [
+        "Intention to commit offence",
+        "Some act towards commission",
+        "Act falls short of completion"
+      ],
+      "punishment": "Up to half of maximum punishment for offence",
+      "process_steps": [
+        "Investigation of attempt",
+        "Evidence of intention",
+        "Same court as completed offence",
+        "Reduced punishment possible"
+      ]
+    },
+    "bigamy": {
+      "section": "494-495",
+      "offence": "Marrying again during lifetime of husband/wife",
+      "elements_required": [
+        "Valid first marriage subsisting",
+        "Contracting second marriage",
+        "Without dissolution of first marriage"
+      ],
+      "punishment": "Up to 7 years imprisonment or fine",
+      "process_steps": [
+        "Complaint by spouse",
+        "Marriage certificate verification",
+        "Evidence of second marriage",
+        "Family Court trial"
+      ]
+    },
+    "adultery": {
+      "section": "497",
+      "offence": "Adultery",
+      "elements_required": [
+        "Voluntary sexual intercourse",
+        "Between married person and another",
+        "Without consent of spouse"
+      ],
+      "punishment": "Up to 5 years imprisonment or fine",
+      "process_steps": [
+        "Complaint by aggrieved spouse",
+        "Evidence of relationship",
+        "Witness testimony",
+        "Family Court proceedings"
+      ]
+    },
+    "cruelty_by_husband": {
+      "section": "498A",
+      "offence": "Cruelty by husband or relatives",
+      "elements_required": [
+        "Willful conduct causing harm",
+        "Demanding dowry",
+        "Driving woman to suicide"
+      ],
+      "punishment": "Up to 3 years imprisonment and fine",
+      "process_steps": [
+        "Complaint under Section 498A",
+        "Medical evidence",
+        "Investigation of dowry demand",
+        "Magistrate's Court trial"
+      ]
+    },
+    "child_marriage": {
+      "section": "375-376",
+      "offence": "Child marriage",
+      "elements_required": [
+        "Marriage of minor",
+        "Below 18 years for female, 21 for male",
+        "With or without consent"
+      ],
+      "punishment": "Up to 2 years imprisonment or fine",
+      "process_steps": [
+        "Child marriage prohibition officer",
+        "Age verification",
+        "Marriage registration check",
+        "Family Court proceedings"
+      ]
+    },
+    "foeticide": {
+      "section": "315-316",
+      "offence": "Act causing miscarriage",
+      "elements_required": [
+        "Causing miscarriage without consent",
+        "Using instruments or drugs",
+        "Intent to cause miscarriage"
+      ],
+      "punishment": "Up to life imprisonment",
+      "process_steps": [
+        "Medical examination",
+        "Forensic evidence",
+        "Investigation of intent",
+        "Sessions Court trial"
+      ]
+    },
+    "infanticide": {
+      "section": "315",
+      "offence": "Infanticide",
+      "elements_required": [
+        "Causing death of child under 1 year",
+        "By wilful act or omission",
+        "Child born alive"
+      ],
+      "punishment": "Up to life imprisonment",
+      "process_steps": [
+        "Post-mortem examination",
+        "Investigation of circumstances",
+        "Mental health assessment",
+        "Sessions Court trial"
+      ]
+    },
+    "abetment_of_suicide": {
+      "section": "305-306",
+      "offence": "Abetment of suicide",
+      "elements_required": [
+        "Instigating suicide",
+        "Aiding suicide attempt",
+        "Driving person to suicide"
+      ],
+      "punishment": "Up to 10 years imprisonment",
+      "process_steps": [
+        "Investigation of relationship",
+        "Evidence of instigation",
+        "Mental health factors",
+        "Sessions Court trial"
+      ]
+    },
+    "hurt_by_act_endangering_life": {
+      "section": "337-338",
+      "offence": "Causing hurt by rash or negligent act",
+      "elements_required": [
+        "Rash or negligent act",
+        "Endangering human life",
+        "Causing hurt thereby"
+      ],
+      "punishment": "Up to 6 months to 2 years",
+      "process_steps": [
+        "Medical examination",
+        "Investigation of negligence",
+        "Traffic accident analysis",
+        "Magistrate's Court trial"
+      ]
+    },
+    "rash_driving": {
+      "section": "279-280",
+      "offence": "Rash driving or riding on public way",
+      "elements_required": [
+        "Driving vehicle dangerously",
+        "On public way",
+        "Endangering human life"
+      ],
+      "punishment": "Up to 6 months imprisonment and fine",
+      "process_steps": [
+        "Traffic police complaint",
+        "Accident investigation",
+        "Witness statements",
+        "Motor Accident Claims Tribunal"
+      ]
+    },
+    "nuisance_by_pollution": {
+      "section": "278-279",
+      "offence": "Making atmosphere noxious to health",
+      "elements_required": [
+        "Discharging noxious substance",
+        "Into atmosphere",
+        "Noxious to health of person"
+      ],
+      "punishment": "Up to 6 months imprisonment or fine",
+      "process_steps": [
+        "Pollution control board complaint",
+        "Environmental testing",
+        "Health impact assessment",
+        "Green Court trial"
+      ]
+    },
+    "adulteration": {
+      "section": "272-276",
+      "offence": "Adulteration of food or drink",
+      "elements_required": [
+        "Mixing noxious substance with food/drink",
+        "Intended for sale",
+        "Sale of adulterated substance"
+      ],
+      "punishment": "Up to 6 months imprisonment and fine",
+      "process_steps": [
+        "Food safety officer inspection",
+        "Laboratory testing",
+        "Supply chain investigation",
+        "Consumer Court proceedings"
+      ]
+    },
+    "illegal_abortion": {
+      "section": "312-316",
+      "offence": "Causing miscarriage without consent",
+      "elements_required": [
+        "Causing miscarriage",
+        "Without woman's consent",
+        "Using instruments or drugs"
+      ],
+      "punishment": "Up to life imprisonment",
+      "process_steps": [
+        "Medical examination",
+        "Investigation of consent",
+        "Forensic evidence",
+        "Sessions Court trial"
+      ]
+    },
+    "exposing_child": {
+      "section": "317",
+      "offence": "Exposure and abandonment of child",
+      "elements_required": [
+        "Exposing child under 12 years",
+        "With intent to abandon",
+        "In place likely to cause death"
+      ],
+      "punishment": "Up to 7 years imprisonment",
+      "process_steps": [
+        "Child welfare committee involvement",
+        "Medical examination",
+        "Investigation of circumstances",
+        "Sessions Court trial"
+      ]
+    },
+    "procuration": {
+      "section": "366-373",
+      "offence": "Procuration of minor girl",
+      "elements_required": [
+        "Procuring minor girl",
+        "From custody of lawful guardian",
+        "For illicit intercourse"
+      ],
+      "punishment": "Up to life imprisonment",
+      "process_steps": [
+        "Investigation of trafficking",
+        "Victim protection",
+        "Evidence collection",
+        "Special court trial"
+      ]
+    },
+    "importation_of_girl": {
+      "section": "366B",
+      "offence": "Importation of girl from foreign country",
+      "elements_required": [
+        "Importing girl under 21 years",
+        "From foreign country",
+        "For prostitution"
+      ],
+      "punishment": "Up to 10 years imprisonment",
+      "process_steps": [
+        "Immigration authorities involvement",
+        "Victim repatriation",
+        "Trafficking network investigation",
+        "Special court trial"
+      ]
+    },
+    "selling_minor_for_prostitution": {
+      "section": "372-373",
+      "offence": "Selling minor for prostitution",
+      "elements_required": [
+        "Selling minor for prostitution",
+        "Buying minor for prostitution",
+        "Exploitation of prostitution"
+      ],
+      "punishment": "Up to life imprisonment",
+      "process_steps": [
+        "Police raid and rescue",
+        "Victim rehabilitation",
+        "Network investigation",
+        "Special court trial"
+      ]
+    },
+    "unnatural_offences": {
+      "section": "377",
+      "offence": "Unnatural offences",
+      "elements_required": [
+        "Carnal intercourse against order of nature",
+        "With any man, woman or animal",
+        "Voluntary participation"
+      ],
+      "punishment": "Up to life imprisonment",
+      "process_steps": [
+        "Medical examination",
+        "Investigation of consent",
+        "Evidence collection",
+        "Sessions Court trial"
+      ]
+    },
+    "stalking": {
+      "section": "354D",
+      "offence": "Stalking",
+      "elements_required": [
+        "Following person",
+        "Contacting through electronic means",
+        "Causing fear of violence or harm"
+      ],
+      "punishment": "Up to 3 years imprisonment and fine",
+      "process_steps": [
+        "Police complaint",
+        "Digital evidence collection",
+        "Restraining order",
+        "Magistrate's Court trial"
+      ]
+    },
+    "acid_attack": {
+      "section": "326A-326B",
+      "offence": "Acid attack",
+      "elements_required": [
+        "Throwing acid",
+        "Causing permanent or partial damage",
+        "With intent to cause harm"
+      ],
+      "punishment": "Up to life imprisonment",
+      "process_steps": [
+        "Immediate medical treatment",
+        "Forensic evidence collection",
+        "Investigation of acid source",
+        "Fast track court trial"
+      ]
+    },
+    "mob_lynching": {
+      "section": "302 read with 149",
+      "offence": "Mob lynching",
+      "elements_required": [
+        "Unlawful assembly",
+        "Committing murder",
+        "With common intention"
+      ],
+      "punishment": "Death penalty or life imprisonment",
+      "process_steps": [
+        "Immediate police action",
+        "Crowd control",
+        "Identification of perpetrators",
+        "Special court trial"
+      ]
+    },
+    "hate_crime": {
+      "section": "153A-153B",
+      "offence": "Promoting enmity between groups",
+      "elements_required": [
+        "Promoting religious/caste enmity",
+        "Doing acts prejudicial to harmony",
+        "Imputing disloyalty to Constitution"
+      ],
+      "punishment": "Up to 3-7 years imprisonment",
+      "process_steps": [
+        "Investigation of speech/content",
+        "Evidence of intent",
+        "Impact assessment",
+        "Sessions Court trial"
+      ]
+    },
+    "corruption": {
+      "section": "161-165A",
+      "offence": "Taking gratification by public servant",
+      "elements_required": [
+        "Public servant taking gratification",
+        "Other than legal remuneration",
+        "For doing or forbearing to do official act"
+      ],
+      "punishment": "Up to life imprisonment",
+      "process_steps": [
+        "Complaint to anti-corruption bureau",
+        "Trap operation",
+        "Evidence collection",
+        "Special court trial"
+      ]
+    },
+    "witness_tampering": {
+      "section": "193-195",
+      "offence": "Giving false evidence",
+      "elements_required": [
+        "Giving false evidence",
+        "Fabricating false evidence",
+        "Using fabricated evidence"
+      ],
+      "punishment": "Up to 7 years imprisonment",
+      "process_steps": [
+        "Court complaint",
+        "Investigation of falsehood",
+        "Cross-examination",
+        "Contempt proceedings"
+      ]
+    },
+    "perjury": {
+      "section": "191-193",
+      "offence": "False statement on oath",
+      "elements_required": [
+        "Making false statement",
+        "On oath or solemn affirmation",
+        "In judicial proceeding"
+      ],
+      "punishment": "Up to 7 years imprisonment",
+      "process_steps": [
+        "Court complaint",
+        "Investigation of falsehood",
+        "Witness credibility assessment",
+        "Contempt proceedings"
+      ]
+    },
+    "contempt_of_court": {
+      "section": "2(c)",
+      "offence": "Contempt of court",
+      "elements_required": [
+        "Disobeying court order",
+        "Interfering with judicial proceedings",
+        "Scandalizing court"
+      ],
+      "punishment": "Up to 6 months imprisonment or fine",
+      "process_steps": [
+        "Court suo moto action",
+        "Show cause notice",
+        "Hearing and evidence",
+        "Contempt order"
+      ]
+    },
+    "breach_of_trust_by_carrier": {
+      "section": "407-409",
+      "offence": "Criminal breach of trust by carrier",
+      "elements_required": [
+        "Carrier entrusted with property",
+        "Dishonestly misappropriating",
+        "During carriage"
+      ],
+      "punishment": "Up to 7 years imprisonment",
+      "process_steps": [
+        "Complaint by owner",
+        "Investigation of carriage contract",
+        "Recovery of goods",
+        "Sessions Court trial"
+      ]
+    },
+    "breach_of_trust_by_merchant": {
+      "section": "415-418",
+      "offence": "Cheating by false pretence",
+      "elements_required": [
+        "Deceiving by false pretence",
+        "Inducing delivery of property",
+        "Dishonest intention"
+      ],
+      "punishment": "Up to 7 years imprisonment",
+      "process_steps": [
+        "Investigation of transaction",
+        "Evidence of false pretence",
+        "Financial loss assessment",
+        "Sessions Court trial"
+      ]
+    },
+    "criminal_negligence": {
+      "section": "304A",
+      "offence": "Causing death by negligence",
+      "elements_required": [
+        "Rash or negligent act",
+        "Not amounting to culpable homicide",
+        "Causing death"
+      ],
+      "punishment": "Up to 2 years imprisonment or fine",
+      "process_steps": [
+        "Investigation of negligence",
+        "Expert opinion",
+        "Medical evidence",
+        "Magistrate's Court trial"
+      ]
+    },
+    "rash_act": {
+      "section": "336-338",
+      "offence": "Act endangering life or personal safety",
+      "elements_required": [
+        "Rash or negligent act",
+        "Endangering life or safety",
+        "Of others"
+      ],
+      "punishment": "Up to 6 months imprisonment or fine",
+      "process_steps": [
+        "Investigation of circumstances",
+        "Risk assessment",
+        "Evidence of negligence",
+        "Magistrate's Court trial"
+      ]
+    },
+    "negligent_act": {
+      "section": "336-338",
+      "offence": "Causing hurt by negligent act",
+      "elements_required": [
+        "Negligent conduct",
+        "Causing hurt",
+        "Not amounting to rash act"
+      ],
+      "punishment": "Up to 2 years imprisonment or fine",
+      "process_steps": [
+        "Medical examination",
+        "Investigation of negligence",
+        "Expert testimony",
+        "Magistrate's Court trial"
+      ]
+    },
+    "disobedience_to_order": {
+      "section": "172-174",
+      "offence": "Disobedience to order duly promulgated by public servant",
+      "elements_required": [
+        "Order by public servant",
+        "Duly promulgated",
+        "Intentional disobedience"
+      ],
+      "punishment": "Up to 1-6 months imprisonment or fine",
+      "process_steps": [
+        "Complaint by public servant",
+        "Verification of order",
+        "Evidence of disobedience",
+        "Magistrate's Court trial"
+      ]
+    },
+    "resistance_to_arrest": {
+      "section": "224-225",
+      "offence": "Resistance or obstruction by person to lawful apprehension",
+      "elements_required": [
+        "Lawful apprehension attempt",
+        "Resistance or obstruction",
+        "By person arrested or rescued"
+      ],
+      "punishment": "Up to 2-4 years imprisonment",
+      "process_steps": [
+        "Police complaint",
+        "Evidence of lawful arrest",
+        "Witness testimony",
+        "Magistrate's Court trial"
+      ]
+    },
+    "escape_from_custody": {
+      "section": "222-223",
+      "offence": "Escape from custody",
+      "elements_required": [
+        "Lawfully in custody",
+        "Escaping from custody",
+        "Without lawful excuse"
+      ],
+      "punishment": "Up to 5 years imprisonment",
+      "process_steps": [
+        "Investigation of escape",
+        "Custody records verification",
+        "Search and recapture",
+        "Sessions Court trial"
+      ]
+    },
+    "assault_on_police": {
+      "section": "152-153",
+      "offence": "Assault or criminal force to deter public servant",
+      "elements_required": [
+        "Assault on public servant",
+        "While performing duty",
+        "To deter from duty"
+      ],
+      "punishment": "Up to 2-7 years imprisonment",
+      "process_steps": [
+        "Police complaint",
+        "Medical examination",
+        "Duty performance evidence",
+        "Sessions Court trial"
+      ]
+    },
+    "impersonation": {
+      "section": "170",
+      "offence": "Personating a public servant",
+      "elements_required": [
+        "Personating public servant",
+        "With fraudulent intent",
+        "To cause harm or injury"
+      ],
+      "punishment": "Up to 3 years imprisonment",
+      "process_steps": [
+        "Investigation of impersonation",
+        "Evidence of fraudulent intent",
+        "Impact assessment",
+        "Magistrate's Court trial"
+      ]
+    },
+    "false_personation": {
+      "section": "205-211",
+      "offence": "False personation for purpose of act or proceeding in suit",
+      "elements_required": [
+        "False personation",
+        "In judicial proceeding",
+        "With fraudulent intent"
+      ],
+      "punishment": "Up to 3 years imprisonment",
+      "process_steps": [
+        "Court complaint",
+        "Investigation of falsehood",
+        "Evidence collection",
+        "Sessions Court trial"
+      ]
+    },
+    "harbouring_deserter": {
+      "section": "135-136",
+      "offence": "Harbouring deserter",
+      "elements_required": [
+        "Harbouring soldier/sailor/airman",
+        "Who deserted armed forces",
+        "Knowing desertion"
+      ],
+      "punishment": "Up to 2 years imprisonment or fine",
+      "process_steps": [
+        "Military police complaint",
+        "Investigation of harbouring",
+        "Evidence of knowledge",
+        "Magistrate's Court trial"
+      ]
+    },
+    "breach_of_contract_by_servant": {
+      "section": "408-409",
+      "offence": "Criminal breach of trust by clerk or servant",
+      "elements_required": [
+        "Clerk or servant",
+        "Entrusted with property",
+        "Dishonestly misappropriating"
+      ],
+      "punishment": "Up to 7 years imprisonment",
+      "process_steps": [
+        "Employer complaint",
+        "Investigation of employment",
+        "Financial transaction analysis",
+        "Sessions Court trial"
+      ]
+    },
+    "falsification_of_accounts": {
+      "section": "477A",
+      "offence": "Falsification of accounts",
+      "elements_required": [
+        "Banker, merchant or agent",
+        "Falsifying accounts",
+        "With intent to defraud"
+      ],
+      "punishment": "Up to 7 years imprisonment",
+      "process_steps": [
+        "Audit investigation",
+        "Financial record analysis",
+        "Evidence of intent",
+        "Sessions Court trial"
+      ]
+    },
+    "making_gambling_house": {
+      "section": "294A",
+      "offence": "Keeping lottery office",
+      "elements_required": [
+        "Keeping any office or place",
+        "For drawing any lottery",
+        "Not authorized by government"
+      ],
+      "punishment": "Up to 6 months imprisonment or fine",
+      "process_steps": [
+        "Police raid",
+        "Evidence collection",
+        "Lottery material seizure",
+        "Magistrate's Court trial"
+      ]
+    },
+    "illegal_gaming": {
+      "section": "294A",
+      "offence": "Being found in common gaming house",
+      "elements_required": [
+        "Found in common gaming house",
+        "Used for purpose of gaming",
+        "During gaming time"
+      ],
+      "punishment": "Up to 3 months imprisonment or fine",
+      "process_steps": [
+        "Police raid",
+        "Witness statements",
+        "Gaming equipment seizure",
+        "Summary trial"
+      ]
+    },
+    "sale_of_indecent_objects": {
+      "section": "292-293",
+      "offence": "Sale of obscene books",
+      "elements_required": [
+        "Selling/distributing obscene books",
+        "Knowing content to be obscene",
+        "With intent to corrupt morals"
+      ],
+      "punishment": "Up to 2 years imprisonment or fine",
+      "process_steps": [
+        "Police complaint",
+        "Content examination",
+        "Morality assessment",
+        "Magistrate's Court trial"
+      ]
+    },
+    "insult_to_modesty": {
+      "section": "509",
+      "offence": "Word, gesture or act intended to insult modesty of woman",
+      "elements_required": [
+        "Uttering word/gesture/act",
+        "Intended to insult modesty",
+        "Of woman"
+      ],
+      "punishment": "Up to 1-3 years imprisonment or fine",
+      "process_steps": [
+        "Woman complaint",
+        "Evidence collection",
+        "Witness testimony",
+        "Magistrate's Court trial"
+      ]
+    },
+    "outraging_modesty": {
+      "section": "354",
+      "offence": "Assault or criminal force to woman with intent to outrage her modesty",
+      "elements_required": [
+        "Assault or criminal force",
+        "To woman",
+        "With intent to outrage her modesty"
+      ],
+      "punishment": "Up to 2-7 years imprisonment",
+      "process_steps": [
+        "Woman complaint",
+        "Medical examination",
+        "Evidence collection",
+        "Sessions Court trial"
+      ]
+    }
+  },
+  "civil_law": {
+    "contract_breach": {
+      "law": "Indian Contract Act, 1872",
+      "remedies": [
+        "Specific performance",
+        "Damages for loss",
+        "Injunction",
+        "Quantum meruit"
+      ],
+      "process_steps": [
+        "Civil suit filing",
+        "Evidence and witnesses",
+        "Court proceedings",
+        "Appeal process"
+      ]
+    },
+    "property_disputes": {
+      "law": "Transfer of Property Act, 1882",
+      "remedies": [
+        "Possession orders",
+        "Title rectification",
+        "Partition suits",
+        "Specific performance"
+      ],
+      "process_steps": [
+        "Civil court filing",
+        "Document verification",
+        "Commissioner reports",
+        "Final decree"
+      ]
+    },
+    "family_matters": {
+      "law": "Hindu Marriage Act, 1955",
+      "remedies": [
+        "Divorce decree",
+        "Maintenance orders",
+        "Custody orders",
+        "Property settlement"
+      ],
+      "process_steps": [
+        "Family court petition",
+        "Mediation mandatory",
+        "Evidence presentation",
+        "Welfare of children paramount"
+      ]
+    },
+    "consumer_disputes": {
+      "law": "Consumer Protection Act, 2019",
+      "remedies": [
+        "Replacement/refund",
+        "Compensation",
+        "Removal of defect",
+        "Discontinuation of unfair trade"
+      ],
+      "process_steps": [
+        "Complaint to consumer forum",
+        "Evidence of deficiency",
+        "Expert opinion",
+        "Appeal to higher forum"
+      ]
+    },
+    "employment_law": {
+      "law": "Industrial Disputes Act, 1947",
+      "remedies": [
+        "Reinstatement",
+        "Back wages",
+        "Compensation for unfair dismissal",
+        "Retrenchment compensation"
+      ],
+      "process_steps": [
+        "Conciliation proceedings",
+        "Labour court reference",
+        "Evidence and arguments",
+        "Award by labour court"
+      ]
+    },
+    "company_law": {
+      "law": "Companies Act, 2013",
+      "remedies": [
+        "Winding up order",
+        "Shareholder remedies",
+        "Director removal",
+        "Oppression relief"
+      ],
+      "process_steps": [
+        "Company court petition",
+        "Shareholder approval",
+        "Tribunal proceedings",
+        "Company court order"
+      ]
+    },
+    "motor_accident_claims": {
+      "law": "Motor Vehicles Act, 1988",
+      "remedies": [
+        "Compensation for death",
+        "Medical expenses",
+        "Loss of income",
+        "Pain and suffering"
+      ],
+      "process_steps": [
+        "Claim petition to MACT",
+        "Medical evidence",
+        "Income proof",
+        "Compensation award"
+      ]
+    },
+    "succession_inheritance": {
+      "law": "Indian Succession Act, 1925",
+      "remedies": [
+        "Grant of probate",
+        "Letters of administration",
+        "Partition of property",
+        "Will execution"
+      ],
+      "process_steps": [
+        "Petition to district court",
+        "Notice to legal heirs",
+        "Evidence of relationship",
+        "Grant of succession certificate"
+      ]
+    },
+    "arbitration_matters": {
+      "law": "Arbitration and Conciliation Act, 1996",
+      "remedies": [
+        "Arbitral award enforcement",
+        "Setting aside award",
+        "Interim measures",
+        "Court assistance"
+      ],
+      "process_steps": [
+        "Arbitration agreement",
+        "Arbitral proceedings",
+        "Award publication",
+        "Court enforcement"
+      ]
+    },
+    "intellectual_property": {
+      "law": "Trade Marks Act, 1999",
+      "remedies": [
+        "Injunction",
+        "Damages",
+        "Account of profits",
+        "Delivery up of infringing goods"
+      ],
+      "process_steps": [
+        "IP court suit",
+        "Evidence of ownership",
+        "Infringement proof",
+        "IP court decree"
+      ]
+    },
+    "environmental_disputes": {
+      "law": "Environment Protection Act, 1986",
+      "remedies": [
+        "Environmental restoration",
+        "Compensation for damage",
+        "Closure orders",
+        "Penalty imposition"
+      ],
+      "process_steps": [
+        "Green tribunal petition",
+        "Environmental assessment",
+        "Expert evidence",
+        "Tribunal order"
+      ]
+    },
+    "tax_disputes": {
+      "law": "Income Tax Act, 1961",
+      "remedies": [
+        "Tax refund",
+        "Assessment setting aside",
+        "Penalty waiver",
+        "Interest relief"
+      ],
+      "process_steps": [
+        "Tribunal appeal",
+        "Department response",
+        "Hearing and evidence",
+        "Tribunal order"
+      ]
+    },
+    "banking_disputes": {
+      "law": "Banking Regulation Act, 1949",
+      "remedies": [
+        "Account restoration",
+        "Cheque dishonour compensation",
+        "Interest on delayed payment",
+        "Bank charges waiver"
+      ],
+      "process_steps": [
+        "Banking ombudsman complaint",
+        "Bank response",
+        "Ombudsman recommendation",
+        "Bank compliance"
+      ]
+    },
+    "insurance_disputes": {
+      "law": "Insurance Act, 1938",
+      "remedies": [
+        "Claim settlement",
+        "Policy revival",
+        "Premium refund",
+        "Compensation for delay"
+      ],
+      "process_steps": [
+        "Insurance ombudsman complaint",
+        "Insurer response",
+        "Ombudsman award",
+        "Court enforcement if needed"
+      ]
+    },
+    "medical_negligence": {
+      "law": "Consumer Protection Act, 2019",
+      "remedies": [
+        "Medical compensation",
+        "Corrective surgery costs",
+        "Pain and suffering damages",
+        "Loss of income compensation"
+      ],
+      "process_steps": [
+        "Medical negligence complaint",
+        "Medical expert opinion",
+        "Causation proof",
+        "Consumer court award"
+      ]
+    },
+    "defamation_civil": {
+      "law": "Defamation laws under common law",
+      "remedies": [
+        "Damages for reputation harm",
+        "Injunction against publication",
+        "Apology publication",
+        "Account of profits"
+      ],
+      "process_steps": [
+        "Civil suit filing",
+        "Evidence of defamation",
+        "Reputation damage proof",
+        "Court decree"
+      ]
+    },
+    "partition_suits": {
+      "law": "Partition Act, 1893",
+      "remedies": [
+        "Property partition",
+        "Separate possession",
+        "Mesne profits",
+        "Future maintenance"
+      ],
+      "process_steps": [
+        "Partition suit filing",
+        "Property valuation",
+        "Commissioner report",
+        "Partition decree"
+      ]
+    },
+    "trust_disputes": {
+      "law": "Indian Trusts Act, 1882",
+      "remedies": [
+        "Trust administration",
+        "Beneficiary rights enforcement",
+        "Trustee removal",
+        "Property recovery"
+      ],
+      "process_steps": [
+        "Trust dispute suit",
+        "Trust deed verification",
+        "Beneficiary evidence",
+        "Court administration order"
+      ]
+    },
+    "landlord_tenant_disputes": {
+      "law": "Transfer of Property Act, 1882",
+      "remedies": [
+        "Eviction order",
+        "Rent recovery",
+        "Property restoration",
+        "Mesne profits"
+      ],
+      "process_steps": [
+        "Rent controller petition",
+        "Evidence of tenancy",
+        "Property inspection",
+        "Eviction decree"
+      ]
+    },
+    "divorce_and_matrimonial_disputes": {
+      "law": "Hindu Marriage Act, 1955",
+      "remedies": [
+        "Divorce decree",
+        "Maintenance orders",
+        "Child custody",
+        "Property division"
+      ],
+      "process_steps": [
+        "Family court petition",
+        "Mediation mandatory",
+        "Evidence presentation",
+        "Court decree"
+      ]
+    },
+    "maintenance_claims": {
+      "law": "Hindu Adoption and Maintenance Act, 1956",
+      "remedies": [
+        "Monthly maintenance",
+        "Lump sum maintenance",
+        "Medical expenses",
+        "Education expenses"
+      ],
+      "process_steps": [
+        "Maintenance petition",
+        "Income proof",
+        "Relationship evidence",
+        "Court order"
+      ]
+    },
+    "child_custody": {
+      "law": "Guardians and Wards Act, 1890",
+      "remedies": [
+        "Custody order",
+        "Visitation rights",
+        "Child support",
+        "Guardianship appointment"
+      ],
+      "process_steps": [
+        "Custody petition",
+        "Child welfare report",
+        "Parent interviews",
+        "Court order"
+      ]
+    },
+    "adoption_proceedings": {
+      "law": "Hindu Adoption and Maintenance Act, 1956",
+      "remedies": [
+        "Adoption decree",
+        "Name change",
+        "Inheritance rights",
+        "Legal parentage"
+      ],
+      "process_steps": [
+        "Adoption petition",
+        "Home study report",
+        "Child consent (if applicable)",
+        "Court approval"
+      ]
+    },
+    "guardianship_matters": {
+      "law": "Guardians and Wards Act, 1890",
+      "remedies": [
+        "Guardianship appointment",
+        "Property management",
+        "Personal care decisions",
+        "Legal representation"
+      ],
+      "process_steps": [
+        "Guardianship application",
+        "Medical reports",
+        "Character certificates",
+        "Court appointment"
+      ]
+    },
+    "probate_matters": {
+      "law": "Indian Succession Act, 1925",
+      "remedies": [
+        "Grant of probate",
+        "Will validation",
+        "Executor appointment",
+        "Estate administration"
+      ],
+      "process_steps": [
+        "Probate petition",
+        "Will verification",
+        "Notice to beneficiaries",
+        "Grant issuance"
+      ]
+    },
+    "wills_and_testaments": {
+      "law": "Indian Succession Act, 1925",
+      "remedies": [
+        "Will execution",
+        "Estate distribution",
+        "Trust creation",
+        "Charity enforcement"
+      ],
+      "process_steps": [
+        "Will registration",
+        "Testator capacity proof",
+        "Witness verification",
+        "Estate administration"
+      ]
+    }
+  },
+  "special_laws": {
+    "it_act": {
+      "law": "Information Technology Act, 2000",
+      "sections": [
+        "66E",
+        "67",
+        "67A",
+        "67B"
+      ],
+      "offences": [
+        "Privacy violation",
+        "Publishing obscene material",
+        "Child pornography",
+        "Cyber terrorism"
+      ],
+      "process_steps": [
+        "Cyber crime cell complaint",
+        "Digital evidence collection",
+        "Forensic analysis",
+        "Special court trial"
+      ]
+    },
+    "dv_act": {
+      "law": "Protection of Women from Domestic Violence Act, 2005",
+      "remedies": [
+        "Protection orders",
+        "Residence orders",
+        "Monetary relief",
+        "Custody orders"
+      ],
+      "process_steps": [
+        "Application to Magistrate",
+        "Ex-parte orders possible",
+        "Service of notice",
+        "Final protection order"
+      ]
+    },
+    "ndps_act": {
+      "law": "Narcotic Drugs and Psychotropic Substances Act, 1985",
+      "offences": [
+        "Possession",
+        "Sale/purchase",
+        "Manufacture",
+        "Trafficking"
+      ],
+      "process_steps": [
+        "Special court jurisdiction",
+        "Forensic testing mandatory",
+        "Strict bail conditions",
+        "Enhanced punishment"
+      ]
+    }
+  },
+  "scraped_data": [
+    {
+      "scraped_at": "2025-12-05T11:15:36.004432",
+      "source": "Official Indian Code Website",
+      "data": {
+        "jurisdiction": "India",
+        "scraped_at": "2025-12-05T11:15:36.004432",
+        "source": "Official Indian Code Website",
+        "sections": {
+          "bns_section_1": {
+            "section_number": "1",
+            "content": "Section 1.Short title and commencement.Show Related Subordinates",
+            "url": "https://www.indiacode.nic.in/handle/123456789/1700",
+            "scraped_at": "2025-12-05T11:15:36.986973"
+          },
+          "bns_section_3": {
+            "section_number": "3",
+            "content": "Section 3A.Salaries and allowances or Judges to be expenditure charged on Consolidated Fund of India.",
+            "url": "https://www.indiacode.nic.in/handle/123456789/1700",
+            "scraped_at": "2025-12-05T11:15:36.986999"
+          },
+          "bns_section_4": {
+            "section_number": "4",
+            "content": "Section 4.Exceptions and modifications subject to which the provisions of Chapter V of Part VI of the  Constitution apply to the High Court of Delhi.",
+            "url": "https://www.indiacode.nic.in/handle/123456789/1700",
+            "scraped_at": "2025-12-05T11:15:36.987007"
+          },
+          "bns_section_7": {
+            "section_number": "7",
+            "content": "Section 7.Practice and procedure in the High Court of Delhi.Show Related Subordinates",
+            "url": "https://www.indiacode.nic.in/handle/123456789/1700",
+            "scraped_at": "2025-12-05T11:15:36.987023"
+          },
+          "bns_section_8": {
+            "section_number": "8",
+            "content": "Section 8.Custody of the Seal of the High Court of Delhi.",
+            "url": "https://www.indiacode.nic.in/handle/123456789/1700",
+            "scraped_at": "2025-12-05T11:15:36.987029"
+          },
+          "bns_section_11": {
+            "section_number": "11",
+            "content": "Section 11.Procedure as to appeals to Supreme Court.",
+            "url": "https://www.indiacode.nic.in/handle/123456789/1700",
+            "scraped_at": "2025-12-05T11:15:36.987044"
+          },
+          "bns_section_12": {
+            "section_number": "12",
+            "content": "Section 12.Transfer of proceedings from the High Court of Punjab to the High Court of Delhi.",
+            "url": "https://www.indiacode.nic.in/handle/123456789/1700",
+            "scraped_at": "2025-12-05T11:15:36.987050"
+          },
+          "bns_section_13": {
+            "section_number": "13",
+            "content": "Section 13.Right to appear or to act in proceedings transferred to the High Court of Delhi.",
+            "url": "https://www.indiacode.nic.in/handle/123456789/1700",
+            "scraped_at": "2025-12-05T11:15:36.987056"
+          },
+          "bns_section_16": {
+            "section_number": "16",
+            "content": "Section 16.Pending proceedings before subordinate courts in Delhi.",
+            "url": "https://www.indiacode.nic.in/handle/123456789/1700",
+            "scraped_at": "2025-12-05T11:15:36.987071"
+          },
+          "bns_section_17": {
+            "section_number": "17",
+            "content": "Section 17.Extension of the jurisdiction of the High Court of Delhi.",
+            "url": "https://www.indiacode.nic.in/handle/123456789/1700",
+            "scraped_at": "2025-12-05T11:15:36.987077"
+          }
+        }
+      }
+    }
+  ]
+}

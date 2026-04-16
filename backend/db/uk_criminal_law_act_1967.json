@@ -1,0 +1,24 @@
+{
+  "code": "Criminal Law Act 1967",
+  "jurisdiction": "England & Wales",
+  "structure": {
+    "PART_I": {
+      "title": "General Criminal Law Provisions",
+      "Section_1": "Abolition of distinction between felony and misdemeanour",
+      "Section_2": "Arrest without warrant provisions",
+      "Section_3": "Use of force in making arrests",
+      "Section_4": "Penalties for assisting offenders",
+      "Sections_5-12": "Consequential provisions and amendments"
+    },
+    "PART_II": {
+      "title": "Abolition of Obsolete Crimes",
+      "Sections_13-14": "Repeal of common law offences and obsolete crimes",
+      "Schedule_1": "List of abolished offences"
+    },
+    "PART_III": {
+      "title": "Supplementary Provisions",
+      "Sections_15-18": "General transitional and interpretive provisions",
+      "Schedules": "Technical amendments"
+    }
+  }
+}

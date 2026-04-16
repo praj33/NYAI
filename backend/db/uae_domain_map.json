@@ -1,0 +1,63 @@
+{
+  "jurisdiction": "UAE",
+  "version": "1.0",
+  "domain_mapping": {
+    "civil": {
+      "subdomains": [
+        "commercial_disputes",
+        "family_matters",
+        "property_disputes",
+        "employment_issues",
+        "contract_disputes",
+        "personal_status",
+        "medical_malpractice",
+        "environmental_disputes",
+        "tax_disputes",
+        "succession_inheritance",
+        "landlord_tenant_disputes"
+      ],
+      "confidence_threshold": 0.8
+    },
+    "criminal": {
+      "subdomains": [
+        "property_crimes",
+        "cyber_crimes",
+        "drug_offences",
+        "public_order_offences",
+        "defamation",
+        "general_crimes"
+      ],
+      "confidence_threshold": 0.8
+    }
+  },
+  "keyword_mapping": {
+    "commercial_disputes": ["commercial transaction", "company formation", "business dispute", "merchant"],
+    "family_matters": ["marriage", "divorce", "custody", "maintenance", "personal status"],
+    "property_disputes": ["real estate", "property", "land", "title deed", "dubai land department"],
+    "employment_issues": ["labour law", "employment contract", "wages", "termination", "work permit"],
+    "contract_disputes": ["contract", "breach", "obligation", "civil code", "agreement"],
+    "personal_status": ["sharia", "islamic law", "non-muslim", "family law", "inheritance"],
+    "medical_malpractice": ["medical negligence", "doctor malpractice", "hospital liability", "medical error"],
+    "environmental_disputes": ["environmental pollution", "waste disposal", "environmental damage", "pollution"],
+    "tax_disputes": ["tax liability", "corporate tax", "tax assessment", "tax dispute"],
+    "succession_inheritance": ["estate", "will", "inheritance", "succession", "probate"],
+    "landlord_tenant_disputes": ["rental dispute", "tenant rights", "eviction", "rent increase", "property maintenance"],
+    "property_crimes": ["theft", "burglary", "robbery", "criminal damage"],
+    "cyber_crimes": ["cybercrime", "hacking", "unauthorized access", "data breach"],
+    "drug_offences": ["narcotics", "drugs", "possession", "trafficking"],
+    "public_order_offences": ["public indecency", "morality", "public order", "offense"],
+    "defamation": ["defamation", "libel", "slander", "reputation damage"],
+    "general_crimes": ["assault", "fraud", "forgery", "general penal code"]
+  },
+  "fallback_rules": {
+    "default_domain": "civil",
+    "uncertainty_threshold": 0.5,
+    "escalation_path": ["civil", "criminal"]
+  },
+  "emirate_specific": {
+    "dubai": ["real estate", "free zone", "DIFC"],
+    "abu_dhabi": ["capital", "federal laws", "ADGM"],
+    "sharjah": ["heritage", "cultural laws"],
+    "default": "federal"
+  }
+}

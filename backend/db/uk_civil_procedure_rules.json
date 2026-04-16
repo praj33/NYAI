@@ -1,0 +1,85 @@
+{
+  "code": "Civil Procedure Rules 2025",
+  "jurisdiction": "England & Wales",
+  "scope": "Comprehensive Regulation of Civil Litigation",
+  "structure": {
+    "PART_2": "Understanding and applying the rules; Powers and duties of court officers",
+    "PART_3": "Case management procedures",
+    "PART_5": "Forms and court records",
+    "PART_7": "Starting a prosecution in magistrates' court",
+    "PART_9": "Allocation and sending for trial",
+    "PART_10": "The indictment",
+    "PART_14": "Bail and custody time limits",
+    "PART_15": "Disclosure procedures",
+    "PART_16": "Written witness statements",
+    "PART_17": "Witness summonses, warrants and orders",
+    "PART_18": "Measures to help witness/defendant",
+    "PART_19": "Expert evidence",
+    "PART_20": "Hearsay evidence",
+    "PART_21": "Evidence of bad character",
+    "PART_23": "Restriction on cross-examination",
+    "PART_24": "Trial and sentence in magistrates' court",
+    "PART_26": "Jurors",
+    "PART_27": "Retrial after acquittal",
+    "PART_28": "Sentencing procedures",
+    "PART_31": "Miscellaneous matters",
+    "PART_33": "Behaviour orders",
+    "PART_34": "Appeal to Crown Court",
+    "PART_35": "Appeal to High Court",
+    "PART_39": "Appeal to Court of Appeal",
+    "PART_45": "Costs procedures",
+    "PART_47": "Investigation orders and warrants",
+    "PART_65": "Anti-Social Behaviour and Harassment proceedings"
+  },
+  "civil_law_areas": {
+    "property_law": [
+      "Land, landlord and tenant relations",
+      "Occupier's liability",
+      "Sales, auctions, and repossessions",
+      "Intellectual property"
+    ],
+    "contract_and_bailment": [
+      "Bailment (Common Law): Transfer of possession of goods with obligation to return",
+      "Requirements: Transfer of possession, obligation to care, return obligation",
+      "Standard of Care: Proportionate to value and nature of goods",
+      "Remedies: Repossession rights, tort of conversion, liability for negligence, damages for breach"
+    ],
+    "family_law": [
+      "Divorce and family matters",
+      "Local authority child protection matters"
+    ],
+    "bankruptcy_and_insolvency": [
+      "Individual bankruptcy procedures",
+      "Corporate insolvency",
+      "Creditor remedies"
+    ],
+    "probate_and_intestacy": [
+      "Wills and testamentary disposition",
+      "Succession without will",
+      "Estate administration"
+    ],
+    "tort_law": [
+      "Negligence",
+      "Liability for defective premises",
+      "Strict liability",
+      "Breach of statutory duty"
+    ],
+    "trust_law": [
+      "Express, implied, and resulting trusts",
+      "Trust administration",
+      "Breach of trust remedies"
+    ],
+    "taxation_and_social_security": [
+      "Income tax",
+      "Capital gains tax",
+      "Tax credits and benefits",
+      "Social security entitlements"
+    ],
+    "commercial_law": [
+      "Sales of goods",
+      "Supply of services",
+      "Secured transactions",
+      "Marine law and law of the sea"
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "learning_records": {
+    "IN:criminal:ipc_302": {
+      "country": "IN",
+      "domain": "criminal",
+      "procedure_id": "ipc_302",
+      "aggregate_confidence_delta": 0.0015,
+      "success_count": 1,
+      "failure_count": 0,
+      "stability_factor": 1.0,
+      "last_updated": "2026-01-31T12:55:07.531642",
+      "history": [
+        {
+          "case_id": "test_case_001",
+          "confidence_before": 0.75,
+          "user_feedback": "positive",
+          "outcome_tag": "resolved",
+          "timestamp": "2026-01-31T18:25:07.531642",
+          "confidence_delta": 0.03
+        }
+      ]
+    },
+    "IN:criminal:section_379": {
+      "country": "IN",
+      "domain": "criminal",
+      "procedure_id": "section_379",
+      "aggregate_confidence_delta": 0.00111,
+      "success_count": 1,
+      "failure_count": 0,
+      "stability_factor": 1.0,
+      "last_updated": "2026-01-31T12:55:09.181303",
+      "history": [
+        {
+          "case_id": "data_flow_test",
+          "confidence_before": 0.75,
+          "user_feedback": "positive",
+          "outcome_tag": "resolved",
+          "timestamp": "2026-01-31T18:25:09.181303",
+          "confidence_delta": 0.0222
+        }
+      ]
+    }
+  },
+  "aggregates": {}
+}

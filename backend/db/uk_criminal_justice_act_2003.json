@@ -1,0 +1,30 @@
+{
+  "code": "Criminal Justice Act 2003",
+  "jurisdiction": "England & Wales",
+  "structure": {
+    "PART_1": {
+      "title": "Dangerous Offenders",
+      "Sections_1-2": "Life imprisonment for certain dangerous offences",
+      "Section_1": "Maximum sentence for certain offences",
+      "Section_2": "Specified offences under Schedule 15"
+    },
+    "PART_2": {
+      "title": "Sentencing",
+      "Sections_142-176": "Framework for sentencing procedures",
+      "Section_166": "Sentencing guidelines"
+    },
+    "PART_3": {
+      "title": "Disclosure",
+      "Sections_201-217": "Criminal disclosure procedures"
+    },
+    "PART_4": {
+      "title": "Trials and Procedure",
+      "Sections_290-296": "Various procedural reforms"
+    },
+    "PART_15": {
+      "title": "Bail and Custody",
+      "Schedule_15": "Offences with enhanced sentencing provisions",
+      "Schedule_15B": "Violent and sexual offences"
+    }
+  }
+}

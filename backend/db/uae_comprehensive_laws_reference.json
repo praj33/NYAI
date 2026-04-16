@@ -1,0 +1,133 @@
+{
+  "code": "Comprehensive Guide to UAE Laws (2025 Edition)",
+  "categories": {
+    "criminal_law": {
+      "murder_homicide": {
+        "premeditated_murder": "Article 384 - Life/Death Penalty (Diya possible if pardoned)",
+        "intentional_unplanned": "Article 385 - Life Imprisonment (7+ years if pardoned)",
+        "manslaughter_negligence": "Articles 387-390 - Up to 10 years + Fine"
+      },
+      "kidnapping_abduction": {
+        "simple_kidnapping": "Article 347 - Up to 5 years",
+        "aggravated_violence": "Articles 348-349 - 7-15 years",
+        "child_kidnapping": "Article 348 - Minimum 7 years"
+      },
+      "assault_battery": {
+        "simple_injury": "3 months/fine",
+        "serious_injury": "1 year/fine",
+        "grievous_injury": "2 years/fine",
+        "torture": "Up to 15 years"
+      },
+      "sexual_offences": {
+        "rape": "5-15 years (Death if minor)",
+        "sexual_harassment": "6 months-1 year + AED 20,000 fine"
+      }
+    },
+    "civil_contract_law": {
+      "contract_formation": {
+        "essential_elements": "Mutual Consent (Ijab & Qabul), Legal Capacity (18+ years), Lawful Object, Legal Cause/Consideration",
+        "key_provisions": {
+          "Article_296": "Cannot limit tort liability (VOID)",
+          "Article_390": "Liquidated damages modifiable by court",
+          "Article_1231": "Breach = damages liability"
+        }
+      },
+      "remedies_for_breach": [
+        "Specific Performance",
+        "Damages (direct + consequential)",
+        "Rescission",
+        "Restitution"
+      ]
+    },
+    "labour_employment_law": {
+      "contract_types": {
+        "full_time": "Fixed/Indefinite - 48 hrs/week max",
+        "part_time": "Variable hours",
+        "temporary": "Project-based",
+        "flexible": "Modern work arrangements"
+      },
+      "key_rights": {
+        "annual_leave": "30 days",
+        "maternity_leave": "45 days paid",
+        "minimum_wage": "AED 5,000",
+        "end_of_service": "21-30 days/year salary"
+      },
+      "termination_notice": "30-90 days"
+    },
+    "personal_status_law": {
+      "marriage": {
+        "requirements": "Age 18+, Consent, Mahr (Muslim), Registration",
+        "divorce_types": {
+          "talaq": "Husband - 3 pronouncements",
+          "khula": "Wife - Return mahr",
+          "judicial": "Either party - Court grounds"
+        }
+      },
+      "child_custody": "Equal rights (Civil Law)"
+    },
+    "commercial_law": {
+      "company_types": {
+        "llc": "Limited liability - Min 1 member",
+        "partnership": "Unlimited liability - Min 2 members",
+        "joint_stock": "Limited liability - Min 5 members"
+      },
+      "registration": "DED + MOA/AOA"
+    },
+    "cybercrime_law": {
+      "penalties_table": {
+        "hacking": "AED 150,000-750,000 + 6+ months",
+        "cyber_fraud": "AED 250,000-1,000,000 + 1+ year",
+        "data_theft": "AED 250,000-1,500,000 + 5+ years",
+        "fake_website": "AED 50,000-200,000 + imprisonment"
+      }
+    },
+    "tax_law": {
+      "vat": "5% (Threshold: AED 375,000)",
+      "corporate_tax": "9% (Profit threshold: AED 375,000)",
+      "excise": "50-100% (Tobacco, energy drinks)"
+    },
+    "immigration_law": {
+      "visa_types": {
+        "golden": "10 years - Investment based",
+        "work": "2-3 years - Employer sponsored",
+        "family": "2-3 years - Resident sponsored",
+        "student": "Study duration - University sponsored"
+      },
+      "overstay_fine": "AED 50-100/day"
+    },
+    "quick_reference_punishments": {
+      "murder": "Life/Death",
+      "kidnapping_child": "7 years minimum",
+      "rape_minor": "Life/Death",
+      "drug_trafficking": "10 years to Death",
+      "cyber_fraud": "1-5 years + AED 250,000-1,500,000",
+      "money_laundering": "5-15 years + AED 500,000-5,000,000"
+    }
+  },
+  "court_structure": {
+    "civil_courts": [
+      "Court of First Instance (Civil Division)",
+      "Court of Appeal",
+      "Court of Cassation"
+    ],
+    "criminal_courts": [
+      "Court of First Instance (Criminal Division)",
+      "Court of Appeal",
+      "Court of Cassation"
+    ],
+    "sharia_courts": [
+      "Personal status matters",
+      "Islamic law principles"
+    ]
+  },
+  "legal_system_overview": {
+    "framework": "Civil law + Sharia law + Common law principles",
+    "jurisdiction": "Federal/Local court systems",
+    "key_characteristics": [
+      "Dual court systems",
+      "Federal and local emirate courts",
+      "Sharia courts for personal status",
+      "Recent integration of common law"
+    ]
+  }
+}

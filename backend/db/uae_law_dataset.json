@@ -1,0 +1,1255 @@
+{
+  "jurisdiction": "UAE",
+  "version": "2.0",
+  "last_updated": "2024-12-02",
+  "civil_law": {
+    "civil_code_law_no_5_1985": {
+      "article_1": {
+        "offence": "Application of Civil Code",
+        "elements_required": [
+          "This Law shall apply to all civil matters not governed by special laws",
+          "Matters shall be governed by the provisions of this Law in the absence of any special provision"
+        ],
+        "civil_remedies": [
+          "Court shall apply provisions of Islamic Sharia where appropriate",
+          "Customary practices may be considered where not contrary to public policy"
+        ],
+        "process_steps": [
+          "File claim in competent civil court",
+          "Court hearing and evidence presentation",
+          "Judgment execution through execution department"
+        ]
+      },
+      "article_2": {
+        "offence": "Interpretation of Law",
+        "elements_required": [
+          "The Court shall interpret the Law according to the principles of Islamic Sharia",
+          "Customary practices shall be considered where they do not contradict public policy"
+        ],
+        "civil_remedies": [
+          "Judicial interpretation of ambiguous provisions",
+          "Reference to Islamic Sharia principles"
+        ],
+        "process_steps": [
+          "Court interpretation during proceedings",
+          "Appeal to higher courts for clarification"
+        ]
+      },
+      "contract_formation_articles_129_135": {
+        "offence": "Essential Elements of Contract",
+        "elements_required": [
+          "Offer and acceptance",
+          "Legal capacity of contracting parties",
+          "Lawful object and consideration",
+          "Definite subject matter"
+        ],
+        "civil_remedies": [
+          "Contract rescission for invalidity",
+          "Damages for breach",
+          "Specific performance",
+          "Compensation for loss"
+        ],
+        "process_steps": [
+          "Mediation attempt (mandatory in some emirates)",
+          "Civil court proceedings",
+          "Appeal to Court of Appeal",
+          "Cassation Court for final appeal"
+        ]
+      }
+    },
+    "commercial_companies_law_no_32_2021": {
+      "article_1": {
+        "offence": "Scope and Application",
+        "elements_required": [
+          "This Law shall apply to all commercial companies established in the UAE",
+          "Includes LLCs, joint stock companies, and other forms of commercial entities"
+        ],
+        "civil_remedies": [
+          "Dissolution of company",
+          "Shareholder derivative actions",
+          "Director liability for breach of duties"
+        ],
+        "process_steps": [
+          "Registration with Department of Economic Development",
+          "Commercial license issuance",
+          "Annual license renewal and audit requirements"
+        ]
+      },
+      "llc_formation_articles_10_25": {
+        "offence": "Limited Liability Company Formation",
+        "elements_required": [
+          "Minimum two shareholders",
+          "Minimum capital as prescribed by law",
+          "Memorandum of Association",
+          "Articles of Association",
+          "Manager or Board of Managers"
+        ],
+        "civil_remedies": [
+          "Shareholder oppression remedies",
+          "Dissolution for deadlock",
+          "Buyout of minority shareholders"
+        ],
+        "process_steps": [
+          "Notarization of founding documents",
+          "Registration with relevant authority",
+          "Commercial license application",
+          "Publication in official gazette"
+        ]
+      },
+      "foreign_ownership_articles_26_31": {
+        "offence": "Foreign Ownership Restrictions",
+        "elements_required": [
+          "Foreign ownership limited to specific sectors",
+          "Local sponsor requirement (51% ownership)",
+          "Special approvals for certain activities"
+        ],
+        "civil_remedies": [
+          "Forced divestment of excess ownership",
+          "Contract termination",
+          "Penalties for non-compliance"
+        ],
+        "process_steps": [
+          "Application for foreign ownership license",
+          "Approval from relevant authorities",
+          "Registration of ownership changes"
+        ]
+      }
+    },
+    "labour_law_no_33_2021": {
+      "article_1": {
+        "offence": "Scope of Application",
+        "elements_required": [
+          "Applies to all employment relationships in UAE",
+          "Includes federal and local government employees",
+          "Excludes certain categories as specified"
+        ],
+        "civil_remedies": [
+          "Unpaid wages recovery",
+          "End of service gratuity",
+          "Compensation for unfair dismissal"
+        ],
+        "process_steps": [
+          "Labour dispute settlement through Ministry",
+          "Labour court proceedings",
+          "Appeal to higher labour courts"
+        ]
+      },
+      "employment_contract_articles_7_12": {
+        "offence": "Employment Contract Requirements",
+        "elements_required": [
+          "Written contract mandatory for all employees",
+          "Clear terms on wages, working hours, leave",
+          "Job description and responsibilities",
+          "Probation period not exceeding 6 months"
+        ],
+        "civil_remedies": [
+          "Contract termination compensation",
+          "Gratuity payment",
+          "Notice period compensation"
+        ],
+        "process_steps": [
+          "Written notice of termination",
+          "Ministry of Human Resources mediation",
+          "Labour court claim if dispute arises"
+        ]
+      },
+      "working_hours_articles_21_25": {
+        "offence": "Working Hours and Leave",
+        "elements_required": [
+          "Maximum 8 hours per day, 48 hours per week",
+          "Rest breaks and weekly rest day",
+          "Annual leave entitlement (30 days)",
+          "Sick leave and maternity leave provisions"
+        ],
+        "civil_remedies": [
+          "Overtime pay for excess hours",
+          "Compensation for denied leave",
+          "Additional pay for work on rest days"
+        ],
+        "process_steps": [
+          "Report violation to Ministry",
+          "Labour inspection",
+          "Court proceedings for enforcement"
+        ]
+      }
+    },
+    "personal_status_law_federal_law_no_28_2005": {
+      "marriage_articles_16_25": {
+        "offence": "Marriage Requirements",
+        "elements_required": [
+          "Islamic marriage contract (Aqd al-Nikah)",
+          "Consent of both parties",
+          "Guardian consent for woman",
+          "Dowry (Mahr) specification",
+          "Two Muslim male witnesses"
+        ],
+        "civil_remedies": [
+          "Divorce (Talaq) by husband",
+          "Judicial divorce (Khula) by wife",
+          "Maintenance and child support",
+          "Property rights division"
+        ],
+        "process_steps": [
+          "Marriage registration at Sharia court",
+          "Personal Status Court proceedings",
+          "Appeal to Court of Appeal",
+          "Cassation Court for final appeal"
+        ]
+      },
+      "divorce_articles_81_110": {
+        "offence": "Divorce Procedures",
+        "elements_required": [
+          "Husband's right to unilateral divorce (Talaq)",
+          "Wife's right to judicial divorce (Khula)",
+          "Court approval for certain divorces",
+          "Reconciliation attempts mandatory"
+        ],
+        "civil_remedies": [
+          "Iddah period observance",
+          "Maintenance during Iddah",
+          "Child custody determination",
+          "Property and dowry settlement"
+        ],
+        "process_steps": [
+          "Reconciliation committee involvement",
+          "Court proceedings for contested divorces",
+          "Appeal procedures",
+          "Execution of court orders"
+        ]
+      }
+    },
+    "non_muslim_personal_status_law_federal_law_no_41_2022": {
+      "article_1": {
+        "offence": "Application to Non-Muslims",
+        "elements_required": [
+          "Applies to Christians, Hindus, Sikhs, Buddhists, and others",
+          "Recognition of religious marriages and divorces",
+          "Child custody and guardianship matters"
+        ],
+        "civil_remedies": [
+          "Divorce proceedings according to religious law",
+          "Property division",
+          "Child support and custody orders"
+        ],
+        "process_steps": [
+          "Civil court jurisdiction",
+          "Mediation mandatory before litigation",
+          "Court judgment based on religious principles"
+        ]
+      },
+      "marriage_and_divorce_articles_5_15": {
+        "offence": "Marriage and Divorce for Non-Muslims",
+        "elements_required": [
+          "Recognition of marriages performed according to religious rites",
+          "Divorce according to religious procedures",
+          "Court registration requirement"
+        ],
+        "civil_remedies": [
+          "Maintenance and support orders",
+          "Property settlement",
+          "Child custody and access rights"
+        ],
+        "process_steps": [
+          "Registration with Civil Status Department",
+          "Court proceedings for disputes",
+          "Appeal to higher courts"
+        ]
+      }
+    }
+  },
+  "criminal_law": {
+    "federal_penal_code_law_no_3_1987": {
+      "article_1": {
+        "offence": "No Crime or Punishment Without Law",
+        "elements_required": [
+          "No act shall be considered a crime unless provided by law",
+          "No punishment shall be imposed except by virtue of a law",
+          "No heavier punishment than prescribed by law"
+        ],
+        "punishment": "As prescribed by specific articles",
+        "process_steps": [
+          "Police investigation",
+          "Public prosecution review",
+          "Criminal court trial",
+          "Appeal to Court of Appeal",
+          "Cassation Court final appeal"
+        ]
+      },
+      "theft_article_391": {
+        "offence": "Theft",
+        "elements_required": [
+          "Taking movable property",
+          "Belonging to another person",
+          "Without the owner's permission",
+          "With intent to appropriate permanently"
+        ],
+        "punishment": "Imprisonment from 1 month to 3 years and/or fine from AED 1,000 to 50,000",
+        "process_steps": [
+          "Police report (FIR equivalent)",
+          "Investigation and evidence collection",
+          "Public prosecution charging",
+          "Criminal court trial"
+        ]
+      },
+      "robbery_article_392": {
+        "offence": "Robbery",
+        "elements_required": [
+          "Theft accompanied by force or threat of force",
+          "Against person or property",
+          "With intent to steal"
+        ],
+        "punishment": "Imprisonment from 5 to 15 years",
+        "process_steps": [
+          "Emergency police response",
+          "Forensic evidence collection",
+          "Fast-track prosecution",
+          "Criminal court trial"
+        ]
+      },
+      "assault_article_333": {
+        "offence": "Assault Causing Bodily Harm",
+        "elements_required": [
+          "Intentional assault",
+          "Causing bodily harm",
+          "Without aggravating circumstances"
+        ],
+        "punishment": "Imprisonment up to 1 year and/or fine up to AED 10,000",
+        "process_steps": [
+          "Medical examination",
+          "Police investigation",
+          "Prosecution and trial"
+        ]
+      },
+      "defamation_article_372": {
+        "offence": "Criminal Defamation",
+        "elements_required": [
+          "Publication or broadcast of false information",
+          "Damaging reputation of another",
+          "Intent or recklessness"
+        ],
+        "punishment": "Imprisonment up to 2 years and/or fine up to AED 100,000",
+        "process_steps": [
+          "Private criminal complaint",
+          "Investigation",
+          "Court proceedings",
+          "Civil remedies also available"
+        ]
+      }
+    },
+    "cybercrime_law_federal_law_no_5_2012": {
+      "article_1": {
+        "offence": "Scope and Definitions",
+        "elements_required": [
+          "Crimes committed using information technology",
+          "Includes computers, networks, and electronic devices",
+          "Both local and cross-border offenses"
+        ],
+        "punishment": "As specified in individual articles",
+        "process_steps": [
+          "Digital evidence preservation",
+          "Specialized cybercrime unit investigation",
+          "Federal court jurisdiction",
+          "International cooperation for cross-border crimes"
+        ]
+      },
+      "unauthorized_access_article_3": {
+        "offence": "Unauthorized Access to Information Systems",
+        "elements_required": [
+          "Intentional access to information system",
+          "Without authorization",
+          "With intent to obtain information or cause damage"
+        ],
+        "punishment": "Imprisonment up to 1 year and/or fine up to AED 500,000",
+        "process_steps": [
+          "Digital forensics investigation",
+          "ISP cooperation for data access",
+          "Specialized prosecution",
+          "Federal criminal court trial"
+        ]
+      },
+      "data_interference_article_4": {
+        "offence": "Data Interference",
+        "elements_required": [
+          "Intentional alteration, deletion, or destruction of data",
+          "Without authorization",
+          "Causing damage to system or data"
+        ],
+        "punishment": "Imprisonment from 6 months to 5 years and/or fine from AED 50,000 to 1,000,000",
+        "process_steps": [
+          "System forensics analysis",
+          "Data recovery attempts",
+          "Criminal prosecution",
+          "Civil damages claims"
+        ]
+      },
+      "cyber_fraud_article_6": {
+        "offence": "Electronic Fraud",
+        "elements_required": [
+          "Use of information technology to commit fraud",
+          "False representation or deception",
+          "Financial gain or loss to others"
+        ],
+        "punishment": "Imprisonment up to 5 years and/or fine up to AED 5,000,000",
+        "process_steps": [
+          "Financial investigation",
+          "Banking records analysis",
+          "Joint investigation with financial authorities",
+          "Specialized court proceedings"
+        ]
+      }
+    },
+    "anti_narcotics_law_federal_law_no_14_1995": {
+      "article_1": {
+        "offence": "Definitions and Scope",
+        "elements_required": [
+          "Control of narcotic drugs and psychotropic substances",
+          "Prevention of trafficking and abuse",
+          "International cooperation provisions"
+        ],
+        "punishment": "As specified for each offense category",
+        "process_steps": [
+          "Drug enforcement administration coordination",
+          "Forensic laboratory testing",
+          "Specialized narcotics courts",
+          "International extradition procedures"
+        ]
+      },
+      "possession_article_39": {
+        "offence": "Possession of Narcotics",
+        "elements_required": [
+          "Knowing possession of narcotic substance",
+          "Without legal authorization",
+          "For personal use or distribution"
+        ],
+        "punishment": "Imprisonment from 6 months to 5 years and/or fine from AED 10,000 to 100,000",
+        "process_steps": [
+          "Police seizure and arrest",
+          "Medical examination",
+          "Forensic testing of substance",
+          "Court proceedings"
+        ]
+      },
+      "trafficking_article_40": {
+        "offence": "Drug Trafficking",
+        "elements_required": [
+          "Importation, exportation, or transportation of narcotics",
+          "Manufacturing or production",
+          "Large quantities indicating trafficking intent"
+        ],
+        "punishment": "Life imprisonment or death penalty for large quantities",
+        "process_steps": [
+          "Undercover operations",
+          "International cooperation",
+          "Specialized prosecution unit",
+          "Supreme court jurisdiction for death penalty cases"
+        ]
+      }
+    },
+    "traffic_law_federal_law_no_21_1995": {
+      "article_1": {
+        "offence": "Traffic Violations",
+        "elements_required": [
+          "Violation of traffic rules and regulations",
+          "Endangering public safety",
+          "Reckless driving behavior"
+        ],
+        "punishment": "Fines, license suspension, imprisonment",
+        "process_steps": [
+          "Traffic police enforcement",
+          "Traffic violation ticketing",
+          "Court proceedings for serious offenses",
+          "License suspension procedures"
+        ]
+      },
+      "drunk_driving_article_62": {
+        "offence": "Driving Under Influence",
+        "elements_required": [
+          "Driving vehicle while intoxicated",
+          "Blood alcohol level above legal limit",
+          "Impaired driving ability"
+        ],
+        "punishment": "Fine up to AED 20,000, imprisonment up to 1 year, license suspension up to 2 years",
+        "process_steps": [
+          "Breathalyzer or blood test",
+          "Vehicle impoundment",
+          "Court appearance",
+          "Driver rehabilitation program"
+        ]
+      }
+    },
+    "human_rights_law": {
+      "federal_law_no_2_2016": {
+        "article_1": {
+          "offence": "Human Rights Protection",
+          "elements_required": [
+            "Protection of fundamental human rights",
+            "Equality before law",
+            "Freedom from discrimination"
+          ],
+          "civil_remedies": [
+            "Right to fair trial",
+            "Freedom of expression",
+            "Right to privacy",
+            "Freedom of assembly"
+          ],
+          "process_steps": [
+            "Complaint to Human Rights Commission",
+            "Investigation",
+            "Mediation",
+            "Court proceedings"
+          ]
+        },
+        "article_32": {
+          "offence": "Right to Work",
+          "elements_required": [
+            "Right to employment without discrimination",
+            "Equal pay for equal work",
+            "Safe working conditions"
+          ],
+          "civil_remedies": [
+            "Employment discrimination claims",
+            "Workplace harassment remedies",
+            "Unfair dismissal compensation"
+          ],
+          "process_steps": [
+            "Complaint to Ministry of Human Resources",
+            "Labour court proceedings",
+            "Compensation awards",
+            "Reinstatement orders"
+          ]
+        }
+      }
+    },
+    "annual_leave_law": {
+      "labour_law_no_33_2021": {
+        "article_29": {
+          "offence": "Annual Leave Entitlement",
+          "elements_required": [
+            "Employee with continuous service",
+            "Minimum 30 days annual leave per year",
+            "Pro-rata calculation for incomplete year"
+          ],
+          "civil_remedies": [
+            "Payment for untaken leave",
+            "Carry forward of leave",
+            "Cash compensation for unused leave"
+          ],
+          "process_steps": [
+            "Leave application to employer",
+            "Employer approval",
+            "Leave payment calculation",
+            "Dispute resolution through labour court"
+          ]
+        },
+        "article_30": {
+          "offence": "Sick Leave Provisions",
+          "elements_required": [
+            "Medical certificate required",
+            "Up to 90 days sick leave per year",
+            "Half pay for extended sick leave"
+          ],
+          "civil_remedies": [
+            "Sick pay entitlement",
+            "Job protection during sick leave",
+            "Medical expense reimbursement"
+          ],
+          "process_steps": [
+            "Medical certificate submission",
+            "Employer verification",
+            "Sick pay calculation",
+            "Labour dispute resolution"
+          ]
+        }
+      }
+    },
+    "company_formation_law": {
+      "commercial_companies_law_no_32_2021": {
+        "article_7": {
+          "offence": "LLC Formation Requirements",
+          "elements_required": [
+            "Minimum 2 shareholders",
+            "Minimum capital AED 150,000",
+            "Local service agent requirement",
+            "Commercial license"
+          ],
+          "civil_remedies": [
+            "Company registration",
+            "Legal personality",
+            "Limited liability protection",
+            "Tax registration"
+          ],
+          "process_steps": [
+            "Name reservation",
+            "Memorandum of Association",
+            "Notarization of documents",
+            "Registration with Department of Economic Development"
+          ]
+        },
+        "article_8": {
+          "offence": "Branch Office Establishment",
+          "elements_required": [
+            "Parent company incorporation certificate",
+            "Board resolution for branch",
+            "Local service agent",
+            "Activity license"
+          ],
+          "civil_remedies": [
+            "Branch registration",
+            "Separate legal entity",
+            "Liability limitation",
+            "Tax compliance"
+          ],
+          "process_steps": [
+            "Application submission",
+            "Document verification",
+            "License approval",
+            "Commercial registration"
+          ]
+        }
+      }
+    },
+    "free_zone_law": {
+      "federal_law_no_32_2021": {
+        "article_1": {
+          "offence": "Free Zone Establishment",
+          "elements_required": [
+            "Federal approval for free zone",
+            "Infrastructure development",
+            "Regulatory framework",
+            "Investment incentives"
+          ],
+          "civil_remedies": [
+            "100% foreign ownership",
+            "Corporate tax exemption",
+            "Customs duty exemption",
+            "Repatriation of profits"
+          ],
+          "process_steps": [
+            "Free zone application",
+            "Master developer selection",
+            "Infrastructure development",
+            "Operational license issuance"
+          ]
+        },
+        "article_15": {
+          "offence": "Free Zone Company Formation",
+          "elements_required": [
+            "Minimum share capital",
+            "Business activity license",
+            "Office space allocation",
+            "Trade license"
+          ],
+          "civil_remedies": [
+            "Company incorporation",
+            "Import/export privileges",
+            "Work permit facilitation",
+            "Bank account opening"
+          ],
+          "process_steps": [
+            "Company name approval",
+            "Shareholder documentation",
+            "Office space booking",
+            "License issuance"
+          ]
+        }
+      }
+    },
+    "real_estate_law": {
+      "federal_law_no_11_2008": {
+        "article_1": {
+          "offence": "Real Estate Transactions",
+          "elements_required": [
+            "Property ownership verification",
+            "Title deed registration",
+            "Notarization requirement",
+            "Dubai Land Department approval"
+          ],
+          "civil_remedies": [
+            "Property transfer",
+            "Mortgage registration",
+            "Lease registration",
+            "Title insurance"
+          ],
+          "process_steps": [
+            "Property valuation",
+            "Legal verification",
+            "Notarization",
+            "Registration with DLD"
+          ]
+        },
+        "article_8": {
+          "offence": "Off-Plan Property Sales",
+          "elements_required": [
+            "Developer registration",
+            "Project approval",
+            "Escrow account requirement",
+            "Completion guarantee"
+          ],
+          "civil_remedies": [
+            "Property delivery",
+            "Compensation for delay",
+            "Refund for cancellation",
+            "Interest on delayed payment"
+          ],
+          "process_steps": [
+            "Purchase agreement",
+            "Payment schedule",
+            "Progress monitoring",
+            "Completion certificate"
+          ]
+        }
+      }
+    },
+    "banking_law": {
+      "federal_law_no_14_2018": {
+        "article_1": {
+          "offence": "Banking License Requirements",
+          "elements_required": [
+            "Central Bank approval",
+            "Minimum capital requirements",
+            "Board of directors",
+            "Compliance framework"
+          ],
+          "civil_remedies": [
+            "Banking license",
+            "Deposit taking authority",
+            "Payment services",
+            "Foreign exchange dealing"
+          ],
+          "process_steps": [
+            "License application",
+            "Fit and proper test",
+            "Capital verification",
+            "Operational approval"
+          ]
+        },
+        "article_45": {
+          "offence": "Customer Protection",
+          "elements_required": [
+            "Fair treatment of customers",
+            "Transparent fee disclosure",
+            "Complaint resolution mechanism",
+            "Financial education"
+          ],
+          "civil_remedies": [
+            "Compensation for losses",
+            "Refund of unfair charges",
+            "Account restoration",
+            "Interest on delayed payments"
+          ],
+          "process_steps": [
+            "Customer complaint",
+            "Bank investigation",
+            "Central Bank mediation",
+            "Court proceedings if unresolved"
+          ]
+        }
+      }
+    },
+    "insurance_law": {
+      "federal_law_no_6_2007": {
+        "article_1": {
+          "offence": "Insurance Business Regulation",
+          "elements_required": [
+            "Insurance Authority approval",
+            "Minimum capital requirements",
+            "Technical reserves",
+            "Actuarial certification"
+          ],
+          "civil_remedies": [
+            "Insurance license",
+            "Policy issuance authority",
+            "Claims settlement",
+            "Reinsurance arrangements"
+          ],
+          "process_steps": [
+            "License application",
+            "Capital verification",
+            "Board approval",
+            "Operational commencement"
+          ]
+        },
+        "article_25": {
+          "offence": "Policyholder Protection",
+          "elements_required": [
+            "Fair contract terms",
+            "Prompt claims settlement",
+            "Clear policy wordings",
+            "Complaint resolution"
+          ],
+          "civil_remedies": [
+            "Claim payment",
+            "Policy cancellation refund",
+            "Compensation for delay",
+            "Alternative dispute resolution"
+          ],
+          "process_steps": [
+            "Claim notification",
+            "Document verification",
+            "Assessment and approval",
+            "Payment processing"
+          ]
+        }
+      }
+    },
+    "intellectual_property_law": {
+      "federal_law_no_36_2009": {
+        "article_1": {
+          "offence": "IP Rights Protection",
+          "elements_required": [
+            "Patent registration",
+            "Trademark registration",
+            "Copyright protection",
+            "Industrial design registration"
+          ],
+          "civil_remedies": [
+            "Injunction against infringement",
+            "Damages for loss",
+            "Account of profits",
+            "Destruction of infringing goods"
+          ],
+          "process_steps": [
+            "IP application filing",
+            "Examination process",
+            "Publication and opposition",
+            "Registration certificate"
+          ]
+        },
+        "article_15": {
+          "offence": "Trademark Protection",
+          "elements_required": [
+            "Distinctive mark",
+            "Used in commerce",
+            "Not confusingly similar",
+            "Not contrary to public policy"
+          ],
+          "civil_remedies": [
+            "Trademark registration",
+            "Opposition proceedings",
+            "Cancellation actions",
+            "Infringement lawsuits"
+          ],
+          "process_steps": [
+            "Trademark search",
+            "Application filing",
+            "Examination and publication",
+            "Registration certificate"
+          ]
+        }
+      }
+    },
+    "competition_law": {
+      "federal_law_no_4_2012": {
+        "article_1": {
+          "offence": "Competition Protection",
+          "elements_required": [
+            "Prevention of anti-competitive agreements",
+            "Abuse of dominant position",
+            "Merger control",
+            "Consumer protection"
+          ],
+          "civil_remedies": [
+            "Fines for violations",
+            "Disgorgement of profits",
+            "Structural remedies",
+            "Behavioral remedies"
+          ],
+          "process_steps": [
+            "Competition Authority investigation",
+            "Dawn raid inspections",
+            "Statement of objections",
+            "Final decision and penalties"
+          ]
+        },
+        "article_5": {
+          "offence": "Anti-Competitive Agreements",
+          "elements_required": [
+            "Agreement between competitors",
+            "Restriction of competition",
+            "Price fixing or market sharing",
+            "Bid rigging"
+          ],
+          "civil_remedies": [
+            "Agreement nullification",
+            "Fines up to 10% of turnover",
+            "Director disqualification",
+            "Damages to affected parties"
+          ],
+          "process_steps": [
+            "Leniency application",
+            "Investigation initiation",
+            "Evidence gathering",
+            "Sanction decision"
+          ]
+        }
+      }
+    },
+    "data_protection_law": {
+      "federal_law_no_45_2021": {
+        "article_1": {
+          "offence": "Personal Data Protection",
+          "elements_required": [
+            "Lawful data processing",
+            "Data subject consent",
+            "Purpose limitation",
+            "Data minimization"
+          ],
+          "civil_remedies": [
+            "Data subject rights",
+            "Compensation for breach",
+            "Data rectification",
+            "Data erasure"
+          ],
+          "process_steps": [
+            "Data Protection Commissioner complaint",
+            "Investigation",
+            "Remedial action",
+            "Penalties for non-compliance"
+          ]
+        },
+        "article_7": {
+          "offence": "Data Breach Notification",
+          "elements_required": [
+            "Personal data breach occurrence",
+            "High risk to data subjects",
+            "Notification within 72 hours",
+            "Documentation of breach"
+          ],
+          "civil_remedies": [
+            "Breach notification",
+            "Data subject communication",
+            "Regulatory reporting",
+            "Remedial measures"
+          ],
+          "process_steps": [
+            "Breach detection",
+            "Risk assessment",
+            "Notification to Commissioner",
+            "Communication to affected individuals"
+          ]
+        }
+      }
+    },
+    "medical_malpractice_law": {
+      "federal_law_no_4_2016": {
+        "article_1": {
+          "offence": "Medical Liability and Malpractice",
+          "elements_required": [
+            "Healthcare professional providing treatment",
+            "Breach of duty of care",
+            "Patient suffers harm or injury",
+            "Causation between breach and harm"
+          ],
+          "civil_remedies": [
+            "Compensation for medical expenses",
+            "Pain and suffering damages",
+            "Loss of income compensation",
+            "Future care costs"
+          ],
+          "process_steps": [
+            "Medical committee investigation",
+            "Expert medical opinion",
+            "Civil court proceedings",
+            "Compensation assessment"
+          ]
+        },
+        "article_15": {
+          "offence": "Medical Negligence Claims",
+          "elements_required": [
+            "Doctor-patient relationship",
+            "Negligent treatment causing harm",
+            "Failure to meet professional standards",
+            "Reasonable foreseeability of harm"
+          ],
+          "civil_remedies": [
+            "Damages for negligence",
+            "Corrective treatment costs",
+            "Compensation for disability",
+            "Legal fees recovery"
+          ],
+          "process_steps": [
+            "Complaint to health authority",
+            "Medical expert assessment",
+            "Court proceedings",
+            "Appeal to higher courts"
+          ]
+        }
+      }
+    },
+    "environmental_law": {
+      "federal_law_no_24_1999": {
+        "article_1": {
+          "offence": "Environmental Protection",
+          "elements_required": [
+            "Activities causing environmental harm",
+            "Pollution of air, water, or soil",
+            "Violation of environmental standards",
+            "Failure to obtain permits"
+          ],
+          "civil_remedies": [
+            "Cleanup and restoration costs",
+            "Environmental damage compensation",
+            "Injunctions against pollution",
+            "Penalty payments"
+          ],
+          "process_steps": [
+            "Environmental agency investigation",
+            "Environmental impact assessment",
+            "Court proceedings",
+            "Enforcement of remediation"
+          ]
+        },
+        "article_45": {
+          "offence": "Waste Management Violations",
+          "elements_required": [
+            "Illegal dumping of waste",
+            "Failure to properly dispose waste",
+            "Hazardous waste handling violations",
+            "Transboundary waste movement"
+          ],
+          "civil_remedies": [
+            "Waste removal costs",
+            "Site remediation expenses",
+            "Compensation to affected parties",
+            "Administrative penalties"
+          ],
+          "process_steps": [
+            "Environmental inspection",
+            "Sampling and testing",
+            "Legal proceedings",
+            "Cleanup enforcement"
+          ]
+        }
+      }
+    },
+    "tax_law": {
+      "federal_law_no_7_2017": {
+        "article_1": {
+          "offence": "Tax Compliance and Disputes",
+          "elements_required": [
+            "Taxpayer subject to UAE tax laws",
+            "Failure to file tax returns",
+            "Underreporting of income",
+            "Disputes over tax assessments"
+          ],
+          "civil_remedies": [
+            "Tax assessment corrections",
+            "Refund of overpaid taxes",
+            "Interest on delayed refunds",
+            "Penalty waivers for reasonable cause"
+          ],
+          "process_steps": [
+            "Tax authority notification",
+            "Administrative review",
+            "Tax committee appeal",
+            "Court proceedings for disputes"
+          ]
+        },
+        "article_25": {
+          "offence": "Corporate Tax Disputes",
+          "elements_required": [
+            "Corporate entity subject to tax",
+            "Disputes over taxable income",
+            "Transfer pricing issues",
+            "Tax treaty interpretations"
+          ],
+          "civil_remedies": [
+            "Tax liability adjustments",
+            "Double taxation relief",
+            "Interest and penalty relief",
+            "Cost recovery"
+          ],
+          "process_steps": [
+            "Advance pricing agreement",
+            "Mutual agreement procedure",
+            "Tax tribunal proceedings",
+            "Federal court appeals"
+          ]
+        }
+      }
+    },
+    "succession_and_inheritance_law": {
+      "federal_law_no_28_2005": {
+        "article_1": {
+          "offence": "Inheritance and Succession",
+          "elements_required": [
+            "Death of UAE national or resident",
+            "Estate distribution according to law",
+            "Sharia principles for Muslims",
+            "Civil law for non-Muslims"
+          ],
+          "civil_remedies": [
+            "Grant of succession certificate",
+            "Estate distribution",
+            "Protection of heirs' rights",
+            "Will execution"
+          ],
+          "process_steps": [
+            "Death registration",
+            "Heir identification",
+            "Estate inventory",
+            "Court-supervised distribution"
+          ]
+        },
+        "article_15": {
+          "offence": "Will and Testament Validity",
+          "elements_required": [
+            "Testator capacity and age",
+            "Formal will requirements",
+            "Witness requirements",
+            "Content validity"
+          ],
+          "civil_remedies": [
+            "Will probate",
+            "Estate administration",
+            "Beneficiary rights protection",
+            "Will contest resolution"
+          ],
+          "process_steps": [
+            "Will registration",
+            "Court validation",
+            "Executor appointment",
+            "Estate distribution"
+          ]
+        }
+      }
+    },
+    "landlord_tenant_law": {
+      "federal_law_no_26_2007": {
+        "article_1": {
+          "offence": "Rental Disputes",
+          "elements_required": [
+            "Valid tenancy agreement",
+            "Rent payment disputes",
+            "Property maintenance issues",
+            "Eviction proceedings"
+          ],
+          "civil_remedies": [
+            "Rent recovery",
+            "Property repairs",
+            "Tenant eviction",
+            "Security deposit return"
+          ],
+          "process_steps": [
+            "Rental Dispute Settlement Committee",
+            "Mediation attempt",
+            "Court proceedings",
+            "Execution of judgments"
+          ]
+        },
+        "article_10": {
+          "offence": "Tenant Rights Protection",
+          "elements_required": [
+            "Residential tenancy",
+            "Unlawful eviction attempts",
+            "Rent increases without justification",
+            "Failure to maintain habitable premises"
+          ],
+          "civil_remedies": [
+            "Rent reduction",
+            "Contract termination",
+            "Compensation for unlawful eviction",
+            "Repair cost recovery"
+          ],
+          "process_steps": [
+            "Complaint to tenancy committee",
+            "Inspection of premises",
+            "Mediation proceedings",
+            "Court enforcement"
+          ]
+        }
+      }
+    }
+  },
+  "scraped_data": [
+    {
+      "scraped_at": "2025-12-05T11:15:36.987273",
+      "source": "UAE Ministry of Justice",
+      "data": {
+        "jurisdiction": "UAE",
+        "scraped_at": "2025-12-05T11:15:36.987273",
+        "source": "UAE Ministry of Justice",
+        "laws": {
+          "uae_law_1": {
+            "title": "Laws & Legislation",
+            "url": "https://www.moj.gov.ae/en/legislation-and-regulations/en/laws-and-legislation.aspx",
+            "category": "general_law",
+            "scraped_at": "2025-12-05T11:15:41.600637"
+          },
+          "uae_law_2": {
+            "title": "Latest Legislations and Laws",
+            "url": "https://www.moj.gov.ae/en/legislation-and-regulations/en/laws-and-legislation/latest-legislations-and-laws.aspx",
+            "category": "general_law",
+            "scraped_at": "2025-12-05T11:15:41.600669"
+          },
+          "uae_law_3": {
+            "title": "Laws & Legislation Portal",
+            "url": "https://elaws.moj.gov.ae/indexEN.html",
+            "category": "general_law",
+            "scraped_at": "2025-12-05T11:15:41.600706"
+          },
+          "uae_law_4": {
+            "title": "International Cooperation Department",
+            "url": "https://www.moj.gov.ae/en/legislation-and-regulations/en/laws-and-legislation/international-cooperation-department.aspx",
+            "category": "general_law",
+            "scraped_at": "2025-12-05T11:15:41.600723"
+          },
+          "uae_law_5": {
+            "title": "Federal Law No. 39 of 2006 on International Judicial Cooperation in Criminal Matters",
+            "url": "https://www.moj.gov.ae/assets/662c1f38/federal-law-no39.aspx",
+            "category": "criminal_law",
+            "scraped_at": "2025-12-05T11:15:41.600740"
+          },
+          "uae_law_6": {
+            "title": "Communication with the International Cooperation Department",
+            "url": "https://www.moj.gov.ae/en/legislation-and-regulations/en/laws-and-legislation/contact-international-cooperation-department/queries.aspx",
+            "category": "general_law",
+            "scraped_at": "2025-12-05T11:15:41.600766"
+          },
+          "uae_law_7": {
+            "title": "Bilateral judicial agreements on international judicial cooperation",
+            "url": "https://www.moj.gov.ae/en/legislation-and-regulations/en/laws-and-legislation/international-cooperation-department/agreements.aspx",
+            "category": "general_law",
+            "scraped_at": "2025-12-05T11:15:41.600784"
+          },
+          "uae_law_8": {
+            "title": "Anti Money Laundering & Combatting Terrorism Financing",
+            "url": "https://www.moj.gov.ae/en/legislation-and-regulations/en/laws-and-legislation/anti-money-laundering-and-combatting-terrorism-financing.aspx",
+            "category": "general_law",
+            "scraped_at": "2025-12-05T11:15:41.600799"
+          },
+          "uae_law_9": {
+            "title": "Virtual Legal Consultant",
+            "url": "https://ai-legislation.moj.gov.ae",
+            "category": "general_law",
+            "scraped_at": "2025-12-05T11:15:41.600813"
+          },
+          "uae_law_10": {
+            "title": "e-Lawyer System",
+            "url": "https://www.moj.gov.ae/en/legislation-and-regulations/en/services/esystems/e-lawyer.aspx",
+            "category": "general_law",
+            "scraped_at": "2025-12-05T11:15:41.600827"
+          },
+          "uae_law_11": {
+            "title": "Virtual Legal Consultant",
+            "url": "https://ai-legislation.moj.gov.ae/",
+            "category": "general_law",
+            "scraped_at": "2025-12-05T11:15:41.600841"
+          },
+          "uae_law_12": {
+            "title": "Legislation Portal",
+            "url": "https://elaws.moj.gov.ae/HomePages/indexAR.aspx",
+            "category": "general_law",
+            "scraped_at": "2025-12-05T11:15:41.600857"
+          },
+          "uae_law_13": {
+            "title": "Laws & Legislation",
+            "url": "https://www.moj.gov.ae/en/legislation-and-regulations/en/laws-and-legislation.aspx",
+            "category": "general_law",
+            "scraped_at": "2025-12-05T11:15:41.600881"
+          }
+        }
+      }
+    }
+  ]
+}
