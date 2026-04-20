@@ -47,6 +47,10 @@ from services.query_expander import expand_query
 from services.retriever import get_hybrid_retriever
 from services.reranker import rerank_sections
 from services.legal_reasoner import apply_reasoning_rules
+
+# ─── TANTRA Compliance ───
+from observer.pipeline import ObserverPipeline
+from api.response_builder import ResponseBuilder, ResponseNotFormatted
 import logging
 
 router = APIRouter(prefix="/nyaya", tags=["nyaya"])
@@ -105,14 +109,22 @@ async def query_legal(request: QueryRequest):
     """Execute a single-jurisdiction legal query with sovereign enforcement."""
     try:
         cleaned_query = clean_query(request.query)
+
+        # ─── TANTRA: Initialize Observer Pipeline ───
+        _temp_trace = f"trace_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:6]}"
+        observer = ObserverPipeline(trace_id=_temp_trace)
+        observer.record("query_received", {"raw_query": request.query})
+
         understanding = analyze_query(cleaned_query)
         understanding_domain = understanding.get("domain") if isinstance(understanding, dict) else None
         if not isinstance(understanding_domain, str) or not understanding_domain.strip():
             understanding_domain = "civil"
         domain_hint_value = understanding_domain
+        observer.record("query_understanding", {"domain": understanding_domain, "source": understanding.get("source", "unknown")})
         if not domain_hint_value and request.domain_hint:
             domain_hint_value = request.domain_hint.value
         expanded_queries = expand_query(cleaned_query, understanding_domain)
+        observer.record("query_expansion", {"expanded_count": len(expanded_queries)})
         hybrid_result = {"candidates": [], "sections_found": 0, "query_logs": []}
         candidate_records = []
 
@@ -132,6 +144,7 @@ async def query_legal(request: QueryRequest):
             finally:
                 executor.shutdown(wait=False, cancel_futures=True)
         candidate_records = hybrid_result.get("candidate_records") or hybrid_result.get("candidates") or []
+        observer.record("hybrid_retrieval", {"candidates_found": len(candidate_records)})
 
         reranker_enabled = os.getenv("RERANKER_ENABLED", "true").lower() not in {"0", "false", "no"}
         reranker_timeout = float(os.getenv("RERANKER_TIMEOUT_SECONDS", "8"))
@@ -152,6 +165,7 @@ async def query_legal(request: QueryRequest):
                 executor.shutdown(wait=False, cancel_futures=True)
         else:
             top_sections = candidate_records[:5]
+        observer.record("cross_encoder_reranking", {"reranked_top": len(top_sections)})
         final_sections = apply_reasoning_rules(cleaned_query, understanding_domain, top_sections)
         reasoning_added = sum(
             1 for item in final_sections if item.get("source") == "reasoning_engine"
@@ -206,6 +220,7 @@ async def query_legal(request: QueryRequest):
             domain_hint=domain_hint_value
         )
         advice = advisor.provide_legal_advice(legal_query)
+        observer.record("clean_legal_advisor", {"sections": len(advice.statutes or []), "domain": advice.domain, "jurisdiction": advice.jurisdiction})
         
         # Prefer deterministic pipeline statutes; fallback to advisor if empty
         statute_records = final_sections or []
@@ -285,6 +300,7 @@ async def query_legal(request: QueryRequest):
                 )
                 for case in relevant_cases
             ]
+        observer.record("case_law_retriever", {"cases_found": len(case_laws)})
         
         # Build qualified legal analysis
         legal_analysis = _build_qualified_analysis(
@@ -331,17 +347,15 @@ async def query_legal(request: QueryRequest):
             "statutes": statutes,
             "case_laws": case_laws,
             "constitutional_articles": [],
-            "provenance_chain": [{
-                "timestamp": datetime.now().isoformat(),
-                "event": "query_processed",
-                "agent": "clean_legal_advisor",
-                "sections_found": sections_found,
-                "case_laws_found": len(case_laws),
-                "ontology_filtered": advice.ontology_filtered if hasattr(advice, 'ontology_filtered') else False,
-                "domains": advice.domains if hasattr(advice, 'domains') else [advice.domain],
-                "jurisdiction_detected": jurisdiction_result.jurisdiction,
-                "jurisdiction_confidence": jurisdiction_result.confidence
-            }],
+            "provenance_chain": [observer.get_provenance_entry(
+                agent="clean_legal_advisor",
+                sections_found=sections_found,
+                case_laws_found=len(case_laws),
+                ontology_filtered=advice.ontology_filtered if hasattr(advice, 'ontology_filtered') else False,
+                domains=advice.domains if hasattr(advice, 'domains') else [advice.domain],
+                jurisdiction_detected=jurisdiction_result.jurisdiction,
+                jurisdiction_confidence=jurisdiction_result.confidence
+            )],
             "reasoning_trace": {
                 "legal_analysis": legal_analysis,
                 "procedural_steps": advice.procedural_steps,
@@ -391,6 +405,7 @@ async def query_legal(request: QueryRequest):
         enriched = enrich_response(base_response, cleaned_query, advice.domain, statutes, advice.jurisdiction)
         
         # Apply enforcement decision using enforcement engine
+        observer.record("enforcement_engine", {"input_confidence": advice.confidence_score})
         enforcement_signal = EnforcementSignal(
             case_id=advice.trace_id,
             country=advice.jurisdiction,
@@ -403,6 +418,21 @@ async def query_legal(request: QueryRequest):
         )
         enforcement_result = enforcement_engine.make_enforcement_decision(enforcement_signal)
         enriched['enforcement_decision'] = enforcement_result.decision.value
+
+        # ─── TANTRA: decision_basis from enforcement result ───
+        enriched['decision_basis'] = observer.build_decision_basis(enforcement_result)
+
+        # ─── TANTRA: confidence_sources ───
+        enriched['confidence_sources'] = observer.build_confidence_sources(
+            sections_found=sections_found,
+            base_confidence=advice.confidence_score,
+            jurisdiction_confidence=jurisdiction_result.confidence,
+            domain_confidence=confidence.domain,
+            statute_match=confidence.statute_match,
+            understanding_source=understanding.get("source", "unknown") if isinstance(understanding, dict) else "unknown",
+            statute_source=statute_source
+        )
+
         explanation_payload = generate_explanation_payload(
             query=cleaned_query,
             jurisdiction=advice.jurisdiction,
@@ -422,7 +452,15 @@ async def query_legal(request: QueryRequest):
             explanation_debug["error"] = explanation_payload.get("error")
         if "reasoning_trace" in enriched and (explanation_debug.get("reason") or explanation_debug.get("error")):
             enriched["reasoning_trace"]["explanation_generation"] = explanation_debug
-        
+
+        # ─── TANTRA: Observer steps ───
+        observer.record("response_enriched", {"has_answer": bool(enriched.get("answer"))})
+        enriched['observer_steps'] = observer.get_observer_steps()
+
+        # ─── TANTRA: Formatter Gate ───
+        builder = ResponseBuilder()
+        enriched = builder.build(enriched)
+
         # Cache the enriched response for downstream endpoints
         response_cache.set(enriched.get("trace_id", advice.trace_id), enriched)
 
@@ -689,6 +727,15 @@ async def get_enforcement_status(trace_id: str = Query(..., description="Trace I
 @router.post("/rl_signal")
 async def submit_rl_signal(request: RLSignalRequest):
     """Accept a reinforcement learning signal from the frontend."""
+    # ─── TANTRA: RL Signal Lock — reject signals for unknown trace_ids ───
+    cached = response_cache.get(request.trace_id)
+    if not cached:
+        return {
+            "accepted": False,
+            "reward_computed": 0.0,
+            "reason": "trace_id_not_found — RL signals must reference a valid, cached query",
+            "trace_id": request.trace_id
+        }
     try:
         from rl_engine.reward_engine import RewardEngine
         reward_engine = RewardEngine()

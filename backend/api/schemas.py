@@ -2,11 +2,16 @@ from pydantic import BaseModel, Field
 from typing import Dict, Any, List, Optional
 from enum import Enum
 
+# ─── TANTRA: Canonical enforcement decisions ───
+# Values sourced from enforcement_engine.decision_model (single source of truth)
+from enforcement_engine.decision_model import EnforcementDecision as _CanonicalDecision
+
 class EnforcementDecision(str, Enum):
-    ALLOW_INFORMATIONAL = "ALLOW_INFORMATIONAL"
-    ALLOW = "ALLOW"
-    SAFE_REDIRECT = "SAFE_REDIRECT"
-    RESTRICT = "RESTRICT"
+    """API-layer enum — values locked to canonical decision_model.py"""
+    ALLOW_INFORMATIONAL = _CanonicalDecision.ALLOW_INFORMATIONAL.value
+    ALLOW = _CanonicalDecision.ALLOW.value
+    SAFE_REDIRECT = _CanonicalDecision.SAFE_REDIRECT.value
+    RESTRICT = _CanonicalDecision.RESTRICT.value
 
 class UserRole(str, Enum):
     CITIZEN = "citizen"
@@ -99,6 +104,11 @@ class NyayaResponse(BaseModel):
     answer: Optional[str] = None
     answer_source: Optional[str] = None
     answer_model: Optional[str] = None
+    # ─── TANTRA Compliance Fields ───
+    observer_steps: List[Dict[str, Any]] = []
+    decision_basis: Optional[Dict[str, Any]] = None
+    confidence_sources: Optional[Dict[str, Any]] = None
+    metadata: Optional[Dict[str, Any]] = None
 
 class MultiJurisdictionResponse(BaseModel):
     comparative_analysis: Dict[str, NyayaResponse]

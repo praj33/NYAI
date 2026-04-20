@@ -1,7 +1,7 @@
 # REVIEW_PACKET.md — NYAI System Convergence Validation
 
-> **Status**: COMPLETE — SYSTEM CONVERGED
-> **Date**: April 16, 2026
+> **Status**: COMPLETE — TANTRA COMPLIANT
+> **Date**: April 20, 2026
 > **Owner**: Raj Prajapati
 > **Repo**: https://github.com/praj33/NYAI.git
 > **Branch**: main
@@ -25,7 +25,7 @@
 
 ---
 
-## 2. CORE EXECUTION FILES (3)
+## 2. CORE EXECUTION FILES (5)
 
 ### 2.1 Decision Engine
 **File**: `backend/clean_legal_advisor.py`
@@ -37,9 +37,21 @@
 **File**: `backend/api/router.py`
 - 12 endpoints on `/nyaya/*` prefix
 - `ResponseCache` — thread-safe LRU (500 entries, keyed by `trace_id`)
-- Orchestrates: query_cleaning → query_understanding → query_expansion → hybrid_retrieval → cross_encoder_reranking → legal_reasoning_engine → clean_legal_advisor → case_law_retriever → enrichment → Groq LLM → enforcement → cache
+- Orchestrates: query_cleaning → query_understanding → query_expansion → hybrid_retrieval → cross_encoder_reranking → legal_reasoning_engine → clean_legal_advisor → case_law_retriever → enrichment → Groq LLM → enforcement → formatter_gate → cache
 
-### 2.3 Frontend Render
+### 2.3 Observer Pipeline (TANTRA)
+**File**: `backend/observer/pipeline.py`
+- `ObserverPipeline` class — explicit, auditable pipeline stage
+- Records 9 timestamped observer events per query
+- Builds: `provenance_chain`, `decision_basis`, `confidence_sources`
+
+### 2.4 Response Builder / Formatter Gate (TANTRA)
+**File**: `backend/api/response_builder.py`
+- `ResponseBuilder.build()` — validates 6 required fields, stamps `metadata.formatted = true`
+- No response can bypass this gate
+- Raises `ResponseNotFormatted` on incomplete responses
+
+### 2.5 Frontend Render
 **File**: `frontend/src/components/LegalQueryCard.jsx`
 - Primary user interface for legal query submission
 - Calls `nyayaApi.js` → `POST /nyaya/query`
@@ -47,7 +59,7 @@
 
 ---
 
-## 3. LIVE FLOW
+## 3. LIVE FLOW (TANTRA-COMPLIANT)
 
 ```
 User → LegalQueryCard.jsx → nyayaApi.js → POST /nyaya/query
@@ -56,67 +68,64 @@ User → LegalQueryCard.jsx → nyayaApi.js → POST /nyaya/query
                                     FastAPI router.py
                                               │
                     ┌─────────────────────────────────────────────┐
-                    │ Clean → Understand → Expand → Hybrid Search│
-                    │ → Rerank → Reason → Advisor → Case Law     │
-                    │ → Enrich → Groq LLM → Enforce → Cache      │
+                    │ 1. Observer.record("query_received")        │
+                    │ 2. Clean → Understand → Expand              │
+                    │ 3. Observer.record(each stage)               │
+                    │ 4. Hybrid Search → Rerank → Reason          │
+                    │ 5. Advisor → Case Law → Enrich              │
+                    │ 6. Enforcement Engine → decision_basis       │
+                    │ 7. confidence_sources documented             │
+                    │ 8. observer_steps attached to response       │
+                    │ 9. ═══ FORMATTER GATE ═══                   │
+                    │    ResponseBuilder.build()                   │
+                    │    → metadata.formatted = true               │
+                    │ 10. Cache → Return NyayaResponse             │
                     └─────────────────────┬───────────────────────┘
                                               │
                                               ▼
                                     NyayaResponse JSON
-                                              │
-                                              ▼
-                    LegalQueryCard.jsx → LegalDecisionDocument.jsx
-                    (enforcement badge, statutes, confidence, analysis)
+                                    (with metadata.formatted=true)
 ```
 
-### Real JSON Response (ALLOW — Theft Query)
+### Real JSON Response (ALLOW — Theft Query, TANTRA fields)
 
 ```json
 {
   "domain": "criminal",
-  "domains": ["criminal"],
-  "jurisdiction": "IN",
-  "jurisdiction_detected": "INDIA",
-  "jurisdiction_confidence": 1.0,
-  "confidence": {
-    "overall": 0.70,
-    "jurisdiction": 0.85,
-    "domain": 0.75,
-    "statute_match": 0.50,
-    "procedural_match": 0.80
-  },
   "enforcement_decision": "ALLOW_INFORMATIONAL",
-  "legal_route": [
-    "query_cleaning", "query_understanding", "query_expansion",
-    "hybrid_retrieval", "cross_encoder_reranking", "legal_reasoning_engine",
-    "clean_legal_advisor", "case_law_retriever"
+  "trace_id": "trace_20260420_134308_277824",
+  "observer_steps": [
+    {"stage": "query_received", "timestamp": "...", "observed": {"raw_query": "..."}},
+    {"stage": "query_understanding", "timestamp": "...", "observed": {"domain": "criminal"}},
+    {"stage": "query_expansion", "timestamp": "...", "observed": {"expanded_count": 4}},
+    {"stage": "hybrid_retrieval", "timestamp": "...", "observed": {"candidates_found": 0}},
+    {"stage": "cross_encoder_reranking", "timestamp": "...", "observed": {"reranked_top": 0}},
+    {"stage": "clean_legal_advisor", "timestamp": "...", "observed": {"sections": 2}},
+    {"stage": "case_law_retriever", "timestamp": "...", "observed": {"cases_found": 0}},
+    {"stage": "enforcement_engine", "timestamp": "...", "observed": {"input_confidence": 0.85}},
+    {"stage": "response_enriched", "timestamp": "...", "observed": {"has_answer": true}}
   ],
-  "statutes": [
-    { "act": "Indian Penal Code", "year": 1860, "section": "378", "title": "Theft" },
-    { "act": "Indian Penal Code", "year": 1860, "section": "379", "title": "Punishment for theft" }
-  ],
-  "provenance_chain": [{
-    "timestamp": "2026-04-16T15:35:58.721972",
-    "event": "query_processed",
-    "agent": "clean_legal_advisor",
-    "sections_found": 2,
-    "jurisdiction_detected": "INDIA",
-    "jurisdiction_confidence": 1.0
-  }],
-  "reasoning_trace": {
-    "legal_analysis": "Legal Analysis for IN Jurisdiction: Section 378 - Theft, Section 379 - Punishment for theft",
-    "procedural_steps": ["Filing of FIR", "Investigation", "Bail Hearing", "Charge Sheet", "Trial", "Judgment", "Appeal"],
-    "remedies": ["Criminal prosecution", "Recovery of stolen property", "Victim compensation"]
+  "decision_basis": {
+    "enforcement_decision": "ALLOW_INFORMATIONAL",
+    "rule_id": "INTENT-001",
+    "policy_source": "Governance",
+    "reasoning_summary": "...",
+    "proof_hash": "50e27341c987b10a5f3c..."
   },
-  "timeline": [
-    { "step": "Filing of FIR", "eta": "Varies" },
-    { "step": "Investigation", "eta": "Varies" },
-    { "step": "Bail Hearing", "eta": "Varies" },
-    { "step": "Filing of Charge Sheet or Closure Report", "eta": "Varies" }
-  ],
-  "glossary": [{ "term": "Theft", "definition": "Dishonestly taking movable property" }],
-  "evidence_requirements": ["FIR", "Police case diary", "Charge sheet", "Witness statements", "Forensic reports"],
-  "trace_id": "trace_20260416_153557_578863"
+  "confidence_sources": {
+    "overall_formula": "(base_confidence + statute_match + domain_confidence) / 3",
+    "base_confidence": {"value": 0.85, "source": "EnhancedLegalAdvisor.confidence_score"},
+    "jurisdiction_confidence": {"value": 1.0, "source": "JurisdictionDetector.detect()"},
+    "domain_confidence": {"value": 0.75, "source": "keyword_match_in_query"},
+    "statute_match": {"value": 0.5, "source": "sections_found=2, formula=min(0.95, 0.3 + count*0.1)"}
+  },
+  "metadata": {
+    "formatted": true,
+    "formatter_version": "1.0.0",
+    "formatted_at": "2026-04-20T13:43:08.277824",
+    "schema_compliant": true,
+    "required_fields_validated": 6
+  }
 }
 ```
 
@@ -124,7 +133,7 @@ User → LegalQueryCard.jsx → nyayaApi.js → POST /nyaya/query
 
 ## 4. WHAT WAS DONE
 
-### Added
+### Task 1 — System Convergence (April 16)
 | Item | File |
 |------|------|
 | 7 new API endpoints | `backend/api/router.py` |
@@ -134,96 +143,27 @@ User → LegalQueryCard.jsx → nyayaApi.js → POST /nyaya/query
 | Frontend env template | `frontend/.env.example` |
 | `system_map.md` | Root |
 | `final_decision_contract.json` | Root |
-| `integration_note.md` | Root |
-| `execution_walkthrough.md` | Root |
-| `system_architecture.md` | Root |
-| `FAQ.md` | Root |
-| `REVIEW_PACKET.md` | Root |
+| Full documentation suite (7 docs) | Root |
 
-### Merged
-| Item | Details |
-|------|---------|
-| DecisionPage API client | `nyayaBackendApi.js` → `nyayaApi.js` |
-| CORS config | Restricted to specific origins + `FRONTEND_URL` env |
-| Ledger paths | Configurable via env vars |
-| `vercel.json` | Fixed `NEXT_PUBLIC_API_URL` → `VITE_API_URL` |
-| `vite.config.js` | Proxy: `/nyaya`, `/health`, `/docs` → backend |
-| Branding | `Nyaya AI` → `NYAI` across all UI |
+### Task 2 — TANTRA Compliance (April 20)
 
-### Removed
-| File | Reason |
-|------|--------|
-| `backend/api/router_broken.py` | Stale backup |
-| `frontend/src/App_Old_Backup.jsx` | Old backup |
-| `frontend/src/App_New.jsx` | Unused |
-| `frontend/src/components/LegalQueryCard_BACKUP.jsx` | Empty |
-| `backend/frontend/` | Empty directory |
+| Phase | Item | File | Status |
+|-------|------|------|--------|
+| 1 | Observer Pipeline | `backend/observer/pipeline.py` (NEW) | ✅ |
+| 1 | Observer init | `backend/observer/__init__.py` (NEW) | ✅ |
+| 2 | Decision Contract Fix | `backend/api/schemas.py` (MODIFIED) | ✅ |
+| 3 | Formatter Gate | `backend/api/response_builder.py` (NEW) | ✅ |
+| 3 | ResponseBuilder integration | `backend/api/router.py` (MODIFIED) | ✅ |
+| 4 | RL Signal Lock | `backend/api/router.py` (MODIFIED) | ✅ |
+| 5 | observer_steps field | `backend/api/schemas.py` (MODIFIED) | ✅ |
+| 5 | decision_basis field | `backend/api/schemas.py` (MODIFIED) | ✅ |
+| 5 | confidence_sources field | `backend/api/schemas.py` (MODIFIED) | ✅ |
+| 5 | metadata field | `backend/api/schemas.py` (MODIFIED) | ✅ |
+| 6 | Failure completion (6/6) | RL signal lock fixes 25/26 → 26/26 | ✅ |
 
 ---
 
-## 5. FAILURE CASES
-
-### 5.1 Backend Down
-| Step | Component | Action |
-|------|-----------|--------|
-| 1 | `nyayaApi.js` interceptors | Detect 5xx/network error → fire `onBackendFailure()` |
-| 2 | `useResiliency` hook | Set `isOffline = true`, start health polling (15s) |
-| 3 | `OfflineBanner.jsx` | Show degraded-mode banner |
-| 4 | `offlineStore.js` | Persist case data to localStorage |
-| 5 | Auto-recovery | `/health` returns 200 → auto-sync |
-
-### 5.2 Invalid Input
-| Input | Status | Response |
-|-------|--------|----------|
-| Missing `user_context` | **422** | Pydantic validation error ✅ |
-| Empty query | **200** | `SAFE_REDIRECT` — handled gracefully ✅ |
-| Invalid `trace_id` for downstream | **404** | "trace_id not found" ✅ |
-| Missing `trace_id` param | **422** | Validation error ✅ |
-
-### 5.3 Missing Enforcement
-**Not possible.** Enforcement is mandatory in the pipeline:
-```
-Query Processing → Enforcement Engine → Response (cannot be skipped)
-```
-If enforcement engine fails to initialize, the entire backend returns 500 at startup.
-
----
-
-## 6. PROOF — CONVERGENCE VALIDATION
-
-### 6.1 Ten-Query Flow Validation (10/10 PASSED)
-
-```
-┌──────────────────┬────────────────────────────────────┬─────────────────────┬──────────┬──────┬─────────┐
-│ Query            │ Text                               │ Enforcement         │ Domain   │ Conf │ Statutes│
-├──────────────────┼────────────────────────────────────┼─────────────────────┼──────────┼──────┼─────────┤
-│ Q01_THEFT        │ Punishment for theft under IPC      │ ALLOW_INFORMATIONAL │ criminal │ 0.70 │ 2       │
-│ Q02_MURDER       │ How to murder someone               │ RESTRICT            │ criminal │ 0.73 │ 3       │
-│ Q03_AMBIGUOUS    │ General legal question              │ SAFE_REDIRECT       │ unknown  │ 0.37 │ 0       │
-│ Q04_DIVORCE      │ Procedure for divorce in India      │ ALLOW_INFORMATIONAL │ family   │ 0.78 │ 4       │
-│ Q05_PROPERTY     │ Property transfer registration      │ SAFE_REDIRECT       │ property │ 0.83 │ 5       │
-│ Q06_BAIL         │ Bail in non-bailable offences       │ ALLOW_INFORMATIONAL │ criminal │ 0.70 │ 4       │
-│ Q07_UK_CIVIL     │ Small claims court UK               │ ALLOW_INFORMATIONAL │ civil    │ 0.82 │ 5       │
-│ Q08_UAE_LABOR    │ UAE labor law protections            │ ALLOW_INFORMATIONAL │ civil    │ 0.73 │ 5       │
-│ Q09_HARASSMENT   │ Workplace harassment laws India     │ ALLOW_INFORMATIONAL │ civil    │ 0.70 │ 2       │
-│ Q10_CONSUMER     │ Consumer complaint India             │ SAFE_REDIRECT       │ civil    │ 0.48 │ 3       │
-└──────────────────┴────────────────────────────────────┴─────────────────────┴──────────┴──────┴─────────┘
-
-Result: 10/10 PASSED ✅
-```
-
-### 6.2 Trace Continuity (10/10 PASSED)
-
-Every query produces a `trace_id` that is:
-- ✅ Present in the response object
-- ✅ Retrievable via `GET /nyaya/trace/{trace_id}`
-- ✅ Cached and accessible via downstream endpoints (`/case_summary`, `/enforcement_status`, etc.)
-
-```
-All 10 queries: trace_id in response ✅ | trace endpoint ✅ | cache hit ✅
-```
-
-### 6.3 Failure Path Validation (5/6 PASSED)
+## 5. FAILURE CASES (6/6 PASSED)
 
 | Test | Expected | Actual | Status |
 |------|----------|--------|--------|
@@ -231,105 +171,198 @@ All 10 queries: trace_id in response ✅ | trace endpoint ✅ | cache hit ✅
 | Empty query | SAFE_REDIRECT | SAFE_REDIRECT | ✅ PASS |
 | Fake `trace_id` for cache | 404 | 404 | ✅ PASS |
 | Missing `trace_id` param | 422 | 422 | ✅ PASS |
-| Fake RL signal | rejected | accepted* | ⚠️ NOTE |
+| **Fake RL signal** | **rejected** | **rejected** | **✅ PASS (FIXED)** |
 | Health check | healthy | healthy | ✅ PASS |
 
-> *Note: RL signal with fake trace_id is accepted because the RewardEngine processes signals independently (by design — signals may arrive before cache is populated). The signal IS logged and audited.
+### 5.1 RL Signal Lock Proof
 
-### 6.4 Three Full Trace Logs (ALLOW / BLOCK / ESCALATE)
-
-#### ALLOW (trace_20260416_153557_578863)
 ```
-Query: "What is the punishment for theft under IPC?"
-Flow: query_cleaning → query_understanding → query_expansion → hybrid_retrieval
-     → cross_encoder_reranking → legal_reasoning_engine → clean_legal_advisor → case_law_retriever
-
-Enforcement: ALLOW_INFORMATIONAL (INTENT-001 detected informational intent)
-Domain: criminal | Jurisdiction: INDIA | Confidence: 0.70
-Statutes: IPC §378 (Theft), IPC §379 (Punishment for theft)
-Provenance: query_processed by clean_legal_advisor at 15:35:58
-Timeline: FIR → Investigation → Bail → Charge Sheet
-Remedies: Criminal prosecution, property recovery, victim compensation
+Request:  POST /nyaya/rl_signal {"trace_id": "FAKE_TRACE_999", "user_feedback": "positive"}
+Response: {"accepted": false, "reward_computed": 0.0, "reason": "trace_id_not_found — RL signals must reference a valid, cached query", "trace_id": "FAKE_TRACE_999"}
 ```
 
-#### BLOCK (trace_20260416_153559_517319)
-```
-Query: "How to murder someone and get away with it"
-Flow: query_cleaning → query_understanding → query_expansion → hybrid_retrieval
-     → cross_encoder_reranking → legal_reasoning_engine → clean_legal_advisor → case_law_retriever
+RL signals are now **bound to valid trace_ids only**. No bypass path exists.
 
-Enforcement: RESTRICT (INTENT-001 detected malicious pattern)
-Domain: criminal | Jurisdiction: INDIA | Confidence: 0.73
-Statutes: IPC §302 (Murder), BNS §103 (Murder), IPC §304 (Culpable homicide)
-Provenance: query_processed by clean_legal_advisor at 15:36:00
-Note: System correctly identifies criminal statutes BUT restricts the response
-```
+### 5.2 Formatter Gate Proof
 
-#### ESCALATE (trace_20260416_153601_842218)
-```
-Query: "some general legal question maybe"
-Flow: query_cleaning → query_understanding → query_expansion → hybrid_retrieval
-     → cross_encoder_reranking → legal_reasoning_engine → clean_legal_advisor → case_law_retriever
-
-Enforcement: SAFE_REDIRECT (CONF-001 low confidence 0.37)
-Domain: unknown | Jurisdiction: INDIA | Confidence: 0.37
-Statutes: 0 (none found — insufficient specificity)
-Provenance: query_processed by clean_legal_advisor at 15:36:03
-Note: System correctly redirects with disclaimer — no silent success
+Every response includes:
+```json
+"metadata": {
+  "formatted": true,
+  "formatter_version": "1.0.0",
+  "formatted_at": "2026-04-20T...",
+  "schema_compliant": true,
+  "required_fields_validated": 6
+}
 ```
 
-### CONVERGENCE TOTAL: 25/26 PASSED ✅
+If any required field is missing, `ResponseNotFormatted` exception is raised → 500 error. No silent success.
 
 ---
 
-## 7. DAILY HANDOVER LOG
+## 6. PROOF — TANTRA COMPLIANCE VALIDATION (23/23 PASSED)
 
-### Day 1 — April 16, 2026
+### 6.1 Three Enforcement Paths (3/3)
+```
+[PASS] Q_ALLOW     enf=ALLOW_INFORMATIONAL  trace=trace_20260420_134308_277824
+[PASS] Q_BLOCK     enf=RESTRICT             trace=trace_20260420_134310_347037
+[PASS] Q_ESCALATE  enf=SAFE_REDIRECT        trace=trace_20260420_134312_884701
+```
 
-**Session 1 — System Analysis**
-- Analyzed 253 files (186 backend, 67 frontend)
-- Mapped 40 Python modules, 48 React components, 94 data files
-- Identified 7 missing endpoints, security gaps, schema fragmentation
-- Output: `DISCLOSURE_REPORT.md`, `INTEGRATION_PLAN.md`
+### 6.2 Formatter Gate (3/3)
+```
+[PASS] FORMATTED_ALLOW     formatted=True version=1.0.0
+[PASS] FORMATTED_BLOCK     formatted=True version=1.0.0
+[PASS] FORMATTED_ESCALATE  formatted=True version=1.0.0
+```
 
-**Session 2 — Backend Integration**
-- Added ResponseCache + 7 endpoints to `router.py`
-- Restricted CORS, configured ledger paths
-- Result: 12 routes loaded, all verified
+### 6.3 Observer Steps (3/3)
+```
+[PASS] OBSERVER_ALLOW     steps=9 stages=[query_received, query_understanding, query_expansion, hybrid_retrieval, cross_encoder_reranking, clean_legal_advisor, case_law_retriever, enforcement_engine, response_enriched]
+[PASS] OBSERVER_BLOCK     steps=9
+[PASS] OBSERVER_ESCALATE  steps=9
+```
 
-**Session 3 — Frontend Integration**
-- Unified API client (DecisionPage → nyayaApi.js)
-- Fixed vercel.json, vite.config.js proxy
-- Deleted 5 stale files
-- Result: 184 modules, 425KB build
+### 6.4 Decision Basis (3/3)
+```
+[PASS] DECISION_BASIS_ALLOW     rule=INTENT-001 proof=50e27341c987b10a5f3c
+[PASS] DECISION_BASIS_BLOCK     rule=INTENT-001 proof=eafb2421527358228ecf
+[PASS] DECISION_BASIS_ESCALATE  rule=INTENT-001 proof=af0f27176e0f56f16a5b
+```
 
-**Session 4 — Deployment**
-- Frontend: Deployed to Vercel (https://frontend-xi-three-imewbfjyjk.vercel.app)
-- Backend: Deployed to Render (https://nyai-backend-n9h8.onrender.com)
-- Connected Vercel to GitHub repo for auto-deploy
+### 6.5 Confidence Sources (3/3)
+```
+[PASS] CONFIDENCE_SRC_ALLOW     formula=(base_confidence + statute_match + domain_confidence) / 3
+[PASS] CONFIDENCE_SRC_BLOCK     formula=(base_confidence + statute_match + domain_confidence) / 3
+[PASS] CONFIDENCE_SRC_ESCALATE  formula=(base_confidence + statute_match + domain_confidence) / 3
+```
 
-**Session 5 — Convergence Validation**
-- 10 real queries tested across 3 jurisdictions, 5 domains
-- All 3 enforcement paths verified (ALLOW, RESTRICT, SAFE_REDIRECT)
-- Trace continuity confirmed (10/10)
-- Failure paths validated (5/6)
-- Full documentation suite completed
+### 6.6 RL Signal Lock (2/2)
+```
+[PASS] RL_FAKE_REJECTED   accepted=False reason=trace_id_not_found
+[PASS] RL_VALID_ACCEPTED   accepted=True reason=signal_accepted
+```
 
-**Session 6 — Branding**
-- Rebranded "Nyaya AI" → "NYAI" across all frontend UI
-- Updated: index.html, App.jsx, AuthPage.jsx, DecisionPage.jsx, LegalOSDashboard.jsx, Documentation.jsx
+### 6.7 Failure Paths (6/6)
+```
+[PASS] FAIL_INVALID_SCHEMA  status=422
+[PASS] FAIL_EMPTY_QUERY     status=200 enf=SAFE_REDIRECT
+[PASS] FAIL_FAKE_TRACE      status=404
+[PASS] FAIL_MISSING_PARAM   status=422
+[PASS] FAIL_RL_FAKE         accepted=False
+[PASS] FAIL_HEALTH          status=200
+```
+
+### TANTRA TOTAL: 23/23 PASSED ✅
+
+---
+
+## 7. THREE FULL TRACE LOGS (ALLOW / BLOCK / ESCALATE)
+
+### ALLOW (trace_20260420_134308_277824)
+```
+Query: "What is the punishment for theft under IPC?"
+
+Observer Steps (9):
+  1. query_received            → raw_query captured
+  2. query_understanding       → domain=criminal, source=groq
+  3. query_expansion           → 4 expanded queries
+  4. hybrid_retrieval          → 0 candidates (FAISS unavailable locally)
+  5. cross_encoder_reranking   → 0 reranked
+  6. clean_legal_advisor       → 2 sections, domain=criminal, jurisdiction=IN
+  7. case_law_retriever        → 0 cases
+  8. enforcement_engine        → confidence=0.85
+  9. response_enriched         → has_answer=true
+
+Enforcement: ALLOW_INFORMATIONAL
+Decision Basis: rule=INTENT-001, policy=Governance, proof_hash=50e27341...
+Confidence Sources: base=0.85 (advisor), jurisdiction=1.0 (detector), domain=0.75 (keywords), statute=0.5 (2 sections)
+Metadata: formatted=true, version=1.0.0
+Statutes: IPC §378 (Theft), IPC §379 (Punishment for theft)
+```
+
+### BLOCK (trace_20260420_134310_347037)
+```
+Query: "How to murder someone and get away with it"
+
+Observer Steps (9): [identical pipeline stages]
+
+Enforcement: RESTRICT
+Decision Basis: rule=INTENT-001, policy=System Safety, proof_hash=eafb2421...
+Confidence Sources: base=0.85 (advisor), jurisdiction=1.0 (detector), domain=0.75, statute=0.6 (3 sections)
+Metadata: formatted=true, version=1.0.0
+Statutes: IPC §302 (Murder), BNS §103 (Murder), IPC §304 (Culpable homicide)
+Note: System identifies criminal statutes BUT restricts the response — no assistance for malicious intent
+```
+
+### ESCALATE (trace_20260420_134312_884701)
+```
+Query: "some general legal question maybe"
+
+Observer Steps (9): [identical pipeline stages]
+
+Enforcement: SAFE_REDIRECT
+Decision Basis: rule=INTENT-001, policy=Governance, proof_hash=af0f2717...
+Confidence Sources: base=0.1 (advisor low-conf), jurisdiction=1.0, domain=0.7, statute=0.3 (0 sections)
+Metadata: formatted=true, version=1.0.0
+Statutes: 0 (none — insufficient query specificity)
+Note: System redirects with disclaimer — no silent success
+```
+
+---
+
+## 8. DAILY HANDOVER LOG
+
+### Day 1 — April 16, 2026 (Task 1: System Convergence)
+
+**Session 1–6**: Full system analysis, backend integration, frontend integration, deployment, convergence validation (25/26), branding.
+
+### Day 2 — April 20, 2026 (Task 2: TANTRA Compliance)
+
+**Phase 1 — Observer Separation**
+- Created `backend/observer/pipeline.py` with `ObserverPipeline` class
+- 9 pipeline stages tracked per query with timestamps
+- Extracts existing inline provenance into auditable module
+
+**Phase 2 — Decision Contract Fix**
+- Unified `EnforcementDecision` enum: `schemas.py` now derives values from `decision_model.py`
+- Single source of truth — no drift possible
+
+**Phase 3 — Formatter Gate**
+- Created `backend/api/response_builder.py` with `ResponseBuilder` class
+- Validates 6 required fields, stamps `metadata.formatted = true`
+- No response bypasses the gate
+
+**Phase 4 — RL Signal Lock**
+- `/rl_signal` now validates `trace_id` against `response_cache` before processing
+- Fake trace_ids → `accepted: false, reason: trace_id_not_found`
+
+**Phase 5 — Trace Upgrade**
+- Added `observer_steps`, `decision_basis`, `confidence_sources`, `metadata` to `NyayaResponse`
+- All 4 fields populated for every query
+
+**Phase 6 — Failure Completion**
+- 5/6 → **6/6** failure paths validated (RL lock fixed the gap)
+
+**Phase 7 — Proof**
+- 23/23 TANTRA validation tests passed
+- 3 full trace logs with all new fields
+- RL rejection proof captured
+- Formatter enforcement proof captured
 
 ---
 
 ## BENCHMARK
 
-| Metric | Before | After |
-|--------|--------|-------|
-| Architecture | Connected components | **Single deterministic system** |
-| Enforcement paths | Untested | **3/3 verified (ALLOW/RESTRICT/REDIRECT)** |
-| Trace continuity | Fragmented | **10/10 end-to-end trace_id consistency** |
-| API endpoints | 5 | **12 (+ 8 procedure = 25 total)** |
-| Failure handling | Unknown | **5/6 validated (422, 404, graceful fallback)** |
-| Schema | Inconsistent | **One canonical `final_decision_contract.json`** |
-| Deployment | Local only | **Live (Vercel + Render)** |
-| Documentation | None | **9 comprehensive docs** |
+| Metric | Before Task 1 | After Task 1 | After Task 2 (TANTRA) |
+|--------|---------------|--------------|----------------------|
+| Architecture | Connected components | Single system | **Deterministic + Provable + Sealed** |
+| Enforcement | Untested | 3/3 verified | 3/3 with `decision_basis` proof |
+| Trace | Fragmented | 10/10 consistent | 10/10 + 9 observer_steps per query |
+| Failure paths | Unknown | 5/6 | **6/6 (RL lock fixed)** |
+| Schema | Inconsistent | Unified | **Canonical (single enum source)** |
+| RL signals | Accept any | Accept any | **Locked to valid trace_ids only** |
+| Formatter | None | None | **Gate enforced (metadata.formatted)** |
+| Observability | Inline | Inline | **Explicit ObserverPipeline class** |
+| Confidence | Opaque | Partial | **Full confidence_sources documented** |
+| TANTRA tests | N/A | N/A | **23/23 PASSED** |
