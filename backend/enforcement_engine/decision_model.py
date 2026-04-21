@@ -9,10 +9,9 @@ from datetime import datetime
 
 
 class EnforcementDecision(Enum):
-    ALLOW_INFORMATIONAL = "ALLOW_INFORMATIONAL"
     ALLOW = "ALLOW"
+    BLOCK = "BLOCK"
     SAFE_REDIRECT = "SAFE_REDIRECT"
-    RESTRICT = "RESTRICT"
 
 
 class PolicySource(Enum):

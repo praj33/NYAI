@@ -8,10 +8,9 @@ from enforcement_engine.decision_model import EnforcementDecision as _CanonicalD
 
 class EnforcementDecision(str, Enum):
     """API-layer enum — values locked to canonical decision_model.py"""
-    ALLOW_INFORMATIONAL = _CanonicalDecision.ALLOW_INFORMATIONAL.value
     ALLOW = _CanonicalDecision.ALLOW.value
+    BLOCK = _CanonicalDecision.BLOCK.value
     SAFE_REDIRECT = _CanonicalDecision.SAFE_REDIRECT.value
-    RESTRICT = _CanonicalDecision.RESTRICT.value
 
 class UserRole(str, Enum):
     CITIZEN = "citizen"

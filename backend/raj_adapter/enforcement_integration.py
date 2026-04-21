@@ -107,7 +107,7 @@ class RajComplianceRule:
             )
             
             if not compliance_check['compliant']:
-                return EnforcementDecision.RESTRICT
+                return EnforcementDecision.BLOCK
         
         return EnforcementDecision.ALLOW
 

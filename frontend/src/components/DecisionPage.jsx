@@ -50,8 +50,14 @@ function DecisionPage() {
         throw new Error(result.error)
       }
 
+      // ─── TANTRA: Frontend Formatter Gate ───
+      // Reject responses that haven't passed the backend formatter gate
+      if (!result.data?.metadata?.formatted) {
+        throw new Error('Response rejected: metadata.formatted missing — unverified response from backend')
+      }
+
       setDecision(result.data)
-      console.log('Decision received:', result.data.trace_id)
+      console.log('Decision received:', result.data.trace_id, '| formatted:', result.data.metadata?.formatted)
     } catch (err) {
       setError(err.message || 'Failed to fetch decision. Please try again.')
       console.error('Query error:', err)

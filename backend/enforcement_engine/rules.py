@@ -60,11 +60,11 @@ class IntentClassificationRule(EnforcementRule):
         
         # Check malicious intent
         if any(pattern in request_lower for pattern in self.malicious_patterns):
-            return EnforcementDecision.RESTRICT
+            return EnforcementDecision.BLOCK
         
         # Check informational intent
         if any(pattern in request_lower for pattern in self.informational_patterns):
-            return EnforcementDecision.ALLOW_INFORMATIONAL
+            return EnforcementDecision.ALLOW
         
         # Check advisory intent
         if any(pattern in request_lower for pattern in self.advisory_patterns):
@@ -106,7 +106,7 @@ class JurisdictionBoundaryRule(EnforcementRule):
     def evaluate(self, context: DecisionContext) -> EnforcementDecision:
         # Ensure jurisdiction routed to matches country
         if context.country != context.jurisdiction_routed_to:
-            return EnforcementDecision.RESTRICT
+            return EnforcementDecision.BLOCK
         return EnforcementDecision.ALLOW
 
 
@@ -133,7 +133,7 @@ class SystemSafetyRule(EnforcementRule):
         request_lower = context.user_request.lower()
         for pattern in self.dangerous_patterns:
             if pattern in request_lower:
-                return EnforcementDecision.RESTRICT
+                return EnforcementDecision.BLOCK
         return EnforcementDecision.ALLOW
 
 
@@ -224,18 +224,18 @@ class EnforcementRuleEngine:
             if isinstance(rule, IntentClassificationRule):
                 intent_decision = decision
             
-            # If any rule returns RESTRICT, we return that decision immediately
-            if decision == EnforcementDecision.RESTRICT:
+            # If any rule returns BLOCK, we return that decision immediately
+            if decision == EnforcementDecision.BLOCK:
                 return decision
         
         # Prioritize intent classification decision if it's not ALLOW
         if intent_decision and intent_decision != EnforcementDecision.ALLOW:
             return intent_decision
         
-        # Check for ALLOW_INFORMATIONAL
+        # Check for ALLOW (informational)
         for rule, decision in decisions:
-            if decision == EnforcementDecision.ALLOW_INFORMATIONAL:
-                return EnforcementDecision.ALLOW_INFORMATIONAL
+            if decision == EnforcementDecision.ALLOW:
+                return EnforcementDecision.ALLOW
         
         # Check for SAFE_REDIRECT
         for rule, decision in decisions:
