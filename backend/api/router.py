@@ -310,9 +310,11 @@ async def query_legal(request: QueryRequest):
         )
         
         # Calculate structured confidence
+        # TANTRA: Use jurisdiction_result.confidence (deterministic keyword detector)
+        # instead of advice.confidence_score (LLM-influenced, may vary with rate limits)
         confidence = _calculate_structured_confidence(
             sections_found,
-            advice.confidence_score,
+            jurisdiction_result.confidence,
             advice.domain,
             cleaned_query
         )
