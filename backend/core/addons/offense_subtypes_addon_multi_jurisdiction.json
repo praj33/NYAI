@@ -76,6 +76,57 @@
     "enforcement_decision": "ALLOW"
   },
 
+  "rera_india": {
+    "jurisdiction": "IN",
+    "keywords": [
+      "rera",
+      "real estate",
+      "builder",
+      "promoter",
+      "flat possession",
+      "flat delay",
+      "builder delay",
+      "construction defect",
+      "structural defect",
+      "project registration",
+      "flat refund",
+      "property registration",
+      "builder complaint",
+      "housing project",
+      "apartment delay",
+      "possession delay",
+      "builder fraud"
+    ],
+    "domains": ["civil", "consumer_commercial"],
+    "statutes": [
+      {
+        "act": "Real Estate (Regulation and Development) Act",
+        "year": 2016,
+        "section": "3",
+        "title": "Prior registration of real estate project - No promoter shall advertise or sell without registering"
+      },
+      {
+        "act": "Real Estate (Regulation and Development) Act",
+        "year": 2016,
+        "section": "14(3)",
+        "title": "Structural defect liability - Promoter shall rectify within 5 years of handing over possession"
+      },
+      {
+        "act": "Real Estate (Regulation and Development) Act",
+        "year": 2016,
+        "section": "18",
+        "title": "Return of amount and compensation for delay - Buyer entitled to refund with interest"
+      },
+      {
+        "act": "Real Estate (Regulation and Development) Act",
+        "year": 2016,
+        "section": "31",
+        "title": "Filing complaint with RERA authority - Any aggrieved person may file complaint"
+      }
+    ],
+    "enforcement_decision": "ALLOW"
+  },
+
   "traffic_violations_uae": {
     "jurisdiction": "UAE",
     "keywords": [

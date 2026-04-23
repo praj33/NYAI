@@ -283,6 +283,15 @@ QUERY_STATUTE_OVERRIDES = [
             {"act": "Bharatiya Nyaya Sanhita", "year": 2023, "section": "281", "title": "Rash driving or riding on a public way"},
         ],
     },
+    {
+        "any": ["rera", "real estate", "builder", "promoter", "flat possession", "flat delay", "builder delay", "construction defect", "structural defect", "project registration", "flat refund", "property registration"],
+        "statutes": [
+            {"act": "Real Estate (Regulation and Development) Act", "year": 2016, "section": "3", "title": "Prior registration of real estate project"},
+            {"act": "Real Estate (Regulation and Development) Act", "year": 2016, "section": "14(3)", "title": "Structural defect liability - Promoter shall rectify within 5 years"},
+            {"act": "Real Estate (Regulation and Development) Act", "year": 2016, "section": "18", "title": "Return of amount and compensation for delay in possession"},
+            {"act": "Real Estate (Regulation and Development) Act", "year": 2016, "section": "31", "title": "Filing complaint with RERA authority"},
+        ],
+    },
 ]
 
 # Act metadata mapping for proper statute formatting
