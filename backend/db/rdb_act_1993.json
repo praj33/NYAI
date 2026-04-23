@@ -1,0 +1,20 @@
+{
+  "jurisdiction": "IN",
+  "code": "Recovery of Debts and Bankruptcy Act, 1993",
+  "key_sections": {
+    "debt_recovery_tribunal": {
+      "Section 3": "Establishment of Debts Recovery Tribunals (DRT) by the Central Government for expeditious adjudication and recovery of debts due to banks and financial institutions",
+      "Section 8": "Establishment of Debts Recovery Appellate Tribunals (DRAT) to hear appeals against orders of the DRT",
+      "Section 17": "Jurisdiction, powers and authority of the Tribunal - DRT exercises jurisdiction over matters relating to recovery of debts due to banks and financial institutions exceeding Rs 20 lakhs",
+      "Section 19": "Application to the Tribunal by bank or financial institution - where a bank or financial institution has to recover any debt from any person, it may make an application to the Tribunal within the local limits of whose jurisdiction the defendant resides or carries on business. The application shall be accompanied by the prescribed fee",
+      "Section 19(1)": "An application under this section shall be in such form and accompanied by such documents as may be prescribed. The applicant shall state the amount of debt and the facts and circumstances giving rise to the claim",
+      "Section 19(22)": "The Tribunal shall pass an order on the application within 180 days from the date of receipt of the application",
+      "Section 20": "Appeal to the Appellate Tribunal - any person aggrieved by an order made by the Tribunal under section 19 may prefer an appeal to the Appellate Tribunal within 30 days",
+      "Section 22": "Deposit of amount of debt due on filing appeal - no appeal shall be entertained by the Appellate Tribunal unless 75% of the amount of debt so due is deposited",
+      "Section 25": "Recovery of debt determined by Tribunal through Recovery Officer by attachment and sale of property, arrest of the judgment debtor, or appointing a receiver",
+      "Section 30": "Transfer of pending cases from civil courts to the Tribunal where the debt exceeds Rs 20 lakhs",
+      "Section 31": "The Tribunal shall not be bound by the procedure laid down in the Code of Civil Procedure but shall be guided by principles of natural justice",
+      "Section 34": "Bar of jurisdiction - no court except the Supreme Court or High Court shall have jurisdiction in matters within the purview of the DRT"
+    }
+  }
+}

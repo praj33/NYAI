@@ -1,0 +1,24 @@
+{
+  "jurisdiction": "IN",
+  "code": "SARFAESI Act, 2002",
+  "key_sections": {
+    "securitization_and_recovery": {
+      "Section 2(1)(zc)": "Security interest means right, title or interest of any kind upon property created in favour of any secured creditor",
+      "Section 2(1)(zd)": "Securitisation means acquisition of financial assets by any securitisation company or reconstruction company from any originator",
+      "Section 5": "Securitisation company or reconstruction company may raise funds from qualified buyers by forming schemes for acquiring financial assets",
+      "Section 9": "Registration of securitisation company or reconstruction company with the Reserve Bank of India",
+      "Section 13(1)": "Notwithstanding anything contained in section 69 or 69A of the Transfer of Property Act, any security interest created in favour of any secured creditor may be enforced without the intervention of court or tribunal",
+      "Section 13(2)": "Where any borrower who is under liability to a secured creditor makes default in repayment, the secured creditor shall issue a demand notice of 60 days to the borrower requiring repayment of the secured debt. The notice must specify the amount payable and consequences of non-payment",
+      "Section 13(3)": "If the borrower fails to discharge liability within 60 days, the secured creditor may take possession of the secured assets, take over management of the business, appoint any person to manage the secured assets, or require any person who has acquired any of the secured assets to pay the secured creditor",
+      "Section 13(3A)": "Every notice of sale shall be published in two leading newspapers including one in vernacular language. The secured creditor shall not sell immovable property at a price less than the reserve price",
+      "Section 13(4)": "The secured creditor may take recourse to measures including: taking possession of secured assets, sale or lease or assign the right over secured assets, take over management of the secured assets, appoint any person to manage the secured assets, require persons owing money to borrower to pay the secured creditor instead. This includes auction of property and seizure of assets",
+      "Section 13(8)": "If the dues of the secured creditor together with all costs charges and expenses incurred are tendered to the secured creditor at any time before the date fixed for sale or transfer, the secured assets shall not be sold or transferred",
+      "Section 14": "The Chief Metropolitan Magistrate or District Magistrate shall take possession of such asset and forward such asset to the secured creditor on receiving a written request from the secured creditor",
+      "Section 15": "Management of secured assets and right of redemption by borrower at any time before the secured asset is sold",
+      "Section 17": "Any person including borrower aggrieved by any measures taken by the secured creditor may make an application to the Debts Recovery Tribunal (DRT) within 45 days. DRT shall consider whether possession or any action taken by the secured creditor is in accordance with the provisions of this Act",
+      "Section 18": "Any person aggrieved by the order of the DRT under Section 17 may prefer an appeal to the Debts Recovery Appellate Tribunal (DRAT) within 30 days from the date of receipt of the order",
+      "Section 34": "No civil court shall have jurisdiction to entertain any suit or proceeding in respect of any matter which the DRT or DRAT is empowered to determine under this Act",
+      "Section 35": "Offences by companies and officers in default - penalty provisions for violation of SARFAESI Act"
+    }
+  }
+}

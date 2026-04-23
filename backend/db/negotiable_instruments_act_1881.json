@@ -1,0 +1,25 @@
+{
+  "jurisdiction": "IN",
+  "code": "Negotiable Instruments Act, 1881",
+  "key_sections": {
+    "cheque_dishonour": {
+      "Section 6": "A cheque is a bill of exchange drawn on a specified banker and not expressed to be payable otherwise than on demand. It includes electronic image of a truncated cheque and a cheque in electronic form",
+      "Section 118": "Presumption as to negotiable instruments - until the contrary is proved, it shall be presumed that every negotiable instrument was made or drawn for consideration",
+      "Section 138": "Dishonour of cheque for insufficiency of funds in the account. Where any cheque drawn by a person on an account maintained by him with a banker for payment of any amount of money to another person is returned by the bank unpaid due to insufficient funds, such person shall be deemed to have committed an offence punishable with imprisonment up to 2 years or with fine up to twice the amount of the cheque, or both. Cognizable only on complaint by payee. Complaint must be filed within 30 days of cause of action",
+      "Section 139": "Presumption in favour of holder - it shall be presumed unless the contrary is proved that the holder of a cheque received the cheque for the discharge of any debt or other liability in whole or in part",
+      "Section 140": "Defence which may not be allowed in any prosecution under section 138 - it shall not be a defence that the drawer had no reason to believe that the cheque would be dishonoured",
+      "Section 141": "Offences by companies - if the person committing an offence under section 138 is a company, every person who was in charge of the company shall be liable",
+      "Section 142": "Cognizance of offences - no court shall take cognizance except on a complaint in writing made by the payee or holder in due course, within one month of the date on which the cause of action arises under clause (c) of the proviso to section 138",
+      "Section 143": "Power of court to try cases summarily - the magistrate may try the case summarily in accordance with provisions of CrPC",
+      "Section 144": "Mode of service of summons - a court issuing summons may direct service by registered post or speed post or courier services"
+    },
+    "general_provisions": {
+      "Section 4": "Promissory note - an instrument in writing containing an unconditional undertaking, signed by the maker, to pay a certain sum of money",
+      "Section 5": "Bill of exchange - an instrument in writing containing an unconditional order, signed by the maker, directing a certain person to pay a certain sum of money to a specified person",
+      "Section 13": "Negotiable instrument means a promissory note, bill of exchange or cheque payable either to order or to bearer",
+      "Section 14": "Negotiation of instruments - transfer from one person to another so as to constitute the person to whom it is transferred the holder thereof",
+      "Section 30": "Liability of drawer - the drawer engages that on due presentment the instrument shall be accepted or paid",
+      "Section 46": "Presentment for payment must be made at a reasonable hour on a business day at the proper place"
+    }
+  }
+}

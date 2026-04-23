@@ -1,0 +1,42 @@
+{
+  "jurisdiction": "IN",
+  "code": "Real Estate (Regulation and Development) Act, 2016",
+  "key_sections": {
+    "registration_and_regulation": {
+      "Section 3": "No promoter shall advertise, market, book, sell or offer for sale, or invite persons to purchase any plot, apartment or building in any real estate project without registering the project with the Real Estate Regulatory Authority (RERA)",
+      "Section 4": "Application for registration of real estate project - promoter shall submit details including layout plan, plan of development works, sanctioned plan, proforma of allotment letter, agreement for sale, and details of encumbrances",
+      "Section 5": "Revocation of registration by the authority if the promoter makes default or violates terms of approval or registration",
+      "Section 6": "Registration and functions of real estate agent - No real estate agent shall facilitate the sale or purchase of any plot, apartment or building without registration",
+      "Section 7": "Application for registration as a real estate agent with the RERA authority",
+      "Section 9": "Registration granted to the real estate agent may be revoked by the Authority for contravention of provisions of the Act",
+      "Section 10": "Functions and duties of real estate agent - shall not facilitate the sale of any property being sold by the promoter which is not registered",
+      "Section 11": "Functions and duties of promoter - shall be responsible for all obligations, responsibilities and functions under the provisions of this Act"
+    },
+    "rights_and_duties": {
+      "Section 12": "Obligations of promoter regarding insurance of real estate project and transfer of insurance to the allottee",
+      "Section 13": "No deposit or advance shall be collected by the promoter without first entering into a written agreement for sale with the allottee",
+      "Section 14(1)": "The promoter shall not transfer or assign his majority rights in the real estate project to a third party without prior written consent from two-thirds of the allottees",
+      "Section 14(2)": "The promoter shall not change the sanctioned plans, layout plans and specifications without the previous consent of the allottees",
+      "Section 14(3)": "The promoter shall be responsible to rectify any structural defect or any defect in workmanship, quality or provision of services or any other obligations as per the agreement for sale within a period of 5 years from the date of handing over possession. The promoter shall rectify such defects without further charge within 30 days",
+      "Section 15": "If the promoter fails to complete the project or is unable to give possession, or has been penalised under the Act, the allottees shall have the right to form an association or society",
+      "Section 16": "Obligations of allottee - shall make necessary payments to the promoter as per the agreement for sale and participate in the registered association"
+    },
+    "compensation_and_refund": {
+      "Section 18(1)": "If the promoter fails to complete or is unable to give possession of the apartment, plot or building, the promoter shall on demand return the amount received from the allottee with interest at prescribed rate, or provide regular interest for every month of delay until possession is handed over",
+      "Section 18(2)": "If the allottee wishes to withdraw from the project without any fault on his part, the promoter shall return the entire amount received with interest within 45 days",
+      "Section 19": "Rights of allottee - right to obtain information relating to sanctioned plans, layout plans along with the specifications, right to know stage-wise time schedule of completion of the project",
+      "Section 20": "Functions of RERA Authority - protect the interests of allottees, ensure compliance, and promote sustainable building",
+      "Section 21": "Composition of Real Estate Regulatory Authority",
+      "Section 22": "Term and conditions of service of chairperson and members of the Authority"
+    },
+    "complaints_and_penalties": {
+      "Section 31": "Any aggrieved person may file a complaint with the RERA authority for any violation of this Act against any promoter, allottee or real estate agent. The authority shall hear and adjudicate the complaint",
+      "Section 32": "The authority may refer the complaint to the adjudicating officer for the purpose of determining the compensation",
+      "Section 35": "Where any promoter contravenes the provisions of section 3, he shall be liable to a penalty which may extend up to 10% of the estimated cost of the real estate project",
+      "Section 38": "Where any promoter fails to comply with or contravenes any orders or directions of the Authority, the promoter shall be punishable with imprisonment for up to 3 years or a fine, or both",
+      "Section 40": "Where any promoter provides false information in the application for registration, the promoter shall be liable to a penalty up to 5% of the estimated cost",
+      "Section 43": "The Appellate Tribunal established under section 44 shall hear appeals against orders of the authority and adjudicating officer",
+      "Section 44": "Establishment of Real Estate Appellate Tribunal by the State Government"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "jurisdiction": "IN",
+  "code": "RBI Guidelines and Circulars",
+  "key_sections": {
+    "npa_and_recovery": {
+      "NPA Classification": "A non-performing asset (NPA) is a loan or advance for which the principal or interest payment remained overdue for a period of 90 days. Sub-standard assets are those which have remained NPA for a period not exceeding 12 months. Doubtful assets are those which have remained NPA for more than 12 months. Loss assets are those where loss has been identified by the bank or auditor but the amount has not been written off",
+      "Income Recognition": "Banks should not charge and take to income account, interest on any NPA. Interest on NPAs should be booked only when it is actually received. Banks may reverse the interest already charged and not collected",
+      "Provisioning Norms": "Banks are required to make provision for NPAs based on classification: Sub-standard 15%, Doubtful 25-100%, Loss assets 100%. Provision is made on a quarterly basis",
+      "One Time Settlement": "Banks and financial institutions may adopt one-time settlement schemes for recovery of NPAs. The scheme covers compromise settlements and technical write-offs"
+    },
+    "fair_practices": {
+      "Fair Practices Code for Lenders": "All banks and NBFCs must follow fair practices code in their dealings with borrowers. This includes: transparent communication of terms and conditions, adequate notice before any action, fair and reasonable treatment during recovery, prohibition of harassment and use of muscle power for recovery, maintaining decency and discipline during recovery process",
+      "Recovery Agent Guidelines": "Banks must ensure that their recovery agents follow the guidelines issued by RBI. Recovery agents should not resort to intimidation, harassment, or violence. Recovery calls should be made only between 7 AM and 7 PM. Identity cards must be carried. Agents must inform the borrower of the details of the dues and the name of the bank. Banks are responsible for the actions of their recovery agents",
+      "Grievance Redressal": "Banks must have a grievance redressal mechanism for borrowers. A complaint can be filed with the Banking Ombudsman under the RBI Integrated Ombudsman Scheme 2021 if the bank does not resolve the complaint within 30 days"
+    },
+    "loan_restructuring": {
+      "Loan Restructuring Framework": "RBI framework allows borrowers facing temporary financial difficulties to request restructuring of their loans. Restructuring may include extension of repayment period, reduction in interest rate, conversion of outstanding interest into term loan, or granting of moratorium. The borrower must demonstrate viability and submit a restructuring proposal",
+      "Resolution Framework for Covid-19": "Special resolution framework allowing one-time restructuring for personal loans, MSME loans and corporate loans affected by the pandemic. Invocation must be done within the prescribed window. Moratorium period up to 2 years for personal loans",
+      "MSME Restructuring": "Special restructuring facility for MSMEs with aggregate exposure up to Rs 25 crore. Banks can restructure MSME accounts that are classified as standard without downgrading the asset classification"
+    },
+    "digital_lending": {
+      "Digital Lending Guidelines": "All loan disbursements and repayments must be executed between the bank accounts of the borrower and the regulated entity without any pass-through of third party. Lending Service Providers and Digital Lending Apps must comply with RBI guidelines. Key requirements: disclosure of all-inclusive cost of digital loans, cooling-off period for borrowers, data privacy protections, prohibition on accessing mobile phone data without consent",
+      "Loan App Regulations": "RBI mandates that only regulated entities can offer digital loans. All digital lending apps must disclose the name of the regulated entity on whose behalf they operate. Automatic increase of credit limit without borrower consent is prohibited. Penalty and penal charges must be reasonable and disclosed upfront",
+      "KYC Norms for Digital Lending": "All digital lending platforms must complete KYC verification as per RBI norms. Video-KYC is permitted for accounts up to specified limits. Re-KYC must be done periodically"
+    }
+  }
+}
