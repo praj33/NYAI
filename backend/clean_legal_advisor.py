@@ -275,7 +275,7 @@ QUERY_STATUTE_OVERRIDES = [
         ],
     },
     {
-        "any": ["drink and drive", "drink drive", "drunk driving", "drunken driving", "dui", "driving under influence"],
+        "any": ["drink and drive", "drink and driving", "drink drive", "drink driving", "drunk driving", "drunken driving", "drinking and driving", "drinking driving", "dui", "driving under influence"],
         "statutes": [
             {"act": "Motor Vehicles Act", "year": 1988, "section": "185", "title": "Driving by a drunken person or by a person under the influence of drugs"},
             {"act": "Motor Vehicles Act", "year": 1988, "section": "184", "title": "Driving dangerously - Rash and negligent driving"},
@@ -1572,7 +1572,7 @@ class EnhancedLegalAdvisor:
         is_theft = any(word in query_lower or word in section_text for word in ['theft', 'stolen', 'steal', 'robbery', 'snatching', 'chain snatching'])
         is_assault = any(word in query_lower or word in section_text for word in ['assault', 'hurt', 'grievous hurt', 'beating', 'attack', 'violence'])
         is_cyber = any(word in query_lower or word in section_text or word in act_text for word in ['cyber', 'hacking', 'phishing', 'identity theft', 'data breach', 'it_act'])
-        is_traffic = any(word in query_lower or word in section_text or word in act_text for word in ['accident', 'drunk driving', 'drink and drive', 'drink drive', 'drunken driving', 'dui', 'traffic', 'vehicle', 'rash driving', 'motor_vehicles', 'challan', 'speeding', 'overspeeding'])
+        is_traffic = any(word in query_lower or word in section_text or word in act_text for word in ['accident', 'drunk driving', 'drink and drive', 'drink and driving', 'drink drive', 'drink driving', 'drunken driving', 'drinking and driving', 'drinking driving', 'dui', 'traffic', 'vehicle', 'rash driving', 'motor_vehicles', 'challan', 'speeding', 'overspeeding'])
         is_property = any(word in query_lower or word in section_text or word in act_text for word in ['property', 'tenant', 'landlord', 'eviction', 'boundary', 'title', 'encroachment', 'land'])
         is_salary = any(word in query_lower or word in section_text or word in act_text for word in ['salary', 'wages', 'termination', 'gratuity', 'pf', 'provident fund', 'employee', 'employer', 'labour'])
         is_consumer = any(word in query_lower or word in section_text or word in act_text for word in ['consumer', 'defective', 'refund', 'warranty', 'replacement', 'deficiency'])
