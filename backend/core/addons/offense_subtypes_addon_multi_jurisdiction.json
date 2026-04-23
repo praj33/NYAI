@@ -222,7 +222,22 @@
       "digital lending",
       "drt",
       "drat",
-      "debt recovery tribunal"
+      "debt recovery tribunal",
+      "bank is taking",
+      "bank is selling",
+      "bank taking",
+      "bank selling",
+      "bank seized",
+      "bank seize",
+      "property seized",
+      "house seized",
+      "property attached",
+      "house auction",
+      "property auction",
+      "taking my property",
+      "selling my house",
+      "selling my property",
+      "foreclosure"
     ],
     "domains": ["civil", "consumer_commercial"],
     "statutes": [

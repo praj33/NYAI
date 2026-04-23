@@ -309,7 +309,7 @@ QUERY_STATUTE_OVERRIDES = [
         ],
     },
     {
-        "any": ["loan default", "loan recovery", "npa", "non performing asset", "emi default", "bank auction", "sarfaesi", "bank notice", "loan restructuring", "emi relief", "moratorium", "recovery agent", "loan harassment", "loan app", "digital lending"],
+        "any": ["loan default", "loan recovery", "npa", "non performing asset", "emi default", "bank auction", "sarfaesi", "bank notice", "loan restructuring", "emi relief", "moratorium", "recovery agent", "loan harassment", "loan app", "digital lending", "bank taking", "bank is taking", "bank is selling", "bank selling", "bank seized", "bank seize", "bank seizing", "property seized", "house seized", "property attached", "house auction", "property auction", "bank repossess", "foreclosure", "taking my property", "selling my house", "selling my property", "seizing my property", "seizing my house"],
         "statutes": [
             {"act": "SARFAESI Act", "year": 2002, "section": "13(2)", "title": "Demand notice - Bank issues 60-day notice before recovery"},
             {"act": "SARFAESI Act", "year": 2002, "section": "13(4)", "title": "Recovery actions - Bank can seize and auction property"},
