@@ -108,6 +108,9 @@ class NyayaResponse(BaseModel):
     decision_basis: Optional[Dict[str, Any]] = None
     confidence_sources: Optional[Dict[str, Any]] = None
     metadata: Optional[Dict[str, Any]] = None
+    # ─── Legal Output Fields ───
+    remedies: List[str] = []
+    procedural_steps: List[str] = []
 
 class MultiJurisdictionResponse(BaseModel):
     comparative_analysis: Dict[str, NyayaResponse]

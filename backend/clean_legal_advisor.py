@@ -1563,7 +1563,7 @@ class EnhancedLegalAdvisor:
         is_theft = any(word in query_lower or word in section_text for word in ['theft', 'stolen', 'steal', 'robbery', 'snatching', 'chain snatching'])
         is_assault = any(word in query_lower or word in section_text for word in ['assault', 'hurt', 'grievous hurt', 'beating', 'attack', 'violence'])
         is_cyber = any(word in query_lower or word in section_text or word in act_text for word in ['cyber', 'hacking', 'phishing', 'identity theft', 'data breach', 'it_act'])
-        is_traffic = any(word in query_lower or word in section_text or word in act_text for word in ['accident', 'drunk driving', 'traffic', 'vehicle', 'rash driving', 'motor_vehicles'])
+        is_traffic = any(word in query_lower or word in section_text or word in act_text for word in ['accident', 'drunk driving', 'drink and drive', 'drink drive', 'drunken driving', 'dui', 'traffic', 'vehicle', 'rash driving', 'motor_vehicles', 'challan', 'speeding', 'overspeeding'])
         is_property = any(word in query_lower or word in section_text or word in act_text for word in ['property', 'tenant', 'landlord', 'eviction', 'boundary', 'title', 'encroachment', 'land'])
         is_salary = any(word in query_lower or word in section_text or word in act_text for word in ['salary', 'wages', 'termination', 'gratuity', 'pf', 'provident fund', 'employee', 'employer', 'labour'])
         is_consumer = any(word in query_lower or word in section_text or word in act_text for word in ['consumer', 'defective', 'refund', 'warranty', 'replacement', 'deficiency'])

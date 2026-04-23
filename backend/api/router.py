@@ -400,7 +400,9 @@ async def query_legal(request: QueryRequest):
                     "statute_match": confidence.statute_match
                 }
             },
-            "trace_id": advice.trace_id
+            "trace_id": advice.trace_id,
+            "remedies": advice.remedies,
+            "procedural_steps": advice.procedural_steps
         }
         
         # Enrich response with timeline, glossary, evidence_requirements
