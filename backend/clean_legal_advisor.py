@@ -274,6 +274,15 @@ QUERY_STATUTE_OVERRIDES = [
             {"act": "Indian Contract Act", "year": 1872, "section": "74", "title": "Compensation for breach where penalty stipulated"},
         ],
     },
+    {
+        "any": ["drink and drive", "drink drive", "drunk driving", "drunken driving", "dui", "driving under influence"],
+        "statutes": [
+            {"act": "Motor Vehicles Act", "year": 1988, "section": "185", "title": "Driving by a drunken person or by a person under the influence of drugs"},
+            {"act": "Motor Vehicles Act", "year": 1988, "section": "184", "title": "Driving dangerously - Rash and negligent driving"},
+            {"act": "Motor Vehicles Act", "year": 1988, "section": "177", "title": "General provision for punishment of offences"},
+            {"act": "Bharatiya Nyaya Sanhita", "year": 2023, "section": "281", "title": "Rash driving or riding on a public way"},
+        ],
+    },
 ]
 
 # Act metadata mapping for proper statute formatting
