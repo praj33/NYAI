@@ -292,6 +292,42 @@ QUERY_STATUTE_OVERRIDES = [
             {"act": "Real Estate (Regulation and Development) Act", "year": 2016, "section": "31", "title": "Filing complaint with RERA authority"},
         ],
     },
+    {
+        "any": ["cheque bounce", "cheque dishonour", "cheque dishonored", "bounced cheque", "cheque returned", "insufficient funds cheque", "section 138"],
+        "statutes": [
+            {"act": "Negotiable Instruments Act", "year": 1881, "section": "138", "title": "Dishonour of cheque for insufficiency of funds"},
+            {"act": "Negotiable Instruments Act", "year": 1881, "section": "139", "title": "Presumption in favour of holder - Court presumes cheque issued for debt"},
+        ],
+    },
+    {
+        "any": ["banking fraud", "bank fraud", "upi fraud", "online banking fraud", "internet banking fraud", "bank cheating", "bank account hacked"],
+        "statutes": [
+            {"act": "Indian Penal Code", "year": 1860, "section": "420", "title": "Cheating and dishonestly inducing delivery of property"},
+            {"act": "Information Technology Act", "year": 2000, "section": "66", "title": "Computer related offences - Covers online banking fraud"},
+            {"act": "Consumer Protection Act", "year": 2019, "section": "2(11)", "title": "Deficiency in service - Bank service issues"},
+            {"act": "Consumer Protection Act", "year": 2019, "section": "35", "title": "Consumer complaint against bank"},
+        ],
+    },
+    {
+        "any": ["loan default", "loan recovery", "npa", "non performing asset", "emi default", "bank auction", "sarfaesi", "bank notice", "loan restructuring", "emi relief", "moratorium", "recovery agent", "loan harassment", "loan app", "digital lending"],
+        "statutes": [
+            {"act": "SARFAESI Act", "year": 2002, "section": "13(2)", "title": "Demand notice - Bank issues 60-day notice before recovery"},
+            {"act": "SARFAESI Act", "year": 2002, "section": "13(4)", "title": "Recovery actions - Bank can seize and auction property"},
+            {"act": "SARFAESI Act", "year": 2002, "section": "17", "title": "Application to DRT - Borrower can challenge bank action"},
+            {"act": "RBI Guidelines", "year": 2023, "section": "NPA_CLASSIFICATION", "title": "Asset classification as NPA - Loan overdue for more than 90 days"},
+            {"act": "RBI Guidelines", "year": 2023, "section": "FAIR_PRACTICES_CODE", "title": "Fair practices for lenders - Transparency and fairness in recovery"},
+            {"act": "RBI Guidelines", "year": 2023, "section": "LOAN_RESTRUCTURING", "title": "Loan restructuring framework - Borrower may request restructuring"},
+            {"act": "RBI Guidelines", "year": 2023, "section": "DIGITAL_LENDING", "title": "Digital lending guidelines - Regulates loan apps and digital platforms"},
+        ],
+    },
+    {
+        "any": ["drt", "drat", "debt recovery tribunal", "debt recovery appellate tribunal", "bank recovery case"],
+        "statutes": [
+            {"act": "SARFAESI Act", "year": 2002, "section": "17", "title": "Application to DRT - Borrower can challenge bank action"},
+            {"act": "SARFAESI Act", "year": 2002, "section": "18", "title": "Appeal to DRAT - Appeal against DRT order"},
+            {"act": "RDB Act", "year": 1993, "section": "19", "title": "Application to DRT by banks - Bank can file recovery case before DRT"},
+        ],
+    },
 ]
 
 # Act metadata mapping for proper statute formatting
