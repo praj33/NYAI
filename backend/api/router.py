@@ -232,37 +232,45 @@ async def query_legal(request: QueryRequest):
         # ─── ACT-HINTS BRIDGE ───
         # If statutes are STILL empty but the LLM identified act_hints,
         # use those hints to find matching QUERY_STATUTE_OVERRIDES.
-        # This makes the system resilient to any user phrasing.
+        # Fully dynamic — no hardcoded act map needed.
         if not statute_records and understanding and isinstance(understanding, dict):
             act_hints = understanding.get("act_hints", [])
             if act_hints:
                 from clean_legal_advisor import QUERY_STATUTE_OVERRIDES
-                # Map act_hint keywords to override act names
-                ACT_HINT_MAP = {
-                    "sarfaesi": "SARFAESI Act",
-                    "securitization": "SARFAESI Act",
-                    "negotiable_instruments": "Negotiable Instruments Act",
-                    "consumer_protection": "Consumer Protection Act",
-                    "rera": "Real Estate (Regulation and Development) Act",
-                    "real_estate": "Real Estate (Regulation and Development) Act",
-                    "motor_vehicles": "Motor Vehicles Act",
-                    "it_act": "Information Technology Act",
-                    "rbi": "RBI Guidelines",
-                }
-                matched_acts = set()
+                # Normalize hints into matchable tokens
+                hint_tokens = set()
                 for hint in act_hints:
-                    hint_lower = hint.lower().replace(" ", "_")
-                    for key, act_name in ACT_HINT_MAP.items():
-                        if key in hint_lower:
-                            matched_acts.add(act_name.lower())
+                    h = hint.lower().strip()
+                    # Extract key identifiable words from the hint
+                    # e.g. "the securitization and reconstruction... act, 2002" → "sarfaesi", "securitization"
+                    # e.g. "section 185 of the motor vehicles act" → "motor vehicles"
+                    hint_tokens.add(h)
+                    # Also add individual meaningful words (3+ chars, skip articles/prepositions)
+                    skip_words = {"the", "and", "for", "act", "section", "under", "with", "from", "that", "this", "any"}
+                    for word in h.replace(",", "").replace(".", "").split():
+                        if len(word) >= 3 and word not in skip_words:
+                            hint_tokens.add(word)
                 
-                if matched_acts:
-                    for rule in QUERY_STATUTE_OVERRIDES:
-                        rule_acts = {s.get("act", "").lower() for s in rule.get("statutes", [])}
-                        if rule_acts & matched_acts:
-                            statute_records = rule.get("statutes", [])
-                            statute_source = "act_hints_bridge"
-                            break
+                # Score each override rule by how many hint tokens match its act names
+                best_rule = None
+                best_score = 0
+                for rule in QUERY_STATUTE_OVERRIDES:
+                    score = 0
+                    rule_text = " ".join(
+                        s.get("act", "").lower() + " " + s.get("title", "").lower()
+                        for s in rule.get("statutes", [])
+                    )
+                    for token in hint_tokens:
+                        if token in rule_text:
+                            score += len(token)  # Longer matches score higher
+                    if score > best_score:
+                        best_score = score
+                        best_rule = rule
+                
+                # Only use if score is meaningful (at least one significant match)
+                if best_rule and best_score >= 5:
+                    statute_records = best_rule.get("statutes", [])
+                    statute_source = "act_hints_bridge"
 
         statutes = []
         seen_statutes = set()
