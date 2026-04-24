@@ -328,6 +328,120 @@ QUERY_STATUTE_OVERRIDES = [
             {"act": "RDB Act", "year": 1993, "section": "19", "title": "Application to DRT by banks - Bank can file recovery case before DRT"},
         ],
     },
+    # ─── NEW ACT OVERRIDES ───
+    {
+        "any": ["ndps", "narcotic", "drug possession", "drug trafficking", "ganja", "charas", "heroin", "cocaine", "marijuana", "cannabis", "opium", "psychotropic", "drug peddling", "drug dealer", "drug seizure", "smack"],
+        "statutes": [
+            {"act": "NDPS Act", "year": 1985, "section": "8", "title": "Prohibition of certain operations relating to narcotic drugs and psychotropic substances"},
+            {"act": "NDPS Act", "year": 1985, "section": "20", "title": "Punishment for cannabis - ganja and charas possession and sale"},
+            {"act": "NDPS Act", "year": 1985, "section": "21", "title": "Punishment for manufactured drugs - heroin, cocaine possession"},
+            {"act": "NDPS Act", "year": 1985, "section": "22", "title": "Punishment for psychotropic substances"},
+            {"act": "NDPS Act", "year": 1985, "section": "27", "title": "Punishment for consumption of narcotic drug or psychotropic substance"},
+            {"act": "NDPS Act", "year": 1985, "section": "37", "title": "Offences cognizable and non-bailable - bail restrictions"},
+            {"act": "NDPS Act", "year": 1985, "section": "50", "title": "Conditions for search of persons - right to be searched before Gazetted Officer"},
+        ],
+    },
+    {
+        "any": ["illegal gun", "illegal weapon", "firearm", "arms act", "gun licence", "pistol", "rifle", "country made weapon", "desi katta", "arms licence", "ammunition", "unlicensed weapon"],
+        "statutes": [
+            {"act": "Arms Act", "year": 1959, "section": "3", "title": "Licence for acquisition and possession of firearms"},
+            {"act": "Arms Act", "year": 1959, "section": "25(1A)", "title": "Punishment for prohibited arms - 7 years to life imprisonment"},
+            {"act": "Arms Act", "year": 1959, "section": "25(1)(a)", "title": "Possession without licence - 1 to 3 years imprisonment"},
+            {"act": "Arms Act", "year": 1959, "section": "27", "title": "Punishment for using arms - death if results in death of person"},
+        ],
+    },
+    {
+        "any": ["sc st", "scheduled caste", "scheduled tribe", "caste abuse", "caste discrimination", "atrocity", "dalit", "untouchability", "caste slur", "caste name calling"],
+        "statutes": [
+            {"act": "SC/ST Prevention of Atrocities Act", "year": 1989, "section": "3(1)(x)", "title": "Abusing by caste name in public - 6 months to 5 years imprisonment"},
+            {"act": "SC/ST Prevention of Atrocities Act", "year": 1989, "section": "3(1)(v)", "title": "Wrongfully dispossessing SC/ST from land"},
+            {"act": "SC/ST Prevention of Atrocities Act", "year": 1989, "section": "18", "title": "All offences cognizable - Section 438 CrPC (anticipatory bail) not applicable"},
+            {"act": "SC/ST Prevention of Atrocities Act", "year": 1989, "section": "14", "title": "Special Courts for trial of offences"},
+        ],
+    },
+    {
+        "any": ["bribe", "bribery", "corruption", "government corruption", "officer taking money", "public servant corruption", "disproportionate assets", "corrupt official", "under the table payment"],
+        "statutes": [
+            {"act": "Prevention of Corruption Act", "year": 1988, "section": "7", "title": "Public servant being bribed - 3 to 7 years imprisonment"},
+            {"act": "Prevention of Corruption Act", "year": 1988, "section": "8", "title": "Bribing a public servant - up to 7 years imprisonment"},
+            {"act": "Prevention of Corruption Act", "year": 1988, "section": "13(1)(b)", "title": "Criminal misconduct - disproportionate assets - 4 to 10 years"},
+            {"act": "Prevention of Corruption Act", "year": 1988, "section": "19", "title": "Prior sanction necessary for prosecution of public servant"},
+        ],
+    },
+    {
+        "any": ["money laundering", "black money", "hawala", "benami", "shell company", "proceeds of crime", "enforcement directorate", "ed raid", "pmla"],
+        "statutes": [
+            {"act": "Prevention of Money Laundering Act", "year": 2002, "section": "3", "title": "Offence of money laundering - concealment of proceeds of crime"},
+            {"act": "Prevention of Money Laundering Act", "year": 2002, "section": "4", "title": "Punishment - 3 to 7 years imprisonment and fine"},
+            {"act": "Prevention of Money Laundering Act", "year": 2002, "section": "5", "title": "Attachment of property involved in money laundering"},
+            {"act": "Prevention of Money Laundering Act", "year": 2002, "section": "45", "title": "Offences cognizable and non-bailable - bail restrictions"},
+        ],
+    },
+    {
+        "any": ["juvenile", "minor offender", "child crime", "juvenile justice", "jjb", "juvenile justice board", "child in conflict with law", "minor arrested"],
+        "statutes": [
+            {"act": "Juvenile Justice Act", "year": 2015, "section": "12", "title": "Bail to children - shall be released on bail as matter of right"},
+            {"act": "Juvenile Justice Act", "year": 2015, "section": "14", "title": "Inquiry by Juvenile Justice Board within 24 hours"},
+            {"act": "Juvenile Justice Act", "year": 2015, "section": "15", "title": "Preliminary assessment for heinous offences - children 16-18 years"},
+            {"act": "Juvenile Justice Act", "year": 2015, "section": "18", "title": "Orders for children - admonition, counselling, special home"},
+            {"act": "Juvenile Justice Act", "year": 2015, "section": "75", "title": "Punishment for cruelty to child - up to 3 years"},
+        ],
+    },
+    {
+        "any": ["sexual harassment workplace", "posh", "workplace harassment", "office harassment", "internal complaints committee", "icc complaint", "harassment at office", "me too", "boss harassing"],
+        "statutes": [
+            {"act": "Sexual Harassment of Women at Workplace Act", "year": 2013, "section": "2(n)", "title": "Definition of sexual harassment - unwelcome physical contact, sexual favours, remarks"},
+            {"act": "Sexual Harassment of Women at Workplace Act", "year": 2013, "section": "4", "title": "Constitution of Internal Complaints Committee (ICC)"},
+            {"act": "Sexual Harassment of Women at Workplace Act", "year": 2013, "section": "9", "title": "Complaint within 3 months of incident"},
+            {"act": "Sexual Harassment of Women at Workplace Act", "year": 2013, "section": "13", "title": "Action - written apology, warning, termination of harasser"},
+        ],
+    },
+    {
+        "any": ["property inheritance", "ancestral property", "succession", "will dispute", "inheritance rights", "daughter property rights", "coparcenary", "father died property", "mother died property", "hindu succession"],
+        "statutes": [
+            {"act": "Hindu Succession Act", "year": 1956, "section": "6", "title": "Daughter has equal coparcenary rights as son by birth"},
+            {"act": "Hindu Succession Act", "year": 1956, "section": "8", "title": "Succession of Hindu male - Class I heirs: son, daughter, widow, mother"},
+            {"act": "Hindu Succession Act", "year": 1956, "section": "14", "title": "Property of female Hindu to be her absolute property"},
+            {"act": "Hindu Succession Act", "year": 1956, "section": "30", "title": "Testamentary succession - Hindu may dispose property by will"},
+        ],
+    },
+    {
+        "any": ["old parents abandoned", "senior citizen", "elderly abuse", "parents maintenance", "old age home", "abandoning parents", "parents not taken care", "maintenance to parents"],
+        "statutes": [
+            {"act": "Maintenance and Welfare of Parents and Senior Citizens Act", "year": 2007, "section": "4", "title": "Maintenance of parents and senior citizens by children or relatives"},
+            {"act": "Maintenance and Welfare of Parents and Senior Citizens Act", "year": 2007, "section": "5", "title": "Tribunal may order monthly maintenance up to Rs 10,000"},
+            {"act": "Maintenance and Welfare of Parents and Senior Citizens Act", "year": 2007, "section": "12", "title": "Transfer of property by senior citizen deemed void if basic needs not met"},
+            {"act": "Maintenance and Welfare of Parents and Senior Citizens Act", "year": 2007, "section": "21", "title": "Punishment for abandonment - imprisonment up to 3 months"},
+        ],
+    },
+    {
+        "any": ["rti", "right to information", "government information", "rti application", "public information officer", "information commission"],
+        "statutes": [
+            {"act": "Right to Information Act", "year": 2005, "section": "3", "title": "All citizens have right to information"},
+            {"act": "Right to Information Act", "year": 2005, "section": "6", "title": "Request for information - apply to Public Information Officer"},
+            {"act": "Right to Information Act", "year": 2005, "section": "7", "title": "Information within 30 days, life/liberty cases within 48 hours"},
+            {"act": "Right to Information Act", "year": 2005, "section": "19", "title": "Appeal - first to senior officer, second to Information Commission"},
+            {"act": "Right to Information Act", "year": 2005, "section": "20", "title": "Penalty Rs 250 per day for delay, max Rs 25,000"},
+        ],
+    },
+    {
+        "any": ["zero fir", "fir at any police station", "bnss", "new crpc", "nagarik suraksha", "electronic fir", "video trial"],
+        "statutes": [
+            {"act": "Bharatiya Nagarik Suraksha Sanhita", "year": 2023, "section": "173(1)", "title": "Zero FIR - FIR can be filed at any police station irrespective of jurisdiction"},
+            {"act": "Bharatiya Nagarik Suraksha Sanhita", "year": 2023, "section": "35", "title": "Arrest without warrant - when police may arrest"},
+            {"act": "Bharatiya Nagarik Suraksha Sanhita", "year": 2023, "section": "483", "title": "Anticipatory bail provisions"},
+            {"act": "Bharatiya Nagarik Suraksha Sanhita", "year": 2023, "section": "530", "title": "Electronic communication - video trials and e-summons"},
+        ],
+    },
+    {
+        "any": ["electronic evidence", "digital evidence", "whatsapp evidence", "email evidence", "cctv evidence", "bsa", "sakshya adhiniyam", "new evidence act"],
+        "statutes": [
+            {"act": "Bharatiya Sakshya Adhiniyam", "year": 2023, "section": "39", "title": "Electronic records have same legal effect as paper records"},
+            {"act": "Bharatiya Sakshya Adhiniyam", "year": 2023, "section": "170", "title": "Certificate for electronic records - admissibility without further proof"},
+            {"act": "Bharatiya Sakshya Adhiniyam", "year": 2023, "section": "57", "title": "Burden of proof on party asserting facts"},
+            {"act": "Bharatiya Sakshya Adhiniyam", "year": 2023, "section": "63", "title": "Oral evidence must be direct"},
+        ],
+    },
 ]
 
 # Act metadata mapping for proper statute formatting
