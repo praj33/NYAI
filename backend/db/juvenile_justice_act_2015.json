@@ -1,0 +1,28 @@
+{
+  "jurisdiction": "IN",
+  "code": "Juvenile Justice (Care and Protection of Children) Act, 2015",
+  "key_sections": {
+    "children_in_conflict": {
+      "Section 2(12)": "Child means a person who has not completed eighteen years of age. Child in conflict with law means a child who is alleged or found to have committed an offence",
+      "Section 2(13)": "Child in conflict with law - a child who is alleged or found to have committed an offence and has not completed 18 years on the date of commission of such offence",
+      "Section 2(33)": "Heinous offences are those for which the minimum punishment under the IPC or any other law is imprisonment for 7 years or more",
+      "Section 2(45)": "Petty offences are those for which maximum punishment is imprisonment up to 3 years",
+      "Section 2(54)": "Serious offences are those for which punishment is imprisonment between 3 and 7 years",
+      "Section 14": "Inquiry by Juvenile Justice Board. Every child in conflict with law shall be produced before the JJB within 24 hours. JJB shall conduct inquiry in the prescribed manner",
+      "Section 15": "Preliminary assessment into heinous offences by JJB for children between 16-18 years. Board may order trial of child as an adult if satisfied that the child had the mental and physical capacity to commit the offence and understood the consequences",
+      "Section 18": "Orders for children found to have committed offence. For petty offences: admonition, group counselling, community service. For serious offences: may be sent to place of safety or special home up to 3 years. For heinous offences: child above 16 may be tried as adult",
+      "Section 19": "Powers of Children's Court. If JJB passes order for trial as adult, the case shall be transferred to Children's Court. Children's Court may sentence the child to a place of safety until 21 years",
+      "Section 21": "No joint proceedings of child alleged to be in conflict with law together with a person who is not a child",
+      "Section 12": "Bail to children in conflict with law. A child alleged to be in conflict with law SHALL be released on bail with or without surety. In case of non-bailable offence, the child may be placed under supervision of a probation officer"
+    },
+    "care_and_protection": {
+      "Section 2(14)": "Child in need of care and protection includes abandoned or lost child, child who is victim of trafficking, child who is mentally ill, child who is being or likely to be abused or exploited",
+      "Section 27": "Mandatory reporting of child abuse. Any person who has knowledge of a child being in need of care and protection shall inform the Child Welfare Committee or the police",
+      "Section 74": "Prohibition on publication of name, address, school or any information that may lead to identification of a child in conflict with law or child in need of care and protection. Penalty: imprisonment up to 6 months or fine up to Rs 2 lakh or both",
+      "Section 75": "Punishment for cruelty to child. Whoever employs or uses a child for the purposes of begging or causes any child to be assaulted, neglected, abandoned, or exposed in a manner likely to cause harm. Imprisonment up to 3 years or fine Rs 1 lakh or both",
+      "Section 76": "Employment of child for begging. Imprisonment up to 5 years and fine Rs 1 lakh",
+      "Section 77": "Penalty for giving intoxicating liquor or narcotic drug to a child. Imprisonment up to 7 years and fine up to Rs 1 lakh",
+      "Section 82": "Adoption of orphan, abandoned and surrendered children by prospective adoptive parents"
+    }
+  }
+}

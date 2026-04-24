@@ -1,0 +1,27 @@
+{
+  "jurisdiction": "IN",
+  "code": "Arms Act, 1959",
+  "key_sections": {
+    "licensing_and_possession": {
+      "Section 3": "Licence for acquisition and possession of firearms and ammunition. No person shall acquire, have in his possession, or carry any firearm or ammunition unless he holds a licence issued in accordance with the provisions of this Act",
+      "Section 4": "Licence for manufacture, sale, etc. No person shall manufacture, sell, transfer, convert, repair, test or prove any firearm or ammunition unless he holds a licence",
+      "Section 5": "Licence for shortening of firearm or conversion of imitation firearms. No person shall shorten the barrel of a firearm or convert an imitation firearm into a firearm",
+      "Section 6": "Licence for dealing in arms and ammunition. Prohibition on dealing without licence",
+      "Section 7": "Prohibition of acquisition or possession of prohibited arms or prohibited ammunition"
+    },
+    "offences_and_penalties": {
+      "Section 25(1A)": "Punishment for manufacture, sale, transfer of prohibited arms or prohibited ammunition. Imprisonment 7 years to life and fine",
+      "Section 25(1AA)": "Punishment for acquisition, possession or carrying of prohibited arms. Imprisonment 7 years to life and fine",
+      "Section 25(1B)": "Whoever uses or attempts to use prohibited arms or prohibited ammunition shall be punishable with imprisonment 7 years to life and fine. If results in death: death or imprisonment for life",
+      "Section 25(1)(a)": "Whoever acquires, has in his possession or carries any firearm or ammunition in contravention of section 3 shall be punishable with imprisonment 1-3 years and fine",
+      "Section 25(1)(e)": "Whoever sells or transfers any firearm to any person without licence or in contravention of licence. Imprisonment 3-7 years and fine",
+      "Section 25(2)": "If any person convicted under sub-section 1 is again convicted, minimum punishment shall be imprisonment 3-7 years and fine",
+      "Section 27": "Punishment for using arms etc. Whoever uses any prohibited arms or prohibited ammunition or does any act in contravention of section 7 and such use or act results in the death of any person shall be punishable with death",
+      "Section 27(1)": "Whoever uses any arms or ammunition in contravention of section 5 shall be punishable with imprisonment up to 7 years or fine or both",
+      "Section 27(2)": "If any person uses firearms or ammunition in a rash or negligent manner so as to endanger human life: imprisonment up to 2 years or fine Rs 2000 or both",
+      "Section 27(3)": "If any person uses any arms or ammunition while committing any offence, the minimum imprisonment shall be 7 years extending up to life imprisonment",
+      "Section 29": "Punishment for knowingly purchasing arms from unlicensed person or delivering arms to person not entitled to possess. Imprisonment up to 3 years or fine or both",
+      "Section 30": "Penalty for certain offences - possession of arms in specified areas notified by the government. Enhanced penalties in disturbed areas"
+    }
+  }
+}

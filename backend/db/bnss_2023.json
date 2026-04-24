@@ -1,0 +1,32 @@
+{
+  "jurisdiction": "IN",
+  "code": "Bharatiya Nagarik Suraksha Sanhita (BNSS), 2023",
+  "key_sections": {
+    "arrest_and_bail": {
+      "Section 35": "When police may arrest without warrant. Cognizable offence, possession of implements of housebreaking, proclaimed offender, stolen property, obstruction of police officer, deserter from armed forces, any person for whom a requisition has been received, acting suspiciously at night",
+      "Section 36": "Arrest how made. Police officer or other person making arrest shall actually touch or confine the body of the person to be arrested unless there be a submission to the custody by word or action",
+      "Section 37": "No unnecessary restraint. Person arrested shall not be subjected to more restraint than is necessary to prevent his escape",
+      "Section 35(3)": "Police officer shall inform the arrested person of the full particulars of the offence and the grounds of arrest. The arrested person shall be informed of his right to have a person informed of his arrest",
+      "Section 47": "Search of arrested person. Whenever a person is arrested, the officer may search such person and place in safe custody all articles found upon him",
+      "Section 479": "Maximum period of detention as under-trial prisoner. No person shall be detained for a period exceeding half the maximum period of imprisonment. For offences not punishable with death: shall be released on personal bond after serving one-third of maximum imprisonment",
+      "Section 480": "Bail in case of bailable offences. Person accused of bailable offence shall be released on bail as a matter of right. If unable to furnish bail: detained in custody but may be released on personal bond",
+      "Section 482": "When bail may be taken in case of non-bailable offences. Court may release a person on bail if there are reasonable grounds for believing he is not guilty. Women and children under 16: may be released on bail",
+      "Section 483": "Anticipatory bail. When any person has reason to believe that he may be arrested on an accusation of a non-bailable offence, he may apply to the High Court or Court of Session for a direction that in the event of arrest, he shall be released on bail"
+    },
+    "investigation_and_trial": {
+      "Section 173": "FIR - Information in cognizable cases. Every information relating to the commission of a cognizable offence, whether given orally or otherwise to an officer in charge of a police station, shall be reduced to writing and registered as First Information Report",
+      "Section 173(3)": "Information given by the informant shall be recorded in the manner prescribed. A copy of the information recorded shall be given forthwith to the informant free of cost",
+      "Section 175": "Preliminary inquiry before registration of FIR. In cases involving offences punishable with 3-7 years, the officer may conduct preliminary inquiry to ascertain whether there exists a prima facie case. Preliminary inquiry must be completed within 14 days",
+      "Section 176": "Investigation by police officer. Officer in charge of a police station may investigate any cognizable case without order of a Magistrate",
+      "Section 187": "Procedure when investigation cannot be completed in 24 hours. Officer shall forward the accused to the Magistrate. Magistrate may authorise detention in police custody for up to 15 days total",
+      "Section 193": "Charge sheet to be filed within 90 days for offences punishable with 10 years or more, and 60 days for other offences. If not filed within time: accused entitled to default bail",
+      "Section 230": "Framing of charge. If the Magistrate is of opinion that there is ground for presuming that the accused has committed an offence, the charge shall be framed",
+      "Section 258": "Summary trial by Magistrate for petty offences. No sentence of imprisonment exceeding 3 months shall be passed in case of summary trial",
+      "Section 346": "Judgement. After the arguments and points of law, the Judge shall give a judgement in the case which shall be written in the language of the court"
+    },
+    "zero_fir_and_electronic": {
+      "Section 173(1)": "Zero FIR. The FIR can be filed at any police station irrespective of jurisdiction. The police station where Zero FIR is filed shall transfer it to the concerned police station having jurisdiction within 15 days",
+      "Section 530": "Electronic communication. All trials, inquiries and proceedings including examination of complainant and witnesses may be held through electronic video linkage. Summons, warrants, and other documents may be served electronically"
+    }
+  }
+}

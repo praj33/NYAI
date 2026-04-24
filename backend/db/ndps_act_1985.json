@@ -1,0 +1,34 @@
+{
+  "jurisdiction": "IN",
+  "code": "Narcotic Drugs and Psychotropic Substances Act, 1985",
+  "key_sections": {
+    "offences_and_penalties": {
+      "Section 8": "Prohibition of certain operations - No person shall cultivate any coca plant, opium poppy, or cannabis plant, produce, manufacture, possess, sell, purchase, transport, warehouse, use, consume, import, export or tranship any narcotic drug or psychotropic substance except for medical or scientific purposes and in the manner and to the extent provided by the provisions of this Act",
+      "Section 15": "Punishment for contravention in relation to poppy straw. Small quantity: rigorous imprisonment up to 6 months or fine up to Rs 10,000. Commercial quantity: rigorous imprisonment 10-20 years and fine Rs 1-2 lakh. Quantity between small and commercial: imprisonment up to 10 years and fine up to Rs 1 lakh",
+      "Section 17": "Punishment for contravention in relation to prepared opium. Same gradation of penalties as section 15 based on small, intermediate or commercial quantity",
+      "Section 18": "Punishment for contravention in relation to opium poppy and opium. Cultivation without license: imprisonment 10-20 years and fine Rs 1-2 lakh",
+      "Section 20": "Punishment for contravention in relation to cannabis plant and cannabis. For ganja: Small quantity up to 6 months or fine up to Rs 10,000. Commercial quantity: imprisonment 10-20 years and fine Rs 1-2 lakh. For charas/hashish: same gradation applies",
+      "Section 21": "Punishment for contravention in relation to manufactured drugs and preparations. Small quantity: imprisonment up to 1 year or fine up to Rs 10,000. Commercial quantity: imprisonment 10-20 years and fine Rs 1-2 lakh",
+      "Section 22": "Punishment for contravention in relation to psychotropic substances. Same gradation of penalties based on quantity",
+      "Section 23": "Punishment for illegal import into India, export from India, or transhipment of narcotic drugs and psychotropic substances. Commercial quantity: imprisonment 10-20 years and fine Rs 1-2 lakh",
+      "Section 24": "Punishment for external dealings in narcotic drugs and psychotropic substances in contravention of section 12. Imprisonment 10-20 years and fine Rs 1-2 lakh",
+      "Section 25": "Punishment for allowing premises to be used for commission of an offence. Imprisonment and fine as provided for that offence",
+      "Section 27": "Punishment for consumption of any narcotic drug or psychotropic substance. Cocaine, morphine, heroin: imprisonment up to 1 year or fine up to Rs 20,000 or both. Other drugs: imprisonment up to 6 months or fine up to Rs 10,000 or both",
+      "Section 27A": "Punishment for financing illicit traffic and harbouring offenders. Rigorous imprisonment 10-20 years and fine Rs 1-2 lakh. If involves financing: imprisonment up to 30 years",
+      "Section 28": "Punishment for attempts to commit offences. Same punishment as if the offence had been committed",
+      "Section 29": "Punishment for abetment and criminal conspiracy. Same punishment as for the offence abetted or conspired",
+      "Section 31A": "Death penalty for certain offences after previous conviction. If previously convicted under sections 15-25 (commercial quantity) or 27A, repeat offence punishable with death"
+    },
+    "search_seizure_investigation": {
+      "Section 35": "Presumption of culpable mental state. In any prosecution, the court shall presume the existence of culpable mental state. The burden of proof shifts to the accused",
+      "Section 36A": "Offences under NDPS Act are triable by Special Courts. No person accused of an offence punishable for 5 years or more shall be released on bail unless the Public Prosecutor has been given an opportunity to oppose. Court must be satisfied that there are reasonable grounds for believing that the accused is not guilty and is not likely to commit any offence while on bail",
+      "Section 37": "Offences to be cognizable and non-bailable. Restrictions on granting bail for offences involving commercial quantity - twin conditions must be satisfied",
+      "Section 41": "Power of entry, search, seizure and arrest by officers of departments of central government, revenue, drugs control, military, and police",
+      "Section 42": "Power of entry, search, seizure and arrest without warrant or authorisation. Officer must have reason to believe from personal knowledge or information that narcotic drugs or psychotropic substances are kept or concealed in any building, conveyance or enclosed place. Must record grounds of belief and take down information in writing",
+      "Section 43": "Power of seizure and arrest in public places. Any officer may arrest without warrant and seize any narcotic drug or psychotropic substance in any public place or in transit",
+      "Section 50": "Conditions under which search of persons shall be conducted. Before search, officer must inform the person of his right to be searched before a Gazetted Officer or a Magistrate. If the person so requires, the officer shall take him to the nearest Gazetted Officer or Magistrate. Non-compliance with Section 50 vitiates the search and seizure",
+      "Section 52A": "Disposal of seized narcotic drugs and psychotropic substances. Standing orders for inventory, sampling, certification by magistrate, and safe custody",
+      "Section 54": "Presumption from possession. If person found in possession of any narcotic drug or psychotropic substance, the burden is on the accused to account for the possession"
+    }
+  }
+}

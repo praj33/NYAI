@@ -1,0 +1,20 @@
+{
+  "jurisdiction": "IN",
+  "code": "Prevention of Corruption Act, 1988",
+  "key_sections": {
+    "offences": {
+      "Section 7": "Offence relating to public servant being bribed. Any public servant who obtains or accepts or attempts to obtain, any undue advantage, with intention to perform or not perform a public duty improperly or dishonestly. Imprisonment 3-7 years and fine",
+      "Section 8": "Offence relating to bribing of a public servant. Any person who gives or promises any undue advantage to a public servant, with intention to induce the public servant to perform or not perform a public duty improperly. Imprisonment up to 7 years or fine or both",
+      "Section 9": "Offence relating to bribing a public servant by a commercial organisation. Imprisonment up to 7 years and fine",
+      "Section 10": "Person in charge of commercial organisation guilty of offence under section 9 shall be deemed guilty unless proves that offence was committed without his knowledge",
+      "Section 11": "Public servant obtaining undue advantage without consideration from person concerned in proceeding or business transacted by such public servant. Imprisonment 6 months to 5 years and fine",
+      "Section 12": "Abetment of offences under sections 7 and 11. Same punishment as the principal offence",
+      "Section 13(1)(a)": "Criminal misconduct by a public servant who dishonestly or fraudulently misappropriates or otherwise converts for his own use any property entrusted to him. Imprisonment 4-10 years and fine",
+      "Section 13(1)(b)": "Criminal misconduct by a public servant who intentionally enriches himself illicitly during the period of his office - assets disproportionate to known sources of income. Imprisonment 4-10 years and fine",
+      "Section 14": "Punishment for habitual offender. Imprisonment 5-10 years and fine",
+      "Section 17": "Persons authorised to investigate offences - police officer not below the rank of Inspector of Police. Delhi Special Police Establishment (CBI) for central government employees",
+      "Section 17A": "No police officer shall conduct any enquiry or investigation into any offence alleged to have been committed by a public servant under this Act without prior approval of the authority competent to remove that officer. Does not apply to cases involving arrest on the spot",
+      "Section 19": "Previous sanction necessary for prosecution. No court shall take cognizance of an offence punishable under sections 7, 11, 13 and 15 except with previous sanction of the competent authority"
+    }
+  }
+}

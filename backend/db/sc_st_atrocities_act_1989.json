@@ -1,0 +1,32 @@
+{
+  "jurisdiction": "IN",
+  "code": "SC/ST Prevention of Atrocities Act, 1989",
+  "key_sections": {
+    "offences_and_atrocities": {
+      "Section 2(1)(c)": "Atrocity means an offence punishable under section 3 committed against a person belonging to a Scheduled Caste or Scheduled Tribe by any person not belonging to a Scheduled Caste or Scheduled Tribe",
+      "Section 3(1)(i)": "Forcing a member of SC/ST to drink or eat any inedible or obnoxious substance. Imprisonment 6 months to 5 years and fine",
+      "Section 3(1)(ii)": "Dumping excreta, waste matter, carcasses or any obnoxious substance in the premises or neighbourhood of a member of SC/ST. Imprisonment 6 months to 5 years and fine",
+      "Section 3(1)(iii)": "Forcibly removing clothes from the person of a member of SC/ST or parading him naked or with painted face or body. Imprisonment 6 months to 5 years and fine",
+      "Section 3(1)(iv)": "Wrongfully occupying or cultivating any land owned by or allotted to a member of SC/ST. Imprisonment 6 months to 5 years and fine",
+      "Section 3(1)(v)": "Wrongfully dispossessing a member of SC/ST from his land or premises or interfering with the enjoyment of his rights over any land or premises. Imprisonment 1-5 years and fine",
+      "Section 3(1)(r)": "Intentionally touching a woman belonging to SC/ST knowing that she belongs to SC/ST, when such act of touching is of a sexual nature. Imprisonment 3-5 years and fine",
+      "Section 3(1)(s)": "Using position of dominance to exploit a SC/ST woman sexually. Imprisonment 3-5 years and fine",
+      "Section 3(1)(w)": "Performing or promoting dedication of a SC/ST woman as devadasi. Imprisonment 3-5 years and fine",
+      "Section 3(1)(x)": "Abusing by caste name in any place within public view. Imprisonment 6 months to 5 years and fine",
+      "Section 3(1)(za)": "Denying a member of SC/ST right of passage to a place of public resort or obstructing such member. Imprisonment 6 months to 5 years and fine",
+      "Section 3(1)(zc)": "Boycotting or threatening to boycott a member of SC/ST or preventing another person from dealing with a member of SC/ST. Imprisonment 6 months to 5 years and fine",
+      "Section 3(2)(v)": "Committing any offence under the IPC punishable with imprisonment 10 years or more against a person of SC/ST. Imprisonment for life and fine",
+      "Section 3(2)(va)": "Committing murder against a person of SC/ST. Death or imprisonment for life and fine"
+    },
+    "investigation_and_trial": {
+      "Section 4": "Punishment for neglect of duties by public servant. If any public servant who is not a member of SC/ST wilfully neglects his duties required to be performed by him for the protection of SC/ST. Imprisonment 6 months to 1 year",
+      "Section 8": "Presumption as to offences. If accused was acquainted with the victim or his family, the court shall presume that the accused was aware of the caste or tribal identity of the victim",
+      "Section 14": "Special Courts for trial of offences under this Act. The State Government shall establish exclusive Special Courts in each district for speedy trial",
+      "Section 15A": "Rights of victims and witnesses including right to reasonable, accurate and timely notice of any court proceeding. Victim has the right to be heard at any proceeding under this Act",
+      "Section 18": "All offences under this Act are cognizable. Section 438 of CrPC (anticipatory bail) shall not apply to a person accused of an offence under this Act. FIR must be registered immediately without preliminary enquiry",
+      "Section 18A": "No preliminary enquiry shall be required for registering an FIR against any person. Investigation shall be completed within 60 days",
+      "Section 21(1)": "Relief and rehabilitation to victims of atrocities. Minimum relief as prescribed by the Central Government",
+      "Section 21(2)(a)": "The investigating officer shall not be below the rank of Deputy Superintendent of Police. Investigation shall be completed within 30 days"
+    }
+  }
+}

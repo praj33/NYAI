@@ -1,0 +1,21 @@
+{
+  "jurisdiction": "IN",
+  "code": "Sexual Harassment of Women at Workplace Act (POSH Act), 2013",
+  "key_sections": {
+    "definition_and_complaints": {
+      "Section 2(n)": "Sexual harassment includes unwelcome physical contact and advances, demand or request for sexual favours, making sexually coloured remarks, showing pornography, any other unwelcome physical, verbal or non-verbal conduct of sexual nature",
+      "Section 2(o)": "Workplace includes any department, organisation, establishment, enterprise, institution, office, branch or unit established or owned or controlled by the government, private sector, unorganised sector, dwelling place or house",
+      "Section 3": "No woman shall be subjected to sexual harassment at any workplace. Circumstances creating hostile work environment include implied or explicit promise of preferential treatment, implied or explicit threat of detrimental treatment, interference with her work, creating intimidating, offensive or hostile work environment, humiliating treatment likely to affect her health or safety",
+      "Section 4": "Constitution of Internal Complaints Committee (ICC) at every workplace with 10 or more employees. Presiding officer must be a woman employed at a senior level",
+      "Section 6": "Constitution of Local Complaints Committee (LCC) in every district for complaints from workplaces with less than 10 employees or where complaint is against the employer",
+      "Section 9": "Complaint of sexual harassment must be made within 3 months from the date of incident. Committee may extend the time limit by 3 months if satisfied that circumstances prevented filing",
+      "Section 10": "Conciliation at request of the aggrieved woman before initiating inquiry. No monetary settlement shall be the basis of conciliation",
+      "Section 11": "Inquiry into complaint by the ICC/LCC. Completed within 90 days. Both parties given opportunity of being heard",
+      "Section 13": "Action for sexual harassment. If allegation proved: recommend to employer to take action including written apology, warning, reprimand, withholding of promotion, termination",
+      "Section 14": "Action against false or malicious complaint. If ICC/LCC concludes complaint was made with malicious intent: recommend action against the complainant. Mere inability to prove does not mean complaint is false",
+      "Section 18": "Appeal against recommendations. Either party may appeal to court or tribunal within 90 days",
+      "Section 19": "Duties of employer - provide safe working environment, display penal consequences, organise awareness programmes, provide necessary facilities to ICC, assist in filing complaint and FIR if required, treat sexual harassment as misconduct under service rules",
+      "Section 26": "Penalty for non-compliance by employer. Fine up to Rs 50,000. Repeated violation: higher fine and cancellation of licence or registration"
+    }
+  }
+}

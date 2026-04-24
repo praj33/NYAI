@@ -1,0 +1,22 @@
+{
+  "jurisdiction": "IN",
+  "code": "Bharatiya Sakshya Adhiniyam (BSA), 2023",
+  "key_sections": {
+    "evidence_and_proof": {
+      "Section 2(1)(d)": "Electronic record means data, record or data generated, image or sound stored, received or sent in an electronic form or micro film or computer generated micro fiche. Includes email, server logs, computer output, digital photographs",
+      "Section 14": "Facts showing existence of state of mind such as intention, knowledge, good faith, negligence, rashness, ill-will or good-will towards any particular person are relevant",
+      "Section 21": "Confessions by accused persons. A confession made by an accused person is relevant if made voluntarily and not caused by inducement, threat or promise",
+      "Section 22": "Confession to police officer not to be proved. No confession made to a police officer shall be proved as against a person accused of any offence",
+      "Section 23": "Confession by accused while in custody of police not to be proved against him unless made in presence of a Magistrate",
+      "Section 24": "Consideration of proved confession affecting person making it and others jointly tried for same offence",
+      "Section 39": "Electronic and digital records. Electronic records shall have the same legal effect, validity and enforceability as paper records. Includes electronically signed documents",
+      "Section 57": "Burden of proof. Whoever desires any court to give judgment as to any legal right or liability dependent on the existence of facts which he asserts must prove that those facts exist. Burden of proof lies on the party who would fail if no evidence were given on either side",
+      "Section 63": "Oral evidence must be direct. Evidence of a fact must be given by the person who saw it, heard it, or perceived it",
+      "Section 94": "Court may presume the existence of certain facts. Including that a man who is in possession of stolen goods soon after theft is either the thief or has received the goods knowing them to be stolen",
+      "Section 118": "Who may testify. All persons shall be competent to testify unless the court considers that they are prevented from understanding questions or giving rational answers by tender years, extreme old age, disease, or similar cause",
+      "Section 122": "Communication during marriage. No person who is or has been married shall be compelled to disclose any communication made during marriage",
+      "Section 126": "Professional communications between advocate and client are privileged. No advocate shall be permitted to disclose any communication made to him by client",
+      "Section 170": "Certificate for electronic records. Any information contained in an electronic record shall be deemed to be a document and shall be admissible without further proof if accompanied by a certificate identifying the electronic record"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "jurisdiction": "IN",
+  "code": "Right to Information Act, 2005",
+  "key_sections": {
+    "information_and_procedure": {
+      "Section 2(f)": "Information means any material in any form including records, documents, memos, emails, opinions, advices, press releases, circulars, orders, logbooks, contracts, reports, papers, samples, models, data material held in any electronic form",
+      "Section 3": "All citizens shall have the right to information subject to the provisions of this Act",
+      "Section 4": "Obligations of public authorities. Every public authority shall maintain all records duly catalogued and indexed. Publish within 120 days: particulars of organisation, functions, duties, powers of officers, procedure of decision making, rules and regulations, directory of officers, monthly remuneration",
+      "Section 6": "Request for obtaining information. A person desiring information shall make a request in writing or electronically to the Central/State Public Information Officer. Applicant not required to give any reason for requesting the information",
+      "Section 7": "Disposal of request. Information shall be provided within 30 days of receipt of request. If information concerns life or liberty of a person: within 48 hours. Fee as may be prescribed",
+      "Section 8": "Exemption from disclosure. Information which would prejudicially affect sovereignty, security, strategic interests, or scientific or economic interests. Information received in confidence from foreign government. Information which would endanger life or physical safety of any person. Cabinet papers including records of deliberations of ministers. Personal information which has no relationship to any public activity",
+      "Section 11": "Third party information. If request relates to information supplied by third party, PIO shall give written notice to that party within 5 days. Third party may make representations within 10 days",
+      "Section 19": "Appeal. First appeal to the officer senior in rank to the PIO within 30 days. Second appeal to the Central/State Information Commission within 90 days",
+      "Section 20": "Penalties. If the Central/State Information Commission is of the opinion that the PIO has without reasonable cause refused to receive the application, or has not provided information within time, or has given incorrect information: penalty of Rs 250 per day until information is provided, subject to a maximum of Rs 25,000. Disciplinary action may also be recommended"
+    }
+  }
+}

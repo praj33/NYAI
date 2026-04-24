@@ -1,0 +1,19 @@
+{
+  "jurisdiction": "IN",
+  "code": "Prevention of Money Laundering Act, 2002",
+  "key_sections": {
+    "offences_and_enforcement": {
+      "Section 3": "Offence of money laundering. Whosoever directly or indirectly attempts to indulge or knowingly assists or is a party to any process or activity connected with the proceeds of crime including concealment, possession, acquisition, use, and projecting it as untainted property shall be guilty of money laundering",
+      "Section 4": "Punishment for money laundering. Rigorous imprisonment 3-7 years and fine up to Rs 5 lakh. If proceeds of crime involved relate to offence under NDPS Act: imprisonment up to 10 years and fine up to Rs 5 lakh",
+      "Section 5": "Attachment of property involved in money laundering. The Director or any officer not below the rank of Deputy Director may provisionally attach any property believed to be proceeds of crime for a period not exceeding 150 days",
+      "Section 8": "Adjudication of property. The Adjudicating Authority shall pass an order confirming the attachment or retention. If proved that property is involved in money laundering, it shall stand confiscated",
+      "Section 17": "Search and seizure by authorised officers of the Enforcement Directorate (ED). Can enter and search premises, seize records, documents and property",
+      "Section 19": "Power of arrest by Director, Deputy Director, Assistant Director or Enforcement Officer. Must have reason to believe that person has been guilty of money laundering. Must be produced before the Special Court within 24 hours",
+      "Section 24": "Burden of proof. When a person is accused of having committed money laundering, the burden of proving that the proceeds of crime are untainted property shall be on the accused",
+      "Section 25": "Special Courts designated by the Central Government for trial of offences under this Act",
+      "Section 26": "Appeal to High Court against orders of Special Court within 90 days",
+      "Section 44": "Offences triable by Special Courts. Cases involving offences under this Act and scheduled offences shall be tried together",
+      "Section 45": "Offences to be cognizable and non-bailable. No person accused of money laundering shall be released on bail unless the Public Prosecutor has been given opportunity to oppose and the court is satisfied that there are reasonable grounds for believing that he is not guilty. Twin conditions for bail apply"
+    }
+  }
+}

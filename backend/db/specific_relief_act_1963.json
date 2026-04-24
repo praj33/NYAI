@@ -1,0 +1,20 @@
+{
+  "jurisdiction": "IN",
+  "code": "Specific Relief Act, 1963",
+  "key_sections": {
+    "specific_performance_and_injunctions": {
+      "Section 10": "Specific performance of contract. The court may direct specific performance of a contract when there exists no standard for ascertaining actual damage, or when compensation in money would not afford adequate relief",
+      "Section 11": "Cases in which specific performance enforceable. When the plaintiff has done or is ready to perform his part of the contract, or where the suit is for specific performance and damages",
+      "Section 12": "Specific performance of part of contract. Court may direct specific performance of part of a contract if that part is separable from the rest",
+      "Section 14": "Contracts not specifically enforceable. Where compensation is adequate relief, where contract involves personal skill or volition, where contract is by its nature determinable",
+      "Section 16": "Personal bars to relief. Specific performance not granted to a person who has failed to show readiness and willingness to perform his part",
+      "Section 20": "Substituted performance. If a party to the contract fails to perform, the other party may get the contract performed by a third party and recover the expense from the defaulting party",
+      "Section 34": "Declaratory decree. Any person entitled to any legal character, or to any right as to any property, may institute a suit against any person denying such right, and the court may make a declaration that he is so entitled",
+      "Section 36": "Preventive relief. Preventive relief is granted at the discretion of the court by injunction, temporary or perpetual",
+      "Section 37": "Temporary and perpetual injunctions. Temporary injunctions are regulated by the Code of Civil Procedure. Perpetual injunctions can only be granted by a decree at hearing",
+      "Section 38": "Perpetual injunction when granted. When the defendant invades or threatens to invade the plaintiff's right to or enjoyment of property, the court may grant a perpetual injunction",
+      "Section 39": "Mandatory injunction. When the defendant has done an act in breach of obligation, and it is necessary to prevent the breach, the court may grant mandatory injunction compelling the defendant to undo the act",
+      "Section 41": "Injunction when refused. When the plaintiff has acquiesced in the defendant's act, when the plaintiff's own conduct is inequitable, when damages would be adequate"
+    }
+  }
+}
