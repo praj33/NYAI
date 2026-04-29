@@ -75,6 +75,7 @@ LAND_DISPUTE_STATUTES = [
 QUERY_STATUTE_OVERRIDES = [
     {
         "any": ["theft", "steal", "stolen"],
+        "exclude": ["juvenile", "minor", "child", "jjb"],
         "statutes": [
             {"act": "Indian Penal Code", "year": 1860, "section": "378", "title": "Theft"},
             {"act": "Indian Penal Code", "year": 1860, "section": "379", "title": "Punishment for theft"},
@@ -378,7 +379,7 @@ QUERY_STATUTE_OVERRIDES = [
         ],
     },
     {
-        "any": ["juvenile", "minor offender", "child crime", "juvenile justice", "jjb", "juvenile justice board", "child in conflict with law", "minor arrested"],
+        "any": ["juvenile", "minor offender", "child crime", "juvenile justice", "jjb", "juvenile justice board", "child in conflict with law", "minor arrested", "minor boy", "minor girl", "child arrested", "underage", "below 18"],
         "statutes": [
             {"act": "Juvenile Justice Act", "year": 2015, "section": "12", "title": "Bail to children - shall be released on bail as matter of right"},
             {"act": "Juvenile Justice Act", "year": 2015, "section": "14", "title": "Inquiry by Juvenile Justice Board within 24 hours"},
