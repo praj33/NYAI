@@ -378,8 +378,23 @@ QUERY_STATUTE_OVERRIDES = [
             {"act": "Prevention of Money Laundering Act", "year": 2002, "section": "45", "title": "Offences cognizable and non-bailable - bail restrictions"},
         ],
     },
+    # ─── POCSO must be BEFORE JJ Act (more specific: minor + sexual offence) ───
+    {
+        "any": ["minor girl raped", "minor boy raped", "minor raped", "child raped", "child sexually abused", "rape of minor", "rape of child", "sexual abuse of child", "pocso", "child molested", "child molestation", "minor molested", "sexual assault on minor", "sexual assault on child", "child pornography"],
+        "statutes": [
+            {"act": "POCSO Act", "year": 2012, "section": "3", "title": "Penetrative sexual assault on child - imprisonment 7 years to life"},
+            {"act": "POCSO Act", "year": 2012, "section": "4", "title": "Punishment for penetrative sexual assault - minimum 7 years RI"},
+            {"act": "POCSO Act", "year": 2012, "section": "5", "title": "Aggravated penetrative sexual assault - by police officer, relative, teacher etc."},
+            {"act": "POCSO Act", "year": 2012, "section": "6", "title": "Punishment for aggravated penetrative sexual assault - minimum 10 years to life"},
+            {"act": "POCSO Act", "year": 2012, "section": "7", "title": "Sexual assault on child - imprisonment 3 to 5 years and fine"},
+            {"act": "POCSO Act", "year": 2012, "section": "11", "title": "Sexual harassment of child"},
+            {"act": "POCSO Act", "year": 2012, "section": "19", "title": "Reporting of offences - mandatory reporting within 24 hours"},
+            {"act": "Indian Penal Code", "year": 1860, "section": "376AB", "title": "Punishment for rape on woman under 12 years - RI min 20 years to life or death"},
+        ],
+    },
     {
         "any": ["juvenile", "minor offender", "child crime", "juvenile justice", "jjb", "juvenile justice board", "child in conflict with law", "minor arrested", "minor boy", "minor girl", "child arrested", "underage", "below 18"],
+        "exclude": ["raped", "rape", "sexual", "molested", "molestation", "pocso", "sexually abused"],
         "statutes": [
             {"act": "Juvenile Justice Act", "year": 2015, "section": "12", "title": "Bail to children - shall be released on bail as matter of right"},
             {"act": "Juvenile Justice Act", "year": 2015, "section": "14", "title": "Inquiry by Juvenile Justice Board within 24 hours"},
