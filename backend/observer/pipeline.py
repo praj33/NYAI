@@ -52,20 +52,7 @@ class ObserverPipeline:
             "observer_steps_count": len(self._steps)
         }
 
-    def build_decision_basis(
-        self,
-        enforcement_result
-    ) -> Dict[str, Any]:
-        """Extract the decision basis from an enforcement result."""
-        return {
-            "enforcement_decision": enforcement_result.decision.value,
-            "rule_id": enforcement_result.rule_id,
-            "policy_source": enforcement_result.policy_source.value,
-            "reasoning_summary": enforcement_result.reasoning_summary,
-            "proof_hash": enforcement_result.proof_hash,
-            "trace_id": enforcement_result.trace_id,
-            "timestamp": enforcement_result.timestamp.isoformat() if enforcement_result.timestamp else None
-        }
+
 
     def build_confidence_sources(
         self,

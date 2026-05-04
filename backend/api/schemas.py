@@ -2,15 +2,8 @@ from pydantic import BaseModel, Field
 from typing import Dict, Any, List, Optional
 from enum import Enum
 
-# ─── TANTRA: Canonical enforcement decisions ───
-# Values sourced from enforcement_engine.decision_model (single source of truth)
-from enforcement_engine.decision_model import EnforcementDecision as _CanonicalDecision
 
-class EnforcementDecision(str, Enum):
-    """API-layer enum — values locked to canonical decision_model.py"""
-    ALLOW = _CanonicalDecision.ALLOW.value
-    BLOCK = _CanonicalDecision.BLOCK.value
-    SAFE_REDIRECT = _CanonicalDecision.SAFE_REDIRECT.value
+# ─── Core Enums ───
 
 class UserRole(str, Enum):
     CITIZEN = "citizen"
@@ -28,6 +21,16 @@ class JurisdictionHint(str, Enum):
     INDIA = "India"
     UK = "UK"
     UAE = "UAE"
+
+class RecommendationType(str, Enum):
+    """Advisory-only recommendation — NOT an enforcement gate."""
+    ALLOW = "ALLOW"
+    DENY = "DENY"
+    ESCALATE = "ESCALATE"
+    REVIEW = "REVIEW"
+
+
+# ─── Request Schemas ───
 
 class UserContext(BaseModel):
     role: UserRole
@@ -63,6 +66,9 @@ class FeedbackRequest(BaseModel):
     feedback_type: FeedbackType
     comment: Optional[str] = Field(None, max_length=1000)
 
+
+# ─── Response Sub-Schemas ───
+
 class StatuteSchema(BaseModel):
     act: str
     year: int
@@ -82,35 +88,79 @@ class ConfidenceSchema(BaseModel):
     statute_match: float = Field(..., ge=0.0, le=1.0)
     procedural_match: float = Field(..., ge=0.0, le=1.0)
 
+class Recommendation(BaseModel):
+    """Advisory-only recommendation. NOT an enforcement gate."""
+    type: RecommendationType = RecommendationType.ALLOW
+    confidence: float = Field(0.0, ge=0.0, le=1.0)
+    rationale: str = ""
+
+class LegalContext(BaseModel):
+    jurisdiction: str
+    domain: str
+    applicable_laws: List[str] = []
+
+class AnalysisBlock(BaseModel):
+    issues_identified: List[str] = []
+    rule_application: List[str] = []
+    conflicts: List[str] = []
+
+class DeterminismProof(BaseModel):
+    input_hash: str
+    output_hash: str
+    version: str
+
+
+# ─── Main Response Schema ───
+
 class NyayaResponse(BaseModel):
+    # ─── Determinism & Tracing ───
+    trace_id: str
+    request_id: str = ""
+    input_hash: str = ""
+    timestamp: str = ""
+    # ─── Legal Context ───
+    legal_context: LegalContext
     domain: str
     domains: List[str] = []
     jurisdiction: str
     jurisdiction_detected: str
     jurisdiction_confidence: float = Field(..., ge=0.0, le=1.0)
     confidence: ConfidenceSchema
+    # ─── Facts & Analysis ───
+    facts: List[str] = []
+    analysis: AnalysisBlock
+    # ─── Recommendation (advisory only) ───
+    recommendation: Recommendation
+    # ─── Explanation ───
+    explanation_chain: List[str] = []
+    # ─── Risk ───
+    risk_flags: List[str] = []
+    # ─── Determinism Proof ───
+    determinism_proof: DeterminismProof
+    # ─── Legal Data ───
     legal_route: List[str]
     statutes: List[StatuteSchema] = []
     case_laws: List[CaseLawSchema] = []
     constitutional_articles: List[str] = []
     provenance_chain: List[Dict[str, Any]] = []
     reasoning_trace: Dict[str, Any] = {}
-    trace_id: str
-    enforcement_decision: EnforcementDecision = EnforcementDecision.ALLOW
     timeline: List[Dict[str, str]] = []
     glossary: List[Dict[str, str]] = []
     evidence_requirements: List[str] = []
+    # ─── LLM Answer ───
     answer: Optional[str] = None
     answer_source: Optional[str] = None
     answer_model: Optional[str] = None
-    # ─── TANTRA Compliance Fields ───
+    # ─── Compliance ───
     observer_steps: List[Dict[str, Any]] = []
-    decision_basis: Optional[Dict[str, Any]] = None
     confidence_sources: Optional[Dict[str, Any]] = None
     metadata: Optional[Dict[str, Any]] = None
-    # ─── Legal Output Fields ───
+    # ─── Legal Output ───
     remedies: List[str] = []
     procedural_steps: List[str] = []
+
+
+# ─── Other Response Schemas ───
 
 class MultiJurisdictionResponse(BaseModel):
     comparative_analysis: Dict[str, NyayaResponse]

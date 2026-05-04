@@ -11,6 +11,8 @@ from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel
 from typing import Dict, Any, List, Optional
 import uuid
+import hashlib
+import json
 import threading
 from collections import OrderedDict
 from datetime import datetime
@@ -31,16 +33,17 @@ from api.schemas import (
     QueryRequest, MultiJurisdictionRequest, ExplainReasoningRequest,
     FeedbackRequest, NyayaResponse, MultiJurisdictionResponse,
     ExplainReasoningResponse, FeedbackResponse, TraceResponse,
-    StatuteSchema, ConfidenceSchema, CaseLawSchema
+    StatuteSchema, ConfidenceSchema, CaseLawSchema,
+    Recommendation, RecommendationType, LegalContext,
+    AnalysisBlock, DeterminismProof
 )
 
 # Import response enricher
 from core.response.enricher import enrich_response
 from services.explainer import generate_explanation_payload
 
-# Import enforcement engine
-from enforcement_engine.engine import SovereignEnforcementEngine
-from enforcement_engine.decision_model import EnforcementSignal
+# Determinism version tag
+DETERMINISM_VERSION = "2.0.0"
 from services.query_cleaner import clean_query
 from services.query_understanding import analyze_query
 from services.query_expander import expand_query
@@ -60,7 +63,6 @@ logger = logging.getLogger(__name__)
 try:
     advisor = EnhancedLegalAdvisor()
     jurisdiction_detector = JurisdictionDetector()
-    enforcement_engine = SovereignEnforcementEngine()
     
     # Initialize case law system
     case_loader = CaseLawLoader()
@@ -68,13 +70,12 @@ try:
     case_retriever = CaseLawRetriever(cases)
     print(f"Case law system initialized: {len(cases)} cases loaded")
     print("Jurisdiction detector initialized")
-    print("Enforcement engine initialized")
+    print("Reasoning layer initialized")
 except Exception as e:
     print(f"Error initializing components: {e}")
     advisor = None
     jurisdiction_detector = None
     case_retriever = None
-    enforcement_engine = None
 
 # ─── Response Cache (thread-safe LRU for trace_id lookups) ───
 class ResponseCache:
@@ -451,34 +452,130 @@ async def query_legal(request: QueryRequest):
         # Enrich response with timeline, glossary, evidence_requirements
         enriched = enrich_response(base_response, cleaned_query, advice.domain, statutes, advice.jurisdiction)
         
-        # Apply enforcement decision using enforcement engine
-        observer.record("enforcement_engine", {"input_confidence": advice.confidence_score})
-        enforcement_signal = EnforcementSignal(
-            case_id=advice.trace_id,
-            country=advice.jurisdiction,
+        # ─── REASONING LAYER: Build deterministic legal context ───
+        input_hash = hashlib.sha256(cleaned_query.encode('utf-8')).hexdigest()
+        request_id = f"req_{uuid.uuid4().hex[:12]}"
+        timestamp_str = datetime.utcnow().isoformat() + "Z"
+
+        # Legal context
+        applicable_laws = list(set(
+            s.act for s in statutes
+        ))
+        legal_context = LegalContext(
+            jurisdiction=advice.jurisdiction,
             domain=response_domain,
-            procedure_id=response_domain,
-            original_confidence=advice.confidence_score,
-            user_request=cleaned_query,
-            jurisdiction_routed_to=advice.jurisdiction,
-            trace_id=advice.trace_id
+            applicable_laws=applicable_laws
         )
-        enforcement_result = enforcement_engine.make_enforcement_decision(enforcement_signal)
-        enriched['enforcement_decision'] = enforcement_result.decision.value
 
-        # ─── TANTRA: decision_basis from enforcement result ───
-        enriched['decision_basis'] = observer.build_decision_basis(enforcement_result)
+        # Facts extraction
+        facts = []
+        if cleaned_query:
+            facts.append(f"User query: {cleaned_query}")
+        facts.append(f"Jurisdiction detected: {jurisdiction_result.jurisdiction} (confidence: {jurisdiction_result.confidence:.2f})")
+        facts.append(f"Domain classified: {response_domain}")
+        facts.append(f"Statutes matched: {sections_found}")
+        facts.append(f"Case laws found: {len(case_laws)}")
 
-        # ─── TANTRA: confidence_sources ───
-        enriched['confidence_sources'] = observer.build_confidence_sources(
-            sections_found=sections_found,
-            base_confidence=advice.confidence_score,
-            jurisdiction_confidence=jurisdiction_result.confidence,
-            domain_confidence=confidence.domain,
-            statute_match=confidence.statute_match,
-            understanding_source=understanding.get("source", "unknown") if isinstance(understanding, dict) else "unknown",
-            statute_source=statute_source
+        # Analysis block
+        issues_identified = []
+        rule_application = []
+        conflicts = []
+        if sections_found == 0:
+            issues_identified.append("No specific statutory provisions matched for this query")
+        else:
+            for s in statutes[:5]:
+                rule_application.append(f"{s.act} Section {s.section}: {s.title}")
+        if jurisdiction_result.confidence < 0.5:
+            issues_identified.append(f"Low jurisdiction confidence ({jurisdiction_result.confidence:.2f}) — results may be imprecise")
+        if len(applicable_laws) > 3:
+            conflicts.append("Multiple acts applicable — cross-reference required")
+
+        analysis = AnalysisBlock(
+            issues_identified=issues_identified,
+            rule_application=rule_application,
+            conflicts=conflicts
         )
+
+        # Recommendation (advisory only)
+        rec_confidence = confidence.overall
+        if sections_found > 0 and jurisdiction_result.confidence > 0.5:
+            rec_type = RecommendationType.ALLOW
+            rec_rationale = f"Query resolved with {sections_found} statute(s) at {rec_confidence:.0%} confidence"
+        elif sections_found > 0:
+            rec_type = RecommendationType.REVIEW
+            rec_rationale = f"Statutes found but jurisdiction confidence low ({jurisdiction_result.confidence:.2f})"
+        elif jurisdiction_result.confidence > 0.5:
+            rec_type = RecommendationType.ESCALATE
+            rec_rationale = "No statutes matched — consider consulting a legal professional"
+        else:
+            rec_type = RecommendationType.DENY
+            rec_rationale = "Insufficient data to provide reliable legal guidance"
+
+        recommendation = Recommendation(
+            type=rec_type,
+            confidence=rec_confidence,
+            rationale=rec_rationale
+        )
+
+        # Explanation chain (step-by-step reasoning)
+        explanation_chain = [
+            f"1. Query received and cleaned: '{cleaned_query}'",
+            f"2. Jurisdiction detected: {jurisdiction_result.jurisdiction} (confidence: {jurisdiction_result.confidence:.2f})",
+            f"3. Domain classified: {response_domain}",
+            f"4. BM25 full-text search executed across {getattr(advisor, 'section_count', 'N/A')} sections",
+            f"5. Statute overrides checked for keyword matches",
+            f"6. {sections_found} relevant statute(s) identified",
+            f"7. {len(case_laws)} case law(s) retrieved",
+            f"8. Recommendation: {rec_type.value} — {rec_rationale}",
+        ]
+
+        # Risk flags
+        risk_flags = []
+        sensitive_keywords = ['murder', 'rape', 'suicide', 'death', 'kill', 'bomb', 'terror']
+        if any(kw in cleaned_query.lower() for kw in sensitive_keywords):
+            risk_flags.append("SENSITIVE_CONTENT: Query involves serious criminal subject matter")
+        if sections_found == 0:
+            risk_flags.append("NO_STATUTES: No statutory provisions matched")
+        if jurisdiction_result.confidence < 0.3:
+            risk_flags.append("LOW_JURISDICTION_CONFIDENCE: Jurisdiction detection unreliable")
+
+        # Determinism proof — hash the canonical output
+        canonical_output = json.dumps({
+            "statutes": [{"act": s.act, "section": s.section, "year": s.year} for s in statutes],
+            "jurisdiction": advice.jurisdiction,
+            "domain": response_domain,
+            "recommendation": rec_type.value,
+        }, sort_keys=True)
+        output_hash = hashlib.sha256(canonical_output.encode('utf-8')).hexdigest()
+
+        determinism_proof = DeterminismProof(
+            input_hash=input_hash,
+            output_hash=output_hash,
+            version=DETERMINISM_VERSION
+        )
+
+        # Inject new fields into enriched response
+        enriched['request_id'] = request_id
+        enriched['input_hash'] = input_hash
+        enriched['timestamp'] = timestamp_str
+        enriched['legal_context'] = legal_context.dict()
+        enriched['facts'] = facts
+        enriched['analysis'] = analysis.dict()
+        enriched['recommendation'] = recommendation.dict()
+        enriched['explanation_chain'] = explanation_chain
+        enriched['risk_flags'] = risk_flags
+        enriched['determinism_proof'] = determinism_proof.dict()
+
+        # ─── confidence_sources ───
+        enriched['confidence_sources'] = {
+            "sections_found": sections_found,
+            "base_confidence": advice.confidence_score,
+            "jurisdiction_confidence": jurisdiction_result.confidence,
+            "domain_confidence": confidence.domain,
+            "statute_match": confidence.statute_match,
+            "understanding_source": understanding.get("source", "unknown") if isinstance(understanding, dict) else "unknown",
+            "statute_source": statute_source
+        }
 
         explanation_payload = generate_explanation_payload(
             query=cleaned_query,

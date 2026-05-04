@@ -1,5 +1,5 @@
 """
-Response Builder — TANTRA Formatter Gate
+Response Builder — Deterministic Formatter Gate
 Enforces that every response passes through a structured validation gate.
 Stamps metadata.formatted = true as proof of compliance.
 No response may bypass this gate.
@@ -7,15 +7,19 @@ No response may bypass this gate.
 from datetime import datetime
 from typing import Dict, Any, List
 
-FORMATTER_VERSION = "1.0.0"
+FORMATTER_VERSION = "2.0.0"
 
 REQUIRED_FIELDS = [
     "domain",
     "jurisdiction",
-    "enforcement_decision",
     "trace_id",
     "confidence",
     "legal_route",
+    "recommendation",
+    "legal_context",
+    "input_hash",
+    "determinism_proof",
+    "timestamp",
 ]
 
 
@@ -27,7 +31,7 @@ class ResponseNotFormatted(Exception):
 class ResponseBuilder:
     """
     Formatter gate that validates and stamps every response before it leaves the pipeline.
-    TANTRA requirement: no response may be returned without metadata.formatted = true.
+    Requirement: no response may be returned without metadata.formatted = true.
     """
 
     def build(self, raw_response: dict) -> dict:
@@ -49,6 +53,7 @@ class ResponseBuilder:
             "formatted_at": datetime.utcnow().isoformat(),
             "schema_compliant": True,
             "required_fields_validated": len(REQUIRED_FIELDS),
+            "schema": "reasoning_v2",
         }
 
         return raw_response
