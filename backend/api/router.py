@@ -107,7 +107,7 @@ class RLSignalRequest(BaseModel):
 
 @router.post("/query", response_model=NyayaResponse)
 async def query_legal(request: QueryRequest):
-    """Execute a single-jurisdiction legal query with sovereign enforcement."""
+    """Execute a single-jurisdiction legal query with deterministic reasoning."""
     try:
         cleaned_query = clean_query(request.query)
 
@@ -736,7 +736,7 @@ async def get_case_summary(trace_id: str = Query(..., description="Trace ID from
         "jurisdiction": cached.get("jurisdiction_detected") or cached.get("jurisdiction"),
         "domain": cached.get("domain"),
         "confidence": cached.get("confidence"),
-        "enforcement_decision": cached.get("enforcement_decision"),
+        "recommendation": cached.get("recommendation"),
         "key_statutes": statute_list[:5],
         "summary_text": (cached.get("reasoning_trace") or {}).get("legal_analysis", "")[:500]
     }
@@ -849,9 +849,9 @@ async def get_jurisdiction_info(jurisdiction: str = Query(..., description="Juri
     return data
 
 
-@router.get("/enforcement_status")
-async def get_enforcement_status(trace_id: str = Query(..., description="Trace ID from a previous /query call")):
-    """Return the enforcement decision details for a cached query."""
+@router.get("/recommendation_status")
+async def get_recommendation_status(trace_id: str = Query(..., description="Trace ID from a previous /query call")):
+    """Return the recommendation details for a cached query."""
     cached = response_cache.get(trace_id)
     if not cached:
         raise HTTPException(status_code=404, detail={"error": "trace_id not found in cache", "trace_id": trace_id})
@@ -859,7 +859,7 @@ async def get_enforcement_status(trace_id: str = Query(..., description="Trace I
     first_prov = provenance[0] if provenance else {}
     return {
         "trace_id": trace_id,
-        "decision": cached.get("enforcement_decision", "UNKNOWN"),
+        "decision": (cached.get("recommendation") or {}).get("type", "UNKNOWN"),
         "jurisdiction_detected": first_prov.get("jurisdiction_detected"),
         "jurisdiction_confidence": first_prov.get("jurisdiction_confidence"),
         "timestamp": first_prov.get("timestamp"),

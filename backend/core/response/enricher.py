@@ -3,11 +3,7 @@ from typing import Dict, List, Any, Optional
 from procedures.loader import procedure_loader
 
 def enrich_response(base_response: Dict[str, Any], query_text: str, domain: str, statutes: List[Dict], jurisdiction: str = "IN") -> Dict[str, Any]:
-    """Enrich response with enforcement_decision, timeline, glossary, and evidence_requirements"""
-    
-    # Set enforcement_decision if not present
-    if "enforcement_decision" not in base_response:
-        base_response["enforcement_decision"] = _get_enforcement_decision(query_text, jurisdiction)
+    """Enrich response with timeline, glossary, and evidence_requirements"""
     
     # Set timeline if not present
     if "timeline" not in base_response:
@@ -22,57 +18,6 @@ def enrich_response(base_response: Dict[str, Any], query_text: str, domain: str,
         base_response["evidence_requirements"] = _get_evidence_defaults(domain, jurisdiction)
     
     return base_response
-
-def _get_enforcement_decision(query_text: str, jurisdiction: str = "IN") -> str:
-    """Determine enforcement decision based on query content"""
-    query_lower = query_text.lower()
-
-    # Addon subtypes may explicitly require escalation
-    try:
-        from core.addons.addon_subtype_resolver import AddonSubtypeResolver
-        addon_resolver = AddonSubtypeResolver()
-        addon_subtype = addon_resolver.detect_addon_subtype(query_text, jurisdiction)
-        if addon_subtype:
-            addon_data = addon_resolver.addon_subtypes.get(addon_subtype, {})
-            addon_decision = addon_data.get("enforcement_decision")
-            if addon_decision:
-                return addon_decision
-    except Exception:
-        pass
-
-    # Authority assault (teacher/coach/boss + violence)
-    authority_roles = ["teacher", "coach", "principal", "warden", "employer", "boss"]
-    authority_verbs = ["beat", "beating", "hit", "slapped", "assaulted", "punched"]
-    if any(role in query_lower for role in authority_roles) and any(verb in query_lower for verb in authority_verbs):
-        return "ESCALATE"
-
-    # Child sexual offense indicators
-    child_sexual_keywords = [
-        "pedophile",
-        "paedophile",
-        "child abuse",
-        "minor sexual",
-        "molested child",
-        "sex with child",
-        "raping child",
-        "raping minor",
-        "year old girl",
-        "year old boy",
-    ]
-    if any(keyword in query_lower for keyword in child_sexual_keywords):
-        return "ESCALATE"
-
-    # Check for suicide/self-harm keywords
-    suicide_keywords = ["kill myself", "suicide", "end my life", "harm myself", "kill me"]
-    if any(keyword in query_lower for keyword in suicide_keywords):
-        return "ESCALATE"
-    
-    # Check for policy violations
-    violation_keywords = ["bomb", "weapon", "violence", "illegal"]
-    if any(keyword in query_lower for keyword in violation_keywords):
-        return "BLOCK"
-    
-    return "ALLOW"
 
 def _get_timeline_defaults(domain: str, jurisdiction: str = "IN") -> List[Dict[str, str]]:
     """Get default timeline based on domain and jurisdiction"""

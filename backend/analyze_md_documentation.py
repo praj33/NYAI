@@ -12,7 +12,7 @@ def analyze_md_files():
     md_files = {
         "ARCHITECTURE.md": "System architecture diagrams and component flow",
         "API_TESTING_EXAMPLES.md": "Complete API testing guide with examples",
-        "ENFORCEMENT_ENGINE.md": "Sovereign enforcement engine philosophy and guarantees",
+        "REVIEW_PACKET.md": "Reasoning layer migration review and determinism proof",
         "INTEGRATED_README.md": "Comprehensive integrated system documentation",
         "INTEGRATION_SUMMARY.md": "Complete integration status and handover notes",
         "NONCE_FIX.md": "Nonce validation fix for easier testing",
@@ -32,7 +32,7 @@ def analyze_md_files():
         "System Architecture": ["ARCHITECTURE.md"],
         "API Documentation": ["API_TESTING_EXAMPLES.md", "INTEGRATED_README.md"],
         "Getting Started": ["QUICKSTART.md", "README.md", "NONCE_FIX.md"],
-        "Governance & Compliance": ["ENFORCEMENT_ENGINE.md", "SOVEREIGN_GOVERNANCE_COMPLIANCE.md"],
+        "Governance & Compliance": ["REVIEW_PACKET.md", "SOVEREIGN_GOVERNANCE_COMPLIANCE.md"],
         "System Integration": ["INTEGRATION_SUMMARY.md", "SYSTEM_VALIDATION.md"],
         "Audit & Tracing": ["TRACE_EXAMPLES.md", "TRACE_PROOF_EXAMPLES.md"],
         "Schema Documentation": ["procedures/schemas/procedure_v1.1.md", "procedures/schemas/schema_notes_v1.1.md", "procedures/schemas/schema_v2.md"]
@@ -66,11 +66,11 @@ def analyze_md_files():
             "Python testing scripts included"
         ],
         
-        "ENFORCEMENT_ENGINE.md": [
-            "Fail-safe design philosophy: 'Nyaya may stop, refuse, escalate but never violate'",
-            "4 decision types: ALLOW, SOFT_REDIRECT, BLOCK, ESCALATE",
-            "Mathematical guarantees: deterministic, no hallucination, explainable",
-            "Cryptographic signing of all enforcement decisions"
+        "REVIEW_PACKET.md": [
+            "Enforcement engine fully removed and replaced with reasoning layer",
+            "4 advisory recommendation types: ALLOW, DENY, ESCALATE, REVIEW",
+            "Determinism proof: 3 identical runs with matching hashes",
+            "New schema: legal_context, facts, analysis, explanation_chain, risk_flags"
         ],
         
         "INTEGRATED_README.md": [
@@ -255,8 +255,8 @@ def analyze_md_files():
         
         "For Compliance/Legal": [
             "Sovereign governance compliance fully documented",
-            "Enforcement engine philosophy and guarantees explained",
-            "Cryptographic audit trail with HMAC-SHA256 signing",
+            "Reasoning layer with determinism proof documented in REVIEW_PACKET.md",
+            "Cryptographic audit trail with input/output hashing",
             "Complete trace examples with verification proofs"
         ]
     }

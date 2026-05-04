@@ -165,97 +165,68 @@ def check_safe_learning():
     return safe_learning
 
 def check_rule_compliance():
-    """🛡️ Task 3: Verify strict rule compliance"""
+    """🛡️ Task 3: Verify reasoning layer compliance"""
     print("\n🛡️ VERIFYING RULE COMPLIANCE (Task 3)")
     print("=" * 50)
     
     checks = []
     
-    # 1. Enforcement engine exists
+    # 1. Reasoning layer schemas exist
     try:
-        from enforcement_engine.engine import enforce_request, EnforcementSignal
-        print("✓ Enforcement engine present")
+        from api.schemas import (
+            Recommendation, RecommendationType, LegalContext,
+            AnalysisBlock, DeterminismProof
+        )
+        print("✓ Reasoning layer schemas present")
         checks.append(True)
     except Exception as e:
-        print(f"❌ Enforcement engine missing: {e}")
+        print(f"❌ Reasoning layer schemas missing: {e}")
         checks.append(False)
         return False
     
-    # 2. Enforcement decisions are structured
+    # 2. Recommendation types are advisory only
     try:
-        signal = EnforcementSignal(
-            case_id='compliance_test',
-            country='IN',
-            domain='criminal',
-            procedure_id='test_proc',
-            original_confidence=0.5,
-            user_request='test request',
-            jurisdiction_routed_to='IN',
-            trace_id='compliance_trace'
-        )
-        
-        result = enforce_request(signal)
-        required_fields = ['decision', 'rule_id', 'policy_source', 'reasoning_summary']
-        has_fields = all(hasattr(result, field) for field in required_fields)
-        
-        if has_fields:
-            print("✓ Enforcement decisions properly structured")
+        types = [t.value for t in RecommendationType]
+        expected = ['ALLOW', 'DENY', 'ESCALATE', 'REVIEW']
+        if set(types) == set(expected):
+            print("✓ Recommendation types properly defined (advisory only)")
             checks.append(True)
         else:
-            print("❌ Enforcement decisions missing required fields")
+            print(f"❌ Unexpected recommendation types: {types}")
             checks.append(False)
     except Exception as e:
-        print(f"❌ Enforcement decision structure failed: {e}")
+        print(f"❌ Recommendation type check failed: {e}")
         checks.append(False)
     
-    # 3. Digital signatures and logging
+    # 3. Determinism proof structure
     try:
-        from enforcement_provenance.ledger import append_event
-        from enforcement_provenance.signer import sign_event_dict
-        
-        test_event = {
-            'event_type': 'compliance_check',
-            'timestamp': datetime.now().isoformat(),
-            'data': {'test': 'compliance'}
-        }
-        
-        signed_event = sign_event_dict(test_event)
-        result = append_event(signed_event)
-        
-        if result['status'] == 'appended':
-            print("✓ Digital signatures and logging working")
+        import hashlib
+        test_input = "test query"
+        input_hash = hashlib.sha256(test_input.encode()).hexdigest()
+        proof = DeterminismProof(input_hash=input_hash, output_hash=input_hash, version="2.0.0")
+        if proof.input_hash and proof.output_hash and proof.version:
+            print("✓ Determinism proof structure valid")
             checks.append(True)
         else:
-            print("❌ Digital signatures/logging failed")
+            print("❌ Determinism proof missing fields")
             checks.append(False)
     except Exception as e:
-        print(f"❌ Provenance logging failed: {e}")
+        print(f"❌ Determinism proof check failed: {e}")
         checks.append(False)
     
-    # 4. Refusal behavior
+    # 4. No enforcement engine remains
     try:
-        # Test edge case that should be refused
-        edge_signal = EnforcementSignal(
-            case_id='edge_case',
-            country='INVALID',
-            domain='invalid',
-            procedure_id='invalid',
-            original_confidence=0.5,
-            user_request='edge case test',
-            jurisdiction_routed_to='INVALID',
-            trace_id='edge_trace'
-        )
-        
-        result = enforce_request(edge_signal)
-        if hasattr(result, 'decision') and result.decision.name in ['BLOCK', 'ESCALATE']:
-            print("✓ Proper refusal behavior")
+        import os
+        enforcement_path = os.path.join(os.path.dirname(__file__), "enforcement_engine")
+        if not os.path.exists(enforcement_path):
+            print("✓ Enforcement engine properly removed")
             checks.append(True)
         else:
-            print("❌ Refusal behavior not working")
+            print("❌ Enforcement engine folder still exists")
             checks.append(False)
     except Exception as e:
-        print(f"✓ System fails safely on edge cases: {e}")
-        checks.append(True)  # Safe failure is good
+        print(f"❌ Enforcement removal check failed: {e}")
+        checks.append(False)
     
     rule_compliance = all(checks)
     print(f"\nRule Compliance: {'✅ WORKING' if rule_compliance else '❌ BROKEN'}")

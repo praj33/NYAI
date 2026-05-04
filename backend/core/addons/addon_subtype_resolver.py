@@ -134,10 +134,6 @@ class AddonSubtypeResolver:
         # Override domains
         base_response['domains'] = addon_data.get('domains', ['criminal'])
         
-        # Set enforcement decision if not already set
-        if 'enforcement_decision' not in base_response:
-            base_response['enforcement_decision'] = addon_data.get('enforcement_decision', 'ALLOW')
-        
         # Mark as addon enhanced
         base_response['addon_enhanced'] = True
         base_response['addon_subtype'] = addon_subtype

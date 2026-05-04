@@ -540,7 +540,7 @@ class LegalAdvice:
     timeline: List[Dict[str, str]] = field(default_factory=list)
     glossary: List[Dict[str, str]] = field(default_factory=list)
     evidence_requirements: List[str] = field(default_factory=list)
-    enforcement_decision: str = "ALLOW"
+
     ontology_filtered: bool = False
     query_understanding: Dict[str, Any] = field(default_factory=dict)
     retrieval_metadata: Dict[str, Any] = field(default_factory=dict)
@@ -560,7 +560,7 @@ class EnhancedLegalAdvisor:
         
         self.loader = JSONLoader(db_path)
         self.sections, self.acts, self.cases = self.loader.load_and_normalize_directory()
-        self.enforcement_ledger = []
+        self.audit_ledger = []
         self.ontology_filter = OntologyFilter()
         self.addon_resolver = AddonSubtypeResolver()
         self.dowry_precision = DowryPrecisionLayer()
@@ -1972,9 +1972,9 @@ class EnhancedLegalAdvisor:
         
         return remedies[:10]
     
-    def _log_enforcement_event(self, event_type: str, trace_id: str, details: Dict[str, Any]):
-        """Log enforcement event to ledger"""
-        prev_hash = self.enforcement_ledger[-1]['hash'] if self.enforcement_ledger else "GENESIS"
+    def _log_audit_event(self, event_type: str, trace_id: str, details: Dict[str, Any]):
+        """Log audit event to ledger"""
+        prev_hash = self.audit_ledger[-1]['hash'] if self.audit_ledger else "GENESIS"
         
         event = {
             "type": event_type,
@@ -1988,14 +1988,14 @@ class EnhancedLegalAdvisor:
         event_str = json.dumps(event, sort_keys=True)
         event["hash"] = hashlib.sha256(event_str.encode()).hexdigest()
         
-        self.enforcement_ledger.append(event)
+        self.audit_ledger.append(event)
     
     def provide_legal_advice(self, legal_query: LegalQuery) -> LegalAdvice:
         """Main method to provide comprehensive legal advice"""
         trace_id = legal_query.trace_id or f"trace_{datetime.now().strftime('%Y%m%d_%H%M%S_%f')}"
         
         # Log query received
-        self._log_enforcement_event("query_received", trace_id, {
+        self._log_audit_event("query_received", trace_id, {
             "query": legal_query.query_text,
             "jurisdiction_hint": legal_query.jurisdiction_hint,
             "domain_hint": legal_query.domain_hint
@@ -2033,7 +2033,7 @@ class EnhancedLegalAdvisor:
         domain = domains[0] if domains else 'civil'
 
         # Log classification
-        self._log_enforcement_event("jurisdiction_resolved", trace_id, {
+        self._log_audit_event("jurisdiction_resolved", trace_id, {
             "jurisdiction": jurisdiction,
             "domain": domain,
             "domains": domains,
@@ -2142,7 +2142,7 @@ class EnhancedLegalAdvisor:
             confidence_score = min(0.95, confidence_score)
         
         # Log completion
-        self._log_enforcement_event("advice_generated", trace_id, {
+        self._log_audit_event("advice_generated", trace_id, {
             "sections_found": len(relevant_sections),
             "confidence_score": confidence_score,
             "jurisdiction_final": jurisdiction,
@@ -2535,7 +2535,7 @@ class EnhancedLegalAdvisor:
             timeline=[],
             glossary=[],
             evidence_requirements=[],
-            enforcement_decision="ALLOW",
+
             ontology_filtered=ontology_filtered or dowry_filtered,
             query_understanding=query_understanding,
             retrieval_metadata=retrieval_metadata,
@@ -2546,10 +2546,10 @@ class EnhancedLegalAdvisor:
         
         return advice
     
-    def save_enforcement_ledger(self, filename: str = "enhanced_legal_advice_ledger.json"):
-        """Save enforcement ledger to file"""
+    def save_audit_ledger(self, filename: str = "enhanced_legal_advice_ledger.json"):
+        """Save audit ledger to file"""
         with open(filename, 'w') as f:
-            json.dump(self.enforcement_ledger, f, indent=2)
+            json.dump(self.audit_ledger, f, indent=2)
     
     def get_system_stats(self) -> Dict[str, Any]:
         """Get comprehensive system statistics"""
@@ -2640,9 +2640,9 @@ def main():
         
         print(f"\n{'='*80}\n")
     
-    # Save enforcement ledger
-    advisor.save_enforcement_ledger()
-    print(f">> Enhanced enforcement ledger saved with {len(advisor.enforcement_ledger)} events")
+    # Save audit ledger
+    advisor.save_audit_ledger()
+    print(f">> Audit ledger saved with {len(advisor.audit_ledger)} events")
     
     # Display final statistics
     print(f"\n>> Final System Performance:")

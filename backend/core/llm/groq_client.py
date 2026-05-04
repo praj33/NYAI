@@ -1,6 +1,6 @@
 """Optional Groq-backed response generation.
 
-Local statutes, procedures, and enforcement remain the source of truth.
+Local statutes, procedures, and reasoning layer remain the source of truth.
 This module only turns retrieved data into a clearer narrative answer.
 """
 
@@ -47,7 +47,7 @@ class GroqResponseGenerator:
         remedies: List[str],
         timeline: List[Dict[str, str]],
         evidence_requirements: List[str],
-        enforcement_decision: str,
+        recommendation: str = "ALLOW",
         legal_analysis: str,
         query_understanding: Optional[Dict[str, Any]] = None,
         retrieval_metadata: Optional[Dict[str, Any]] = None,
@@ -63,7 +63,7 @@ class GroqResponseGenerator:
             remedies=remedies,
             timeline=timeline,
             evidence_requirements=evidence_requirements,
-            enforcement_decision=enforcement_decision,
+            recommendation=recommendation,
             legal_analysis=legal_analysis,
             query_understanding=query_understanding,
             retrieval_metadata=retrieval_metadata,
@@ -93,7 +93,7 @@ class GroqResponseGenerator:
                 remedies=remedies,
                 timeline=timeline,
                 evidence_requirements=evidence_requirements,
-                enforcement_decision=enforcement_decision,
+                recommendation=recommendation,
                 legal_analysis=legal_analysis,
                 query_understanding=query_understanding,
                 retrieval_metadata=retrieval_metadata,
@@ -107,7 +107,7 @@ class GroqResponseGenerator:
                             "role": "system",
                             "content": (
                                 "You are a legal response formatter. Use only the supplied statutes, "
-                                "procedures, case laws, and enforcement result. Do not invent laws, "
+                                "procedures, case laws, and reasoning context. Do not invent laws, "
                                 "sections, punishments, timelines, or procedure steps. If data is missing, "
                                 "say it is unavailable in the retrieved records."
                             ),
@@ -167,7 +167,7 @@ class GroqResponseGenerator:
         remedies: List[str],
         timeline: List[Dict[str, str]],
         evidence_requirements: List[str],
-        enforcement_decision: str,
+        recommendation: str,
         legal_analysis: str,
         query_understanding: Optional[Dict[str, Any]],
         retrieval_metadata: Optional[Dict[str, Any]],
@@ -199,13 +199,13 @@ class GroqResponseGenerator:
         return "\n".join(
             [
                 "Write a concise legal answer in plain English.",
-                "Structure: short answer, key statutes, procedure, enforcement status, practical next steps.",
+                "Structure: short answer, key statutes, procedure, recommendation, practical next steps.",
                 "Mention exact section numbers and act names only from the provided data.",
                 "",
                 f"User query: {query}",
                 f"Jurisdiction: {jurisdiction}",
                 f"Domain: {domain}",
-                f"Enforcement decision: {enforcement_decision}",
+                f"Recommendation: {recommendation}",
                 f"Query understanding: {(query_understanding or {}).get('summary', 'None')}",
                 f"User intent: {(query_understanding or {}).get('intent', 'general')}",
                 f"Search terms used: {(retrieval_metadata or {}).get('search_queries', [])}",
@@ -245,14 +245,14 @@ class GroqResponseGenerator:
         remedies: List[str],
         timeline: List[Dict[str, str]],
         evidence_requirements: List[str],
-        enforcement_decision: str,
+        recommendation: str,
         legal_analysis: str,
         query_understanding: Optional[Dict[str, Any]],
         retrieval_metadata: Optional[Dict[str, Any]],
     ) -> str:
         parts = [
             f"Query: {query}",
-            f"Jurisdiction: {jurisdiction}. Domain: {domain}. Enforcement: {enforcement_decision}.",
+            f"Jurisdiction: {jurisdiction}. Domain: {domain}. Recommendation: {recommendation}.",
         ]
 
         if query_understanding and query_understanding.get("summary"):

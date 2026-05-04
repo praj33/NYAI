@@ -121,7 +121,7 @@ async def root():
             "timeline": "GET /nyaya/timeline?trace_id={trace_id}",
             "glossary": "GET /nyaya/glossary?trace_id={trace_id}",
             "jurisdiction_info": "GET /nyaya/jurisdiction_info?jurisdiction={code}",
-            "enforcement_status": "GET /nyaya/enforcement_status?trace_id={trace_id}",
+            "recommendation_status": "GET /nyaya/recommendation_status?trace_id={trace_id}",
             "rl_signal": "POST /nyaya/rl_signal",
             "procedure_analyze": "POST /nyaya/procedures/analyze",
             "procedure_summary": "GET /nyaya/procedures/summary/{country}/{domain}",
