@@ -28,7 +28,7 @@ class GovernedExecutionPipeline:
             # Add governance metadata to result
             if isinstance(result, dict):
                 result['governance_metadata'] = {
-                    'advisory': 'ALLOW',
+                    'advisory': 'INFORM',
                     'governance_approved': True,
                     'trace_id': trace_id,
                     'timestamp': datetime.utcnow().isoformat()
@@ -37,7 +37,7 @@ class GovernedExecutionPipeline:
                 result = {
                     'result': result,
                     'governance_metadata': {
-                        'advisory': 'ALLOW',
+                        'advisory': 'INFORM',
                         'governance_approved': True,
                         'trace_id': trace_id,
                         'timestamp': datetime.utcnow().isoformat()
@@ -72,7 +72,7 @@ class GovernedExecutionPipeline:
 
             if isinstance(result, dict):
                 result['governance_metadata'] = {
-                    'advisory': 'ALLOW',
+                    'advisory': 'INFORM',
                     'governance_approved': True,
                     'trace_id': trace_id,
                     'timestamp': datetime.utcnow().isoformat()
@@ -81,7 +81,7 @@ class GovernedExecutionPipeline:
                 result = {
                     'result': result,
                     'governance_metadata': {
-                        'advisory': 'ALLOW',
+                        'advisory': 'INFORM',
                         'governance_approved': True,
                         'trace_id': trace_id,
                         'timestamp': datetime.utcnow().isoformat()

@@ -187,7 +187,7 @@ def check_rule_compliance():
     # 2. Recommendation types are advisory only
     try:
         types = [t.value for t in RecommendationType]
-        expected = ['ALLOW', 'DENY', 'ESCALATE', 'REVIEW']
+        expected = ['INFORM', 'REVIEW', 'ESCALATE', 'INSUFFICIENT_DATA']
         if set(types) == set(expected):
             print("✓ Recommendation types properly defined (advisory only)")
             checks.append(True)

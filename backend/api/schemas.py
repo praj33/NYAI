@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, validator
 from typing import Dict, Any, List, Optional
 from enum import Enum
 
@@ -23,11 +23,11 @@ class JurisdictionHint(str, Enum):
     UAE = "UAE"
 
 class RecommendationType(str, Enum):
-    """Advisory-only recommendation — NOT an enforcement gate."""
-    ALLOW = "ALLOW"
-    DENY = "DENY"
-    ESCALATE = "ESCALATE"
+    """TANTRA-canonical advisory types. No semantic bias."""
+    INFORM = "INFORM"
     REVIEW = "REVIEW"
+    ESCALATE = "ESCALATE"
+    INSUFFICIENT_DATA = "INSUFFICIENT_DATA"
 
 
 # ─── Request Schemas ───
@@ -67,7 +67,7 @@ class FeedbackRequest(BaseModel):
     comment: Optional[str] = Field(None, max_length=1000)
 
 
-# ─── Response Sub-Schemas ───
+# ─── TANTRA Canonical Sub-Schemas ───
 
 class StatuteSchema(BaseModel):
     act: str
@@ -88,9 +88,26 @@ class ConfidenceSchema(BaseModel):
     statute_match: float = Field(..., ge=0.0, le=1.0)
     procedural_match: float = Field(..., ge=0.0, le=1.0)
 
+class Fact(BaseModel):
+    """Structured fact — no free-form strings."""
+    fact_id: str
+    statement: str
+    source: str
+
+class RuleApplication(BaseModel):
+    """Maps a law_id to its application. No free-form strings."""
+    law_id: str
+    application: str
+
+class ExplanationStep(BaseModel):
+    """Single step in the explanation chain."""
+    step_number: int
+    description: str
+    source: str = "pipeline"
+
 class Recommendation(BaseModel):
-    """Advisory-only recommendation. NOT an enforcement gate."""
-    type: RecommendationType = RecommendationType.ALLOW
+    """Advisory-only recommendation. NOT a decision gate."""
+    type: RecommendationType = RecommendationType.INFORM
     confidence: float = Field(0.0, ge=0.0, le=1.0)
     rationale: str = ""
 
@@ -101,7 +118,7 @@ class LegalContext(BaseModel):
 
 class AnalysisBlock(BaseModel):
     issues_identified: List[str] = []
-    rule_application: List[str] = []
+    rule_application: List[RuleApplication] = []
     conflicts: List[str] = []
 
 class DeterminismProof(BaseModel):
@@ -109,15 +126,21 @@ class DeterminismProof(BaseModel):
     output_hash: str
     version: str
 
+    @validator('input_hash', 'output_hash')
+    def must_be_hex64(cls, v):
+        if len(v) != 64 or not all(c in '0123456789abcdef' for c in v):
+            raise ValueError(f"Hash must be 64-char lowercase hex, got: {v[:20]}...")
+        return v
 
-# ─── Main Response Schema ───
+
+# ─── Main Response Schema (TANTRA Canonical) ───
 
 class NyayaResponse(BaseModel):
-    # ─── Determinism & Tracing ───
+    # ─── Determinism & Tracing (ALL REQUIRED — no defaults) ───
     trace_id: str
-    request_id: str = ""
-    input_hash: str = ""
-    timestamp: str = ""
+    request_id: str
+    input_hash: str
+    timestamp: str
     # ─── Legal Context ───
     legal_context: LegalContext
     domain: str
@@ -126,13 +149,13 @@ class NyayaResponse(BaseModel):
     jurisdiction_detected: str
     jurisdiction_confidence: float = Field(..., ge=0.0, le=1.0)
     confidence: ConfidenceSchema
-    # ─── Facts & Analysis ───
-    facts: List[str] = []
+    # ─── Facts & Analysis (STRUCTURED) ───
+    facts: List[Fact]
     analysis: AnalysisBlock
     # ─── Recommendation (advisory only) ───
     recommendation: Recommendation
-    # ─── Explanation ───
-    explanation_chain: List[str] = []
+    # ─── Explanation (STRUCTURED) ───
+    explanation_chain: List[ExplanationStep]
     # ─── Risk ───
     risk_flags: List[str] = []
     # ─── Determinism Proof ───
@@ -152,6 +175,7 @@ class NyayaResponse(BaseModel):
     answer_source: Optional[str] = None
     answer_model: Optional[str] = None
     # ─── Compliance ───
+    observer_validation: Optional[Dict[str, Any]] = None
     observer_steps: List[Dict[str, Any]] = []
     confidence_sources: Optional[Dict[str, Any]] = None
     metadata: Optional[Dict[str, Any]] = None

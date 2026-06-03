@@ -35,7 +35,8 @@ from api.schemas import (
     ExplainReasoningResponse, FeedbackResponse, TraceResponse,
     StatuteSchema, ConfidenceSchema, CaseLawSchema,
     Recommendation, RecommendationType, LegalContext,
-    AnalysisBlock, DeterminismProof
+    AnalysisBlock, DeterminismProof,
+    Fact, RuleApplication, ExplanationStep
 )
 
 # Import response enricher
@@ -43,7 +44,8 @@ from core.response.enricher import enrich_response
 from services.explainer import generate_explanation_payload
 
 # Determinism version tag
-DETERMINISM_VERSION = "2.0.0"
+DETERMINISM_VERSION = "3.0.0"
+DETERMINISM_GUARD_ENABLED = os.getenv("DETERMINISM_GUARD_ENABLED", "false").lower() not in {"0", "false", "no"}
 from services.query_cleaner import clean_query
 from services.query_understanding import analyze_query
 from services.query_expander import expand_query
@@ -53,7 +55,8 @@ from services.legal_reasoner import apply_reasoning_rules
 
 # ─── TANTRA Compliance ───
 from observer.pipeline import ObserverPipeline
-from api.response_builder import ResponseBuilder, ResponseNotFormatted
+from api.response_builder import ResponseBuilder, SchemaValidationError, HashMismatchError, TraceContinuityError
+from tantra.output_bucket import output_bucket
 import logging
 
 router = APIRouter(prefix="/nyaya", tags=["nyaya"])
@@ -218,7 +221,8 @@ async def query_legal(request: QueryRequest):
         legal_query = LegalQuery(
             query_text=cleaned_query,
             jurisdiction_hint=request.jurisdiction_hint,
-            domain_hint=domain_hint_value
+            domain_hint=domain_hint_value,
+            trace_id=_temp_trace
         )
         advice = advisor.provide_legal_advice(legal_query)
         observer.record("clean_legal_advisor", {"sections": len(advice.statutes or []), "domain": advice.domain, "jurisdiction": advice.jurisdiction})
@@ -453,8 +457,15 @@ async def query_legal(request: QueryRequest):
         enriched = enrich_response(base_response, cleaned_query, advice.domain, statutes, advice.jurisdiction)
         
         # ─── REASONING LAYER: Build deterministic legal context ───
-        input_hash = hashlib.sha256(cleaned_query.encode('utf-8')).hexdigest()
-        request_id = f"req_{uuid.uuid4().hex[:12]}"
+        # input_hash = sha256(full canonical input payload)
+        canonical_input = json.dumps({
+            "query": cleaned_query,
+            "jurisdiction_hint": jurisdiction_hint_str,
+            "domain_hint": domain_hint_value,
+        }, sort_keys=True)
+        input_hash = hashlib.sha256(canonical_input.encode('utf-8')).hexdigest()
+        # Deterministic request_id — derived from input_hash, no randomness
+        request_id = f"req_{input_hash[:12]}"
         timestamp_str = datetime.utcnow().isoformat() + "Z"
 
         # Legal context
@@ -467,16 +478,17 @@ async def query_legal(request: QueryRequest):
             applicable_laws=applicable_laws
         )
 
-        # Facts extraction
+        # Facts extraction — STRUCTURED Fact objects
         facts = []
-        if cleaned_query:
-            facts.append(f"User query: {cleaned_query}")
-        facts.append(f"Jurisdiction detected: {jurisdiction_result.jurisdiction} (confidence: {jurisdiction_result.confidence:.2f})")
-        facts.append(f"Domain classified: {response_domain}")
-        facts.append(f"Statutes matched: {sections_found}")
-        facts.append(f"Case laws found: {len(case_laws)}")
+        facts.append(Fact(fact_id="F1", statement=f"User query: {cleaned_query}", source="input"))
+        facts.append(Fact(fact_id="F2", statement=f"Jurisdiction detected: {jurisdiction_result.jurisdiction} (confidence: {jurisdiction_result.confidence:.2f})", source="JurisdictionDetector"))
+        facts.append(Fact(fact_id="F3", statement=f"Domain classified: {response_domain}", source="DomainClassifier"))
+        facts.append(Fact(fact_id="F4", statement=f"Statutes matched: {sections_found}", source="BM25Search"))
+        facts.append(Fact(fact_id="F5", statement=f"Case laws found: {len(case_laws)}", source="CaseLawRetriever"))
+        if sections_found == 0:
+            enriched.setdefault('risk_flags_extra', []).append("EMPTY_FACTS: No statutory provisions matched")
 
-        # Analysis block
+        # Analysis block — STRUCTURED RuleApplication objects
         issues_identified = []
         rule_application = []
         conflicts = []
@@ -484,11 +496,15 @@ async def query_legal(request: QueryRequest):
             issues_identified.append("No specific statutory provisions matched for this query")
         else:
             for s in statutes[:5]:
-                rule_application.append(f"{s.act} Section {s.section}: {s.title}")
+                rule_application.append(RuleApplication(
+                    law_id=f"{s.act}:{s.section}",
+                    application=s.title
+                ))
         if jurisdiction_result.confidence < 0.5:
             issues_identified.append(f"Low jurisdiction confidence ({jurisdiction_result.confidence:.2f}) — results may be imprecise")
         if len(applicable_laws) > 3:
             conflicts.append("Multiple acts applicable — cross-reference required")
+            enriched.setdefault('risk_flags_extra', []).append("CONFLICTING_LAWS: Multiple acts applicable")
 
         analysis = AnalysisBlock(
             issues_identified=issues_identified,
@@ -496,10 +512,10 @@ async def query_legal(request: QueryRequest):
             conflicts=conflicts
         )
 
-        # Recommendation (advisory only)
+        # Recommendation (advisory only) — TANTRA canonical types
         rec_confidence = confidence.overall
         if sections_found > 0 and jurisdiction_result.confidence > 0.5:
-            rec_type = RecommendationType.ALLOW
+            rec_type = RecommendationType.INFORM
             rec_rationale = f"Query resolved with {sections_found} statute(s) at {rec_confidence:.0%} confidence"
         elif sections_found > 0:
             rec_type = RecommendationType.REVIEW
@@ -508,7 +524,7 @@ async def query_legal(request: QueryRequest):
             rec_type = RecommendationType.ESCALATE
             rec_rationale = "No statutes matched — consider consulting a legal professional"
         else:
-            rec_type = RecommendationType.DENY
+            rec_type = RecommendationType.INSUFFICIENT_DATA
             rec_rationale = "Insufficient data to provide reliable legal guidance"
 
         recommendation = Recommendation(
@@ -517,20 +533,20 @@ async def query_legal(request: QueryRequest):
             rationale=rec_rationale
         )
 
-        # Explanation chain (step-by-step reasoning)
+        # Explanation chain — STRUCTURED ExplanationStep objects
         explanation_chain = [
-            f"1. Query received and cleaned: '{cleaned_query}'",
-            f"2. Jurisdiction detected: {jurisdiction_result.jurisdiction} (confidence: {jurisdiction_result.confidence:.2f})",
-            f"3. Domain classified: {response_domain}",
-            f"4. BM25 full-text search executed across {getattr(advisor, 'section_count', 'N/A')} sections",
-            f"5. Statute overrides checked for keyword matches",
-            f"6. {sections_found} relevant statute(s) identified",
-            f"7. {len(case_laws)} case law(s) retrieved",
-            f"8. Recommendation: {rec_type.value} — {rec_rationale}",
+            ExplanationStep(step_number=1, description=f"Query received and cleaned: '{cleaned_query}'", source="QueryCleaner"),
+            ExplanationStep(step_number=2, description=f"Jurisdiction detected: {jurisdiction_result.jurisdiction} (confidence: {jurisdiction_result.confidence:.2f})", source="JurisdictionDetector"),
+            ExplanationStep(step_number=3, description=f"Domain classified: {response_domain}", source="DomainClassifier"),
+            ExplanationStep(step_number=4, description=f"BM25 full-text search executed across {getattr(advisor, 'section_count', 'N/A')} sections", source="BM25Search"),
+            ExplanationStep(step_number=5, description="Statute overrides checked for keyword matches", source="ReasoningEngine"),
+            ExplanationStep(step_number=6, description=f"{sections_found} relevant statute(s) identified", source="StatuteMerger"),
+            ExplanationStep(step_number=7, description=f"{len(case_laws)} case law(s) retrieved", source="CaseLawRetriever"),
+            ExplanationStep(step_number=8, description=f"Recommendation: {rec_type.value} — {rec_rationale}", source="RecommendationEngine"),
         ]
 
         # Risk flags
-        risk_flags = []
+        risk_flags = list(enriched.pop('risk_flags_extra', []))
         sensitive_keywords = ['murder', 'rape', 'suicide', 'death', 'kill', 'bomb', 'terror']
         if any(kw in cleaned_query.lower() for kw in sensitive_keywords):
             risk_flags.append("SENSITIVE_CONTENT: Query involves serious criminal subject matter")
@@ -539,12 +555,14 @@ async def query_legal(request: QueryRequest):
         if jurisdiction_result.confidence < 0.3:
             risk_flags.append("LOW_JURISDICTION_CONFIDENCE: Jurisdiction detection unreliable")
 
-        # Determinism proof — hash the canonical output
+        # Determinism proof — hash canonical output (EXCLUDING timestamp)
         canonical_output = json.dumps({
             "statutes": [{"act": s.act, "section": s.section, "year": s.year} for s in statutes],
             "jurisdiction": advice.jurisdiction,
             "domain": response_domain,
             "recommendation": rec_type.value,
+            "facts": [f.dict() for f in facts],
+            "rule_application": [r.dict() for r in rule_application],
         }, sort_keys=True)
         output_hash = hashlib.sha256(canonical_output.encode('utf-8')).hexdigest()
 
@@ -559,10 +577,10 @@ async def query_legal(request: QueryRequest):
         enriched['input_hash'] = input_hash
         enriched['timestamp'] = timestamp_str
         enriched['legal_context'] = legal_context.dict()
-        enriched['facts'] = facts
+        enriched['facts'] = [f.dict() for f in facts]
         enriched['analysis'] = analysis.dict()
         enriched['recommendation'] = recommendation.dict()
-        enriched['explanation_chain'] = explanation_chain
+        enriched['explanation_chain'] = [s.dict() for s in explanation_chain]
         enriched['risk_flags'] = risk_flags
         enriched['determinism_proof'] = determinism_proof.dict()
 
@@ -601,15 +619,65 @@ async def query_legal(request: QueryRequest):
         observer.record("response_enriched", {"has_answer": bool(enriched.get("answer"))})
         enriched['observer_steps'] = observer.get_observer_steps()
 
-        # ─── TANTRA: Formatter Gate ───
+        # ─── TANTRA: Observer Validation Gate ───
+        observer_result = observer.validate_response(enriched)
+        enriched['observer_validation'] = observer_result.to_dict()
+        if not observer_result.passed:
+            raise SchemaValidationError(
+                observer_result.violations,
+                trace_id=enriched.get('trace_id', 'UNKNOWN')
+            )
+
+        # ─── TANTRA: Formatter Gate (FAIL CLOSED) ───
         builder = ResponseBuilder()
         enriched = builder.build(enriched)
+
+        # ─── TANTRA: trace_guard — ensure trace_id not mutated ───
+        final_trace = enriched.get('trace_id', '')
+        if final_trace != _temp_trace and final_trace != advice.trace_id:
+            raise TraceContinuityError(_temp_trace, final_trace)
+
+        # ─── TANTRA: Output Bucket — log every output ───
+        try:
+            output_bucket.store(enriched)
+        except Exception as bucket_err:
+            logger.warning("Output bucket storage failed: %s", bucket_err)
 
         # Cache the enriched response for downstream endpoints
         response_cache.set(enriched.get("trace_id", advice.trace_id), enriched)
 
         return NyayaResponse(**enriched)
         
+    except SchemaValidationError as sve:
+        raise HTTPException(
+            status_code=500,
+            detail={
+                "error_code": "SCHEMA_VALIDATION_ERROR",
+                "message": str(sve),
+                "violations": sve.violations,
+                "trace_id": sve.trace_id
+            }
+        )
+    except HashMismatchError as hme:
+        raise HTTPException(
+            status_code=500,
+            detail={
+                "error_code": "HASH_MISMATCH_ERROR",
+                "message": str(hme),
+                "trace_id": hme.trace_id
+            }
+        )
+    except TraceContinuityError as tce:
+        raise HTTPException(
+            status_code=500,
+            detail={
+                "error_code": "TRACE_CONTINUITY_ERROR",
+                "message": str(tce),
+                "trace_id": tce.original
+            }
+        )
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(
             status_code=500,

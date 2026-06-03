@@ -50,18 +50,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Global exception handler
+# Global exception handler — FAIL CLOSED
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
-    from api.response_builder import ResponseBuilder
+    from fastapi.responses import JSONResponse
     trace_id = getattr(request.state, 'trace_id', 'unknown')
-    return HTTPException(
+    return JSONResponse(
         status_code=500,
-        detail=ResponseBuilder.build_error_response(
-            "INTERNAL_ERROR",
-            "An unexpected error occurred",
-            trace_id
-        ).dict()
+        content={
+            "error_code": "INTERNAL_ERROR",
+            "message": f"TANTRA FAIL CLOSED: {str(exc)}",
+            "trace_id": trace_id
+        }
     )
 
 # Middleware to add trace_id to request state
