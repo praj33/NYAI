@@ -31,26 +31,26 @@
 
 | Step | Code Location | Action | Fail Mode |
 |------|-------------|--------|-----------|
-| 1 | router.py line 116 | `clean_query(request.query)` | Returns original on failure |
-| 2 | router.py line 118 | Generate `_temp_trace` | Never fails |
-| 3 | router.py line 119 | `ObserverPipeline(_temp_trace)` | Never fails |
-| 4 | router.py line 122 | `analyze_query(cleaned_query)` | Falls back to domain="civil" |
-| 5 | router.py line 131 | `expand_query()` | Falls back to original query |
-| 6 | router.py line 136 | `hybrid_retriever.hybrid_search()` in ThreadPoolExecutor (12s) | Timeout → empty candidates |
-| 7 | router.py line 153 | `rerank_sections()` in ThreadPoolExecutor (8s) | Timeout → top-5 unranked |
-| 8 | router.py line 163 | `apply_reasoning_rules()` | Returns unmodified sections |
-| 9 | router.py line 195 | `advisor.provide_legal_advice(LegalQuery(_temp_trace))` | Raises → HTTP 500 |
-| 10 | router.py line 343 | `case_retriever.retrieve()` | Returns empty list on failure |
-| 11 | router.py line 460 | Compute `input_hash` (SHA256) | Never fails |
-| 12 | router.py line 500–540 | Build Facts, Analysis, Recommendation, ExplanationChain | Never fails |
-| 13 | router.py line 560 | Compute `output_hash` (SHA256) | Never fails |
-| 14 | router.py line 565 | `DeterminismProof(input_hash, output_hash, "3.0.0")` | Raises if not hex64 → HTTP 500 |
-| 15 | router.py line 590 | `observer.validate_response(enriched)` | Raises SchemaValidationError → HTTP 500 |
-| 16 | router.py line 633 | `ResponseBuilder().build(enriched)` | Raises SchemaValidationError → HTTP 500 |
-| 17 | router.py line 636 | trace_guard check | Raises TraceContinuityError → HTTP 500 |
-| 18 | router.py line 644 | `output_bucket.store(enriched)` | Warning logged, never blocks response |
-| 19 | router.py line 647 | `response_cache.set(trace_id, enriched)` | Never fails |
-| 20 | router.py line 649 | `return NyayaResponse(**enriched)` | Raises Pydantic ValidationError → HTTP 500 |
+| 1 | `router.py:115` | `clean_query(request.query)` | Returns original on failure |
+| 2 | `router.py:118` | Generate `_temp_trace` (does not read `request.state.trace_id` from `main.py:72`) | Never fails |
+| 3 | `router.py:119` | `ObserverPipeline(_temp_trace)` | Never fails |
+| 4 | `router.py:122` | `analyze_query(cleaned_query)` | Falls back to domain="civil" |
+| 5 | `router.py:130` | `expand_query()` | Falls back to original query |
+| 6 | `router.py:141` | `hybrid_retriever.hybrid_search()` in ThreadPoolExecutor (12s) | Timeout → empty candidates |
+| 7 | `router.py:159` | `rerank_sections()` in ThreadPoolExecutor (8s) | Timeout → top-5 unranked |
+| 8 | `router.py:173` | `apply_reasoning_rules()` | Returns unmodified sections |
+| 9 | `router.py:227` | `advisor.provide_legal_advice(LegalQuery(trace_id=_temp_trace))` | Raises → HTTP 500 |
+| 10 | `router.py:336` | `case_retriever.retrieve()` | Returns empty list on failure |
+| 11 | `router.py:466` | Compute `input_hash` (SHA256) | Never fails |
+| 12 | `router.py:482-546` | Build Facts, Analysis, Recommendation, ExplanationChain | Never fails |
+| 13 | `router.py:567` | Compute `output_hash` (SHA256) | Never fails |
+| 14 | `router.py:569-573` | `DeterminismProof(input_hash, output_hash, "3.0.0")` | Raises if not hex64 → HTTP 500 |
+| 15 | `router.py:623` | `observer.validate_response(enriched)` | Raises SchemaValidationError → HTTP 500 |
+| 16 | `router.py:632-633` | `ResponseBuilder().build(enriched)` | Raises SchemaValidationError → HTTP 500 |
+| 17 | `router.py:636-638` | trace_guard check | Raises TraceContinuityError → HTTP 500 |
+| 18 | `router.py:642` | `output_bucket.store(enriched)` | Warning logged, never blocks response |
+| 19 | `router.py:647` | `response_cache.set(trace_id, enriched)` | Never fails |
+| 20 | `router.py:649` | `return NyayaResponse(**enriched)` | Raises Pydantic ValidationError → HTTP 500 |
 
 ---
 
@@ -99,6 +99,22 @@
 └─────────────────────┘
 ```
 
+### Module Status Table
+
+| Module | Path | Exists | Imported by `router.py` | Query path | Status |
+|--------|------|--------|----------------------|------------|--------|
+| ObserverPipeline | `observer/pipeline.py` | ✅ | ✅ `router.py:57` | ✅ validate + record | LIVE |
+| ResponseBuilder | `api/response_builder.py` | ✅ | ✅ `router.py:58` | ✅ build gate | LIVE |
+| OutputBucket | `tantra/output_bucket.py` | ✅ | ✅ `router.py:59` | ✅ store | LIVE |
+| RewardEngine | `rl_engine/reward_engine.py` | ✅ | ✅ lazy `router.py:952` | `/rl_signal` only | LIVE (partial) |
+| tantra/flow.py | `tantra/flow.py` | ✅ | ❌ | ❌ | STANDALONE (`flow.py:100`) |
+| SovereignCoreMock | `tantra/sovereign_core_mock.py` | ✅ | ❌ | ❌ | DISCONNECTED |
+| governed_execution | `governed_execution/pipeline.py` | ✅ | ❌ | ❌ | DISCONNECTED |
+| raj_adapter | `raj_adapter/` | ✅ | ❌ | ❌ | DISCONNECTED |
+| sovereign_agents | `sovereign_agents/` | ✅ | ❌ | ❌ | DISCONNECTED |
+| enforcement_engine | N/A | ❌ | N/A | N/A | ABSENT |
+| hash_chain_ledger | `provenance_chain/hash_chain_ledger.py` | ✅ | ❌ | ❌ | DISCONNECTED |
+
 ---
 
 ## SECTION 4 — SCHEMA AUDIT RESULTS
@@ -110,9 +126,10 @@
 - `RecommendationType`: advisory-only (INFORM/REVIEW/ESCALATE/INSUFFICIENT_DATA)
 - `DeterminismProof`: both hash validators active (hex64 pattern in schema + observer + builder)
 - `final_decision_contract.json`: STALE v1.0.0 — requires immediate update to v2.0.0
-- Frontend validator (`casePayloadValidator.js`): aligned to current schema, no enforcement_decision references
+- Frontend validator (`casePayloadValidator.js`): aligned — no `enforcement_decision` references
+- Frontend UI (`LegalQueryCard.jsx`, `LegalDecisionDocument.jsx`, `nyayaBackendApi.js`): **drifted** — still expects `enforcement_decision`
 
-**Verdict:** Schema PASS (internal) / FAIL (external contract)
+**Verdict:** Schema PASS (internal backend) / FAIL (external contract + frontend UI)
 
 ---
 
@@ -123,7 +140,7 @@
 - `_temp_trace` propagates from handler → ObserverPipeline → LegalQuery → NyayaResponse.trace_id ✅
 - `middleware_trace_id` (main.py) is never read by any handler ❌
 - trace_guard prevents mutation within pipeline ✅
-- 3 distinct trace IDs generated per request ⚠️
+- 2 effective trace IDs on happy path (`middleware_trace_id` orphaned; `_temp_trace` == `advice.trace_id`) ⚠️
 
 **Verdict:** Trace PARTIAL — internal continuity PASS, HTTP layer FAIL
 
@@ -186,7 +203,7 @@
 | Observability (ObserverPipeline) | ✅ LIVE |
 | Observability (Trace endpoint) | ❌ STUB |
 
-**5 blockers must be resolved before TANTRA convergence approval.**
+**8 blockers must be resolved before TANTRA convergence approval** (see `CONVERGENCE_AUDIT.md` BL-001–BL-008). **TANTRA convergence: NOT APPROVED.**
 
 ---
 
@@ -199,6 +216,7 @@
 | P3 | `/trace/` endpoint is stub — no event replay | Implement from `output_bucket.retrieve()` |
 | P4 | HTTP middleware trace orphaned — HTTP layer correlation impossible | Use `request.state.trace_id` as `_temp_trace` |
 | P5 | Zero test CI — regressions undetected | Add 3 minimum integration tests |
+| P6 | Frontend UI expects `enforcement_decision` — badges won't render | Migrate to `recommendation.type` |
 
 ---
 
@@ -208,9 +226,9 @@ All findings are based on direct code inspection of the following files:
 
 | File | Lines Inspected | Key Findings |
 |------|----------------|-------------|
-| `backend/api/main.py` | Full (96 lines) | CORS fallback, middleware orphan, router inclusion |
-| `backend/api/router.py` | Full (974 lines) | _temp_trace generation, full query pipeline, trace_guard |
-| `backend/api/schemas.py` | Full (~220 lines) | NyayaResponse fields, RecommendationType, DeterminismProof validator |
+| `backend/api/main.py` | Full (153 lines) | CORS fallback `main.py:47`, middleware orphan `main.py:71-72`, router inclusion `main.py:77` |
+| `backend/api/router.py` | Full (975 lines) | `_temp_trace` `router.py:118`, query pipeline, trace_guard `router.py:636-638`, stub trace `router.py:771-783` |
+| `backend/api/schemas.py` | Full (263 lines) | NyayaResponse `schemas.py:138-156`, RecommendationType `schemas.py:25-30`, validator `schemas.py:129-133` |
 | `backend/api/response_builder.py` | Full (~130 lines) | CANONICAL_FIELDS list, VALID_RECOMMENDATION_TYPES, tantra_v3 stamp |
 | `backend/observer/pipeline.py` | Full (~175 lines) | Pure witness classification, validate_response, blocking behavior |
 | `backend/tantra/output_bucket.py` | Full (~100 lines) | Disk persistence, JSONL append, verify() tamper detection |
@@ -219,9 +237,11 @@ All findings are based on direct code inspection of the following files:
 | `backend/governed_execution/pipeline.py` | Full | Always approves, advisory-only, not imported by router |
 | `backend/rl_engine/reward_engine.py` | Lines 1–130 | Delta bounds, volatility cap, no persistent write |
 | `backend/clean_legal_advisor.py` | Lines 1990–2000 | trace_id reuse from legal_query |
-| `final_decision_contract.json` | Full | `enforcement_decision` required, 4-value enum |
+| `final_decision_contract.json` | Full | `enforcement_decision` required at line 27, enum at 47-50 |
 | `frontend/vercel.json` | Full | `VITE_API_URL` — correct |
-| `frontend/src/lib/casePayloadValidator.js` | Lines 1–40 | No `enforcement_decision` references |
+| `frontend/src/lib/casePayloadValidator.js` | Full grep | No `enforcement_decision` references |
+| `frontend/src/components/LegalQueryCard.jsx` | grep | Still references `enforcement_decision` — UI drift |
+| `backend/api/dependencies.py` | Lines 9-11 | `get_trace_id()` generates new uuid4 — not middleware trace |
 | `backend/.github/workflows/ci.yml` | Full | `pytest \|\| echo` — zero-test pass |
 | `backend/requirements.txt` | Full | `torch==2.1.2`, `faiss-cpu`, `sentence-transformers` |
 | `backend/raj_adapter/enforcement_integration.py` | Lines 1–60 | Advisory-only, not imported by router |
@@ -232,6 +252,8 @@ All findings are based on direct code inspection of the following files:
 ## SECTION 12 — FINAL VERDICT
 
 ### NYAI Readiness Classification: **INTEGRATION READY**
+
+### TANTRA Convergence Approval: **NOT GRANTED**
 
 **What NYAI actually is:**
 A multi-jurisdiction legal AI backend that correctly implements the TANTRA canonical schema for its response output. The enforcement engine has been deleted by design and replaced with an advisory-only recommendation system. The TANTRA-facing outputs (11 canonical fields, SHA256 hash proofs, fail-closed validation) are correctly implemented and internally consistent.
@@ -263,5 +285,5 @@ A multi-jurisdiction legal AI backend that correctly implements the TANTRA canon
 5. Add minimum CI test coverage (3 integration tests)
 6. Add `GET /nyaya/output/{trace_id}` endpoint for external auditors
 7. Connect `hash_chain_ledger.py` to query handler
-8. Set `DETERMINISM_GUARD_ENABLED=true` as default
+8. Migrate frontend UI from `enforcement_decision` to `recommendation.type`
 

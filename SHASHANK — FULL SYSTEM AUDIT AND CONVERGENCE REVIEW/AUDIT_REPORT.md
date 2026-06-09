@@ -12,6 +12,8 @@ NYAI is a multi-jurisdiction legal AI that has undergone a **major architectural
 
 **Final Readiness Classification: INTEGRATION READY (NOT PRODUCTION READY)**
 
+**TANTRA Convergence Approval: NOT GRANTED** — 5 critical/high blockers remain (stale contract, sovereign push, trace replay, middleware trace orphan, zero-test CI). See `CONVERGENCE_AUDIT.md` BL-001–BL-006.
+
 ---
 
 ## PHASE 1 — ARCHITECTURE AUDIT
@@ -66,13 +68,13 @@ HTTP Request
 | ObserverPipeline | `backend/observer/pipeline.py` | ✅ Yes | ✅ Yes |
 | ResponseBuilder | `backend/api/response_builder.py` | ✅ Yes | ✅ Yes |
 | OutputBucket | `backend/tantra/output_bucket.py` | ✅ Yes | ✅ Yes (imported, called) |
-| TANTRA flow.py | `backend/tantra/flow.py` | ✅ Yes | ❌ Standalone script only |
+| TANTRA flow.py | `backend/tantra/flow.py` | ✅ Yes | ❌ Standalone script only (`flow.py:100` — not imported by `router.py`) |
 | SovereignCoreMock | `backend/tantra/sovereign_core_mock.py` | ✅ Yes | ❌ Not imported by router |
 | GovernedExecutionPipeline | `backend/governed_execution/pipeline.py` | ✅ Yes | ❌ Not imported by router |
 | RajReasoningIntegrator | `backend/raj_adapter/enforcement_integration.py` | ✅ Yes | ❌ Not imported by router |
 | RewardEngine | `backend/rl_engine/reward_engine.py` | ✅ Yes | ✅ Yes (lazy import in /rl_signal) |
 | SovereignAgents (base/legal/constitutional) | `backend/sovereign_agents/` | ✅ Yes | ❌ Not imported anywhere |
-| enforcement_engine/ | N/A | ❌ ABSENT | N/A |
+| enforcement_engine/ | N/A | ❌ ABSENT | N/A — `backend/enforcement_engine/` not present (glob verified) |
 
 ### Actual vs Claimed Architecture Delta
 
@@ -135,13 +137,15 @@ VALID_RECOMMENDATION_TYPES = {"INFORM","REVIEW","ESCALATE","INSUFFICIENT_DATA"}
 **All 11 fields verified present and populated correctly.**
 
 ### DeterminismProof Validator — Verified
-`schemas.py` line ~110: `@validator('input_hash','output_hash') def must_be_hex64` — confirmed present and active. Both router.py and response_builder.py independently validate hex64 format.
+`schemas.py:129-133`: `@validator('input_hash','output_hash') def must_be_hex64` — confirmed present and active. Both `router.py:569-573` and `response_builder.py:39` independently validate hex64 format.
 
 ### Frontend Schema (vercel.json) — CORRECTED (Previously Flagged)
 `frontend/vercel.json` uses `"VITE_API_URL"` — correct for a Vite project. **CF-006 from pre-loaded flags is FALSE**. This was a pre-audit false positive.
 
-### `casePayloadValidator.js` — No enforcement_decision reference
-Zero occurrences of `enforcement_decision`, `ALLOW`, `BLOCK`, or `RESTRICT` in the frontend validator. Frontend is already aligned to the new schema.
+### Frontend Schema Split — PARTIAL ALIGNMENT
+- `frontend/src/lib/casePayloadValidator.js`: **aligned** — zero `enforcement_decision` references (grep verified).
+- `frontend/src/lib/gravitas.types.js`: **aligned** — no `enforcement_decision` references.
+- **UI components still drifted:** `LegalQueryCard.jsx`, `LegalDecisionDocument.jsx`, `DecisionPage.jsx`, `LawAgentView.jsx`, `nyayaBackendApi.js`, and test files still expect `enforcement_decision` (ALLOW/BLOCK/ESCALATE). Backend returns `recommendation.type` instead — UI enforcement badges will not render correctly without migration.
 
 ---
 
@@ -151,9 +155,9 @@ Zero occurrences of `enforcement_decision`, `ALLOW`, `BLOCK`, or `RESTRICT` in t
 
 | ID | Generated At | Value | Used Where |
 |----|-------------|-------|-----------|
-| `middleware_trace_id` | `main.py` middleware | `str(uuid.uuid4())` | `request.state.trace_id` — **NEVER READ by router** |
-| `_temp_trace` | `router.py` line 118 | `f"trace_{timestamp}_{uuid4().hex[:6]}"` | ObserverPipeline, LegalQuery |
-| `advice.trace_id` | `clean_legal_advisor.py` line 1995 | `legal_query.trace_id` (reuses `_temp_trace`) | `base_response["trace_id"]` |
+| `middleware_trace_id` | `main.py:71-72` middleware | `str(uuid.uuid4())` | `request.state.trace_id` — **NEVER READ by `query_legal()`** |
+| `_temp_trace` | `router.py:118` | `f"trace_{timestamp}_{uuid4().hex[:6]}"` | ObserverPipeline, LegalQuery |
+| `advice.trace_id` | `clean_legal_advisor.py:1995` | `legal_query.trace_id` (reuses `_temp_trace`) | `base_response["trace_id"]` (`router.py:451`) |
 
 **Result:** `_temp_trace` == `advice.trace_id` (advisor reuses the passed value). `middleware_trace_id` is **completely orphaned** — generated, stored in `request.state`, never read again, never appears in any response.
 
@@ -267,7 +271,7 @@ The enforcement engine is deleted. The recommendation field is advisory-only by 
 
 | Module | Integration State | Evidence |
 |--------|------------------|----------|
-| `tantra/output_bucket.py` | ✅ **LIVE** — called in query handler | `output_bucket.store(enriched)` — router line 644 |
+| `tantra/output_bucket.py` | ✅ **LIVE** — called in query handler | `output_bucket.store(enriched)` — `router.py:642` (import at `router.py:59`) |
 | `tantra/flow.py` | ❌ **STANDALONE SCRIPT** — `if __name__ == "__main__":` | Not imported by any API endpoint |
 | `tantra/sovereign_core_mock.py` | ❌ **NOT WIRED** to live API | Only used by `flow.py` (standalone script) |
 | `governed_execution/pipeline.py` | ❌ **DISCONNECTED** | Not imported by router |
@@ -329,7 +333,7 @@ The enforcement engine is deleted. The recommendation field is advisory-only by 
 | F-002 | `tantra/flow.py` is a standalone script, not wired to any API endpoint — TANTRA flow not executable via the API | CRITICAL | 6 |
 | F-003 | `SovereignCoreMock` never called from live API — TANTRA sovereign core push is completely disconnected | CRITICAL | 6 |
 | F-004 | `GET /nyaya/trace/{trace_id}` returns hardcoded stub data — real event chain replay is impossible | HIGH | 3 |
-| F-005 | `middleware_trace_id` (from `main.py` HTTP middleware) is orphaned — never read by the query handler; 3 distinct trace IDs circulate | HIGH | 3 |
+| F-005 | `middleware_trace_id` (`main.py:71-72`) is orphaned — never read by `query_legal()`; handler uses separate `_temp_trace` (`router.py:118`) | HIGH | 3 |
 | F-006 | `enforcement_engine/` directory does not exist — architectural documentation (ARCHITECTURE.md, system_map.md) describes a ghost module | HIGH | 1 |
 | F-007 | `sovereign_agents/`, `governed_execution/`, `raj_adapter/` all exist but are not imported by any active endpoint — documented as integrated but disconnected | HIGH | 1 |
 | F-008 | `hash_chain_ledger.py` (`provenance_chain/`) is not imported or called from `router.py` — provenance_chain field in response is built inline, not from the ledger | HIGH | 3 |
@@ -337,7 +341,8 @@ The enforcement engine is deleted. The recommendation field is advisory-only by 
 | F-010 | `TRACE_PROOF_EXAMPLES.md` documents `decision: ALLOW/BLOCK` and HMAC signatures — these structures no longer exist in the codebase | HIGH | 2 |
 | F-011 | CI pipeline: `pytest || echo "No tests found"` — zero tests pass CI silently; no TANTRA integration tests | MEDIUM | 7 |
 | F-012 | `OutputBucket.retrieve()` has no HTTP endpoint — TANTRA auditors cannot query the disk log via the API | MEDIUM | 6 |
-| F-013 | `DETERMINISM_GUARD_ENABLED` env flag defaults to `false` — determinism guard is off by default in production | MEDIUM | 3 |
+| F-013 | `DETERMINISM_GUARD_ENABLED` defined at `router.py:48` but **never referenced** — dead code; determinism enforced only via Observer + ResponseBuilder + `schemas.py` validator | LOW | 3 |
+| F-021 | Frontend UI components still expect `enforcement_decision`; backend returns `recommendation` — enforcement badges will not render | MEDIUM | 2 |
 | F-014 | RL `RewardEngine.compute_reward()` returns a reward value but does not write it to any persistent store — RL loop is compute-only, no actual learning | MEDIUM | 5 |
 | F-015 | `MultiJurisdictionResponse.comparative_analysis: Dict[str, NyayaResponse]` — the `/multi_jurisdiction` endpoint returns an empty dict stub | MEDIUM | 7 |
 | F-016 | Raj schemas (`failure_paths_v2.json`, `evidence_readiness_v2.json`, `system_compliance_v2.json`) exist on disk but `RajReasoningIntegrator` is not imported by any active endpoint | MEDIUM | 1 |
@@ -367,4 +372,20 @@ The enforcement engine is deleted. The recommendation field is advisory-only by 
 5. Three endpoints (`multi_jurisdiction`, `explain_reasoning`, `feedback`) are stubs
 6. CORS open-by-default risk
 7. RAM requirements exceed Render Free tier
+
+---
+
+## TANTRA CONVERGENCE VERDICT
+
+**NOT APPROVED for TANTRA convergence.** NYAI core query output is internally schema-consistent and advisory-only, but downstream TANTRA integration paths are not wired: sovereign core push absent, `tantra/flow.py` not callable from API, trace replay stub, stale `final_decision_contract.json`, and no external output-bucket access.
+
+---
+
+## AUDIT SPRINT COMPLETE
+
+**Sprint status:** COMPLETE  
+**Deliverables verified:** 7/7 files in `SHASHANK — FULL SYSTEM AUDIT AND CONVERGENCE REVIEW/`  
+**Verification method:** Live codebase grep + file read (`backend/`, `frontend/`, `final_decision_contract.json`)  
+**Auditor:** Shashank — Independent Forensic Sprint  
+**Date completed:** 09 Jun 2026
 

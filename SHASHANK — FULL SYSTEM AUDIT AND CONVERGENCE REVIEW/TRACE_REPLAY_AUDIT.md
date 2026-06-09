@@ -12,15 +12,15 @@
 HTTP Request arrives at NYAI
 │
 ├─► [ID-1] middleware_trace_id
-│       Generated: main.py middleware — str(uuid.uuid4())
+│       Generated: `main.py:71-72` — str(uuid.uuid4())
 │       Stored:    request.state.trace_id
-│       Fate:      ORPHANED — never read by any endpoint handler
-│       Used in:   global_exception_handler (request.state.trace_id fallback only)
+│       Fate:      ORPHANED — `query_legal()` never reads `request.state.trace_id`
+│       Used in:   `main.py:57` global_exception_handler fallback only
 │
 └─► query_legal() handler begins
     │
     ├─► [ID-2] _temp_trace
-    │       Generated: router.py line 118
+    │       Generated: `router.py:118`
     │                  f"trace_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:6]}"
     │       Format:    "trace_20260510_143022_a1b2c3"  (NOT a standard UUID)
     │       Passed to: ObserverPipeline(trace_id=_temp_trace)
@@ -29,12 +29,12 @@ HTTP Request arrives at NYAI
     └─► EnhancedLegalAdvisor.provide_legal_advice(legal_query)
         │
         └─► [ID-3] advice.trace_id
-                Generated: clean_legal_advisor.py line 1995
+                Generated: `clean_legal_advisor.py:1995`
                            legal_query.trace_id or f"trace_{timestamp_%f}"
                 Value:     == _temp_trace (reuses passed value since it was provided)
-                Placed in: base_response["trace_id"] = advice.trace_id
+                Placed in: `router.py:451` base_response["trace_id"] = advice.trace_id
 
-[ID-2] == [ID-3]  →  CONTINUOUS within handler
+[ID-2] == [ID-3]  →  CONTINUOUS within handler (happy path: 2 effective IDs, not 3)
 [ID-1] != [ID-2]  →  ORPHANED at HTTP layer
 ```
 
@@ -52,7 +52,7 @@ HTTP Request arrives at NYAI
 ## TRACE_GUARD ANALYSIS
 
 ```python
-# router.py — after ResponseBuilder.build()
+# router.py:635-638 — after ResponseBuilder.build()
 final_trace = enriched.get('trace_id', '')
 if final_trace != _temp_trace and final_trace != advice.trace_id:
     raise TraceContinuityError(_temp_trace, final_trace)
@@ -67,7 +67,7 @@ if final_trace != _temp_trace and final_trace != advice.trace_id:
 
 ## REPLAY CAPABILITY ASSESSMENT
 
-### GET /nyaya/trace/{trace_id} — STUB
+### GET /nyaya/trace/{trace_id} — STUB (`router.py:771-783`)
 ```python
 @router.get("/trace/{trace_id}", response_model=TraceResponse)
 async def get_trace(trace_id: str):
@@ -101,7 +101,7 @@ The endpoint accepts a trace_id but does not query `response_cache`, `output_buc
 ### hash_chain_ledger.py — DISCONNECTED
 - File: `backend/provenance_chain/hash_chain_ledger.py`
 - Status: EXISTS but is **not imported** by `router.py` or any active endpoint
-- The `provenance_chain` field in `NyayaResponse` is a single-entry list built inline by `observer.get_provenance_entry()` — it is NOT the hash-chained ledger
+- The `provenance_chain` field in `NyayaResponse` is a single-entry list built inline at `router.py:400-408` via `observer.get_provenance_entry()` — it is NOT the hash-chained ledger
 - The actual hash chain is never written to during query processing
 
 ---

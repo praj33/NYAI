@@ -9,11 +9,11 @@
 
 | Capability | Evidence | Scope |
 |-----------|----------|-------|
-| Legal information retrieval | BM25 + FAISS + cross-encoder reranking in `router.py` lines 135–175 | All 3 jurisdictions (India/UK/UAE) |
+| Legal information retrieval | BM25 + FAISS + cross-encoder reranking in `router.py:141`, `router.py:159`, `router.py:173` | All 3 jurisdictions (India/UK/UAE) |
 | Structured response generation | `NyayaResponse` Pydantic model, 11 canonical TANTRA fields, all populated in `router.py` | Single-request lifecycle |
 | Trace lifecycle management | `_temp_trace` generated at handler start, passed to ObserverPipeline and LegalQuery, validated in trace_guard | Within a single HTTP request |
 | Schema validation gating | ObserverPipeline (fail-closed) + ResponseBuilder (fail-closed) — two independent validators | Every response |
-| Advisory recommendation classification | `RecommendationType.{INFORM,REVIEW,ESCALATE,INSUFFICIENT_DATA}` — rules in `router.py` lines 530–544 | Per-query output |
+| Advisory recommendation classification | `RecommendationType.{INFORM,REVIEW,ESCALATE,INSUFFICIENT_DATA}` — rules in `router.py:515-534` | Per-query output |
 | Output logging to disk | `OutputBucket` writes to `backend/output_logs/nyai_output_log.jsonl` — append-only, hash-verified entries | Per-query |
 | RL signal acceptance | `POST /nyaya/rl_signal` — computes reward, returns to caller, no persistence | Per-signal |
 | Jurisdiction detection | `JurisdictionDetector.detect()` — deterministic keyword scoring, confidence score | Per-query |
@@ -28,10 +28,10 @@
 | Legal decisions | `enforcement_decision` field ABSENT from `NyayaResponse`; `enforcement_engine/` directory does not exist | Deleted per `raj_convergence_task.md` |
 | Blocking user access on legal grounds | No enforcement rule applies a BLOCK to a query based on content; HTTP 500 is only for schema violations | Schema guard ≠ content authority |
 | Jurisdiction authority | JurisdictionDetector returns `confidence` float — advisory detection, not binding assignment | `Recommendation.type != BIND` |
-| Enforcement actions | `GovernedExecutionPipeline` always sets `governance_approved: True`, never rejects | `governed_execution/pipeline.py` line 29 |
-| Persistent RL model updates | `RewardEngine.compute_reward()` returns reward value to endpoint caller; no write to any persistent store | `router.py` lines 960–964 |
-| TANTRA sovereign receipt | `SovereignCoreMock` is not called from the live API | `router.py` — no import of sovereign_core |
-| Downstream contract enforcement | `final_decision_contract.json` v1.0.0 is stale; no code enforces the contract's `enforcement_decision` requirement | Schema mismatch confirmed |
+| Enforcement actions | `GovernedExecutionPipeline` always sets `governance_approved: True`, never rejects | `governed_execution/pipeline.py:30-32` |
+| Persistent RL model updates | `RewardEngine.compute_reward()` returns reward value to endpoint caller; no write to any persistent store | `router.py:952-965` |
+| TANTRA sovereign receipt | `SovereignCoreMock` is not called from the live API | `router.py` — no `sovereign_core` import (only `tantra.output_bucket` at `router.py:59`) |
+| Downstream contract enforcement | `final_decision_contract.json` v1.0.0 is stale; no code enforces the contract's `enforcement_decision` requirement | `final_decision_contract.json:27,47-50`; `schemas.py:138-156` has `recommendation` not `enforcement_decision` |
 
 ---
 

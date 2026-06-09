@@ -12,7 +12,8 @@
 | JSON contract | `final_decision_contract.json` | JSON Schema draft 2020-12 | 1.0.0 | **STALE — DRIFTED** |
 | TANTRA canonical taxonomy | `backend/procedures/schemas/canonical_taxonomy_v1.2.json` | JSON | v1.2 | Present, not validated in query path |
 | Frontend types | `frontend/src/lib/gravitas.types.js` | JS module | unknown | Aligned to current schema |
-| Frontend validator | `frontend/src/lib/casePayloadValidator.js` | JS module | unknown | No enforcement_decision references |
+| Frontend validator | `frontend/src/lib/casePayloadValidator.js` | JS module | unknown | No `enforcement_decision` references (grep verified) |
+| Frontend UI components | `frontend/src/components/LegalQueryCard.jsx`, `LegalDecisionDocument.jsx`, etc. | JSX | legacy | **DRIFTED** — still expect `enforcement_decision` |
 | ResponseBuilder | `backend/api/response_builder.py` | Python | 3.0.0 | **CURRENT — aligned to schemas.py** |
 | ObserverPipeline | `backend/observer/pipeline.py` | Python | — | **CURRENT — aligned to schemas.py** |
 
@@ -20,7 +21,7 @@
 
 ## CRITICAL FINDING: enforcement_decision vs recommendation SPLIT
 
-### Contract (stale — `final_decision_contract.json`)
+### Contract (stale — `final_decision_contract.json:27,47-50`)
 ```json
 "required": ["domain","jurisdiction","confidence","statutes","enforcement_decision","trace_id"],
 "enforcement_decision": {
@@ -29,11 +30,11 @@
 }
 ```
 
-### Current Reality (`backend/api/schemas.py` — NyayaResponse)
+### Current Reality (`backend/api/schemas.py:108-112,138-156` — NyayaResponse)
 ```python
 # NO enforcement_decision field exists in NyayaResponse
-recommendation: Recommendation  # Advisory only
-# Recommendation.type: RecommendationType.{INFORM, REVIEW, ESCALATE, INSUFFICIENT_DATA}
+recommendation: Recommendation  # Advisory only — schemas.py:156
+# Recommendation.type: RecommendationType.{INFORM, REVIEW, ESCALATE, INSUFFICIENT_DATA} — schemas.py:25-30
 ```
 
 ### Verdict
@@ -77,7 +78,7 @@ The contract describes a field that does not exist. Any system validating NYAI r
 
 ## DeterminismProof Validator — Verified
 
-`schemas.py`:
+`schemas.py:129-133`:
 ```python
 @validator('input_hash', 'output_hash')
 def must_be_hex64(cls, v):
@@ -113,9 +114,10 @@ def must_be_hex64(cls, v):
 | `schemas.py` ↔ `response_builder.py` | ✅ ALIGNED | Same 11 CANONICAL_FIELDS, same VALID_RECOMMENDATION_TYPES |
 | `schemas.py` ↔ `observer/pipeline.py` | ✅ ALIGNED | Same 11 CANONICAL_FIELDS, same VALID_RECOMMENDATION_TYPES |
 | `schemas.py` ↔ `final_decision_contract.json` | ❌ DRIFTED | Contract requires `enforcement_decision`; schema has `recommendation` |
-| `schemas.py` ↔ `casePayloadValidator.js` | ✅ ALIGNED | No enforcement_decision in frontend validator |
+| `schemas.py` ↔ `casePayloadValidator.js` | ✅ ALIGNED | No `enforcement_decision` in frontend validator |
+| `schemas.py` ↔ frontend UI components | ❌ DRIFTED | `LegalQueryCard.jsx`, `LegalDecisionDocument.jsx`, `nyayaBackendApi.js` still expect `enforcement_decision` |
 | `schemas.py` ↔ `TRACE_PROOF_EXAMPLES.md` | ❌ DRIFTED | Examples show ALLOW/BLOCK/HMAC; none exist in schema |
-| `schemas.py` ↔ `REVIEW_PACKET.md` (Apr 23) | ❌ DRIFTED | REVIEW_PACKET describes legacy enforcement_decision REQUIRED_FIELDS |
+| `schemas.py` ↔ root `REVIEW_PACKET.md` (Apr 23) | ❌ DRIFTED | Root review packet describes legacy `enforcement_decision` REQUIRED_FIELDS |
 | `response_builder.py` ↔ `observer/pipeline.py` | ✅ ALIGNED | Double-gate uses identical field list |
 
 ---
@@ -150,7 +152,8 @@ def must_be_hex64(cls, v):
 | Internal schema consistency (schemas.py ↔ Observer ↔ Builder) | ✅ PASS |
 | All 11 TANTRA canonical fields present and validated | ✅ PASS |
 | DeterminismProof hex64 validation active | ✅ PASS |
-| Frontend alignment | ✅ PASS |
+| Frontend validator alignment | ✅ PASS |
+| Frontend UI alignment | ❌ FAIL — components still use `enforcement_decision` |
 | Contract alignment (final_decision_contract.json) | ❌ FAIL — CRITICAL DRIFT |
 | Schema versioning | ⚠️ PARTIAL — only in metadata stamp, not in model |
 | Undocumented fields | ⚠️ 6 fields not in contract |

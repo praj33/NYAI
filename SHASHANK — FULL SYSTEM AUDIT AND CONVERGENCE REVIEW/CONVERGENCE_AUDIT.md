@@ -27,8 +27,8 @@ NYAI Position:
 
 ### tantra/output_bucket.py — ✅ LIVE & INTEGRATED
 
-**Integration point:** `router.py` imports `from tantra.output_bucket import output_bucket` at line 59
-**Called at:** `router.py` line 644: `output_bucket.store(enriched)`
+**Integration point:** `router.py:59` imports `from tantra.output_bucket import output_bucket`
+**Called at:** `router.py:642`: `output_bucket.store(enriched)`
 **Storage:** `backend/output_logs/nyai_output_log.jsonl` — disk-persisted, append-only
 **Persistence:** Survives process restarts; rebuilds in-memory index from JSONL on startup
 **Verification:** `output_bucket.verify(trace_id)` recomputes entry_hash — tamper detection works
@@ -36,8 +36,8 @@ NYAI Position:
 
 ### tantra/flow.py — ❌ STANDALONE SCRIPT ONLY
 
-**Status:** `if __name__ == "__main__":` block — must be run manually as `python tantra/flow.py`
-**Not imported** by any API endpoint, router, or scheduled job
+**Status:** `if __name__ == "__main__":` at `flow.py:100` — must be run manually as `python tantra/flow.py`
+**Not imported** by `router.py` (grep: only `tantra.output_bucket` imported at `router.py:59`)
 **What it does:** Full TANTRA pipeline simulation:
   1. POST query to NYAI (HTTP call to 127.0.0.1:8000)
   2. Forward response to SovereignCoreMock
@@ -88,7 +88,20 @@ NYAI Position:
 | BL-005 | `hash_chain_ledger.py` not called | Hash-chain provenance is never written | Import and call `ledger.append_entry()` in the query handler |
 | BL-006 | No HTTP endpoint for `output_bucket.retrieve()` | External TANTRA auditors cannot access the output log | Add `GET /nyaya/output/{trace_id}` endpoint |
 | BL-007 | Middleware trace_id orphaned | HTTP layer trace cannot be correlated with response trace | Read `request.state.trace_id` in handler and use as `_temp_trace` |
-| BL-008 | `DETERMINISM_GUARD_ENABLED` defaults to false | Determinism guard is off; hash mismatches silently pass | Set default to true or make it required in deployment config |
+| BL-008 | Frontend UI still expects `enforcement_decision` | Enforcement badges/UI states will not render against live API | Migrate UI to `recommendation.type` |
+
+---
+
+## UPSTREAM / DOWNSTREAM INTEGRATION MAP
+
+**Upstream (callers → NYAI):**
+- `POST /nyaya/query` accepts `QueryRequest` (`schemas.py:39-43`) — no caller authentication
+- CORS: `main.py:45-47` — falls back to `["*"]` if no origins configured
+
+**Downstream (NYAI → TANTRA):**
+- **Only live write:** `output_bucket.store(enriched)` at `router.py:642` → `backend/output_logs/nyai_output_log.jsonl`
+- **Not wired:** `SovereignCoreMock.receive()`, `tantra/flow.py`, `hash_chain_ledger`, external push/webhook
+- **Procedure routes** (`procedure_router.py`) use `dependencies.get_trace_id()` which generates a **new** `uuid4()` (`dependencies.py:9-11`) — also disconnected from middleware trace
 
 ---
 
@@ -132,18 +145,23 @@ This output is **pushed only to `output_logs/nyai_output_log.jsonl` locally**. I
 | Contract | LIVE internally | `final_decision_contract.json` must be updated to v2.0.0 |
 | Enforcement | ABSENT | Must define whether TANTRA requires enforcement or accepts advisory |
 | Execution | PARTIAL | SovereignCore push must be wired; output_bucket HTTP endpoint needed |
-| Truth | PARTIAL | hash_chain_ledger must be connected; determinism guard must be enabled |
+| Truth | PARTIAL | hash_chain_ledger must be connected; `DETERMINISM_GUARD_ENABLED` at `router.py:48` is dead code |
 | Observability | PARTIAL | /trace/ endpoint must be implemented; observer_steps accessible but not queryable |
 
 ---
 
 ## CONVERGENCE APPROVAL BLOCKERS
 
+**TANTRA convergence approval: NOT GRANTED.**
+
 Before TANTRA convergence approval can be granted, these items must be resolved:
 
-1. **BL-001 (CRITICAL):** Update `final_decision_contract.json` to v2.0.0 — remove `enforcement_decision`, add `recommendation` schema
-2. **BL-003 (HIGH):** Wire `SovereignCoreMock.receive()` call into live query handler
-3. **BL-004 (HIGH):** Implement real `/nyaya/trace/{trace_id}` endpoint (reads from `output_bucket`)
-4. **BL-006 (HIGH):** Add `GET /nyaya/output/{trace_id}` endpoint for external TANTRA auditor access
-5. **Contract clarity (HIGH):** Formally document that `Recommendation.type` replaces `enforcement_decision` for TANTRA purposes — update TANTRA integration spec
+1. **BL-001 (CRITICAL):** Update `final_decision_contract.json` to v2.0.0 — remove `enforcement_decision`, add `recommendation` schema (`final_decision_contract.json:27`)
+2. **BL-002 (CRITICAL):** Expose `run_tantra_flow()` (`flow.py:17`) via API or scheduler
+3. **BL-003 (HIGH):** Wire `SovereignCoreMock.receive()` call into live query handler
+4. **BL-004 (HIGH):** Implement real `/nyaya/trace/{trace_id}` endpoint (reads from `output_bucket`; currently stub at `router.py:771-783`)
+5. **BL-006 (HIGH):** Add `GET /nyaya/output/{trace_id}` endpoint for external TANTRA auditor access
+6. **BL-007 (HIGH):** Unify middleware and handler trace — read `request.state.trace_id` in `query_legal()`
+7. **BL-008 (MEDIUM):** Migrate frontend UI from `enforcement_decision` to `recommendation.type`
+8. **Contract clarity (HIGH):** Formally document that `Recommendation.type` replaces `enforcement_decision` for TANTRA purposes
 
