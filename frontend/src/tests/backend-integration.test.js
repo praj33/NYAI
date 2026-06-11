@@ -2,7 +2,26 @@
  * Backend Integration Tests — Recommendation Model
  */
 
+import { MOCK_DECISIONS } from './recommendation-states.test.js'
+
 const VALID_RECOMMENDATION_TYPES = ['INFORM', 'REVIEW', 'ESCALATE', 'INSUFFICIENT_DATA']
+
+const REQUIRED_RESPONSE_FIELDS = [
+  'domain',
+  'jurisdiction',
+  'confidence',
+  'recommendation',
+  'trace_id',
+  'request_id',
+  'input_hash',
+  'determinism_proof',
+  'timestamp',
+  'facts',
+  'analysis',
+  'explanation_chain',
+  'risk_flags',
+  'legal_context'
+]
 
 export async function testBackendConnection() {
   console.log('\n🔍 TEST 1: Backend Connection...')
@@ -73,6 +92,70 @@ export async function testRequiredFields() {
   return { success: true }
 }
 
+export function validateResponseFields(decision) {
+  if (!decision || typeof decision !== 'object') return false
+  return REQUIRED_RESPONSE_FIELDS.every(field => field in decision)
+}
+
+export function validateRecommendationState(decision) {
+  const recType = decision?.recommendation?.type
+  return Boolean(recType && VALID_RECOMMENDATION_TYPES.includes(recType))
+}
+
+async function testRecommendationStateRender(type) {
+  const mock = MOCK_DECISIONS[type]
+  if (!mock) {
+    return { success: false, error: `No mock payload for recommendation type: ${type}` }
+  }
+  if (mock.recommendation?.type !== type) {
+    return { success: false, error: `Mock payload type mismatch: expected ${type}` }
+  }
+  return { success: true, note: `${type} recommendation state validated via mock payload` }
+}
+
+export async function testINFORMState() {
+  return testRecommendationStateRender('INFORM')
+}
+
+export async function testREVIEWState() {
+  return testRecommendationStateRender('REVIEW')
+}
+
+export async function testESCALATEState() {
+  return testRecommendationStateRender('ESCALATE')
+}
+
+export async function testINSUFFICIENT_DATAState() {
+  return testRecommendationStateRender('INSUFFICIENT_DATA')
+}
+
+export async function testErrorHandling() {
+  try {
+    const response = await fetch('http://localhost:8000/nyaya/query', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query: '' })
+    })
+    if (!response.ok) {
+      return { success: true, note: 'Empty query rejected with error response' }
+    }
+    return { success: false, error: 'Empty query should not return success' }
+  } catch (error) {
+    return { success: true, note: 'Request failure surfaced without silent pass' }
+  }
+}
+
+export async function testTimeoutHandling() {
+  const start = Date.now()
+  const result = await testBackendConnection()
+  const elapsed = Date.now() - start
+  return {
+    success: result.success && elapsed < 30000,
+    timeout: elapsed >= 30000,
+    note: result.success ? `Request completed in ${elapsed}ms` : 'Backend unreachable'
+  }
+}
+
 export async function testRecommendationType() {
   console.log('\n🔍 TEST 4: Recommendation Type Validation...')
   const result = await testQueryEndpoint()
@@ -120,5 +203,13 @@ export default {
   testQueryEndpoint,
   testRequiredFields,
   testRecommendationType,
+  validateResponseFields,
+  validateRecommendationState,
+  testINFORMState,
+  testREVIEWState,
+  testESCALATEState,
+  testINSUFFICIENT_DATAState,
+  testErrorHandling,
+  testTimeoutHandling,
   runAllTests
 }

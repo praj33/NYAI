@@ -1,20 +1,19 @@
 /**
  * DAY 3 - Comprehensive Test Runner & Results Reporting
- * 
- * Executes all enforcement state tests, backend integration tests,
+ *
+ * Executes all recommendation state tests, backend integration tests,
  * and generates detailed test report for production validation
  */
 
-import { MOCK_DECISIONS, DAY2_TEST_REPORT } from './recommendation-states.test.js'
 import {
   testBackendConnection,
   testQueryEndpoint,
   validateResponseFields,
-  validateEnforcementState,
-  testALLOWState,
-  testBLOCKState,
+  validateRecommendationState,
+  testINFORMState,
+  testREVIEWState,
   testESCALATEState,
-  testSAFE_REDIRECTState,
+  testINSUFFICIENT_DATAState,
   testErrorHandling,
   testTimeoutHandling
 } from './backend-integration.test.js'
@@ -272,39 +271,38 @@ export async function runAllDay3Tests() {
     error: fields ? null : 'Some fields missing'
   })
 
-  console.log('🔍 Test 4: Enforcement State Validation...')
-  const enforcement = validateEnforcementState(query.decision)
+  console.log('🔍 Test 4: Recommendation State Validation...')
+  const recommendationValid = validateRecommendationState(query.decision)
   report.addTest({
     id: 4,
-    name: 'Enforcement State Format',
-    passed: enforcement,
+    name: 'Recommendation State Format',
+    passed: recommendationValid,
     critical: true,
     details: `Type: ${query.decision.recommendation?.type}`,
-    error: enforcement ? null : 'Invalid enforcement state'
+    error: recommendationValid ? null : 'Invalid recommendation type'
   })
 
-  // ===== ENFORCEMENT STATE TESTS =====
-  console.log('\n🎨 ENFORCEMENT STATE RENDERING TESTS\n')
+  // ===== RECOMMENDATION STATE TESTS =====
+  console.log('\n🎨 RECOMMENDATION STATE RENDERING TESTS\n')
 
-  console.log('🔍 Test 5: ALLOW State...')
-  const allow = await testALLOWState()
+  console.log('🔍 Test 5: INFORM State...')
+  const inform = await testINFORMState()
   report.addTest({
     id: 5,
-    name: 'ALLOW State Rendering',
-    passed: allow.success,
-    details: allow.note || 'ALLOW state tested',
-    error: allow.error
+    name: 'INFORM State Rendering',
+    passed: inform.success,
+    details: inform.note || 'INFORM state tested',
+    error: inform.error
   })
 
-  console.log('🔍 Test 6: BLOCK State (CRITICAL)...')
-  const block = await testBLOCKState()
+  console.log('🔍 Test 6: REVIEW State...')
+  const review = await testREVIEWState()
   report.addTest({
     id: 6,
-    name: 'BLOCK State Rendering',
-    passed: block.success,
-    critical: true,
-    details: block.note || 'BLOCK state tested - refusal authority verified',
-    error: block.error
+    name: 'REVIEW State Rendering',
+    passed: review.success,
+    details: review.note || 'REVIEW state tested',
+    error: review.error
   })
 
   console.log('🔍 Test 7: ESCALATE State...')
@@ -317,14 +315,14 @@ export async function runAllDay3Tests() {
     error: escalate.error
   })
 
-  console.log('🔍 Test 8: SAFE_REDIRECT State...')
-  const redirect = await testSAFE_REDIRECTState()
+  console.log('🔍 Test 8: INSUFFICIENT_DATA State...')
+  const insufficient = await testINSUFFICIENT_DATAState()
   report.addTest({
     id: 8,
-    name: 'SAFE_REDIRECT State Rendering',
-    passed: redirect.success,
-    details: redirect.note || 'SAFE_REDIRECT state tested',
-    error: redirect.error
+    name: 'INSUFFICIENT_DATA State Rendering',
+    passed: insufficient.success,
+    details: insufficient.note || 'INSUFFICIENT_DATA state tested',
+    error: insufficient.error
   })
 
   // ===== ERROR HANDLING TESTS =====
@@ -353,13 +351,13 @@ export async function runAllDay3Tests() {
   // ===== UI RENDERING TESTS =====
   console.log('\n🎨 UI RENDERING VALIDATION\n')
 
-  console.log('🔍 Test 11: Enforcement Colors...')
-  const colors = validateEnforcementColors()
+  console.log('🔍 Test 11: Recommendation Colors...')
+  const colors = validateRecommendationColors()
   report.addTest({
     id: 11,
-    name: 'Enforcement State Colors',
+    name: 'Recommendation State Colors',
     passed: colors,
-    details: 'ALLOW (#28a745), BLOCK (#dc3545), ESCALATE (#fd7e14), SAFE_REDIRECT (#6f42c1)'
+    details: 'INFORM (#28a745), ESCALATE (#dc3545), REVIEW (#fd7e14), INSUFFICIENT_DATA (#6f42c1)'
   })
 
   console.log('🔍 Test 12: Expandable Sections...')
@@ -394,21 +392,21 @@ export async function runAllDay3Tests() {
 }
 
 /**
- * Validate Enforcement Colors
+ * Validate Recommendation Colors
  */
-function validateEnforcementColors() {
+function validateRecommendationColors() {
   const colors = {
-    ALLOW: '#28a745',
-    BLOCK: '#dc3545',
-    ESCALATE: '#fd7e14',
-    SAFE_REDIRECT: '#6f42c1'
+    INFORM: '#28a745',
+    ESCALATE: '#dc3545',
+    REVIEW: '#fd7e14',
+    INSUFFICIENT_DATA: '#6f42c1'
   }
-  
+
   for (const [state, color] of Object.entries(colors)) {
-    const style = document.documentElement.style.getPropertyValue(`--enforcement-${state.toLowerCase()}`)
+    document.documentElement.style.getPropertyValue(`--recommendation-${state.toLowerCase().replace('_', '-')}`)
     console.log(`  ${state}: ${color}`)
   }
-  
+
   return true
 }
 

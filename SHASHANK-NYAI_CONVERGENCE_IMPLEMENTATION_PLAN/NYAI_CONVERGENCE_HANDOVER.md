@@ -1,8 +1,10 @@
 # NYAI CONVERGENCE HANDOVER
 
 **State after sprint:** TANTRA-CONVERGENCE READY  
+**Branch:** `feature/tantra-convergence-ready`  
 **Date:** 11 June 2026  
-**Location:** `SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/`
+**Location:** `SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/`  
+**Audit:** [CONVERGENCE_AUDIT_REPORT.md](./CONVERGENCE_AUDIT_REPORT.md)
 
 ---
 
@@ -15,21 +17,22 @@
 | [REPLAY_PROOF_REPORT.md](./REPLAY_PROOF_REPORT.md) | Replay endpoints and hash chain evidence |
 | [AUTHORITY_MATRIX_V2.md](./AUTHORITY_MATRIX_V2.md) | Authority boundaries (6 dimensions) |
 | [TANTRA_CONVERGENCE_PROOF.md](./TANTRA_CONVERGENCE_PROOF.md) | Live API convergence proof |
+| [CONVERGENCE_AUDIT_REPORT.md](./CONVERGENCE_AUDIT_REPORT.md) | Post-sprint audit sign-off |
 | [tantra_flow_proof.json](./tantra_flow_proof.json) | Captured TANTRA flow response |
 | [trace_replay_proof.json](./trace_replay_proof.json) | Captured trace replay response |
 | [output_proof.json](./output_proof.json) | Captured output bucket verification |
 
-**Operational review packet (not in this folder):** [`backend/REVIEW_PACKET.md`](../backend/REVIEW_PACKET.md)
+**Operational review packet (project root):** [`REVIEW_PACKET.md`](../REVIEW_PACKET.md)
 
 ---
 
 ## Quick Start
 
 ```bash
-# Start server
+# Start server (use 8001 on Windows if 8000 is blocked)
 cd backend && uvicorn api.main:app --reload --port 8000
 
-# Run convergence tests
+# Run convergence tests (5/5 pass)
 cd backend && pytest tests/test_tantra_convergence.py -v
 
 # Execute TANTRA flow

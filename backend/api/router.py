@@ -120,8 +120,10 @@ async def query_legal(request: QueryRequest, http_request: Request):
         cleaned_query = clean_query(request.query)
 
         # ─── TANTRA: Initialize Observer Pipeline ───
+        # Unified trace: main.py middleware sets request.state.trace_id → http_request.state.trace_id
         _temp_trace = (
-            getattr(http_request, 'state', None) and getattr(http_request.state, 'trace_id', None)
+            (getattr(http_request, 'state', None) and getattr(http_request.state, 'trace_id', None))
+            if http_request is not None else None
         ) or f"trace_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:6]}"
         observer = ObserverPipeline(trace_id=_temp_trace)
         observer.record("query_received", {"raw_query": request.query})

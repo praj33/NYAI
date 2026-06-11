@@ -1,7 +1,10 @@
 # TRACE CONTINUITY PROOF
 
 **Sprint:** NYAI Canonical Convergence Build  
-**Date:** 11 June 2026
+**Branch:** `feature/tantra-convergence-ready`  
+**Date:** 11 June 2026  
+**Live trace_id:** `f5618054-e78a-4815-9aaf-553c477d5208`  
+**Audit:** [CONVERGENCE_AUDIT_REPORT.md](./CONVERGENCE_AUDIT_REPORT.md)
 
 ---
 

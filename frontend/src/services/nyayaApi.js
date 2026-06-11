@@ -218,69 +218,6 @@ export const casePresentationService = {
     }
   },
 
-  // Fetch enforcement status from backend — never defaults to 'clear' on failure
-  async getEnforcementStatus(traceId, jurisdiction) {
-    try {
-      const response = await apiClient.get('/nyaya/enforcement_status', {
-        params: { trace_id: traceId, jurisdiction }
-      })
-      const data = response.data
-      if (!data || !data.verdict || !data.state) {
-        throw new Error('Enforcement status response missing required fields: verdict, state')
-      }
-      return {
-        success: true,
-        data: this._validateEnforcementStatus(data),
-        trace_id: traceId
-      }
-    } catch (error) {
-      // On any failure, verdict is NON_ENFORCEABLE — never silently pass as clear
-      return {
-        success: false,
-        error: error.response?.data?.message || error.message || 'Enforcement status could not be verified',
-        trace_id: traceId,
-        data: {
-          state: 'block',
-          verdict: 'NON_ENFORCEABLE',
-          reason: 'Enforcement status could not be verified.',
-          barriers: ['Verification endpoint unreachable or returned invalid data'],
-          blocked_path: null,
-          escalation_required: false,
-          escalation_target: null,
-          redirect_suggestion: null,
-          safe_explanation: 'This decision cannot be displayed until enforcement status is confirmed.',
-          trace_id: traceId
-        }
-      }
-    }
-  },
-
-  // Validate enforcement status — throws if required fields are absent
-  _validateEnforcementStatus(data) {
-    const validStates = ['block', 'escalate', 'soft_redirect', 'conditional', 'clear']
-    const validVerdicts = ['ENFORCEABLE', 'PENDING_REVIEW', 'NON_ENFORCEABLE']
-
-    if (!validStates.includes(data.state)) {
-      throw new Error(`Invalid enforcement state: ${data.state}`)
-    }
-    if (!validVerdicts.includes(data.verdict)) {
-      throw new Error(`Invalid enforcement verdict: ${data.verdict}`)
-    }
-
-    return {
-      state: data.state,
-      verdict: data.verdict,
-      reason: data.reason ?? '',
-      barriers: Array.isArray(data.barriers) ? data.barriers : [],
-      blocked_path: data.blocked_path ?? null,
-      escalation_required: Boolean(data.escalation_required),
-      escalation_target: data.escalation_target ?? null,
-      redirect_suggestion: data.redirect_suggestion ?? null,
-      safe_explanation: data.safe_explanation ?? '',
-      trace_id: data.trace_id ?? null
-    }
-  },
-
   // Fetch advisory recommendation from stored output bucket
   async getRecommendation(traceId) {
     try {

@@ -1,8 +1,10 @@
 # DAY 3 - Mobile Responsiveness Test Guide
 
-**Date:** March 4, 2026  
+**Date:** 11 June 2026 (updated for TANTRA convergence)  
 **Phase:** DAY 3 of 3-Day Nyaya Agent Implementation  
 **Task:** Verify Gravitas Decision Page works on mobile and tablet devices  
+**Convergence:** TANTRA-CONVERGENCE READY — use `recommendation.type` badges, not enforcement banners  
+**Related:** [`DAY2_TEST_GUIDE.md`](./DAY2_TEST_GUIDE.md) · [`SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/`](../../../SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/)
 
 ---
 
@@ -24,12 +26,12 @@
 - [ ] Expandable sections work smoothly
 - [ ] Confidence bars display correctly
 - [ ] Timeline renders legibly
-- [ ] Enforcement banner visible and clear
+- [ ] Recommendation status badge visible and clear
 
 ### Mobile (iPhone/Android - 375-428px)
 - [ ] Query textarea full width
 - [ ] Button full width and tapable
-- [ ] Enforcement banner color clear
+- [ ] Recommendation badge color clear (INFORM/REVIEW/ESCALATE/INSUFFICIENT_DATA)
 - [ ] Sections stack vertically
 - [ ] No horizontal scroll
 - [ ] Font sizes readable (min 14px)
@@ -157,13 +159,13 @@ Desktop: Test on monitor at 1920x1080
 6. Result: ✓ Error displayed properly
 ```
 
-#### Test 10: Enforcement Banner
+#### Test 10: Recommendation Banner
 ```
-1. Check enforcement banner on different states
-2. For ALLOW: Green banner visible, ✅ label clear
-3. For BLOCK: Red banner unmistakable, 🚫 label bold
-4. For ESCALATE: Orange banner stands out
-5. For SAFE_REDIRECT: Purple color distinct
+1. Check recommendation banner on different types
+2. For INFORM: Green banner visible, ✅ label clear
+3. For ESCALATE: Red banner unmistakable, advisory label bold
+4. For REVIEW: Orange banner stands out
+5. For INSUFFICIENT_DATA: Purple color distinct
 6. Result: ✓ All colors distinguishable
 ```
 
@@ -300,7 +302,7 @@ Check: No lag between tap and visual change
 
 ### Text Contrast
 ```
-✓ Enforcement banner: White text on colored background
+✓ Recommendation badge: White text on colored background
 ✓ Error messages: Dark text on light background
 ✓ Links/buttons: Sufficient contrast (WCAG AA)
 ```
@@ -334,7 +336,7 @@ FORM SECTION:
 [ ] Submit button works
 
 DECISION DISPLAY:
-[ ] Enforcement banner visible
+[ ] Recommendation status badge visible
 [ ] Color distinguishable
 [ ] Title readable
 [ ] Summary grid shows (2 or 4 columns based on device)
@@ -469,7 +471,7 @@ Before declaring DAY 3 mobile testing complete:
 - [ ] No console errors on device
 - [ ] Performance acceptable (load < 3s)
 - [ ] Error messages display correctly
-- [ ] All enforcement states visible
+- [ ] All recommendation types visible (INFORM/REVIEW/ESCALATE/INSUFFICIENT_DATA)
 - [ ] Export and reset buttons work
 
 ---

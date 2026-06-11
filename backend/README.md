@@ -1,5 +1,22 @@
 # Nyaya AI - Sovereign Legal Intelligence Platform
 
+## TANTRA Convergence Status (11 June 2026)
+
+| | |
+|--|--|
+| **Status** | TANTRA-CONVERGENCE READY — all 8 gaps PASS |
+| **Branch** | `feature/tantra-convergence-ready` |
+| **Contract** | `final_decision_contract.json` v2.0.0 · `schema_version` `tantra_v3` |
+| **Recommendation types** | INFORM · REVIEW · ESCALATE · INSUFFICIENT_DATA (advisory only) |
+| **Tests** | `tests/test_tantra_convergence.py` — 5/5 pass |
+| **Review packet** | [`REVIEW_PACKET.md`](../REVIEW_PACKET.md) (authoritative, project root) |
+| **Sprint deliverables** | [`../SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/`](../SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/) |
+| **Implementation guide** | [`../NYAI_CONVERGENCE_REMEDIATION_GUIDE.md`](../NYAI_CONVERGENCE_REMEDIATION_GUIDE.md) |
+
+> **Note:** Sections below describing the sovereign enforcement engine are **legacy architecture documentation** from before the convergence sprint. The live API is advisory-only; `enforcement_decision` is absent from `backend/api/` and `frontend/src/`.
+
+---
+
 ## 🔍 Project Overview
 
 Nyaya AI is a sovereign-compliant multi-agent legal intelligence platform designed to provide transparent, auditable legal analysis across multiple jurisdictions (India, UK, UAE). The system follows a modular architecture that ensures:
@@ -454,10 +471,11 @@ The Postman collection includes all endpoints with sample payloads and headers.
 
 - **Sovereign Compliance**: Never remove event signing or hash chaining
 - **Provenance Chain**: Maintain immutable audit trail
-- **Enforcement Engine**: Preserve all governance controls and deterministic decisions
-- **API Contracts**: Keep backward compatibility for all endpoints
+- **Advisory contract**: Preserve `recommendation.type` semantics — do not reintroduce `enforcement_decision` or content blocking
+- **Trace continuity**: Middleware `trace_id` must propagate through the full query pipeline
+- **API Contracts**: Keep `final_decision_contract.json` v2.0.0 / `tantra_v3` alignment
 - **Data Bridge**: Preserve original JSON files, only normalize
-- **Security**: Never bypass nonce validation, signature verification, or enforcement checks
+- **Security**: Never bypass nonce validation or signature verification
 
 ## 📊 System Validation
 
@@ -468,8 +486,9 @@ The system has been validated to ensure:
 - ✅ Provenance chain validates correctly
 - ✅ Trace retrieval works as expected
 - ✅ RL feedback emits events properly
-- ✅ Enforcement engine blocks/governs requests as designed
-- ✅ All governance decisions are logged with cryptographic proof
+- ✅ Advisory recommendation model (no enforcement gating)
+- ✅ Convergence test suite passes (`test_tantra_convergence.py` — 5/5)
+- ✅ Provenance and output bucket logging with cryptographic proof
 - ✅ Clean folder structure maintained
 - ✅ No code duplication
 - ✅ No unnecessary changes made

@@ -1,8 +1,10 @@
 # NYAI — AUTHORITY MATRIX V2
 
 **Sprint:** NYAI Canonical Convergence Build  
+**Branch:** `feature/tantra-convergence-ready`  
 **Date:** 11 June 2026  
-**Contract:** `final_decision_contract.json` v2.0.0 / `tantra_v3`
+**Contract:** `final_decision_contract.json` v2.0.0 / `tantra_v3`  
+**Audit:** [CONVERGENCE_AUDIT_REPORT.md](./CONVERGENCE_AUDIT_REPORT.md)
 
 ---
 

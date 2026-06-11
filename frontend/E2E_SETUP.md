@@ -1,5 +1,7 @@
 # Gravitas Decision Engine - E2E Test Suite Setup Guide
 
+> **Convergence note (11 June 2026):** NYAI is TANTRA-CONVERGENCE READY. UI tests use `recommendation.type` (INFORM/REVIEW/ESCALATE/INSUFFICIENT_DATA), not legacy `enforcement_decision`. Sprint deliverables: [`SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/`](../SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/).
+
 ## Overview
 
 This document provides complete setup and execution instructions for the End-to-End (E2E) validation suite for the Gravitas Decision Engine. The suite validates the complete data flow:
@@ -146,16 +148,17 @@ npx playwright show-report
 
 **Expected Result**: Exact `trace_id` from API is visible in the rendered page.
 
-### 2. Enforcement Gatekeeper Test (State Accuracy)
+### 2. Recommendation Gatekeeper Test (State Accuracy)
 
-**Purpose**: Verify Phase 4 logic - the UI strictly adheres to enforcement states.
+**Purpose**: Verify Phase 4 logic — the UI renders advisory recommendation states without blocking content.
 
 **Scenarios**:
-- **ALLOW**: Decision content is rendered
-- **BLOCK**: Decision string is NOT present in DOM when state is BLOCK
-- **ESCALATE**: Escalation UI is displayed
+- **INFORM**: Full decision content is rendered
+- **REVIEW**: Full decision content is rendered (advisory review flag)
+- **ESCALATE**: Escalation UI is displayed; content still visible (advisory only)
+- **INSUFFICIENT_DATA**: Graceful insufficient-data state
 
-**Expected Result**: UI behavior matches enforcement state rules.
+**Expected Result**: UI behavior matches `recommendation.type` rules; no content is withheld.
 
 ### 3. Rendering Fidelity Test (Data Matching)
 
@@ -165,7 +168,7 @@ npx playwright show-report
 1. Submit complex case with known mock payload
 2. Verify `casePayload.decision` matches `<div data-testid="final-decision">`
 3. Verify timeline and procedural steps arrays render correctly
-4. Verify enforcement decision matches UI
+4. Verify `recommendation.type` matches UI badge/state
 
 **Expected Result**: 100% data fidelity between API response and UI rendering.
 
