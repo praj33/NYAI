@@ -3,7 +3,7 @@
  * Rendered when enforcement state is 'block'.
  *
  * The decision and reasoning strings are NEVER passed to this component.
- * They are withheld at the EnforcementGatekeeper level — not hidden via CSS.
+ * Legacy barrier UI — advisory routing now uses RecommendationGatekeeper upstream.
  */
 import React from 'react'
 

@@ -1,8 +1,18 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "NyayaDecisionContract",
-  "description": "Canonical decision object contract — used by Decision Engine, Enforcement, Observer, Frontend",
-  "version": "1.0.0",
+  "description": "Canonical decision object contract — used by Decision Engine, Observer, Frontend, TANTRA",
+  "version": "2.0.0",
+  "schema_version": "tantra_v3",
+  "ownership": {
+    "owner": "NYAI",
+    "maintained_by": "Vedant"
+  },
+  "compatibility": {
+    "replaces": "1.0.0",
+    "breaking_changes": ["enforcement_decision removed", "recommendation added"],
+    "migration_note": "ALLOW→INFORM, RESTRICT→ESCALATE, SAFE_REDIRECT→REVIEW"
+  },
 
   "request": {
     "type": "object",
@@ -24,7 +34,19 @@
 
   "response": {
     "type": "object",
-    "required": ["domain", "jurisdiction", "confidence", "statutes", "enforcement_decision", "trace_id"],
+    "required": [
+      "domain",
+      "jurisdiction",
+      "confidence",
+      "statutes",
+      "recommendation",
+      "trace_id",
+      "schema_version",
+      "request_id",
+      "input_hash",
+      "determinism_proof",
+      "timestamp"
+    ],
     "properties": {
       "domain": { "type": "string", "description": "Detected legal domain" },
       "domains": { "type": "array", "items": { "type": "string" }, "description": "All applicable domains" },
@@ -44,10 +66,22 @@
         }
       },
 
-      "enforcement_decision": {
+      "recommendation": {
+        "type": "object",
+        "description": "Advisory-only recommendation. NOT a decision gate.",
+        "required": ["type", "confidence", "rationale"],
+        "properties": {
+          "type": { "enum": ["INFORM", "REVIEW", "ESCALATE", "INSUFFICIENT_DATA"] },
+          "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+          "rationale": { "type": "string" },
+          "urgency_flag": { "type": "boolean", "default": false }
+        }
+      },
+
+      "schema_version": { "type": "string", "const": "tantra_v3" },
+      "answer_disclaimer": {
         "type": "string",
-        "enum": ["ALLOW", "ALLOW_INFORMATIONAL", "SAFE_REDIRECT", "RESTRICT"],
-        "description": "Sovereign enforcement decision — SINGLE SOURCE OF TRUTH for gating"
+        "description": "Mandatory disclaimer that NYAI output is advisory only and not legal authority"
       },
 
       "statutes": {
@@ -116,15 +150,27 @@
       "answer_source": { "type": "string", "enum": ["groq_llm", "local_fallback", "skipped"] },
       "answer_model": { "type": ["string", "null"] },
 
-      "trace_id": { "type": "string", "description": "Unique trace identifier for audit trail" }
+      "trace_id": { "type": "string", "description": "Unique trace identifier for audit trail" },
+      "request_id": { "type": "string", "description": "Deterministic request identifier derived from input_hash" },
+      "input_hash": { "type": "string", "description": "SHA256 hash of canonical input payload" },
+      "timestamp": { "type": "string", "format": "date-time", "description": "Response generation timestamp (UTC)" },
+      "determinism_proof": {
+        "type": "object",
+        "required": ["input_hash", "output_hash", "version"],
+        "properties": {
+          "input_hash": { "type": "string" },
+          "output_hash": { "type": "string" },
+          "version": { "type": "string" }
+        }
+      }
     }
   },
 
   "enforcement_rules": [
-    { "id": "INTENT-001", "type": "IntentClassificationRule", "source": "Governance", "action": "Blocks malicious intent, classifies informational" },
+    { "id": "INTENT-001", "type": "IntentClassificationRule", "source": "Governance", "action": "Classifies informational vs malicious intent (advisory)" },
     { "id": "CONST-001", "type": "ConstitutionalComplianceRule", "source": "Constitutional", "action": "Constitutional domain requires confidence >= 0.8" },
     { "id": "JURIS-001", "type": "JurisdictionBoundaryRule", "source": "Governance", "action": "Country must match routed jurisdiction" },
-    { "id": "SAFETY-001", "type": "SystemSafetyRule", "source": "System Safety", "action": "Blocks bypass/circumvent attempts" },
+    { "id": "SAFETY-001", "type": "SystemSafetyRule", "source": "System Safety", "action": "Flags bypass/circumvent attempts" },
     { "id": "CONF-001", "type": "ConfidenceThresholdRule", "source": "System Safety", "action": "Criminal/constitutional min 0.3, general min 0.2" },
     { "id": "PROC-001", "type": "ProcedureIntegrityRule", "source": "Compliance", "action": "Appeals require confidence >= 0.75" },
     { "id": "RAJ-FAILURE-001", "type": "RajFailurePathRule", "source": "Compliance", "action": "Failure path schema validation" },

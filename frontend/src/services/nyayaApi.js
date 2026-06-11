@@ -281,6 +281,37 @@ export const casePresentationService = {
     }
   },
 
+  // Fetch advisory recommendation from stored output bucket
+  async getRecommendation(traceId) {
+    try {
+      const response = await apiClient.get(`/nyaya/output/${traceId}`)
+      const fullResponse = response.data?.stored_output?.full_response
+        || response.data?.stored_output
+        || {}
+      const recommendation = fullResponse.recommendation
+      if (!recommendation?.type) {
+        throw new Error('Recommendation missing from stored output')
+      }
+      return {
+        success: true,
+        data: recommendation,
+        trace_id: traceId
+      }
+    } catch (error) {
+      return {
+        success: false,
+        error: error.response?.data?.detail || error.message || 'Recommendation could not be retrieved',
+        trace_id: traceId,
+        data: {
+          type: 'INSUFFICIENT_DATA',
+          confidence: 0,
+          rationale: 'Recommendation could not be retrieved from stored output.',
+          urgency_flag: false
+        }
+      }
+    }
+  },
+
   // Fetch all case presentation data in parallel
   async getAllCaseData(traceId, jurisdiction, caseType, caseId) {
     try {

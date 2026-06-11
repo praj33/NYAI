@@ -503,18 +503,11 @@ const LegalDecisionDocument = ({ onResponseReceived }) => {
         <div style={{ animation: 'fadeIn 0.5s ease' }}>
           <style>{`@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }`}</style>
 
-          {/* Enforcement Banner */}
+          {/* Advisory Recommendation Banner */}
           <div style={{
             padding: '16px 20px',
-            background: decision.enforcement_decision === 'ALLOW' ? 'rgba(40, 167, 69, 0.15)' :
-                       decision.enforcement_decision === 'BLOCK' ? 'rgba(220, 53, 69, 0.15)' :
-                       decision.enforcement_decision === 'ESCALATE' ? 'rgba(253, 126, 20, 0.15)' :
-                       'rgba(111, 66, 193, 0.15)',
-            border: `2px solid ${
-              decision.enforcement_decision === 'ALLOW' ? '#28a745' :
-              decision.enforcement_decision === 'BLOCK' ? '#dc3545' :
-              decision.enforcement_decision === 'ESCALATE' ? '#fd7e14' : '#6f42c1'
-            }`,
+            background: 'rgba(40, 167, 69, 0.15)',
+            border: '2px solid #28a745',
             borderRadius: '8px',
             marginBottom: '20px',
             display: 'flex',
@@ -522,23 +515,21 @@ const LegalDecisionDocument = ({ onResponseReceived }) => {
             justifyContent: 'space-between'
           }}>
             <div>
-              <div style={{ 
-                color: decision.enforcement_decision === 'ALLOW' ? '#28a745' :
-                       decision.enforcement_decision === 'BLOCK' ? '#dc3545' :
-                       decision.enforcement_decision === 'ESCALATE' ? '#fd7e14' : '#6f42c1',
+              <div style={{
+                color: '#28a745',
                 fontSize: '14px',
                 fontWeight: '600',
                 letterSpacing: '1px'
               }}>
-                ENFORCEMENT STATUS
+                ADVISORY RECOMMENDATION
               </div>
-              <div style={{ 
-                color: '#fff', 
-                fontSize: '20px', 
+              <div style={{
+                color: '#fff',
+                fontSize: '20px',
                 fontWeight: '700',
                 marginTop: '4px'
               }}>
-                {decision.enforcement_decision}
+                {decision.recommendation?.type || 'INFORM'}
               </div>
             </div>
             <div style={{ textAlign: 'right' }}>
@@ -873,28 +864,22 @@ const LegalDecisionDocument = ({ onResponseReceived }) => {
             
             <div style={{
               padding: '20px',
-              background: decision.enforcement_decision === 'BLOCK' ? 'rgba(220, 53, 69, 0.1)' :
-                         decision.enforcement_decision === 'ESCALATE' ? 'rgba(253, 126, 20, 0.1)' :
-                         'rgba(40, 167, 69, 0.1)',
-              border: `2px solid ${
-                decision.enforcement_decision === 'BLOCK' ? '#dc3545' :
-                decision.enforcement_decision === 'ESCALATE' ? '#fd7e14' : '#28a745'
-              }`,
+              background: 'rgba(40, 167, 69, 0.1)',
+              border: '2px solid #28a745',
               borderRadius: '8px',
               marginBottom: '16px'
             }}>
-              <div style={{ 
-                color: decision.enforcement_decision === 'BLOCK' ? '#dc3545' :
-                       decision.enforcement_decision === 'ESCALATE' ? '#fd7e14' : '#28a745',
+              <div style={{
+                color: '#28a745',
                 fontSize: '18px',
                 fontWeight: '700',
                 textAlign: 'center',
                 letterSpacing: '2px'
               }}>
-                {decision.enforcement_decision === 'ALLOW' ? 'PROCEED WITH RECOMMENDED ROUTE' :
-                 decision.enforcement_decision === 'BLOCK' ? 'PATHWAY BLOCKED' :
-                 decision.enforcement_decision === 'ESCALATE' ? 'ESCALATION REQUIRED' :
-                 'REDIRECT RECOMMENDED'}
+                {decision.recommendation?.type === 'ESCALATE' ? 'ESCALATION ADVISED — CONSULT LEGAL COUNSEL' :
+                 decision.recommendation?.type === 'REVIEW' ? 'REVIEW RECOMMENDED BEFORE ACTING' :
+                 decision.recommendation?.type === 'INSUFFICIENT_DATA' ? 'ADDITIONAL INFORMATION NEEDED' :
+                 'ADVISORY GUIDANCE — NOT A BINDING ORDER'}
               </div>
             </div>
 

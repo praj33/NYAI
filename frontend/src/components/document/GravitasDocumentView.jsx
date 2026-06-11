@@ -5,14 +5,14 @@
  * Ingests a single `casePayload` object and renders all 9 required fields
  * in the exact logical flow defined by Vedant's formatter contract:
  *
- *   1. Metadata & Verification  → DecisionHeader  (trace_id, enforcement_status, jurisdiction)
+ *   1. Metadata & Verification  → DecisionHeader  (trace_id, recommendation, jurisdiction)
  *   2. Case Context             → CaseContext     (case_summary, legal_route)
  *   3. Procedure & Execution    → ProceduralSteps (procedural_steps)
  *                               → DecisionTimeline (timeline)
  *   4. Final Determination      → Determination   (decision, reasoning)
  *
  * Rendering rules:
- *   - Enforcement gating is handled upstream by EnforcementGatekeeper.
+ *   - Advisory routing is handled upstream by RecommendationGatekeeper.
  *     GravitasDocumentView always renders all 9 fields when called directly.
  *   - Empty procedural_steps / timeline: formal empty state, never blank space
  *
@@ -28,10 +28,8 @@ import Determination from './Determination.jsx'
 import SkeletonLoader from '../SkeletonLoader.jsx'
 import ApiErrorState from '../ApiErrorState.jsx'
 
-// ─── Prop validation (runtime) ────────────────────────────────────────────────
-
 const REQUIRED_FIELDS = [
-  'trace_id', 'enforcement_status', 'jurisdiction',
+  'trace_id', 'recommendation', 'jurisdiction',
   'case_summary', 'legal_route',
   'procedural_steps', 'timeline',
   'decision', 'reasoning'
@@ -46,13 +44,11 @@ function validatePayload(payload) {
       return `casePayload missing required field: "${field}"`
     }
   }
-  if (!payload.enforcement_status?.verdict) {
-    return 'casePayload.enforcement_status missing required field: "verdict"'
+  if (!payload.recommendation?.type) {
+    return 'casePayload.recommendation missing required field: "type"'
   }
   return null
 }
-
-// ─── Component ────────────────────────────────────────────────────────────────
 
 const GravitasDocumentView = ({ casePayload, loading = false, onFeedback }) => {
   if (loading) {
@@ -76,7 +72,7 @@ const GravitasDocumentView = ({ casePayload, loading = false, onFeedback }) => {
 
   const {
     trace_id,
-    enforcement_status,
+    recommendation,
     jurisdiction,
     case_summary,
     legal_route,
@@ -98,30 +94,24 @@ const GravitasDocumentView = ({ casePayload, loading = false, onFeedback }) => {
 
   return (
     <article className="gdv-document">
-
-      {/* ── 1. Metadata & Verification ── */}
       <DecisionHeader
         traceId={trace_id}
-        enforcementStatus={enforcement_status}
+        recommendation={recommendation}
         jurisdiction={jurisdiction}
       />
 
       <div className="gdv-body">
-        {/* ── 2. Case Context ── */}
         <CaseContext
           caseSummary={case_summary}
           legalRoute={legal_route}
         />
 
-        {/* ── 3. Procedure & Execution ── */}
         <ProceduralSteps proceduralSteps={procedural_steps} />
         <DecisionTimeline timeline={timeline} />
 
-        {/* ── 4. Final Determination ── */}
         <Determination decision={decision} reasoning={reasoning} />
       </div>
 
-      {/* ── Document Footer ── */}
       <footer className="gdv-footer">
         <span className="gdv-footer-trace">
           UUID: {trace_id}

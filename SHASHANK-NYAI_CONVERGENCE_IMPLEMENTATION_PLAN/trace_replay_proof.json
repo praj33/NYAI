@@ -1,0 +1,121 @@
+﻿{
+    "trace_id":  "2bba2d75-a3dd-4d71-b4ee-6b4baf7fdda7",
+    "event_chain":  [
+                        {
+                            "index":  0,
+                            "stage":  "query_received",
+                            "timestamp":  "2026-06-11T06:19:42.389741",
+                            "trace_id":  "2bba2d75-a3dd-4d71-b4ee-6b4baf7fdda7",
+                            "observed":  {
+                                             "raw_query":  "theft of mobile phone"
+                                         }
+                        },
+                        {
+                            "index":  1,
+                            "stage":  "query_understanding",
+                            "timestamp":  "2026-06-11T06:19:42.390646",
+                            "trace_id":  "2bba2d75-a3dd-4d71-b4ee-6b4baf7fdda7",
+                            "observed":  {
+                                             "domain":  "criminal",
+                                             "source":  "local_fallback"
+                                         }
+                        },
+                        {
+                            "index":  2,
+                            "stage":  "query_expansion",
+                            "timestamp":  "2026-06-11T06:19:42.390779",
+                            "trace_id":  "2bba2d75-a3dd-4d71-b4ee-6b4baf7fdda7",
+                            "observed":  {
+                                             "expanded_count":  4
+                                         }
+                        },
+                        {
+                            "index":  3,
+                            "stage":  "hybrid_retrieval",
+                            "timestamp":  "2026-06-11T06:19:42.395948",
+                            "trace_id":  "2bba2d75-a3dd-4d71-b4ee-6b4baf7fdda7",
+                            "observed":  {
+                                             "candidates_found":  0
+                                         }
+                        },
+                        {
+                            "index":  4,
+                            "stage":  "cross_encoder_reranking",
+                            "timestamp":  "2026-06-11T06:19:42.395978",
+                            "trace_id":  "2bba2d75-a3dd-4d71-b4ee-6b4baf7fdda7",
+                            "observed":  {
+                                             "reranked_top":  0
+                                         }
+                        },
+                        {
+                            "index":  5,
+                            "stage":  "clean_legal_advisor",
+                            "timestamp":  "2026-06-11T06:19:42.793289",
+                            "trace_id":  "2bba2d75-a3dd-4d71-b4ee-6b4baf7fdda7",
+                            "observed":  {
+                                             "domain":  "criminal",
+                                             "jurisdiction":  "IN",
+                                             "sections":  2
+                                         }
+                        },
+                        {
+                            "index":  6,
+                            "stage":  "case_law_retriever",
+                            "timestamp":  "2026-06-11T06:19:42.793543",
+                            "trace_id":  "2bba2d75-a3dd-4d71-b4ee-6b4baf7fdda7",
+                            "observed":  {
+                                             "cases_found":  0
+                                         }
+                        },
+                        {
+                            "index":  7,
+                            "stage":  "response_enriched",
+                            "timestamp":  "2026-06-11T06:19:42.794830",
+                            "trace_id":  "2bba2d75-a3dd-4d71-b4ee-6b4baf7fdda7",
+                            "observed":  {
+                                             "has_answer":  true
+                                         }
+                        }
+                    ],
+    "agent_routing_tree":  {
+                               "legal_route":  [
+                                                   "query_cleaning",
+                                                   "query_understanding",
+                                                   "query_expansion",
+                                                   "hybrid_retrieval",
+                                                   "cross_encoder_reranking",
+                                                   "legal_reasoning_engine",
+                                                   "clean_legal_advisor",
+                                                   "case_law_retriever"
+                                               ]
+                           },
+    "jurisdiction_hops":  [
+                              "INDIA"
+                          ],
+    "rl_reward_snapshot":  {
+
+                           },
+    "context_fingerprint":  "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+    "nonce_verification":  true,
+    "signature_verification":  true,
+    "input_hash":  "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+    "output_hash":  "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+    "provenance_chain":  [
+                             {
+                                 "agent":  "clean_legal_advisor",
+                                 "case_laws_found":  0,
+                                 "domains":  [
+                                                 "criminal"
+                                             ],
+                                 "event":  "query_processed",
+                                 "jurisdiction_confidence":  1.0,
+                                 "jurisdiction_detected":  "INDIA",
+                                 "observer_steps_count":  7,
+                                 "ontology_filtered":  true,
+                                 "sections_found":  2,
+                                 "timestamp":  "2026-06-11T06:19:42.793606"
+                             }
+                         ],
+    "tamper_verified":  true,
+    "stored_at":  "2026-06-11T06:19:42.794956"
+}

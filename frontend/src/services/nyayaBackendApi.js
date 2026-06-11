@@ -31,7 +31,7 @@ nyayaClient.interceptors.response.use(
  * Query Nyaya AI for legal decision
  * @param {string} query - Legal query text
  * @param {string} jurisdiction - Optional jurisdiction (IN, UK, UAE, etc)
- * @returns {Promise<Object>} Legal decision response with enforcement_decision
+ * @returns {Promise<Object>} Legal decision response with recommendation
  */
 export async function queryNyayaDecision(query, jurisdiction = 'IN') {
   try {
@@ -41,12 +41,12 @@ export async function queryNyayaDecision(query, jurisdiction = 'IN') {
 
     const response = await nyayaClient.post('/nyaya/query', {
       query: query.trim(),
-      jurisdiction_hint: jurisdiction
+      jurisdiction_hint: jurisdiction,
+      user_context: { role: 'citizen', confidence_required: true }
     })
 
-    // Validate response has enforcement_decision
-    if (!response.data?.enforcement_decision) {
-      console.warn('Warning: Response missing enforcement_decision field')
+    if (!response.data?.recommendation?.type) {
+      console.warn('Warning: Response missing recommendation.type field')
     }
 
     return {
@@ -107,48 +107,48 @@ export async function testNyayaConnection() {
 }
 
 /**
- * Validate enforcement state
- * @param {string} state - Enforcement state value
+ * Validate recommendation type
+ * @param {string} type - Recommendation type value
  * @returns {boolean} True if valid
  */
-export function isValidEnforcementState(state) {
-  const validStates = ['ALLOW', 'BLOCK', 'ESCALATE', 'SAFE_REDIRECT']
-  return validStates.includes(state)
+export function isValidRecommendationType(type) {
+  const validTypes = ['INFORM', 'REVIEW', 'ESCALATE', 'INSUFFICIENT_DATA']
+  return validTypes.includes(type)
 }
 
 /**
- * Get enforcement state details
- * @param {string} state - Enforcement state
- * @returns {Object} Color and label for the state
+ * Get recommendation type details
+ * @param {string} type - Recommendation type
+ * @returns {Object} Color and label for the type
  */
-export function getEnforcementStateDetails(state) {
-  const stateMap = {
-    ALLOW: {
+export function getRecommendationTypeDetails(type) {
+  const typeMap = {
+    INFORM: {
       color: '#28a745',
-      label: '✅ ALLOWED',
-      icon: '✅',
-      description: 'This legal pathway is permitted'
+      label: 'ℹ️ INFORMATIONAL',
+      icon: 'ℹ️',
+      description: 'Advisory guidance provided'
     },
-    BLOCK: {
-      color: '#dc3545',
-      label: '🚫 BLOCKED',
-      icon: '🚫',
-      description: 'This pathway is blocked by legal authority'
+    REVIEW: {
+      color: '#ffc107',
+      label: '⚠️ REVIEW RECOMMENDED',
+      icon: '⚠️',
+      description: 'Additional review recommended before acting'
     },
     ESCALATE: {
       color: '#fd7e14',
-      label: '📈 ESCALATION REQUIRED',
+      label: '📈 ESCALATION ADVISED',
       icon: '📈',
-      description: 'This matter requires expert review and escalation'
+      description: 'Consider consulting a legal professional'
     },
-    SAFE_REDIRECT: {
-      color: '#6f42c1',
-      label: '↩️ SAFE REDIRECT',
-      icon: '↩️',
-      description: 'This matter should be redirected to a more appropriate venue'
+    INSUFFICIENT_DATA: {
+      color: '#6c757d',
+      label: '❓ INSUFFICIENT DATA',
+      icon: '❓',
+      description: 'Insufficient data for reliable guidance'
     }
   }
-  return stateMap[state] || stateMap.ALLOW
+  return typeMap[type] || typeMap.INFORM
 }
 
-export default { queryNyayaDecision, testNyayaConnection, isValidEnforcementState, getEnforcementStateDetails }
+export default { queryNyayaDecision, testNyayaConnection, isValidRecommendationType, getRecommendationTypeDetails }

@@ -40,7 +40,7 @@ def run_tantra_flow(
         json.dumps(payload).encode('utf-8'),
         {'Content-Type': 'application/json'}
     )
-    resp = urllib.request.urlopen(req, timeout=60)
+    resp = urllib.request.urlopen(req, timeout=120)
     nyai_output = json.loads(resp.read())
 
     trace_id = nyai_output.get("trace_id", "UNKNOWN")

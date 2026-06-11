@@ -37,7 +37,7 @@ const LawAgentView = ({ responseData }) => {
     reasoning_trace = {},
     legal_route = [],
     trace_id,
-    enforcement_decision
+    recommendation = {}
   } = responseData
 
   const { 
@@ -47,15 +47,15 @@ const LawAgentView = ({ responseData }) => {
     timeline = {}
   } = reasoning_trace
 
-  const enforcementState = enforcement_decision || 'ALLOW'
-  const enforcementColors = {
-    'ALLOW': { bg: 'rgba(34, 197, 94, 0.1)', border: '#22c55e', text: '#22c55e' },
-    'BLOCK': { bg: 'rgba(239, 68, 68, 0.1)', border: '#ef4444', text: '#ef4444' },
+  const recType = recommendation.type || 'INFORM'
+  const recommendationColors = {
+    'INFORM': { bg: 'rgba(34, 197, 94, 0.1)', border: '#22c55e', text: '#22c55e' },
+    'REVIEW': { bg: 'rgba(255, 193, 7, 0.1)', border: '#ffc107', text: '#ffc107' },
     'ESCALATE': { bg: 'rgba(249, 115, 22, 0.1)', border: '#f97316', text: '#f97316' },
-    'SOFT_REDIRECT': { bg: 'rgba(59, 130, 246, 0.1)', border: '#3b82f6', text: '#3b82f6' }
+    'INSUFFICIENT_DATA': { bg: 'rgba(108, 117, 125, 0.1)', border: '#6c757d', text: '#6c757d' }
   }
 
-  const colors = enforcementColors[enforcementState] || enforcementColors['ALLOW']
+  const colors = recommendationColors[recType] || recommendationColors['INFORM']
 
   return (
     <div style={{
@@ -224,7 +224,7 @@ const LawAgentView = ({ responseData }) => {
           borderBottom: `1px solid ${colors.border}`,
           paddingBottom: '12px'
         }}>
-          SECTION 5 — Enforcement Decision
+          SECTION 5 — Advisory Recommendation
         </h3>
         <div style={{ 
           fontSize: '32px', 
@@ -233,7 +233,7 @@ const LawAgentView = ({ responseData }) => {
           marginBottom: '12px',
           letterSpacing: '2px'
         }}>
-          {enforcementState}
+          {recType}
         </div>
         {legal_analysis && (
           <p style={{ color: '#fff', fontSize: '13px', lineHeight: '1.6', margin: '12px 0' }}>

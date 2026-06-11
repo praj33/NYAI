@@ -5,7 +5,7 @@
  * and generates detailed test report for production validation
  */
 
-import { MOCK_DECISIONS, DAY2_TEST_REPORT } from './enforcement-states.test.js'
+import { MOCK_DECISIONS, DAY2_TEST_REPORT } from './recommendation-states.test.js'
 import {
   testBackendConnection,
   testQueryEndpoint,
@@ -279,7 +279,7 @@ export async function runAllDay3Tests() {
     name: 'Enforcement State Format',
     passed: enforcement,
     critical: true,
-    details: `State: ${query.decision.enforcement_decision}`,
+    details: `Type: ${query.decision.recommendation?.type}`,
     error: enforcement ? null : 'Invalid enforcement state'
   })
 
@@ -515,7 +515,7 @@ export async function runSpotChecks() {
     },
     'Test Files': () => {
       const files = [
-        'frontend/src/tests/enforcement-states.test.js',
+        'frontend/src/tests/recommendation-states.test.js',
         'frontend/src/tests/backend-integration.test.js',
         'frontend/src/tests/DAY2_TEST_GUIDE.md'
       ]

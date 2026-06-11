@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react'
 import ErrorBoundary, { SystemCrash } from './components/ErrorBoundary.jsx'
 import ServiceOutage from './components/ServiceOutage.jsx'
 import GravitasDocumentView from './components/document/GravitasDocumentView.jsx'
-import EnforcementGatekeeper from './components/document/EnforcementGatekeeper.jsx'
+import RecommendationGatekeeper from './components/document/RecommendationGatekeeper.jsx'
 import { useServiceOutage } from './hooks/useServiceOutage.js'
 import { validateCasePayload } from './lib/casePayloadValidator.js'
 
@@ -117,15 +117,15 @@ function ErrorHandlingIntegration({ casePayload, onFeedback, traceId }) {
       onReturnToDashboard={() => window.location.href = '/'}
       onRetry={() => window.location.reload()}
     >
-      {/* EnforcementGatekeeper applies enforcement logic before rendering document */}
-      <EnforcementGatekeeper casePayload={validatedPayload}>
+      {/* RecommendationGatekeeper applies advisory routing before rendering document */}
+      <RecommendationGatekeeper casePayload={validatedPayload}>
         {(enforcementState) => (
           <GravitasDocumentView
             casePayload={validatedPayload}
             onFeedback={onFeedback}
           />
         )}
-      </EnforcementGatekeeper>
+      </RecommendationGatekeeper>
     </ErrorBoundary>
   )
 }

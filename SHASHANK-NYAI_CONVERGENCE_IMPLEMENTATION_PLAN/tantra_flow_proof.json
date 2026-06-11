@@ -1,0 +1,76 @@
+﻿{
+    "status":  "PASS",
+    "trace_id":  "2bba2d75-a3dd-4d71-b4ee-6b4baf7fdda7",
+    "sovereign_receipt":  {
+                              "sovereign_core":  "MOCK",
+                              "trace_id":  "2bba2d75-a3dd-4d71-b4ee-6b4baf7fdda7",
+                              "received_at":  "2026-06-11T06:19:42.818995",
+                              "input_hash_received":  "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+                              "output_hash_received":  "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+                              "schema_fields_present":  11,
+                              "schema_fields_required":  11,
+                              "violations":  [
+
+                                             ],
+                              "accepted":  true,
+                              "status":  "ACCEPTED"
+                          },
+    "bucket_verified":  true,
+    "trace_continuity":  true,
+    "input_hash_continuity":  true,
+    "flow_proof":  {
+                       "flow":  "TANTRA",
+                       "flow_start":  "2026-06-11T06:19:42.210497",
+                       "flow_end":  "2026-06-11T06:19:42.858027",
+                       "trace_id":  "2bba2d75-a3dd-4d71-b4ee-6b4baf7fdda7",
+                       "input_hash":  "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+                       "stages":  {
+                                      "nyai_response":  {
+                                                            "trace_id":  "2bba2d75-a3dd-4d71-b4ee-6b4baf7fdda7",
+                                                            "input_hash":  "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+                                                            "output_hash":  "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+                                                            "recommendation":  {
+                                                                                   "type":  "INFORM",
+                                                                                   "confidence":  0.75,
+                                                                                   "rationale":  "Query resolved with 2 statute(s) at 75% confidence"
+                                                                               },
+                                                            "facts_count":  5,
+                                                            "schema_fields_present":  11
+                                                        },
+                                      "sovereign_core":  {
+                                                             "sovereign_core":  "MOCK",
+                                                             "trace_id":  "2bba2d75-a3dd-4d71-b4ee-6b4baf7fdda7",
+                                                             "received_at":  "2026-06-11T06:19:42.818995",
+                                                             "input_hash_received":  "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+                                                             "output_hash_received":  "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+                                                             "schema_fields_present":  11,
+                                                             "schema_fields_required":  11,
+                                                             "violations":  [
+
+                                                                            ],
+                                                             "accepted":  true,
+                                                             "status":  "ACCEPTED"
+                                                         },
+                                      "output_bucket":  {
+                                                            "stored":  "true",
+                                                            "trace_id":  "2bba2d75-a3dd-4d71-b4ee-6b4baf7fdda7",
+                                                            "entry_hash":  "ae2d47467ae913c8ec1d15fc94f8f962f7d222c1e73d684161b9e543e55330e6",
+                                                            "bucket_file":  "C:\\Users\\shash\\OneDrive\\Documents\\NYAI\\backend\\tantra\\..\\output_logs\\nyai_output_log.jsonl"
+                                                        },
+                                      "verification":  {
+                                                           "verified":  true,
+                                                           "trace_id":  "2bba2d75-a3dd-4d71-b4ee-6b4baf7fdda7",
+                                                           "stored_entry_hash":  "4719f0d4d4421d56aaf8d1de96f9e61431a96be6e32a5a19748adbd93891b5fa",
+                                                           "recomputed_entry_hash":  "4719f0d4d4421d56aaf8d1de96f9e61431a96be6e32a5a19748adbd93891b5fa",
+                                                           "output_hash":  "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+                                                           "tamper_detected":  false
+                                                       }
+                                  },
+                       "trace_continuity":  true,
+                       "input_hash_continuity":  true,
+                       "sovereign_accepted":  true,
+                       "bucket_verified":  true,
+                       "flow_status":  "PASS"
+                   },
+    "authority_note":  "Advisory participation only. No enforcement authority transferred."
+}

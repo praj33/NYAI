@@ -10,7 +10,6 @@
 
 import { useState, useCallback, useRef } from 'react'
 import { nyayaApi } from '../services/nyayaApi.js'
-import { casePresentationService } from '../services/nyayaApi.js'
 import GravitasResponseTransformer from '../lib/GravitasResponseTransformer.js'
 
 /**
@@ -96,25 +95,13 @@ export function useGravitasDecision(options = {}) {
         throw new Error('Invalid response structure from backend')
       }
 
-      // Verify enforcement status before displaying results
-      const enforcementResult = await casePresentationService.getEnforcementStatus(
-        validatedDecision.trace_id,
-        validatedDecision.jurisdiction
-      )
+      setDecision(validatedDecision)
 
-      const decisionWithEnforcement = {
-        ...validatedDecision,
-        enforcement_status: enforcementResult.success ? enforcementResult.data : null
-      }
-
-      setDecision(decisionWithEnforcement)
-
-      // Call success callback if provided
       if (onSuccess) {
-        onSuccess(decisionWithEnforcement)
+        onSuccess(validatedDecision)
       }
 
-      return decisionWithEnforcement
+      return validatedDecision
     } catch (err) {
       // Don't set error if request was aborted
       if (err.name === 'AbortError') {

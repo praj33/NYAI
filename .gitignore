@@ -44,5 +44,6 @@ provenance_ledger.json
 storybook-static/
 
 #Task md files
-NYAI_AUDIT_PLAN.md
-FULL SYSTEM AUDIT AND CONVERGENCE REVIEW (NYAI Independent Audit Sprint).md
+NYAI Full Convergence Remediation Sprint (NYAI__ Canonical Convergence Build).md
+NYAI_CONVERGENCE_IMPLEMENTATION_PLAN.md 
+NYAI_CONVERGENCE_GAP_ANALYSIS_AND_IMPLEMENTATION_GUIDE.md

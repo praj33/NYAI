@@ -1,6 +1,6 @@
 // ErrorBoundary.jsx — React ErrorBoundary class component
 // Catches unhandled frontend exceptions and renders SystemCrash UI overlay.
-// Wraps GravitasDocumentView and EnforcementGatekeeper to prevent white screen of death.
+// Wraps GravitasDocumentView and RecommendationGatekeeper to prevent white screen of death.
 import React from 'react'
 import ApiErrorState from './ApiErrorState.jsx'
 

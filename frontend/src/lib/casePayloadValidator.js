@@ -76,37 +76,31 @@ function validateTimelineEvent(event, index) {
 }
 
 /**
- * Validates enforcement status object
- * @param {any} status 
+ * Validates advisory recommendation object
+ * @param {any} recommendation
  * @returns {{ valid: boolean, error: string|null, sanitized: any }}
  */
-function validateEnforcementStatus(status) {
-  if (!status || typeof status !== 'object') {
-    return { valid: false, error: 'enforcement_status is not an object', sanitized: null }
+function validateRecommendation(recommendation) {
+  if (!recommendation || typeof recommendation !== 'object') {
+    return { valid: false, error: 'recommendation is not an object', sanitized: null }
   }
-  
-  const validStates = ['clear', 'block', 'escalate', 'soft_redirect', 'conditional']
-  const validVerdicts = ['ENFORCEABLE', 'PENDING_REVIEW', 'NON_ENFORCEABLE']
-  
-  const state = validStates.includes(status.state) ? status.state : 'block'
-  const verdict = validVerdicts.includes(status.verdict) ? status.verdict : 'NON_ENFORCEABLE'
-  
+
+  const validTypes = ['INFORM', 'REVIEW', 'ESCALATE', 'INSUFFICIENT_DATA']
+  const type = validTypes.includes(recommendation.type) ? recommendation.type : 'INSUFFICIENT_DATA'
+  const confidence = typeof recommendation.confidence === 'number'
+    ? Math.max(0, Math.min(1, recommendation.confidence))
+    : 0
+
   return {
     valid: true,
     error: null,
     sanitized: {
-      state,
-      verdict,
-      reason: typeof status.reason === 'string' ? status.reason : 'Validation pending',
-      barriers: Array.isArray(status.barriers) ? status.barriers : [],
-      blocked_path: status.blocked_path ?? null,
-      escalation_required: Boolean(status.escalation_required),
-      escalation_target: status.escalation_target ?? null,
-      redirect_suggestion: status.redirect_suggestion ?? null,
-      safe_explanation: typeof status.safe_explanation === 'string' 
-        ? status.safe_explanation 
-        : 'Enforcement status could not be verified.',
-      trace_id: status.trace_id ?? null
+      type,
+      confidence,
+      rationale: typeof recommendation.rationale === 'string'
+        ? recommendation.rationale
+        : 'No recommendation rationale provided.',
+      urgency_flag: recommendation.urgency_flag === true
     }
   }
 }
@@ -115,7 +109,7 @@ function validateEnforcementStatus(status) {
  * Main casePayload validator
  * Strictly validates all 9 required fields per formatter contract:
  * - trace_id (required)
- * - enforcement_status (required)
+ * - recommendation (required)
  * - jurisdiction (required)
  * - case_summary (required)
  * - legal_route (required)
@@ -148,7 +142,7 @@ export function validateCasePayload(payload, strict = false) {
   }
 
   // Required fields that MUST be present (throw in strict mode)
-  const requiredFields = ['trace_id', 'enforcement_status', 'jurisdiction', 'case_summary', 'legal_route', 'decision', 'reasoning']
+  const requiredFields = ['trace_id', 'recommendation', 'jurisdiction', 'case_summary', 'legal_route', 'decision', 'reasoning']
   
   for (const field of requiredFields) {
     if (payload[field] == null || (typeof payload[field] === 'string' && payload[field].trim() === '')) {
@@ -162,13 +156,13 @@ export function validateCasePayload(payload, strict = false) {
     }
   }
 
-  // Validate enforcement_status (critical - must exist and have verdict)
-  const enforcementValidation = validateEnforcementStatus(payload.enforcement_status)
-  if (!enforcementValidation.valid) {
+  // Validate recommendation (critical - must exist and have type)
+  const recommendationValidation = validateRecommendation(payload.recommendation)
+  if (!recommendationValidation.valid) {
     if (strict) {
       return {
         valid: false,
-        error: enforcementValidation.error,
+        error: recommendationValidation.error,
         sanitized: null
       }
     }
@@ -235,7 +229,7 @@ export function validateCasePayload(payload, strict = false) {
   // Build sanitized output
   const sanitized = {
     trace_id: typeof payload.trace_id === 'string' ? payload.trace_id : 'unknown',
-    enforcement_status: enforcementValidation.sanitized,
+    recommendation: recommendationValidation.sanitized,
     jurisdiction: typeof payload.jurisdiction === 'string' ? payload.jurisdiction : 'Unknown',
     case_summary: typeof payload.case_summary === 'string' ? payload.case_summary : 'Summary unavailable',
     legal_route: legalRoute,
@@ -277,17 +271,11 @@ export function validateField(value, fieldName, fallback = null, strict = false)
 // Zod schema (if Zod is available in the project)
 export const casePayloadZodSchema = zod ? zod.object({
   trace_id: zod.string().min(1, 'trace_id is required'),
-  enforcement_status: zod.object({
-    state: zod.enum(['clear', 'block', 'escalate', 'soft_redirect', 'conditional']),
-    verdict: zod.enum(['ENFORCEABLE', 'PENDING_REVIEW', 'NON_ENFORCEABLE']),
-    reason: zod.string(),
-    barriers: zod.array(zod.string()).default([]),
-    blocked_path: zod.string().nullable().default(null),
-    escalation_required: zod.boolean().default(false),
-    escalation_target: zod.string().nullable().default(null),
-    redirect_suggestion: zod.string().nullable().default(null),
-    safe_explanation: zod.string(),
-    trace_id: zod.string().nullable().default(null)
+  recommendation: zod.object({
+    type: zod.enum(['INFORM', 'REVIEW', 'ESCALATE', 'INSUFFICIENT_DATA']),
+    confidence: zod.number().min(0).max(1),
+    rationale: zod.string(),
+    urgency_flag: zod.boolean().default(false)
   }),
   jurisdiction: zod.string().min(1, 'jurisdiction is required'),
   case_summary: zod.string().min(1, 'case_summary is required'),

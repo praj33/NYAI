@@ -73,31 +73,31 @@ function DecisionPage() {
     }))
   }
 
-  const getEnforcementColor = (state) => {
-    switch (state) {
-      case 'ALLOW':
+  const getRecommendationColor = (type) => {
+    switch (type) {
+      case 'INFORM':
         return '#28a745'
-      case 'BLOCK':
-        return '#dc3545'
+      case 'REVIEW':
+        return '#ffc107'
       case 'ESCALATE':
         return '#fd7e14'
-      case 'SAFE_REDIRECT':
-        return '#6f42c1'
+      case 'INSUFFICIENT_DATA':
+        return '#6c757d'
       default:
         return '#6c757d'
     }
   }
 
-  const getEnforcementLabel = (state) => {
-    switch (state) {
-      case 'ALLOW':
-        return '✅ ALLOWED'
-      case 'BLOCK':
-        return '🚫 BLOCKED'
+  const getRecommendationLabel = (type) => {
+    switch (type) {
+      case 'INFORM':
+        return 'ℹ️ INFORMATIONAL'
+      case 'REVIEW':
+        return '⚠️ REVIEW RECOMMENDED'
       case 'ESCALATE':
-        return '📈 ESCALATION REQUIRED'
-      case 'SAFE_REDIRECT':
-        return '↩️ SAFE REDIRECT'
+        return '📈 ESCALATION ADVISED'
+      case 'INSUFFICIENT_DATA':
+        return '❓ INSUFFICIENT DATA'
       default:
         return '⚠️ PENDING'
     }
@@ -113,7 +113,7 @@ function DecisionPage() {
       {/* Header */}
       <div className="decision-header">
         <h1>NYAI Legal Agent</h1>
-        <p>Real-time structured legal decisions with enforcement authority</p>
+        <p>Real-time structured legal advisory with TANTRA-canonical recommendations</p>
       </div>
 
       {/* Query Section */}
@@ -155,16 +155,19 @@ function DecisionPage() {
       {/* Decision Display */}
       {decision && (
         <div className="decision-display">
-          {/* Enforcement Status Banner */}
+          {/* Advisory Recommendation Banner */}
           <div 
-            className="enforcement-banner"
-            style={{ borderLeftColor: getEnforcementColor(decision.enforcement_decision) }}
+            className="recommendation-banner"
+            style={{ borderLeftColor: getRecommendationColor(decision.recommendation?.type) }}
           >
-            <div className="enforcement-content">
-              <h2 style={{ color: getEnforcementColor(decision.enforcement_decision) }}>
-                {getEnforcementLabel(decision.enforcement_decision)}
+            <div className="recommendation-content">
+              <h2 style={{ color: getRecommendationColor(decision.recommendation?.type) }}>
+                {getRecommendationLabel(decision.recommendation?.type)}
               </h2>
-              <p className="enforcement-state">{decision.enforcement_decision}</p>
+              <p className="recommendation-type">{decision.recommendation?.type}</p>
+              {decision.recommendation?.rationale && (
+                <p className="recommendation-rationale">{decision.recommendation.rationale}</p>
+              )}
             </div>
           </div>
 
@@ -436,7 +439,7 @@ function DecisionPage() {
               color: '#666'
             }}>
               <strong>DEBUG INFO:</strong><br/>
-              Enforcement State: <strong>{decision.enforcement_decision}</strong><br/>
+              Recommendation: <strong>{decision.recommendation?.type}</strong><br/>
               Trace ID: <strong>{decision.trace_id}</strong><br/>
               Confidence: <strong>{Math.round(decision.confidence?.overall * 100)}%</strong><br/>
               Fields: <strong>{Object.keys(decision).length}/12</strong><br/>

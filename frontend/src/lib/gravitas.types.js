@@ -7,22 +7,15 @@
  */
 
 /**
- * @typedef {'ENFORCEABLE' | 'PENDING_REVIEW' | 'NON_ENFORCEABLE'} EnforcementVerdict
- * @typedef {'clear' | 'block' | 'escalate' | 'soft_redirect' | 'conditional'} EnforcementState
+ * @typedef {'INFORM' | 'REVIEW' | 'ESCALATE' | 'INSUFFICIENT_DATA'} RecommendationType
  */
 
 /**
- * @typedef {Object} EnforcementStatus
- * @property {EnforcementState}   state                - Granular enforcement state
- * @property {EnforcementVerdict} verdict              - Gatekeeper verdict (primary UI gate)
- * @property {string}             reason               - Human-readable reason
- * @property {string[]}           barriers             - Specific blockers (NON_ENFORCEABLE only)
- * @property {string|null}        blocked_path         - Blocked pathway description
- * @property {boolean}            escalation_required  - Whether escalation is needed
- * @property {string|null}        escalation_target    - Target authority for escalation
- * @property {string|null}        redirect_suggestion  - Alternative pathway suggestion
- * @property {string}             safe_explanation     - User-facing explanation
- * @property {string}             trace_id             - Mirrors parent trace_id
+ * @typedef {Object} Recommendation
+ * @property {RecommendationType} type       - Advisory recommendation type
+ * @property {number}             confidence  - Confidence score 0-1
+ * @property {string}             rationale   - Human-readable advisory rationale
+ * @property {boolean}            [urgency_flag] - Whether urgent professional review is advised
  */
 
 /**
@@ -50,15 +43,15 @@
  * The single object ingested by GravitasDocumentView.
  * Maps exactly to Vedant's formatter output — all 9 fields required.
  *
- * @property {string}            trace_id          - UUID audit identifier
- * @property {EnforcementStatus} enforcement_status - Gatekeeper verdict object
- * @property {string}            jurisdiction      - e.g. 'India', 'UK', 'UAE'
- * @property {string}            case_summary      - Findings of fact narrative
- * @property {string[]}          legal_route       - Statutory/regulatory framework applied
- * @property {ProceduralStep[]}  procedural_steps  - Ordered execution steps (may be empty)
- * @property {TimelineEvent[]}   timeline          - Chronological deadlines (may be empty)
- * @property {string}            decision          - The ultimate ruling text
- * @property {string}            reasoning         - Logical justification connecting facts to decision
+ * @property {string}           trace_id       - UUID audit identifier
+ * @property {Recommendation}   recommendation - Advisory recommendation object
+ * @property {string}           jurisdiction   - e.g. 'India', 'UK', 'UAE'
+ * @property {string}           case_summary   - Findings of fact narrative
+ * @property {string[]}         legal_route    - Statutory/regulatory framework applied
+ * @property {ProceduralStep[]} procedural_steps - Ordered execution steps (may be empty)
+ * @property {TimelineEvent[]}  timeline       - Chronological deadlines (may be empty)
+ * @property {string}           decision       - The ultimate ruling text
+ * @property {string}           reasoning      - Logical justification connecting facts to decision
  */
 
 export {}

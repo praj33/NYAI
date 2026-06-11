@@ -1,32 +1,31 @@
 /**
  * DecisionHeader.jsx
- * Fields consumed: trace_id, enforcement_status, jurisdiction
- *
- * Verdict → header accent:
- *   ENFORCEABLE     → green  ✅
- *   PENDING_REVIEW  → amber  ⏳
- *   NON_ENFORCEABLE → red    🚫
+ * Fields consumed: trace_id, recommendation, jurisdiction
  */
 import React from 'react'
 
-const VERDICT_CONFIG = {
-  ENFORCEABLE: {
+const RECOMMENDATION_CONFIG = {
+  INFORM: {
     color: '#1a7f4b', bg: '#d1fae5', border: '#6ee7b7',
-    icon: '✅', label: 'Enforceable'
+    icon: 'ℹ️', label: 'Informational Guidance'
   },
-  PENDING_REVIEW: {
+  REVIEW: {
     color: '#92400e', bg: '#fef3c7', border: '#fcd34d',
-    icon: '⏳', label: 'Pending Review'
+    icon: '⏳', label: 'Review Recommended'
   },
-  NON_ENFORCEABLE: {
+  ESCALATE: {
     color: '#991b1b', bg: '#fee2e2', border: '#fca5a5',
-    icon: '🚫', label: 'Non-Enforceable'
+    icon: '📈', label: 'Escalation Advised'
+  },
+  INSUFFICIENT_DATA: {
+    color: '#4338ca', bg: '#e0e7ff', border: '#a5b4fc',
+    icon: '❓', label: 'Insufficient Data'
   }
 }
 
-const DecisionHeader = ({ traceId, enforcementStatus, jurisdiction }) => {
-  const verdict = enforcementStatus?.verdict ?? 'PENDING_REVIEW'
-  const cfg = VERDICT_CONFIG[verdict] ?? VERDICT_CONFIG.PENDING_REVIEW
+const DecisionHeader = ({ traceId, recommendation, jurisdiction }) => {
+  const recType = recommendation?.type ?? 'REVIEW'
+  const cfg = RECOMMENDATION_CONFIG[recType] ?? RECOMMENDATION_CONFIG.REVIEW
 
   return (
     <header style={{
@@ -60,14 +59,13 @@ const DecisionHeader = ({ traceId, enforcementStatus, jurisdiction }) => {
             <span>{cfg.label}</span>
           </div>
 
-          {enforcementStatus?.reason && (
+          {recommendation?.rationale && (
             <p style={{ margin: '10px 0 0 0', fontSize: '13px', color: cfg.color, maxWidth: '520px', lineHeight: '1.5' }}>
-              {enforcementStatus.reason}
+              {recommendation.rationale}
             </p>
           )}
         </div>
 
-        {/* Audit trace_id — top-right */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '4px' }}>
           <span style={{ fontSize: '10px', fontWeight: '600', color: '#9ca3af', letterSpacing: '1px', textTransform: 'uppercase' }}>
             Reference ID
@@ -82,20 +80,17 @@ const DecisionHeader = ({ traceId, enforcementStatus, jurisdiction }) => {
         </div>
       </div>
 
-      {/* Enforcement barriers — NON_ENFORCEABLE only */}
-      {verdict === 'NON_ENFORCEABLE' && enforcementStatus?.barriers?.length > 0 && (
+      {recType === 'ESCALATE' && recommendation?.urgency_flag && (
         <div style={{
           marginTop: '16px', padding: '12px 16px',
           backgroundColor: '#fee2e2', border: '1px solid #fca5a5', borderRadius: '6px'
         }}>
           <div style={{ fontSize: '12px', fontWeight: '700', color: '#991b1b', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-            Enforcement Barriers
+            Urgent Advisory
           </div>
-          <ul style={{ margin: 0, paddingLeft: '18px' }}>
-            {enforcementStatus.barriers.map((barrier, i) => (
-              <li key={i} style={{ fontSize: '13px', color: '#7f1d1d', lineHeight: '1.6' }}>{barrier}</li>
-            ))}
-          </ul>
+          <p style={{ margin: 0, fontSize: '13px', color: '#7f1d1d', lineHeight: '1.6' }}>
+            Consider consulting a qualified legal professional promptly.
+          </p>
         </div>
       )}
     </header>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './GravitasDecisionPanel.css'
 import ConfidenceIndicator from './ConfidenceIndicator.jsx'
 import JurisdictionInfoBar from './JurisdictionInfoBar.jsx'
-import EnforcementStatusCard from './EnforcementStatusCard.jsx'
+import RecommendationStatusCard from './RecommendationStatusCard.jsx'
 import SkeletonLoader from './SkeletonLoader.jsx'
 
 /**
@@ -12,7 +12,7 @@ import SkeletonLoader from './SkeletonLoader.jsx'
  * Displays a comprehensive legal decision screen combining:
  * - Domain and Jurisdiction information
  * - Confidence metrics
- * - Enforcement status (if applicable)
+ * - Advisory recommendation (if applicable)
  * - Constitutional references
  * - Recommended legal routes
  * - Provenance chain and reasoning
@@ -27,7 +27,7 @@ import SkeletonLoader from './SkeletonLoader.jsx'
  * @param {Array<Object>} props.decision.provenance_chain - Decision provenance
  * @param {Object} props.decision.reasoning_trace - Detailed reasoning
  * @param {string} props.decision.trace_id - Unique trace identifier
- * @param {Object} props.decision.enforcement_status - Enforcement state
+ * @param {Object} props.decision.recommendation - Advisory recommendation
  * @param {boolean} props.loading - Loading state
  * @param {Function} props.onExplainClick - Callback for explain reasoning
  * @param {Function} props.onFeedbackClick - Callback for feedback submission
@@ -92,11 +92,11 @@ const GravitasDecisionPanel = ({
         </div>
       </div>
 
-      {/* Enforcement Status - if applicable */}
-      {decision.enforcement_status && (
-        <div className="gravitas-enforcement-section">
-          <EnforcementStatusCard 
-            enforcementStatus={decision.enforcement_status}
+      {/* Advisory Recommendation - if applicable */}
+      {decision.recommendation && (
+        <div className="gravitas-recommendation-section">
+          <RecommendationStatusCard
+            recommendation={decision.recommendation}
             traceId={decision.trace_id}
           />
         </div>

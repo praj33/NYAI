@@ -1,60 +1,29 @@
 /**
  * GravitasResponseTransformer
- * 
+ *
  * Utilities for transforming, validating, and formatting Nyaya API responses
  * into the format expected by the Gravitas UI components.
- * 
- * Provides:
- * - Response validation and sanitization
- * - Data transformation and enrichment
- * - Error handling and fallback defaults
- * - Formatting utilities for display
  */
 
-/**
- * Validates and transforms a NyayaResponse from the backend
- * 
- * @param {Object} apiResponse - Raw response from /nyaya/query endpoint
- * @returns {Object} Validated and transformed response ready for GravitasDecisionPanel
- * @throws {Error} If response is missing critical fields
- * 
- * @example
- * const response = await nyayaApi.query({ query: "Can I file a case?" });
- * const validatedData = GravitasResponseTransformer.transform(response);
- * <GravitasDecisionPanel decision={validatedData} />
- */
 export const GravitasResponseTransformer = {
-  /**
-   * Transform and validate NyayaResponse
-   */
   transform: (apiResponse) => {
     if (!apiResponse || typeof apiResponse !== 'object') {
       throw new Error('Invalid API response: expected object')
     }
 
     return {
-      // Required fields
       domain: sanitizeString(apiResponse.domain, 'general'),
       jurisdiction: sanitizeString(apiResponse.jurisdiction, 'Unknown'),
       trace_id: sanitizeString(apiResponse.trace_id, generateTraceId()),
-      
-      // Confidence - always 0.0 to 1.0
       confidence: normalizeConfidence(apiResponse.confidence),
-      
-      // Arrays
       legal_route: sanitizeArray(apiResponse.legal_route, []),
       constitutional_articles: sanitizeArray(apiResponse.constitutional_articles, []),
       provenance_chain: sanitizeProvenanceChain(apiResponse.provenance_chain || []),
-      
-      // Objects
       reasoning_trace: sanitizeObject(apiResponse.reasoning_trace, {}),
-      enforcement_status: normalizeEnforcementStatus(apiResponse.enforcement_status)
+      recommendation: normalizeRecommendation(apiResponse.recommendation)
     }
   },
 
-  /**
-   * Validate if response meets minimum requirements for display
-   */
   isValid: (decision) => {
     return (
       decision &&
@@ -65,9 +34,6 @@ export const GravitasResponseTransformer = {
     )
   },
 
-  /**
-   * Get a user-friendly summary from the decision
-   */
   getSummary: (decision) => {
     if (!GravitasResponseTransformer.isValid(decision)) {
       return 'Invalid decision data'
@@ -80,12 +46,9 @@ export const GravitasResponseTransformer = {
     return `${confidencePercent}% confidence - ${domain} case in ${jurisdiction}`
   },
 
-  /**
-   * Format confidence for human-readable text
-   */
   formatConfidence: (confidence) => {
     const percent = Math.round(normalizeConfidence(confidence) * 100)
-    
+
     if (percent >= 85) return `Very High (${percent}%)`
     if (percent >= 65) return `High (${percent}%)`
     if (percent >= 45) return `Moderate (${percent}%)`
@@ -93,43 +56,33 @@ export const GravitasResponseTransformer = {
     return `Very Low (${percent}%)`
   },
 
-  /**
-   * Get confidence color for UI
-   */
   getConfidenceColor: (confidence) => {
     const percent = Math.round(normalizeConfidence(confidence) * 100)
-    
-    if (percent >= 85) return '#28a745' // Green
-    if (percent >= 65) return '#20c997' // Teal
-    if (percent >= 45) return '#ffc107' // Yellow
-    if (percent >= 25) return '#fd7e14' // Orange
-    return '#dc3545' // Red
+
+    if (percent >= 85) return '#28a745'
+    if (percent >= 65) return '#20c997'
+    if (percent >= 45) return '#ffc107'
+    if (percent >= 25) return '#fd7e14'
+    return '#dc3545'
   },
 
-  /**
-   * Format enforcement status for display
-   */
-  formatEnforcementStatus: (status) => {
-    if (!status) return null
+  formatRecommendation: (recommendation) => {
+    if (!recommendation) return null
 
-    const stateLabels = {
-      clear: '✅ Clear to proceed',
-      block: '🚫 Pathway blocked',
-      escalate: '📈 Escalation required',
-      soft_redirect: '↩️ Consider alternative',
-      conditional: '⚠️ Conditional access'
+    const typeLabels = {
+      INFORM: 'ℹ️ Informational guidance',
+      REVIEW: '⚠️ Review recommended',
+      ESCALATE: '📈 Escalation advised',
+      INSUFFICIENT_DATA: '❓ Insufficient data'
     }
 
     return {
-      ...status,
-      displayLabel: stateLabels[status.state] || 'Unknown status',
-      severity: getSeverity(status.state)
+      ...recommendation,
+      displayLabel: typeLabels[recommendation.type] || 'Unknown recommendation',
+      severity: getRecommendationSeverity(recommendation.type)
     }
   },
 
-  /**
-   * Extract key points for quick reference
-   */
   getKeyPoints: (decision) => {
     const points = []
 
@@ -153,23 +106,17 @@ export const GravitasResponseTransformer = {
       points.push(`${decision.constitutional_articles.length} Constitutional articles referenced`)
     }
 
-    if (decision.enforcement_status?.state && decision.enforcement_status.state !== 'clear') {
-      points.push(`⚠️ ${formatLabel(decision.enforcement_status.state)}`)
+    if (decision.recommendation?.type && decision.recommendation.type !== 'INFORM') {
+      points.push(`${formatLabel(decision.recommendation.type)}`)
     }
 
     return points
   },
 
-  /**
-   * Create a compact representation for logging/debugging
-   */
   toDebugString: (decision) => {
     return `[${decision.trace_id.substring(0, 8)}] ${decision.domain} @ ${decision.jurisdiction} (${Math.round(decision.confidence * 100)}%)`
   },
 
-  /**
-   * Merge multiple decisions (for multi-jurisdiction responses)
-   */
   mergeMultiple: (decisions) => {
     if (!Array.isArray(decisions) || decisions.length === 0) {
       return null
@@ -187,10 +134,6 @@ export const GravitasResponseTransformer = {
     }
   }
 }
-
-/**
- * Internal helper functions
- */
 
 function sanitizeString(value, defaultValue = '') {
   if (typeof value === 'string') {
@@ -214,6 +157,9 @@ function sanitizeObject(value, defaultValue = {}) {
 }
 
 function normalizeConfidence(value) {
+  if (value && typeof value === 'object' && typeof value.overall === 'number') {
+    return normalizeConfidence(value.overall)
+  }
   const num = parseFloat(value)
   if (isNaN(num)) return 0.5
   if (num < 0) return 0
@@ -221,21 +167,16 @@ function normalizeConfidence(value) {
   return num
 }
 
-function normalizeEnforcementStatus(status) {
-  if (!status) return null
-
-  const validStates = ['clear', 'block', 'escalate', 'soft_redirect', 'conditional']
-  const state = validStates.includes(status.state) ? status.state : 'clear'
-
+function normalizeRecommendation(rec) {
+  if (!rec || typeof rec !== 'object') {
+    return { type: 'INSUFFICIENT_DATA', confidence: 0, rationale: '' }
+  }
+  const validTypes = new Set(['INFORM', 'REVIEW', 'ESCALATE', 'INSUFFICIENT_DATA'])
   return {
-    state,
-    reason: sanitizeString(status.reason, ''),
-    blocked_path: status.blocked_path || null,
-    escalation_required: Boolean(status.escalation_required),
-    escalation_target: status.escalation_target || null,
-    redirect_suggestion: status.redirect_suggestion || null,
-    safe_explanation: sanitizeString(status.safe_explanation, ''),
-    trace_id: sanitizeString(status.trace_id, '')
+    type: validTypes.has(rec.type) ? rec.type : 'INSUFFICIENT_DATA',
+    confidence: typeof rec.confidence === 'number' ? rec.confidence : 0,
+    rationale: rec.rationale || '',
+    urgency_flag: rec.urgency_flag === true,
   }
 }
 
@@ -252,16 +193,14 @@ function sanitizeProvenanceChain(chain) {
     }))
 }
 
-function getSeverity(state) {
-  switch (state) {
-    case 'block':
-      return 'critical'
-    case 'escalate':
-    case 'conditional':
+function getRecommendationSeverity(type) {
+  switch (type) {
+    case 'ESCALATE':
+    case 'INSUFFICIENT_DATA':
       return 'high'
-    case 'soft_redirect':
+    case 'REVIEW':
       return 'medium'
-    case 'clear':
+    case 'INFORM':
     default:
       return 'none'
   }

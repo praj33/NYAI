@@ -211,6 +211,12 @@ class TraceResponse(BaseModel):
     context_fingerprint: str
     nonce_verification: bool
     signature_verification: bool
+    input_hash: Optional[str] = None
+    output_hash: Optional[str] = None
+    provenance_chain: Optional[List[Dict[str, Any]]] = None
+    tamper_verified: Optional[bool] = None
+    stored_at: Optional[str] = None
+    replay_source: Optional[str] = None
 
 class ErrorResponse(BaseModel):
     error_code: str

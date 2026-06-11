@@ -7,13 +7,14 @@ if project_root not in sys.path:
 if os.getcwd() not in sys.path:
     sys.path.append(os.getcwd())
 
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, HTTPException, Query, Request
 from pydantic import BaseModel
 from typing import Dict, Any, List, Optional
 import uuid
 import hashlib
 import json
 import threading
+import asyncio
 from collections import OrderedDict
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeout
@@ -57,7 +58,11 @@ from services.legal_reasoner import apply_reasoning_rules
 from observer.pipeline import ObserverPipeline
 from api.response_builder import ResponseBuilder, SchemaValidationError, HashMismatchError, TraceContinuityError
 from tantra.output_bucket import output_bucket
+from tantra.flow import run_tantra_flow
+from provenance_chain.hash_chain_ledger import HashChainLedger
 import logging
+
+ledger = HashChainLedger()
 
 router = APIRouter(prefix="/nyaya", tags=["nyaya"])
 logger = logging.getLogger(__name__)
@@ -109,13 +114,15 @@ class RLSignalRequest(BaseModel):
 
 
 @router.post("/query", response_model=NyayaResponse)
-async def query_legal(request: QueryRequest):
+async def query_legal(request: QueryRequest, http_request: Request):
     """Execute a single-jurisdiction legal query with deterministic reasoning."""
     try:
         cleaned_query = clean_query(request.query)
 
         # ─── TANTRA: Initialize Observer Pipeline ───
-        _temp_trace = f"trace_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:6]}"
+        _temp_trace = (
+            getattr(http_request, 'state', None) and getattr(http_request.state, 'trace_id', None)
+        ) or f"trace_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:6]}"
         observer = ObserverPipeline(trace_id=_temp_trace)
         observer.record("query_received", {"raw_query": request.query})
 
@@ -643,6 +650,24 @@ async def query_legal(request: QueryRequest):
         except Exception as bucket_err:
             logger.warning("Output bucket storage failed: %s", bucket_err)
 
+        # ─── TANTRA: Hash Chain Ledger — append provenance entry ───
+        try:
+            proof_dict = enriched.get("determinism_proof") or {}
+            if hasattr(proof_dict, 'dict'):
+                proof_dict = proof_dict.dict()
+            ledger.append_event({
+                "trace_id": enriched.get("trace_id"),
+                "input_hash": enriched.get("input_hash"),
+                "output_hash": proof_dict.get("output_hash", "") if isinstance(proof_dict, dict) else "",
+                "timestamp": enriched.get("timestamp"),
+                "schema_version": "tantra_v3",
+                "domain": enriched.get("domain"),
+                "jurisdiction": enriched.get("jurisdiction"),
+                "recommendation_type": (enriched.get("recommendation") or {}).get("type", ""),
+            })
+        except Exception as ledger_err:
+            logger.warning("Hash chain ledger append failed: %s", ledger_err)
+
         # Cache the enriched response for downstream endpoints
         response_cache.set(enriched.get("trace_id", advice.trace_id), enriched)
 
@@ -770,17 +795,113 @@ async def submit_feedback(request: FeedbackRequest):
 
 @router.get("/trace/{trace_id}", response_model=TraceResponse)
 async def get_trace(trace_id: str):
-    """Get Trace"""
+    """Replay trace from output bucket with tamper verification."""
+    stored = output_bucket.retrieve(trace_id)
+    if not stored:
+        raise HTTPException(
+            status_code=404,
+            detail={"error": "trace_id not found in output bucket", "trace_id": trace_id}
+        )
+
+    verification = output_bucket.verify(trace_id)
+    full_response = stored.get("full_response") or {}
+    observer_steps = full_response.get("observer_steps") or []
+    event_chain = [
+        {
+            "index": idx,
+            "stage": step.get("stage"),
+            "timestamp": step.get("timestamp"),
+            "trace_id": step.get("trace_id"),
+            "observed": step.get("observed", {}),
+        }
+        for idx, step in enumerate(observer_steps)
+    ]
+
+    proof = full_response.get("determinism_proof") or {}
+    if hasattr(proof, 'dict'):
+        proof = proof.dict()
+
+    legal_route = full_response.get("legal_route") or []
+    jurisdiction_hops = list({
+        full_response.get("jurisdiction_detected") or full_response.get("jurisdiction") or ""
+    })
+
     return TraceResponse(
         trace_id=trace_id,
-        event_chain=[],
-        agent_routing_tree={},
-        jurisdiction_hops=[],
+        event_chain=event_chain,
+        agent_routing_tree={"legal_route": legal_route},
+        jurisdiction_hops=[h for h in jurisdiction_hops if h],
         rl_reward_snapshot={},
-        context_fingerprint="mock_fingerprint",
-        nonce_verification=True,
-        signature_verification=True
+        context_fingerprint=stored.get("input_hash") or full_response.get("input_hash", ""),
+        nonce_verification=verification.get("verified", False),
+        signature_verification=verification.get("verified", False),
+        input_hash=stored.get("input_hash") or full_response.get("input_hash"),
+        output_hash=stored.get("output_hash") or (proof.get("output_hash") if isinstance(proof, dict) else None),
+        provenance_chain=full_response.get("provenance_chain"),
+        tamper_verified=verification.get("verified", False),
+        stored_at=stored.get("timestamp"),
+        replay_source="output_bucket",
     )
+
+
+@router.get("/output/{trace_id}")
+async def get_output(trace_id: str):
+    """Retrieve stored output with hash verification for external auditors."""
+    stored = output_bucket.retrieve(trace_id)
+    if not stored:
+        raise HTTPException(
+            status_code=404,
+            detail={"error": "trace_id not found in output bucket", "trace_id": trace_id}
+        )
+
+    verification = output_bucket.verify(trace_id)
+    full_response = stored.get("full_response") or {}
+    proof = full_response.get("determinism_proof") or stored.get("determinism_proof") or {}
+    if hasattr(proof, 'dict'):
+        proof = proof.dict()
+
+    return {
+        "trace_id": trace_id,
+        "stored_output": stored,
+        "verification": verification,
+        "hash_proof": {
+            "input_hash": stored.get("input_hash", "") or full_response.get("input_hash", ""),
+            "output_hash": proof.get("output_hash", "") if isinstance(proof, dict) else stored.get("output_hash", ""),
+            "tamper_detected": not verification.get("verified", True),
+        },
+        "retrieved_at": datetime.utcnow().isoformat() + "Z",
+    }
+
+
+@router.post("/tantra_flow")
+async def execute_tantra_flow(request: QueryRequest):
+    """Execute full TANTRA flow. Advisory participation only. No authority transfer."""
+    try:
+        jurisdiction_hint = request.jurisdiction_hint.value if request.jurisdiction_hint else "India"
+        port = os.getenv("PORT", "8000")
+        nyai_url = f"http://127.0.0.1:{port}/nyaya/query"
+        # Run in thread pool so event loop stays free for nested /query HTTP call
+        flow_proof = await asyncio.to_thread(
+            run_tantra_flow,
+            request.query,
+            jurisdiction_hint,
+            nyai_url,
+        )
+        return {
+            "status": flow_proof.get("flow_status"),
+            "trace_id": flow_proof.get("trace_id"),
+            "sovereign_receipt": flow_proof["stages"]["sovereign_core"],
+            "bucket_verified": flow_proof.get("bucket_verified"),
+            "trace_continuity": flow_proof.get("trace_continuity"),
+            "input_hash_continuity": flow_proof.get("input_hash_continuity"),
+            "flow_proof": flow_proof,
+            "authority_note": "Advisory participation only. No enforcement authority transferred.",
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail={"error": "TANTRA flow failed", "reason": str(e)}
+        )
 
 # ═══════════════════════════════════════════════════════════════
 # NEW INTEGRATION ENDPOINTS (consumed by frontend components)

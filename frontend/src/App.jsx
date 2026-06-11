@@ -15,7 +15,7 @@ import LegalRouteCard from './components/LegalRouteCard.jsx'
 import TimelineCard from './components/TimelineCard.jsx'
 import GlossaryCard from './components/GlossaryCard.jsx'
 import JurisdictionInfoBar from './components/JurisdictionInfoBar.jsx'
-import EnforcementStatusCard from './components/EnforcementStatusCard.jsx'
+import RecommendationStatusCard from './components/RecommendationStatusCard.jsx'
 import SkeletonLoader from './components/SkeletonLoader.jsx'
 import GlareHover from './components/GlareHover.jsx'
 import AnimatedText from './components/AnimatedText.jsx'
@@ -37,7 +37,7 @@ const CasePresentation = ({ traceId, jurisdiction, caseType, caseId }) => {
     timeline: null,
     glossary: null,
     jurisdictionInfo: null,
-    enforcementStatus: null
+    recommendation: null
   })
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -57,27 +57,23 @@ const CasePresentation = ({ traceId, jurisdiction, caseType, caseId }) => {
     setError(null)
 
     try {
-      // Fetch case data and enforcement status in parallel from REAL backend
-      const [caseResult, enforcementResult] = await Promise.all([
+      const [caseResult, recommendationResult] = await Promise.all([
         casePresentationService.getAllCaseData(traceId, currentJurisdiction, caseType, caseId),
-        casePresentationService.getEnforcementStatus(traceId, currentJurisdiction)
+        casePresentationService.getRecommendation(traceId)
       ])
 
-      // Get enforcement status data from Chandresh's Sovereign Enforcement Engine
-      const enforcementStatus = enforcementResult.success ? enforcementResult.data : null
+      const recommendation = recommendationResult.success ? recommendationResult.data : null
 
       if (caseResult.success) {
-        // Use real backend data only - no fallback
         setCaseData({
           caseSummary: caseResult.data.caseSummary,
           legalRoutes: caseResult.data.legalRoutes,
           timeline: caseResult.data.timeline,
           glossary: caseResult.data.glossary,
           jurisdictionInfo: caseResult.data.jurisdictionInfo,
-          enforcementStatus: enforcementStatus
+          recommendation
         })
       } else {
-        // Real error from backend - no fallback to sample data
         setError(caseResult.error || 'Failed to load case data from Nyaya backend')
         setCaseData({
           caseSummary: null,
@@ -85,7 +81,7 @@ const CasePresentation = ({ traceId, jurisdiction, caseType, caseId }) => {
           timeline: null,
           glossary: null,
           jurisdictionInfo: null,
-          enforcementStatus: enforcementStatus
+          recommendation
         })
       }
     } catch (err) {
@@ -96,7 +92,7 @@ const CasePresentation = ({ traceId, jurisdiction, caseType, caseId }) => {
         timeline: null,
         glossary: null,
         jurisdictionInfo: null,
-        enforcementStatus: null
+        recommendation: null
       })
     } finally {
       setLoading(false)
@@ -208,9 +204,9 @@ const CasePresentation = ({ traceId, jurisdiction, caseType, caseId }) => {
         </div>
       </div>
 
-      {/* Enforcement Status Card - Shows BLOCK, ESCALATE, SOFT_REDIRECT states */}
-      <EnforcementStatusCard 
-        enforcementStatus={caseData.enforcementStatus} 
+      {/* Recommendation Status Card - Shows REVIEW, ESCALATE, INSUFFICIENT_DATA states */}
+      <RecommendationStatusCard
+        recommendation={caseData.recommendation}
         traceId={traceId}
       />
 
