@@ -53,6 +53,9 @@ class ObserverPipeline:
         "risk_flags", "determinism_proof", "timestamp",
     ]
 
+    CONTRACT_FIELDS = ["schema_version", "answer_disclaimer"]
+    SCHEMA_VERSION = "tantra_v3"
+
     VALID_RECOMMENDATION_TYPES = {"INFORM", "REVIEW", "ESCALATE", "INSUFFICIENT_DATA"}
 
     def __init__(self, trace_id: str):
@@ -112,6 +115,16 @@ class ObserverPipeline:
             if field not in response or response[field] is None:
                 violations.append(f"OBSERVER_SCHEMA: missing field '{field}'")
                 valid = False
+
+        for field in self.CONTRACT_FIELDS:
+            if field not in response or response[field] is None:
+                violations.append(f"OBSERVER_SCHEMA: missing contract field '{field}'")
+                valid = False
+        if response.get("schema_version") and response.get("schema_version") != self.SCHEMA_VERSION:
+            violations.append(
+                f"OBSERVER_SCHEMA: invalid schema_version='{response.get('schema_version')}'"
+            )
+            valid = False
 
         # Validate recommendation type
         rec = response.get("recommendation", {})

@@ -91,5 +91,29 @@ class HashChainLedger:
         """Get the current length of the chain."""
         return len(self._load_ledger())
 
+    def reconstruct(self, trace_id: Optional[str] = None) -> List[Dict[str, Any]]:
+        """
+        Reconstruct the provenance chain as ordered signed events.
+        Optionally filter by trace_id. Fails if chain integrity is broken.
+        """
+        if not self.verify_chain_integrity():
+            raise ValueError("Chain integrity verification failed — cannot reconstruct")
+
+        reconstructed: List[Dict[str, Any]] = []
+        for entry in self._load_ledger()[1:]:  # skip genesis block
+            signed_event = entry.get("signed_event")
+            if not signed_event:
+                continue
+            if trace_id is not None and signed_event.get("trace_id") != trace_id:
+                continue
+            reconstructed.append({
+                "index": entry["index"],
+                "timestamp": entry["timestamp"],
+                "event_hash": entry["event_hash"],
+                "prev_hash": entry["prev_hash"],
+                "signed_event": signed_event,
+            })
+        return reconstructed
+
 # Global instance
 ledger = HashChainLedger(os.getenv("PROVENANCE_LEDGER_PATH", "provenance_ledger.json"))

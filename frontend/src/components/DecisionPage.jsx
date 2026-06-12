@@ -103,9 +103,10 @@ function DecisionPage() {
     }
   }
 
-  const parseProceduralSteps = (stepsString) => {
-    if (!stepsString) return []
-    return stepsString.split('|').map(step => step.trim()).filter(Boolean)
+  const normalizeProceduralSteps = (steps) => {
+    if (!steps) return []
+    if (Array.isArray(steps)) return steps.map((step) => String(step).trim()).filter(Boolean)
+    return String(steps).split('|').map((step) => step.trim()).filter(Boolean)
   }
 
   return (
@@ -143,7 +144,7 @@ function DecisionPage() {
           </form>
 
           {error && (
-            <div className="error-message">
+            <div className="error-message" data-testid="error-message">
               <span>⚠️</span>
               <p>{error}</p>
               <button onClick={() => setError(null)}>×</button>
@@ -164,7 +165,7 @@ function DecisionPage() {
               <h2 style={{ color: getRecommendationColor(decision.recommendation?.type) }}>
                 {getRecommendationLabel(decision.recommendation?.type)}
               </h2>
-              <p className="recommendation-type">{decision.recommendation?.type}</p>
+              <p className="recommendation-type" data-testid="recommendation-type">{decision.recommendation?.type}</p>
               {decision.recommendation?.rationale && (
                 <p className="recommendation-rationale">{decision.recommendation.rationale}</p>
               )}
@@ -191,7 +192,7 @@ function DecisionPage() {
                 </div>
                 <div className="info-item">
                   <div className="info-label">Trace ID</div>
-                  <div className="info-value trace-id">{decision.trace_id}</div>
+                  <div className="info-value trace-id" data-testid="trace-id">{decision.trace_id}</div>
                 </div>
               </div>
             </div>
@@ -217,7 +218,7 @@ function DecisionPage() {
             {expandedSections.procedural && (
               <div className="section-content">
                 <ol className="procedural-list">
-                  {parseProceduralSteps(decision.reasoning_trace?.procedural_steps?.join(' | ')).map((step, idx) => (
+                  {normalizeProceduralSteps(decision.reasoning_trace?.procedural_steps).map((step, idx) => (
                     <li key={idx}>{step}</li>
                   ))}
                 </ol>

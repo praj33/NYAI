@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import FeedbackButtons from './FeedbackButtons.jsx'
 import { legalQueryService } from '../services/nyayaApi.js'
 
-const LegalQueryCard = ({ onResponseReceived }) => {
+const LegalQueryCard = ({ onResponseReceived, isOffline: _isOffline }) => {
   const [query, setQuery] = useState('')
   const [selectedJurisdiction, setSelectedJurisdiction] = useState('India')
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -216,6 +216,43 @@ const LegalQueryCard = ({ onResponseReceived }) => {
             </div>
           </div>
 
+          {response.recommendation?.type && (
+            <div style={{ marginBottom: '24px' }} data-testid="recommendation-status">
+              <h5 style={{
+                color: response.recommendation.type === 'INFORM' ? '#10b981' :
+                      response.recommendation.type === 'REVIEW' ? '#f59e0b' :
+                      response.recommendation.type === 'ESCALATE' ? '#f97316' : '#6c757d',
+                fontSize: '16px',
+                marginBottom: '12px',
+                fontWeight: '600'
+              }}>
+                ℹ️ Advisory Recommendation
+              </h5>
+              <div style={{
+                padding: '20px',
+                background: 'rgba(16, 185, 129, 0.1)',
+                border: '2px solid rgba(16, 185, 129, 0.4)',
+                borderRadius: '8px'
+              }}>
+                <div
+                  data-testid="recommendation-type"
+                  style={{
+                  color: '#fff',
+                  fontSize: '16px',
+                  fontWeight: '700',
+                  marginBottom: '4px',
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px'
+                }}>
+                  {response.recommendation.type}
+                </div>
+                <div style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '12px' }}>
+                  {response.recommendation.rationale || 'Advisory recommendation — not a binding decision'}
+                </div>
+              </div>
+            </div>
+          )}
+
           {response.reasoning_trace?.legal_analysis && (
             <div style={{ marginBottom: '24px' }}>
               <h4 style={{ 
@@ -246,41 +283,6 @@ const LegalQueryCard = ({ onResponseReceived }) => {
                   {response.reasoning_trace.legal_analysis}
                 </pre>
               </div>
-
-              {response.recommendation?.type && (
-                <div style={{ marginTop: '20px' }}>
-                  <h5 style={{
-                    color: response.recommendation.type === 'INFORM' ? '#10b981' :
-                          response.recommendation.type === 'REVIEW' ? '#f59e0b' :
-                          response.recommendation.type === 'ESCALATE' ? '#f97316' : '#6c757d',
-                    fontSize: '16px',
-                    marginBottom: '12px',
-                    fontWeight: '600'
-                  }}>
-                    ℹ️ Advisory Recommendation
-                  </h5>
-                  <div style={{
-                    padding: '20px',
-                    background: 'rgba(16, 185, 129, 0.1)',
-                    border: '2px solid rgba(16, 185, 129, 0.4)',
-                    borderRadius: '8px'
-                  }}>
-                    <div style={{
-                      color: '#fff',
-                      fontSize: '16px',
-                      fontWeight: '700',
-                      marginBottom: '4px',
-                      textTransform: 'uppercase',
-                      letterSpacing: '1px'
-                    }}>
-                      {response.recommendation.type}
-                    </div>
-                    <div style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '12px' }}>
-                      {response.recommendation.rationale || 'Advisory recommendation — not a binding decision'}
-                    </div>
-                  </div>
-                </div>
-              )}
 
               {response.reasoning_trace?.remedies && response.reasoning_trace.remedies.length > 0 && (
                 <div style={{ marginTop: '20px' }}>
@@ -484,7 +486,7 @@ const LegalQueryCard = ({ onResponseReceived }) => {
             marginBottom: '24px'
           }}>
             <span style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '12px' }}>Trace ID: </span>
-            <span style={{ color: '#fff', fontSize: '13px', fontFamily: 'monospace' }}>{traceId}</span>
+            <span data-testid="trace-id" style={{ color: '#fff', fontSize: '13px', fontFamily: 'monospace' }}>{traceId}</span>
           </div>
 
           <FeedbackButtons traceId={traceId} context="Legal Query Response" />

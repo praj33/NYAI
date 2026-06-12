@@ -1,6 +1,6 @@
 # NYAI Convergence Audit Report
 
-**Date:** 11 June 2026  
+**Date:** 12 June 2026  
 **Branch:** `feature/tantra-convergence-ready`  
 **Verdict:** **TANTRA-CONVERGENCE READY** — all 8 gaps PASS, phases 1–8 PASS
 
@@ -14,7 +14,7 @@ The NYAI Canonical Convergence Build sprint is complete. Schema, trace, replay, 
 |--------|--------|
 | Gaps resolved | 8 / 8 PASS |
 | Phases complete | 8 / 8 PASS |
-| Convergence tests | 5 / 5 pass (`backend/tests/test_tantra_convergence.py`) |
+| Convergence tests | 6 / 6 pass (`backend/tests/test_tantra_convergence.py`) |
 | Contract | `final_decision_contract.json` v2.0.0 · `schema_version`: `tantra_v3` |
 | Recommendation types | INFORM · REVIEW · ESCALATE · INSUFFICIENT_DATA |
 | `enforcement_decision` in `backend/api/` or `frontend/src/` | 0 references |
@@ -36,11 +36,13 @@ The NYAI Canonical Convergence Build sprint is complete. Schema, trace, replay, 
 
 ---
 
-## Live Proof (11 June 2026)
+## Live Proof (12 June 2026 — post-audit re-run)
 
 | Artifact | Value |
 |----------|-------|
-| Example `trace_id` | `f5618054-e78a-4815-9aaf-553c477d5208` |
+| Example `trace_id` | `b4870bea-8011-45fa-ba14-de40b28c2527` |
+| `schema_version` (live `/query` response) | `tantra_v3` |
+| `answer_disclaimer` (live `/query` response) | present |
 | `flow_status` | `PASS` |
 | `sovereign_receipt.accepted` | `true` |
 | `trace_continuity` | `true` |
@@ -72,6 +74,21 @@ All sprint deliverables live in **`SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN
 
 **Operational review:** [`REVIEW_PACKET.md`](../REVIEW_PACKET.md) (project root, 12 sections)  
 **Implementation guide:** [`NYAI_CONVERGENCE_REMEDIATION_GUIDE.md`](../NYAI_CONVERGENCE_REMEDIATION_GUIDE.md)
+
+---
+
+## Post-Audit Remediation (12 June 2026)
+
+Independent audit identified four residual gaps; all closed before this deliverable refresh:
+
+| Gap | Resolution |
+|-----|------------|
+| `schema_version` / `answer_disclaimer` absent from live response | Stamped in `response_builder.py`, `router.py`; on `NyayaResponse` in `schemas.py` |
+| `HashChainLedger.reconstruct()` missing | Implemented + `test_hash_chain_ledger_reconstruct` |
+| Observer failure test did not exercise pipeline | `test_observer_blocks_invalid_schema` calls `ObserverPipeline.validate_response()` directly |
+| CI not running on feature branch | `ci.yml` triggers on `main` and `feature/tantra-convergence-ready` |
+
+Runtime proof JSONs re-captured with shared `trace_id` `b4870bea-8011-45fa-ba14-de40b28c2527`; contract identity fields confirmed in `output_proof.json`.
 
 ---
 

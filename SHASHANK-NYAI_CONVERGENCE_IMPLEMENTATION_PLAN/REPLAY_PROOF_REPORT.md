@@ -2,7 +2,7 @@
 
 **Sprint:** NYAI Canonical Convergence Build  
 **Branch:** `feature/tantra-convergence-ready`  
-**Date:** 11 June 2026  
+**Date:** 12 June 2026  
 **Audit:** [CONVERGENCE_AUDIT_REPORT.md](./CONVERGENCE_AUDIT_REPORT.md)
 
 ---
@@ -39,7 +39,7 @@ curl -s http://localhost:8000/nyaya/output/{trace_id}
 ## Actual Response Samples (Phase 6)
 
 **Trace replay** ([`trace_replay_proof.json`](./trace_replay_proof.json)):
-- `trace_id`: `f5618054-e78a-4815-9aaf-553c477d5208`
+- `trace_id`: `e20fb600-7104-43c5-9869-9c4aa8423d82`
 - `event_chain`: 8 stages (non-empty)
 - `tamper_verified`: `true`
 - `input_hash`: `780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330`
@@ -47,6 +47,8 @@ curl -s http://localhost:8000/nyaya/output/{trace_id}
 **Output retrieval** ([`output_proof.json`](./output_proof.json)):
 - `verification.verified`: `true`
 - `hash_proof.tamper_detected`: `false`
+- `stored_output.full_response.schema_version`: `tantra_v3`
+- `stored_output.full_response.answer_disclaimer`: present
 
 ---
 

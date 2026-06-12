@@ -11,6 +11,12 @@ from typing import Dict, Any, List
 
 FORMATTER_VERSION = "3.0.0"
 DETERMINISM_VERSION = "3.0.0"
+SCHEMA_VERSION = "tantra_v3"
+ANSWER_DISCLAIMER = (
+    "NYAI output is advisory only and does not constitute legal advice, "
+    "a binding determination, or enforcement authority. "
+    "Consult a qualified legal professional before acting on this information."
+)
 
 # All 11 TANTRA-canonical fields that MUST be present
 CANONICAL_FIELDS = [
@@ -33,6 +39,12 @@ STRUCTURAL_FIELDS = [
     "jurisdiction",
     "confidence",
     "legal_route",
+]
+
+# Contract-required fields from final_decision_contract.json v2.0.0
+CONTRACT_FIELDS = [
+    "schema_version",
+    "answer_disclaimer",
 ]
 
 VALID_RECOMMENDATION_TYPES = {"INFORM", "REVIEW", "ESCALATE", "INSUFFICIENT_DATA"}
@@ -86,6 +98,10 @@ class ResponseBuilder:
         trace_id = raw_response.get('trace_id', 'UNKNOWN')
         violations = []
 
+        # Stamp contract identity fields before validation
+        raw_response["schema_version"] = SCHEMA_VERSION
+        raw_response["answer_disclaimer"] = ANSWER_DISCLAIMER
+
         # 1. Check all canonical fields present and non-None
         for field in CANONICAL_FIELDS:
             if field not in raw_response or raw_response[field] is None:
@@ -96,18 +112,28 @@ class ResponseBuilder:
             if field not in raw_response or raw_response[field] is None:
                 violations.append(f"MISSING_STRUCTURAL_FIELD: {field}")
 
+        # 3. Check contract fields
+        for field in CONTRACT_FIELDS:
+            if field not in raw_response or raw_response[field] is None:
+                violations.append(f"MISSING_CONTRACT_FIELD: {field}")
+        if raw_response.get("schema_version") != SCHEMA_VERSION:
+            violations.append(
+                f"INVALID_SCHEMA_VERSION: expected {SCHEMA_VERSION}, "
+                f"got {raw_response.get('schema_version')}"
+            )
+
         # If fields are missing, fail now (can't validate contents of missing fields)
         if violations:
             raise SchemaValidationError(violations, trace_id)
 
-        # 3. Validate recommendation.type is valid enum
+        # 4. Validate recommendation.type is valid enum
         rec = raw_response.get("recommendation", {})
         rec_type = rec.get("type") if isinstance(rec, dict) else getattr(rec, "type", None)
         rec_type_str = rec_type.value if hasattr(rec_type, 'value') else str(rec_type)
         if rec_type_str not in VALID_RECOMMENDATION_TYPES:
             violations.append(f"INVALID_ENUM: recommendation.type={rec_type_str}, expected one of {VALID_RECOMMENDATION_TYPES}")
 
-        # 4. Validate facts is non-empty list of objects (not strings)
+        # 5. Validate facts is non-empty list of objects (not strings)
         facts = raw_response.get("facts", [])
         if not isinstance(facts, list) or len(facts) == 0:
             violations.append("EMPTY_FACTS: facts must contain at least 1 Fact object")
@@ -117,7 +143,7 @@ class ResponseBuilder:
                 if not f.get("fact_id") or not f.get("statement") or not f.get("source"):
                     violations.append(f"INVALID_FACT[{i}]: must have fact_id, statement, source")
 
-        # 5. Validate determinism_proof hashes are 64-char hex
+        # 6. Validate determinism_proof hashes are 64-char hex
         proof = raw_response.get("determinism_proof", {})
         proof_dict = proof if isinstance(proof, dict) else (proof.dict() if hasattr(proof, 'dict') else {})
         for hash_field in ["input_hash", "output_hash"]:
@@ -125,12 +151,12 @@ class ResponseBuilder:
             if not HEX64_PATTERN.match(str(h)):
                 violations.append(f"INVALID_HASH: determinism_proof.{hash_field} must be 64-char lowercase hex")
 
-        # 6. Validate explanation_chain contains structured steps
+        # 7. Validate explanation_chain contains structured steps
         chain = raw_response.get("explanation_chain", [])
         if not isinstance(chain, list) or len(chain) == 0:
             violations.append("EMPTY_EXPLANATION_CHAIN: must contain at least 1 ExplanationStep")
 
-        # 7. Validate analysis.rule_application contains structured objects
+        # 8. Validate analysis.rule_application contains structured objects
         analysis = raw_response.get("analysis", {})
         analysis_dict = analysis if isinstance(analysis, dict) else (analysis.dict() if hasattr(analysis, 'dict') else {})
         rule_apps = analysis_dict.get("rule_application", [])

@@ -2,7 +2,7 @@
 
 **Sprint:** NYAI Canonical Convergence Build  
 **Branch:** `feature/tantra-convergence-ready`  
-**Date:** 11 June 2026  
+**Date:** 12 June 2026  
 **Contract:** `final_decision_contract.json` v2.0.0 / `tantra_v3`  
 **Audit:** [CONVERGENCE_AUDIT_REPORT.md](./CONVERGENCE_AUDIT_REPORT.md)
 
@@ -57,5 +57,6 @@
 - [x] `grep enforcement_decision backend/api/schemas.py` → 0 results
 - [x] `grep enforcement_decision backend/api/response_builder.py` → 0 results
 - [x] `grep enforcement_decision backend/observer/pipeline.py` → 0 results
-- [x] Frontend migrated to `recommendation.type`
+- [x] Frontend migrated to `recommendation.type` (including `frontend/e2e/gravitas.spec.ts`)
 - [x] Metadata ownership/compatibility blocks present
+- [x] Live API responses include `schema_version` and `answer_disclaimer` (verified in [`output_proof.json`](./output_proof.json))

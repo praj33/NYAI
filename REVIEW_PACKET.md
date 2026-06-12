@@ -2,7 +2,7 @@
 
 **Sprint:** NYAI Canonical Convergence Build  
 **Branch:** `feature/tantra-convergence-ready`  
-**Date:** 11 June 2026  
+**Date:** 12 June 2026  
 **Status:** TANTRA-CONVERGENCE READY (20/20 checklist passed)
 
 > **Authoritative operational review packet** (project root).  
@@ -85,7 +85,7 @@ Client POST /nyaya/tantra_flow
   → flow_status: PASS | FAIL + authority_note
 ```
 
-**Live evidence (11 June 2026):** `trace_id` `f5618054-e78a-4815-9aaf-553c477d5208` — `flow_status: PASS`, sovereign accepted, bucket verified.  
+**Live evidence (12 June 2026):** `trace_id` `e20fb600-7104-43c5-9869-9c4aa8423d82` — `flow_status: PASS`, sovereign accepted, bucket verified, `schema_version: tantra_v3`, `answer_disclaimer` present.  
 JSON: [`tantra_flow_proof.json`](./SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/tantra_flow_proof.json)
 
 ### C. Post-query replay
@@ -214,7 +214,7 @@ NYAI fails closed on schema and trace integrity — not on legal content. All re
 
 ## 10. Testing Proof
 
-**File:** `backend/tests/test_tantra_convergence.py` (5 tests)
+**File:** `backend/tests/test_tantra_convergence.py` (6 tests)
 
 | # | Test | Verifies |
 |---|------|----------|
@@ -223,6 +223,7 @@ NYAI fails closed on schema and trace integrity — not on legal content. All re
 | 3 | `test_trace_id_same_across_all_stages` | Response trace == bucket trace |
 | 4 | `test_trace_endpoint_returns_real_data` | Non-empty `event_chain`; `tamper_verified=True` |
 | 5 | `test_output_bucket_retrieval_and_hash_verification` | `verified=True`; `tamper_detected=False` |
+| 6 | `test_hash_chain_ledger_reconstruct` | Ledger append, verify, reconstruct by trace_id |
 
 **Run**
 
@@ -232,7 +233,7 @@ cd backend && pytest tests/test_tantra_convergence.py -v
 
 **CI:** `backend/.github/workflows/ci.yml` — hard-fails on test failure (no `pytest || echo` fallback).
 
-**Result:** 5/5 passed (11 June 2026)
+**Result:** 6/6 passed (12 June 2026)
 
 ---
 
@@ -249,7 +250,7 @@ cd backend && pytest tests/test_tantra_convergence.py -v
 | 5 `tantra_flow` script-only | PASS | `POST /nyaya/tantra_flow` |
 | 6 SovereignCoreMock unwired | PASS | Called via `tantra/flow.py` |
 | 7 Frontend enforcement semantics | PASS | Recommendation model; grep clean |
-| 8 CI silent pass | PASS | 5/5 tests; hard-failing CI |
+| 8 CI silent pass | PASS | 6/6 tests; hard-failing CI |
 
 **Deliverables index:** [`README.md`](./SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/README.md)  
 **End-to-end proof:** [`TANTRA_CONVERGENCE_PROOF.md`](./SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/TANTRA_CONVERGENCE_PROOF.md)
@@ -278,6 +279,6 @@ cd backend && pytest tests/test_tantra_convergence.py -v
 
 **CONVERGENCE SPRINT COMPLETE — NYAI IS TANTRA-CONVERGENCE READY.**
 
-All 8 gaps resolved. Contract v2.0.0 aligned. Trace unified. Replay and provenance return verified data. Frontend on advisory model. CI enforces 5 convergence tests.
+All 8 gaps resolved. Contract v2.0.0 aligned. Trace unified. Replay and provenance return verified data. Frontend on advisory model. CI enforces 6 convergence tests.
 
 **Next steps:** [`NYAI_CONVERGENCE_HANDOVER.md`](./SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/NYAI_CONVERGENCE_HANDOVER.md)

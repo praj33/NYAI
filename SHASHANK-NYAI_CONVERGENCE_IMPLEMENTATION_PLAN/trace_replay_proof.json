@@ -1,122 +1,123 @@
-﻿{
-    "trace_id":  "f5618054-e78a-4815-9aaf-553c477d5208",
-    "event_chain":  [
-                        {
-                            "index":  0,
-                            "stage":  "query_received",
-                            "timestamp":  "2026-06-11T11:20:23.891195",
-                            "trace_id":  "f5618054-e78a-4815-9aaf-553c477d5208",
-                            "observed":  {
-                                             "raw_query":  "theft of mobile phone"
-                                         }
-                        },
-                        {
-                            "index":  1,
-                            "stage":  "query_understanding",
-                            "timestamp":  "2026-06-11T11:20:23.898293",
-                            "trace_id":  "f5618054-e78a-4815-9aaf-553c477d5208",
-                            "observed":  {
-                                             "domain":  "criminal",
-                                             "source":  "local_fallback"
-                                         }
-                        },
-                        {
-                            "index":  2,
-                            "stage":  "query_expansion",
-                            "timestamp":  "2026-06-11T11:20:23.898293",
-                            "trace_id":  "f5618054-e78a-4815-9aaf-553c477d5208",
-                            "observed":  {
-                                             "expanded_count":  4
-                                         }
-                        },
-                        {
-                            "index":  3,
-                            "stage":  "hybrid_retrieval",
-                            "timestamp":  "2026-06-11T11:20:23.901542",
-                            "trace_id":  "f5618054-e78a-4815-9aaf-553c477d5208",
-                            "observed":  {
-                                             "candidates_found":  0
-                                         }
-                        },
-                        {
-                            "index":  4,
-                            "stage":  "cross_encoder_reranking",
-                            "timestamp":  "2026-06-11T11:20:23.901542",
-                            "trace_id":  "f5618054-e78a-4815-9aaf-553c477d5208",
-                            "observed":  {
-                                             "reranked_top":  0
-                                         }
-                        },
-                        {
-                            "index":  5,
-                            "stage":  "clean_legal_advisor",
-                            "timestamp":  "2026-06-11T11:20:24.103291",
-                            "trace_id":  "f5618054-e78a-4815-9aaf-553c477d5208",
-                            "observed":  {
-                                             "domain":  "criminal",
-                                             "jurisdiction":  "IN",
-                                             "sections":  2
-                                         }
-                        },
-                        {
-                            "index":  6,
-                            "stage":  "case_law_retriever",
-                            "timestamp":  "2026-06-11T11:20:24.103291",
-                            "trace_id":  "f5618054-e78a-4815-9aaf-553c477d5208",
-                            "observed":  {
-                                             "cases_found":  0
-                                         }
-                        },
-                        {
-                            "index":  7,
-                            "stage":  "response_enriched",
-                            "timestamp":  "2026-06-11T11:20:24.103291",
-                            "trace_id":  "f5618054-e78a-4815-9aaf-553c477d5208",
-                            "observed":  {
-                                             "has_answer":  true
-                                         }
-                        }
-                    ],
-    "agent_routing_tree":  {
-                               "legal_route":  [
-                                                   "query_cleaning",
-                                                   "query_understanding",
-                                                   "query_expansion",
-                                                   "hybrid_retrieval",
-                                                   "cross_encoder_reranking",
-                                                   "legal_reasoning_engine",
-                                                   "clean_legal_advisor",
-                                                   "case_law_retriever"
-                                               ]
-                           },
-    "jurisdiction_hops":  [
-                              "INDIA"
-                          ],
-    "rl_reward_snapshot":  {
-
-                           },
-    "context_fingerprint":  "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
-    "nonce_verification":  true,
-    "signature_verification":  true,
-    "input_hash":  "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
-    "output_hash":  "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
-    "provenance_chain":  [
-                             {
-                                 "agent":  "clean_legal_advisor",
-                                 "case_laws_found":  0,
-                                 "domains":  [
-                                                 "criminal"
-                                             ],
-                                 "event":  "query_processed",
-                                 "jurisdiction_confidence":  1.0,
-                                 "jurisdiction_detected":  "INDIA",
-                                 "observer_steps_count":  7,
-                                 "ontology_filtered":  true,
-                                 "sections_found":  2,
-                                 "timestamp":  "2026-06-11T11:20:24.103291"
-                             }
-                         ],
-    "tamper_verified":  true,
-    "stored_at":  "2026-06-11T11:20:24.103291",
-    "replay_source":  "output_bucket"
+{
+  "trace_id": "e20fb600-7104-43c5-9869-9c4aa8423d82",
+  "event_chain": [
+    {
+      "index": 0,
+      "stage": "query_received",
+      "timestamp": "2026-06-12T04:24:57.042304",
+      "trace_id": "e20fb600-7104-43c5-9869-9c4aa8423d82",
+      "observed": {
+        "raw_query": "theft of mobile phone"
+      }
+    },
+    {
+      "index": 1,
+      "stage": "query_understanding",
+      "timestamp": "2026-06-12T04:24:57.674980",
+      "trace_id": "e20fb600-7104-43c5-9869-9c4aa8423d82",
+      "observed": {
+        "domain": "criminal",
+        "source": "groq"
+      }
+    },
+    {
+      "index": 2,
+      "stage": "query_expansion",
+      "timestamp": "2026-06-12T04:24:57.966750",
+      "trace_id": "e20fb600-7104-43c5-9869-9c4aa8423d82",
+      "observed": {
+        "expanded_count": 4
+      }
+    },
+    {
+      "index": 3,
+      "stage": "hybrid_retrieval",
+      "timestamp": "2026-06-12T04:24:57.970891",
+      "trace_id": "e20fb600-7104-43c5-9869-9c4aa8423d82",
+      "observed": {
+        "candidates_found": 0
+      }
+    },
+    {
+      "index": 4,
+      "stage": "cross_encoder_reranking",
+      "timestamp": "2026-06-12T04:24:57.970935",
+      "trace_id": "e20fb600-7104-43c5-9869-9c4aa8423d82",
+      "observed": {
+        "reranked_top": 0
+      }
+    },
+    {
+      "index": 5,
+      "stage": "clean_legal_advisor",
+      "timestamp": "2026-06-12T04:25:00.017604",
+      "trace_id": "e20fb600-7104-43c5-9869-9c4aa8423d82",
+      "observed": {
+        "domain": "criminal",
+        "jurisdiction": "IN",
+        "sections": 2
+      }
+    },
+    {
+      "index": 6,
+      "stage": "case_law_retriever",
+      "timestamp": "2026-06-12T04:25:00.017971",
+      "trace_id": "e20fb600-7104-43c5-9869-9c4aa8423d82",
+      "observed": {
+        "cases_found": 0
+      }
+    },
+    {
+      "index": 7,
+      "stage": "response_enriched",
+      "timestamp": "2026-06-12T04:25:00.019552",
+      "trace_id": "e20fb600-7104-43c5-9869-9c4aa8423d82",
+      "observed": {
+        "has_answer": true
+      }
+    }
+  ],
+  "agent_routing_tree": {
+    "legal_route": [
+      "query_cleaning",
+      "query_understanding",
+      "query_expansion",
+      "hybrid_retrieval",
+      "cross_encoder_reranking",
+      "legal_reasoning_engine",
+      "clean_legal_advisor",
+      "case_law_retriever"
+    ]
+  },
+  "jurisdiction_hops": [
+    "INDIA"
+  ],
+  "rl_reward_snapshot": {},
+  "context_fingerprint": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+  "nonce_verification": true,
+  "signature_verification": true,
+  "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+  "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+  "provenance_chain": [
+    {
+      "agent": "clean_legal_advisor",
+      "case_laws_found": 0,
+      "domains": [
+        "criminal"
+      ],
+      "event": "query_processed",
+      "jurisdiction_confidence": 1.0,
+      "jurisdiction_detected": "INDIA",
+      "observer_steps_count": 7,
+      "ontology_filtered": false,
+      "sections_found": 2,
+      "timestamp": "2026-06-12T04:25:00.018131"
+    }
+  ],
+  "tamper_verified": true,
+  "stored_at": "2026-06-12T04:25:00.019718",
+  "replay_source": "output_bucket",
+  "generated_at": "2026-06-12T04:24:57.019735Z",
+  "query_trace_id": "e20fb600-7104-43c5-9869-9c4aa8423d82",
+  "trace_continuity_verified": true
 }

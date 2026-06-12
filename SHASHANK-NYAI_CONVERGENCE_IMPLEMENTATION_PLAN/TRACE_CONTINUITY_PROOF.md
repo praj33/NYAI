@@ -2,8 +2,8 @@
 
 **Sprint:** NYAI Canonical Convergence Build  
 **Branch:** `feature/tantra-convergence-ready`  
-**Date:** 11 June 2026  
-**Live trace_id:** `f5618054-e78a-4815-9aaf-553c477d5208`  
+**Date:** 12 June 2026  
+**Live trace_id:** `e20fb600-7104-43c5-9869-9c4aa8423d82`  
 **Audit:** [CONVERGENCE_AUDIT_REPORT.md](./CONVERGENCE_AUDIT_REPORT.md)
 
 ---
@@ -95,4 +95,16 @@ if final_trace != _temp_trace and final_trace != advice.trace_id:
 
 ## Runtime Evidence
 
-Runtime API evidence captured in [`TANTRA_CONVERGENCE_PROOF.md`](./TANTRA_CONVERGENCE_PROOF.md) (Phase 6).
+**Sprint re-run (12 June 2026):** trace `e20fb600-7104-43c5-9869-9c4aa8423d82`
+
+| Checkpoint | trace_id | Match |
+|------------|----------|-------|
+| POST /nyaya/query response | `e20fb600-7104-43c5-9869-9c4aa8423d82` | ✅ |
+| output_bucket stored | `e20fb600-7104-43c5-9869-9c4aa8423d82` | ✅ |
+| GET /nyaya/trace event_chain (all steps) | `e20fb600-7104-43c5-9869-9c4aa8423d82` | ✅ |
+| SovereignCoreMock receipt | `e20fb600-7104-43c5-9869-9c4aa8423d82` | ✅ |
+| HashChainLedger reconstruct | 1 event for trace | ✅ |
+
+JSON: [`trace_replay_proof.json`](./trace_replay_proof.json), [`tantra_flow_proof.json`](./tantra_flow_proof.json)
+
+Full API evidence: [`TANTRA_CONVERGENCE_PROOF.md`](./TANTRA_CONVERGENCE_PROOF.md) (Phase 6).

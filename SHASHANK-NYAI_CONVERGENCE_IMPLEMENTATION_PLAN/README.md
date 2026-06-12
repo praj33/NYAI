@@ -6,9 +6,9 @@ Sprint documentation for the NYAI Canonical Convergence Build.
 |--|--|
 | **Status** | TANTRA-CONVERGENCE READY |
 | **Branch** | `feature/tantra-convergence-ready` |
-| **Last updated** | 11 June 2026 |
+| **Last updated** | 12 June 2026 |
 | **Checklist** | 20/20 passed · 8/8 gaps PASS · phases 1–8 PASS |
-| **Tests** | `backend/tests/test_tantra_convergence.py` — 5/5 pass |
+| **Tests** | `backend/tests/test_tantra_convergence.py` — 6/6 pass |
 | **Contract** | `final_decision_contract.json` v2.0.0 · `schema_version` `tantra_v3` |
 
 ---
@@ -41,7 +41,7 @@ Sprint documentation for the NYAI Canonical Convergence Build.
 
 ## Runtime Evidence (Phase 6)
 
-Captured 11 June 2026 · example `trace_id`: `f5618054-e78a-4815-9aaf-553c477d5208`
+Captured 12 June 2026 (sprint re-run) · example `trace_id`: `e20fb600-7104-43c5-9869-9c4aa8423d82`
 
 | File | Endpoint | Description |
 |------|----------|-------------|

@@ -56,7 +56,10 @@ from services.legal_reasoner import apply_reasoning_rules
 
 # ─── TANTRA Compliance ───
 from observer.pipeline import ObserverPipeline
-from api.response_builder import ResponseBuilder, SchemaValidationError, HashMismatchError, TraceContinuityError
+from api.response_builder import (
+    ResponseBuilder, SchemaValidationError, HashMismatchError, TraceContinuityError,
+    SCHEMA_VERSION, ANSWER_DISCLAIMER,
+)
 from tantra.output_bucket import output_bucket
 from tantra.flow import run_tantra_flow
 from provenance_chain.hash_chain_ledger import HashChainLedger
@@ -627,6 +630,10 @@ async def query_legal(request: QueryRequest, http_request: Request):
         # ─── TANTRA: Observer steps ───
         observer.record("response_enriched", {"has_answer": bool(enriched.get("answer"))})
         enriched['observer_steps'] = observer.get_observer_steps()
+
+        # ─── TANTRA: Contract identity fields (required by final_decision_contract v2.0.0) ───
+        enriched["schema_version"] = SCHEMA_VERSION
+        enriched["answer_disclaimer"] = ANSWER_DISCLAIMER
 
         # ─── TANTRA: Observer Validation Gate ───
         observer_result = observer.validate_response(enriched)

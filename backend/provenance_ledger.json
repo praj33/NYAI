@@ -661,5 +661,645 @@
       "jurisdiction": "IN",
       "recommendation_type": "INFORM"
     }
+  },
+  {
+    "index": 42,
+    "timestamp": "2026-06-12T03:48:55.041580Z",
+    "event_hash": "04db9013e33196585739c8e46619e8256bad68b54f1b23d68c8a99e942e8523a",
+    "prev_hash": "6ef7e6a5877437e7d994f805f2d17c9ce86ee3cba289b66c810028c5bc88482d",
+    "signed_event": {
+      "trace_id": "e49d8b7c-bba7-4c54-b5fd-16a9f9b83cdd",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T03:48:55.022517Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 43,
+    "timestamp": "2026-06-12T03:49:31.998240Z",
+    "event_hash": "14640405585a6f518d1cec75caab9a5bd3b9b2e6c37e9973ed0438f1fd538998",
+    "prev_hash": "04db9013e33196585739c8e46619e8256bad68b54f1b23d68c8a99e942e8523a",
+    "signed_event": {
+      "trace_id": "a9730cb7-4215-458f-9426-ee07140dea4b",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T03:49:31.994165Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 44,
+    "timestamp": "2026-06-12T03:49:32.431256Z",
+    "event_hash": "904cc81bb4f1f63293ea917798abbaf6bf17ffe4848a1cd483968c3c3d46af9b",
+    "prev_hash": "14640405585a6f518d1cec75caab9a5bd3b9b2e6c37e9973ed0438f1fd538998",
+    "signed_event": {
+      "trace_id": "1c56cf79-fba4-4907-ba76-83d494d3feb4",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T03:49:32.424350Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 45,
+    "timestamp": "2026-06-12T03:49:32.903922Z",
+    "event_hash": "4de326e1c58b3d207dce9f24d15f63dcf12fd1fe6ab49a062266f7a568506519",
+    "prev_hash": "904cc81bb4f1f63293ea917798abbaf6bf17ffe4848a1cd483968c3c3d46af9b",
+    "signed_event": {
+      "trace_id": "e633c2d2-b21f-4de6-beea-43e9dee926b8",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T03:49:32.900699Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 46,
+    "timestamp": "2026-06-12T03:49:33.478251Z",
+    "event_hash": "49f5cc5fa30c95e5d4e9a986582715905c30aacf05d60ed06bc9d147d9966bab",
+    "prev_hash": "4de326e1c58b3d207dce9f24d15f63dcf12fd1fe6ab49a062266f7a568506519",
+    "signed_event": {
+      "trace_id": "cc4a8281-fcc8-4c89-9748-f2d238e33ae3",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T03:49:33.470236Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 47,
+    "timestamp": "2026-06-12T03:49:41.319235Z",
+    "event_hash": "9d731bef42b04e2da230388fd6277f595f9b4e0ab590483f1b7582a9660e92e2",
+    "prev_hash": "49f5cc5fa30c95e5d4e9a986582715905c30aacf05d60ed06bc9d147d9966bab",
+    "signed_event": {
+      "trace_id": "1e294dca-5a59-4ea3-b13a-38e5282fbe3a",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T03:49:41.315913Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 48,
+    "timestamp": "2026-06-12T04:04:52.975261Z",
+    "event_hash": "12a535fb78a9413aa8a823cc3cd9b79675a75754584a440d587b6a2add755a7e",
+    "prev_hash": "9d731bef42b04e2da230388fd6277f595f9b4e0ab590483f1b7582a9660e92e2",
+    "signed_event": {
+      "trace_id": "16ca8fef-4cc3-473f-a5dc-ec59cbfa2db0",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:04:52.969683Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 49,
+    "timestamp": "2026-06-12T04:04:55.030534Z",
+    "event_hash": "32ef8ac82ad2acc66f042e9f246ac56c335478b83c0a9c0cf6105243466fa95c",
+    "prev_hash": "12a535fb78a9413aa8a823cc3cd9b79675a75754584a440d587b6a2add755a7e",
+    "signed_event": {
+      "trace_id": "2719e1de-24d3-4d69-8bc9-88391d5be0c2",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:04:55.013836Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 50,
+    "timestamp": "2026-06-12T04:04:58.021503Z",
+    "event_hash": "1e6622d597446add663f5a9f31569578b13a230d540147d11c73a3e73bfb9d6d",
+    "prev_hash": "32ef8ac82ad2acc66f042e9f246ac56c335478b83c0a9c0cf6105243466fa95c",
+    "signed_event": {
+      "trace_id": "482bfbfa-3364-4af5-8496-1def5aa425c7",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:04:58.004375Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 51,
+    "timestamp": "2026-06-12T04:05:00.084340Z",
+    "event_hash": "057e987747597e36cff4f984ead85ce09fdf1ac8708b715bf519ff4a93cf117e",
+    "prev_hash": "1e6622d597446add663f5a9f31569578b13a230d540147d11c73a3e73bfb9d6d",
+    "signed_event": {
+      "trace_id": "4487221d-15e1-4bfe-951d-2981b42bbc86",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:05:00.065322Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 52,
+    "timestamp": "2026-06-12T04:07:07.680769Z",
+    "event_hash": "d52f04ea45513c3d19ef1165b4bd580e230014e776761e9456f4ca9f2531bc51",
+    "prev_hash": "057e987747597e36cff4f984ead85ce09fdf1ac8708b715bf519ff4a93cf117e",
+    "signed_event": {
+      "trace_id": "a0d84eed-8381-42c4-ac03-6e9f9ca884e8",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:07:07.669229Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 53,
+    "timestamp": "2026-06-12T04:07:10.109695Z",
+    "event_hash": "d1ecdd15b79ce39e65d9e78ac43e28c952dd7e24498f6c1e436503f2c5dae802",
+    "prev_hash": "d52f04ea45513c3d19ef1165b4bd580e230014e776761e9456f4ca9f2531bc51",
+    "signed_event": {
+      "trace_id": "c2213f3d-826e-43c9-a0ee-8c5505e3a113",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:07:10.084860Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 54,
+    "timestamp": "2026-06-12T04:07:12.718910Z",
+    "event_hash": "b2665a87b995a79e2280f7ecc0914033d64da2ee8e3d674fc9c4d95bb879f785",
+    "prev_hash": "d1ecdd15b79ce39e65d9e78ac43e28c952dd7e24498f6c1e436503f2c5dae802",
+    "signed_event": {
+      "trace_id": "bc753277-2314-4dca-ae91-82910b4afe65",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:07:12.690712Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 55,
+    "timestamp": "2026-06-12T04:07:15.405188Z",
+    "event_hash": "36464abd257b7e2198c881c8ff6918b99e818c27677d8270c1346565b8494862",
+    "prev_hash": "b2665a87b995a79e2280f7ecc0914033d64da2ee8e3d674fc9c4d95bb879f785",
+    "signed_event": {
+      "trace_id": "35769520-66a1-4382-b247-825d71406348",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:07:15.370413Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 56,
+    "timestamp": "2026-06-12T04:08:04.202915Z",
+    "event_hash": "dcc9abd38e684d3422addbfcc0e5a86e300f0f051bff789897f55e21185a2aa5",
+    "prev_hash": "36464abd257b7e2198c881c8ff6918b99e818c27677d8270c1346565b8494862",
+    "signed_event": {
+      "trace_id": "cf3b2624-296e-4051-9af8-39092fc4517c",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:08:04.198301Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 57,
+    "timestamp": "2026-06-12T04:08:06.558033Z",
+    "event_hash": "c2dd996af4fee434d81e1d00f31cfb8c38ba3ef4b75c3fa6f09d6b50b67f4497",
+    "prev_hash": "dcc9abd38e684d3422addbfcc0e5a86e300f0f051bff789897f55e21185a2aa5",
+    "signed_event": {
+      "trace_id": "b16e43c6-a92c-4ba8-a1cb-78f633983992",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:08:06.529210Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 58,
+    "timestamp": "2026-06-12T04:08:08.729738Z",
+    "event_hash": "969ec44d49c6800c109cc4042def4e921ef86f5a57b3e53b2e34972aef1c1fe7",
+    "prev_hash": "c2dd996af4fee434d81e1d00f31cfb8c38ba3ef4b75c3fa6f09d6b50b67f4497",
+    "signed_event": {
+      "trace_id": "84314234-1e06-4c6b-a2b6-945317fe120f",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:08:08.705319Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 59,
+    "timestamp": "2026-06-12T04:08:10.930064Z",
+    "event_hash": "77a726dc24a9410b1d7377c5ec6d7a08c2fdd40ed475e28dd6dc9c16266f18be",
+    "prev_hash": "969ec44d49c6800c109cc4042def4e921ef86f5a57b3e53b2e34972aef1c1fe7",
+    "signed_event": {
+      "trace_id": "ac3b05cf-8446-4e2b-a945-fa42c6caa085",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:08:10.911487Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 60,
+    "timestamp": "2026-06-12T04:09:09.520751Z",
+    "event_hash": "122f88372cfc2eb3bf0435afaebf466627a0073ef7c6aab9deb290fe620abeb5",
+    "prev_hash": "77a726dc24a9410b1d7377c5ec6d7a08c2fdd40ed475e28dd6dc9c16266f18be",
+    "signed_event": {
+      "trace_id": "eabb0cb6-b0af-4e2e-9dd7-7a9b234312a6",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:09:09.514138Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 61,
+    "timestamp": "2026-06-12T04:09:13.449906Z",
+    "event_hash": "07b93cfdeeab04860413e3915e215523f714879fb01ac10f561638ebb05dc945",
+    "prev_hash": "122f88372cfc2eb3bf0435afaebf466627a0073ef7c6aab9deb290fe620abeb5",
+    "signed_event": {
+      "trace_id": "61be6e41-aa21-456b-9f05-156666f646d5",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:09:13.439432Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 62,
+    "timestamp": "2026-06-12T04:09:16.508620Z",
+    "event_hash": "831187df0a79ede6d817cce3401bcac01e83509b68d8b3ad843f694b3ec8d550",
+    "prev_hash": "07b93cfdeeab04860413e3915e215523f714879fb01ac10f561638ebb05dc945",
+    "signed_event": {
+      "trace_id": "74280d71-9fef-4984-8820-6e1f3966583a",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:09:16.491773Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 63,
+    "timestamp": "2026-06-12T04:09:18.419745Z",
+    "event_hash": "a724c38358bc9bc7308051146494713697504e6d1e7df1717173453b28b4b8e7",
+    "prev_hash": "831187df0a79ede6d817cce3401bcac01e83509b68d8b3ad843f694b3ec8d550",
+    "signed_event": {
+      "trace_id": "5143194a-2d11-462a-aea6-f24b9ea7c292",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:09:18.390924Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 64,
+    "timestamp": "2026-06-12T04:10:35.642726Z",
+    "event_hash": "b1ca4866f224ae1c62dac23b4923cb0adb2f64f0f6bd52dd8e96471534b3a72e",
+    "prev_hash": "a724c38358bc9bc7308051146494713697504e6d1e7df1717173453b28b4b8e7",
+    "signed_event": {
+      "trace_id": "e010bc9c-07e3-4fe7-b684-992687861cd2",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:10:35.638251Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 65,
+    "timestamp": "2026-06-12T04:10:37.813113Z",
+    "event_hash": "c288474e577aa5e1d264433d827f68c3148de1a658b92e8cd4e82554ab38408e",
+    "prev_hash": "b1ca4866f224ae1c62dac23b4923cb0adb2f64f0f6bd52dd8e96471534b3a72e",
+    "signed_event": {
+      "trace_id": "5f5ae75b-1597-4499-af81-e63d54a04cce",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:10:37.788293Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 66,
+    "timestamp": "2026-06-12T04:10:40.525508Z",
+    "event_hash": "9181b1e97fbcfd6c1aab3ee6d16a59b9bf9015ede701717f41d5994a2ba5b167",
+    "prev_hash": "c288474e577aa5e1d264433d827f68c3148de1a658b92e8cd4e82554ab38408e",
+    "signed_event": {
+      "trace_id": "0bbc0f66-1f72-4716-98b2-4f24c40307ad",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:10:40.509065Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 67,
+    "timestamp": "2026-06-12T04:10:42.774081Z",
+    "event_hash": "a2e55183e3cf6854936722f9e98d58afc4160a39fc4e5e5a321c97b662d2039e",
+    "prev_hash": "9181b1e97fbcfd6c1aab3ee6d16a59b9bf9015ede701717f41d5994a2ba5b167",
+    "signed_event": {
+      "trace_id": "f5ae9873-0f21-4262-afeb-7b51677ad149",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:10:42.755527Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 68,
+    "timestamp": "2026-06-12T04:18:18.201765Z",
+    "event_hash": "7ec373bf5cf1a24ceb39f37c110617153ab548ba35ef6db1637e69d8c4a63906",
+    "prev_hash": "a2e55183e3cf6854936722f9e98d58afc4160a39fc4e5e5a321c97b662d2039e",
+    "signed_event": {
+      "trace_id": "b4870bea-8011-45fa-ba14-de40b28c2527",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:18:18.187279Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 69,
+    "timestamp": "2026-06-12T04:23:11.084187Z",
+    "event_hash": "657da112d490491c3c535ebdc0d7b4add0c88fb362ec42760b61c1335e07cf22",
+    "prev_hash": "7ec373bf5cf1a24ceb39f37c110617153ab548ba35ef6db1637e69d8c4a63906",
+    "signed_event": {
+      "trace_id": "3463948b-33fa-49cf-ada1-f8de4f166b1e",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:23:11.074975Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 70,
+    "timestamp": "2026-06-12T04:23:13.221051Z",
+    "event_hash": "8b9c0dfeae265c8872ec1597d6725264c40ebe3ca2c7c0892f1f5c7197446d53",
+    "prev_hash": "657da112d490491c3c535ebdc0d7b4add0c88fb362ec42760b61c1335e07cf22",
+    "signed_event": {
+      "trace_id": "b5786667-5233-4f0f-8cce-4c6feefe5503",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:23:13.150627Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 71,
+    "timestamp": "2026-06-12T04:23:16.267288Z",
+    "event_hash": "31660fb7dfa6e8d1145139d47e6d9ff9567c8a6956a58d69e54951191a526317",
+    "prev_hash": "8b9c0dfeae265c8872ec1597d6725264c40ebe3ca2c7c0892f1f5c7197446d53",
+    "signed_event": {
+      "trace_id": "b073e9a6-83ec-42ae-a251-001434a9cf24",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:23:16.247782Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 72,
+    "timestamp": "2026-06-12T04:23:18.969330Z",
+    "event_hash": "97102e261561d30be17f8a30801548df92cf1e3d84b25fd01d6a6bbe7af90afa",
+    "prev_hash": "31660fb7dfa6e8d1145139d47e6d9ff9567c8a6956a58d69e54951191a526317",
+    "signed_event": {
+      "trace_id": "f2671684-b04f-4126-a5b5-0d3e1a142d51",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:23:18.948273Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 73,
+    "timestamp": "2026-06-12T04:25:00.041557Z",
+    "event_hash": "2584595d21e4b99dd35aaf306d5a30d7a6a8344a0a0af4d92c3a05781aaa8d51",
+    "prev_hash": "97102e261561d30be17f8a30801548df92cf1e3d84b25fd01d6a6bbe7af90afa",
+    "signed_event": {
+      "trace_id": "e20fb600-7104-43c5-9869-9c4aa8423d82",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:25:00.018330Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 74,
+    "timestamp": "2026-06-12T04:26:36.836778Z",
+    "event_hash": "9f4bb5ef46857b54a6e8bc69ca696138ed8bf794264fc3488fb128967e700f4a",
+    "prev_hash": "2584595d21e4b99dd35aaf306d5a30d7a6a8344a0a0af4d92c3a05781aaa8d51",
+    "signed_event": {
+      "trace_id": "7b969eb2-f065-468d-9b86-c76dec8ad5f9",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:26:36.824290Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 75,
+    "timestamp": "2026-06-12T04:26:39.649439Z",
+    "event_hash": "b244448f49fb7002334f4044ea7b58a2ad9d9b2b7f93ced2063eb81e702d427c",
+    "prev_hash": "9f4bb5ef46857b54a6e8bc69ca696138ed8bf794264fc3488fb128967e700f4a",
+    "signed_event": {
+      "trace_id": "aed3a399-3301-4940-9a88-e1c7071083f8",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:26:39.619788Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 76,
+    "timestamp": "2026-06-12T04:26:42.914799Z",
+    "event_hash": "f01df27c1e848d5b54b1d9fbc90d36f262fe37dee5bf6ddf01e04593f45129af",
+    "prev_hash": "b244448f49fb7002334f4044ea7b58a2ad9d9b2b7f93ced2063eb81e702d427c",
+    "signed_event": {
+      "trace_id": "388c663b-4cc6-4bed-a74a-b803ec1f22ee",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:26:42.875103Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 77,
+    "timestamp": "2026-06-12T04:26:46.452064Z",
+    "event_hash": "7f0ad2bcae23cbaa618d39c58507f931befaa5c3b07b5d746b6cd88d8f25878b",
+    "prev_hash": "f01df27c1e848d5b54b1d9fbc90d36f262fe37dee5bf6ddf01e04593f45129af",
+    "signed_event": {
+      "trace_id": "b9cc7b72-cf51-4707-887c-8e129695c53e",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:26:46.412514Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 78,
+    "timestamp": "2026-06-12T04:27:58.644561Z",
+    "event_hash": "7535e86cbc33d83fd57af7a00d38008f3fc7de92da87b4d0b320103605a86b2f",
+    "prev_hash": "7f0ad2bcae23cbaa618d39c58507f931befaa5c3b07b5d746b6cd88d8f25878b",
+    "signed_event": {
+      "trace_id": "69d1be97-818f-4532-9f6a-0be8a3a30bbb",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:27:58.636493Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 79,
+    "timestamp": "2026-06-12T04:28:01.263903Z",
+    "event_hash": "19303b9d51ca4228c4d0b98bc87d9e202fc0e7c2dcd02b945259ac8b340e2067",
+    "prev_hash": "7535e86cbc33d83fd57af7a00d38008f3fc7de92da87b4d0b320103605a86b2f",
+    "signed_event": {
+      "trace_id": "04da8a4c-0c15-49ec-8d34-9880ba19f4fd",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:28:01.242422Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 80,
+    "timestamp": "2026-06-12T04:28:04.012628Z",
+    "event_hash": "1ba04254bc2a29a975fb6e4cb1f240a7233592427ad8248a50755ea7c030fad7",
+    "prev_hash": "19303b9d51ca4228c4d0b98bc87d9e202fc0e7c2dcd02b945259ac8b340e2067",
+    "signed_event": {
+      "trace_id": "e05da3a9-d441-4de5-a143-07f514a3cfed",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:28:03.983539Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 81,
+    "timestamp": "2026-06-12T04:28:06.507628Z",
+    "event_hash": "80777e1f534fd56cc52b223094bc89e275245dfc007e232d21267cc9573b1e7f",
+    "prev_hash": "1ba04254bc2a29a975fb6e4cb1f240a7233592427ad8248a50755ea7c030fad7",
+    "signed_event": {
+      "trace_id": "9368dc1e-4dfb-4b76-91f6-7076516fdb2c",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T04:28:06.467459Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
   }
 ]

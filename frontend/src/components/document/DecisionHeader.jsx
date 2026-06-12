@@ -49,14 +49,16 @@ const DecisionHeader = ({ traceId, recommendation, jurisdiction }) => {
             {jurisdiction}
           </h1>
 
-          <div style={{
+          <div
+            data-testid="recommendation-type"
+            style={{
             display: 'inline-flex', alignItems: 'center', gap: '8px',
             padding: '6px 14px', backgroundColor: 'white',
             border: `1.5px solid ${cfg.border}`, borderRadius: '20px',
             fontSize: '13px', fontWeight: '600', color: cfg.color
           }}>
             <span>{cfg.icon}</span>
-            <span>{cfg.label}</span>
+            <span>{recType}</span>
           </div>
 
           {recommendation?.rationale && (
@@ -70,7 +72,9 @@ const DecisionHeader = ({ traceId, recommendation, jurisdiction }) => {
           <span style={{ fontSize: '10px', fontWeight: '600', color: '#9ca3af', letterSpacing: '1px', textTransform: 'uppercase' }}>
             Reference ID
           </span>
-          <code style={{
+          <code
+            data-testid="trace-id"
+            style={{
             fontSize: '11px', fontFamily: '"Courier New", monospace',
             color: '#374151', backgroundColor: 'rgba(0,0,0,0.05)',
             padding: '4px 10px', borderRadius: '4px'

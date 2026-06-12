@@ -3,12 +3,11 @@
 // to prevent white screen of death and handle backend outages gracefully.
 
 import React, { useState, useEffect } from 'react'
-import ErrorBoundary, { SystemCrash } from './components/ErrorBoundary.jsx'
-import ServiceOutage from './components/ServiceOutage.jsx'
-import GravitasDocumentView from './components/document/GravitasDocumentView.jsx'
-import RecommendationGatekeeper from './components/document/RecommendationGatekeeper.jsx'
-import { useServiceOutage } from './hooks/useServiceOutage.js'
-import { validateCasePayload } from './lib/casePayloadValidator.js'
+import ErrorBoundary, { SystemCrash } from './ErrorBoundary.jsx'
+import ServiceOutage from './ServiceOutage.jsx'
+import RecommendationGatekeeper from './document/RecommendationGatekeeper.jsx'
+import { useServiceOutage } from '../hooks/useServiceOutage.js'
+import { validateCasePayload } from '../lib/casePayloadValidator.js'
 
 /**
  * ErrorHandlingIntegration - Complete error & failure handling wrapper
@@ -117,15 +116,10 @@ function ErrorHandlingIntegration({ casePayload, onFeedback, traceId }) {
       onReturnToDashboard={() => window.location.href = '/'}
       onRetry={() => window.location.reload()}
     >
-      {/* RecommendationGatekeeper applies advisory routing before rendering document */}
-      <RecommendationGatekeeper casePayload={validatedPayload}>
-        {(enforcementState) => (
-          <GravitasDocumentView
-            casePayload={validatedPayload}
-            onFeedback={onFeedback}
-          />
-        )}
-      </RecommendationGatekeeper>
+      <RecommendationGatekeeper
+        casePayload={validatedPayload}
+        onFeedback={onFeedback}
+      />
     </ErrorBoundary>
   )
 }
@@ -151,7 +145,7 @@ function ErrorHandlingIntegration({ casePayload, onFeedback, traceId }) {
 
 // Also export individual layers for granular control
 export { ErrorBoundary, SystemCrash, ServiceOutage }
-export { validateCasePayload } from './lib/casePayloadValidator.js'
-export { useServiceOutage } from './hooks/useServiceOutage.js'
+export { validateCasePayload } from '../lib/casePayloadValidator.js'
+export { useServiceOutage } from '../hooks/useServiceOutage.js'
 
 export default ErrorHandlingIntegration

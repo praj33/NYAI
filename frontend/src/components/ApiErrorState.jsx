@@ -3,7 +3,7 @@
 import React from 'react'
 
 const ApiErrorState = ({ title, message, traceId, onRetry }) => (
-  <div className="consultation-card">
+  <div className="consultation-card error-message" data-testid="error-message">
     <div style={{ textAlign: 'center', padding: '24px' }}>
       <div style={{ fontSize: '32px', marginBottom: '12px' }}>⚠️</div>
       <h3 style={{ color: '#dc3545', marginBottom: '8px', fontSize: '16px', fontWeight: '600' }}>

@@ -1,6 +1,6 @@
 # Nyaya AI - Sovereign Legal Intelligence Platform
 
-## TANTRA Convergence Status (11 June 2026)
+## TANTRA Convergence Status (12 June 2026)
 
 | | |
 |--|--|
@@ -8,7 +8,7 @@
 | **Branch** | `feature/tantra-convergence-ready` |
 | **Contract** | `final_decision_contract.json` v2.0.0 · `schema_version` `tantra_v3` |
 | **Recommendation types** | INFORM · REVIEW · ESCALATE · INSUFFICIENT_DATA (advisory only) |
-| **Tests** | `tests/test_tantra_convergence.py` — 5/5 pass |
+| **Tests** | `tests/test_tantra_convergence.py` — 6/6 pass |
 | **Review packet** | [`REVIEW_PACKET.md`](../REVIEW_PACKET.md) (authoritative, project root) |
 | **Sprint deliverables** | [`../SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/`](../SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/) |
 | **Implementation guide** | [`../NYAI_CONVERGENCE_REMEDIATION_GUIDE.md`](../NYAI_CONVERGENCE_REMEDIATION_GUIDE.md) |
@@ -487,7 +487,7 @@ The system has been validated to ensure:
 - ✅ Trace retrieval works as expected
 - ✅ RL feedback emits events properly
 - ✅ Advisory recommendation model (no enforcement gating)
-- ✅ Convergence test suite passes (`test_tantra_convergence.py` — 5/5)
+- ✅ Convergence test suite passes (`test_tantra_convergence.py` — 6/6)
 - ✅ Provenance and output bucket logging with cryptographic proof
 - ✅ Clean folder structure maintained
 - ✅ No code duplication

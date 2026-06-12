@@ -2,7 +2,7 @@
 
 **Sprint:** NYAI Canonical Convergence Build  
 **Branch:** `feature/tantra-convergence-ready`  
-**Date:** 11 June 2026  
+**Date:** 12 June 2026  
 **Contract:** `final_decision_contract.json` v2.0.0 / `tantra_v3`  
 **Audit:** [CONVERGENCE_AUDIT_REPORT.md](./CONVERGENCE_AUDIT_REPORT.md)
 
@@ -99,4 +99,4 @@ Highest actions:
 3. `RecommendationGatekeeper` → no content withholding
 4. `GovernedExecutionPipeline` → disconnected, always approves when connected
 5. `POST /tantra_flow` → `authority_note` explicitly states no authority transfer
-6. Live proof: `sovereign_receipt.accepted: true`, `trace_continuity: true`, `flow_status: PASS`
+6. Live proof: `trace_id` `e20fb600-7104-43c5-9869-9c4aa8423d82`, `sovereign_receipt.accepted: true`, `trace_continuity: true`, `flow_status: PASS`

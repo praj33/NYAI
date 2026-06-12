@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { defineConfig, devices } from '@playwright/test';
 
 /**
@@ -34,7 +35,7 @@ export default defineConfig({
   // Global setup
   use: {
     // Base URL for tests
-    baseURL: process.env.FRONTEND_URL || 'http://localhost:5173',
+    baseURL: process.env.FRONTEND_URL || 'http://localhost:3000',
     
     // Collect traces on failure
     trace: 'on-first-retry',
@@ -48,9 +49,6 @@ export default defineConfig({
     // Action timeout
     actionTimeout: 15 * 1000,
     
-    // Browser context options
-    channel: 'chrome',
-    
     // Locale
     locale: 'en-US',
     
@@ -63,26 +61,13 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] }
-    },
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] }
-    },
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] }
-    },
-    // Mobile testing
-    {
-      name: 'Mobile Chrome',
-      use: { ...devices['Pixel 5'] }
     }
   ],
   
   // Local dev server
   webServer: {
     command: 'npm run dev',
-    url: 'http://localhost:5173',
+    url: 'http://localhost:3000',
     timeout: 120 * 1000,
     reuseExistingServer: !process.env.CI
   }

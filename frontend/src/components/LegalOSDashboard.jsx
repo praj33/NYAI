@@ -14,7 +14,7 @@ const LegalOSDashboard = ({ onModuleSelect }) => {
     {
       id: 'decision',
       title: 'Legal Decisions',
-      description: 'Query structured legal decisions with enforcement',
+      description: 'Query structured legal decisions with advisory recommendations',
       color: '#ec4899'
     },
     {

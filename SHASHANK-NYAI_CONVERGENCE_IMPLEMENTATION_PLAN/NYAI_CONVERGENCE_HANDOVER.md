@@ -2,7 +2,7 @@
 
 **State after sprint:** TANTRA-CONVERGENCE READY  
 **Branch:** `feature/tantra-convergence-ready`  
-**Date:** 11 June 2026  
+**Date:** 12 June 2026  
 **Location:** `SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/`  
 **Audit:** [CONVERGENCE_AUDIT_REPORT.md](./CONVERGENCE_AUDIT_REPORT.md)
 
@@ -32,7 +32,7 @@
 # Start server (use 8001 on Windows if 8000 is blocked)
 cd backend && uvicorn api.main:app --reload --port 8000
 
-# Run convergence tests (5/5 pass)
+# Run convergence tests (6/6 pass)
 cd backend && pytest tests/test_tantra_convergence.py -v
 
 # Execute TANTRA flow
@@ -56,7 +56,7 @@ HTTP Request
             ├─► ResponseBuilder (fail-closed gate)
             ├─► OutputBucket.store() → output_logs/*.jsonl
             ├─► HashChainLedger.append_event() → provenance_ledger.json
-            └─► NyayaResponse (11 canonical fields)
+            └─► NyayaResponse (11 canonical + 2 contract identity fields)
 
 POST /nyaya/tantra_flow
     ├─► run_tantra_flow() [asyncio.to_thread]
@@ -79,8 +79,8 @@ GET /nyaya/output/{id} → output_bucket.retrieve() + hash_proof
 | 4. Hash chain disconnected | `ledger.append_event()` after store | `router.py:~653` |
 | 5. tantra_flow not callable | `POST /nyaya/tantra_flow` | `router.py` |
 | 6. SovereignCore not wired | Called via `run_tantra_flow()` | `tantra/flow.py` |
-| 7. Frontend enforcement drift | RecommendationStatusCard/Gatekeeper | `frontend/src/` |
-| 8. Zero-test CI | 5 convergence tests + proper CI | `tests/test_tantra_convergence.py`, `ci.yml` |
+| 7. Frontend enforcement drift | RecommendationStatusCard/Gatekeeper + e2e tests | `frontend/src/`, `frontend/e2e/gravitas.spec.ts` |
+| 8. Zero-test CI | 6 convergence tests + proper CI | `tests/test_tantra_convergence.py`, `ci.yml` |
 
 ---
 

@@ -1,6 +1,12 @@
 from pydantic import BaseModel, Field, validator
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List, Optional, Literal
 from enum import Enum
+
+ANSWER_DISCLAIMER = (
+    "NYAI output is advisory only and does not constitute legal advice, "
+    "a binding determination, or enforcement authority. "
+    "Consult a qualified legal professional before acting on this information."
+)
 
 
 # ─── Core Enums ───
@@ -136,6 +142,9 @@ class DeterminismProof(BaseModel):
 # ─── Main Response Schema (TANTRA Canonical) ───
 
 class NyayaResponse(BaseModel):
+    # ─── Contract identity (TANTRA v3) ───
+    schema_version: Literal["tantra_v3"] = "tantra_v3"
+    answer_disclaimer: str = Field(default=ANSWER_DISCLAIMER)
     # ─── Determinism & Tracing (ALL REQUIRED — no defaults) ───
     trace_id: str
     request_id: str

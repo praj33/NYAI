@@ -2,9 +2,9 @@ name: Nyaya CI Pipeline
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, feature/tantra-convergence-ready ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, feature/tantra-convergence-ready ]
 
 jobs:
   build-and-test:

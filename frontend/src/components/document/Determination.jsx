@@ -32,7 +32,10 @@ const Determination = ({ decision, reasoning }) => (
         Final Determination
       </div>
 
-      <p style={{
+      <p
+        data-testid="final-decision"
+        className="decision-content"
+        style={{
         margin: 0,
         fontSize: '1.2rem',
         fontWeight: '700',
