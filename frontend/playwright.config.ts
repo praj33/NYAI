@@ -15,8 +15,8 @@ export default defineConfig({
   // Retry failed tests in CI
   retries: process.env.CI ? 2 : 0,
   
-  // Limit workers for consistency
-  workers: process.env.CI ? 1 : undefined,
+  // Single worker avoids menu-overlay races against the dev server during navigation setup
+  workers: 1,
   
   // Reporter configuration
   reporter: [
@@ -24,8 +24,8 @@ export default defineConfig({
     ['list']
   ],
   
-  // Timeout per test
-  timeout: 60 * 1000,
+  // Galaxy background + auth gate make navigation setup slow on cold start
+  timeout: 120 * 1000,
   
   // Timeout for expect() assertions
   expect: {

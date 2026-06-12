@@ -1301,5 +1301,69 @@
       "jurisdiction": "IN",
       "recommendation_type": "INFORM"
     }
+  },
+  {
+    "index": 82,
+    "timestamp": "2026-06-12T06:24:51.985705Z",
+    "event_hash": "89d30ac1b4f9e1814ffd8a5b33673848348e0bf1a9df70326873c5b57b0c9aca",
+    "prev_hash": "80777e1f534fd56cc52b223094bc89e275245dfc007e232d21267cc9573b1e7f",
+    "signed_event": {
+      "trace_id": "81c9c1ab-4316-4116-8be2-31233d479c44",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T06:24:51.977851Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 83,
+    "timestamp": "2026-06-12T06:25:02.091772Z",
+    "event_hash": "58bb2c2c885ce4ee3110103c3b85ea62680a9b1b6262dd30804482c3b15c18fc",
+    "prev_hash": "89d30ac1b4f9e1814ffd8a5b33673848348e0bf1a9df70326873c5b57b0c9aca",
+    "signed_event": {
+      "trace_id": "53f89cca-a543-4cd3-9c7b-f82151f645a4",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T06:25:02.077042Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 84,
+    "timestamp": "2026-06-12T06:25:04.718760Z",
+    "event_hash": "2ee31ec8db7b6b97d3d107eed3f423b9e23120f98f0813a9ab3630fda95c7030",
+    "prev_hash": "58bb2c2c885ce4ee3110103c3b85ea62680a9b1b6262dd30804482c3b15c18fc",
+    "signed_event": {
+      "trace_id": "6b94d4d7-bbaf-43e6-bd8d-5723568148c2",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T06:25:04.701914Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
+  },
+  {
+    "index": 85,
+    "timestamp": "2026-06-12T06:25:19.361722Z",
+    "event_hash": "8f62437905fe2cc6d9fddff0eedaac38bd7e6b3cc6ecc727b7235f346f36e5aa",
+    "prev_hash": "2ee31ec8db7b6b97d3d107eed3f423b9e23120f98f0813a9ab3630fda95c7030",
+    "signed_event": {
+      "trace_id": "fd0e2a2f-452c-4692-af81-1836ebc2ffe2",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "timestamp": "2026-06-12T06:25:19.347400Z",
+      "schema_version": "tantra_v3",
+      "domain": "criminal",
+      "jurisdiction": "IN",
+      "recommendation_type": "INFORM"
+    }
   }
 ]

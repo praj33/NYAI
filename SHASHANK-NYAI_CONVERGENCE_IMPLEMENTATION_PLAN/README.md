@@ -48,6 +48,7 @@ Captured 12 June 2026 (sprint re-run) · example `trace_id`: `e20fb600-7104-43c5
 | [tantra_flow_proof.json](./tantra_flow_proof.json) | `POST /nyaya/tantra_flow` | Full TANTRA flow capture (`flow_status: PASS`) |
 | [trace_replay_proof.json](./trace_replay_proof.json) | `GET /nyaya/trace/{trace_id}` | Trace replay with non-empty `event_chain` |
 | [output_proof.json](./output_proof.json) | `GET /nyaya/output/{trace_id}` | Output bucket verification |
+| [api_evidence/](./api_evidence/) | — | Evidence manifest, Postman/Newman run guide, screenshot checklist |
 
 > **Note:** On Windows, use port **8001** if 8000 is blocked: `uvicorn api.main:app --reload --port 8001`
 

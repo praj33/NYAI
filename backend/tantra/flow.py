@@ -95,10 +95,3 @@ def run_tantra_flow(
     }
 
     return flow_proof
-
-
-if __name__ == "__main__":
-    print("=== TANTRA END-TO-END FLOW ===\n")
-    result = run_tantra_flow("theft of mobile phone")
-    print(json.dumps(result, indent=2, default=str))
-    print(f"\n=== FLOW STATUS: {result['flow_status']} ===")

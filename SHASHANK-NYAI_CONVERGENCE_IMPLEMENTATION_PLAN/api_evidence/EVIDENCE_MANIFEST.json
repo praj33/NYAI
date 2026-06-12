@@ -1,0 +1,43 @@
+{
+  "captured_at": "2026-06-12",
+  "phase": 6,
+  "description": "Phase 6 live API evidence index for TANTRA convergence sign-off",
+  "example_trace_id": "e20fb600-7104-43c5-9869-9c4aa8423d82",
+  "artifacts": {
+    "tantra_flow": {
+      "file": "../tantra_flow_proof.json",
+      "endpoint": "POST /nyaya/tantra_flow",
+      "status": "PASS"
+    },
+    "trace_replay": {
+      "file": "../trace_replay_proof.json",
+      "endpoint": "GET /nyaya/trace/{trace_id}",
+      "status": "verified"
+    },
+    "output_bucket": {
+      "file": "../output_proof.json",
+      "endpoint": "GET /nyaya/output/{trace_id}",
+      "status": "verified"
+    },
+    "postman_collection": {
+      "file": "../../backend/Nyaya_AI_Backend.postman_collection.json",
+      "note": "Import into Postman or run via Newman (see POSTMAN_RUN.md)"
+    },
+    "automated_tests": {
+      "file": "../../backend/tests/test_tantra_convergence.py",
+      "command": "cd backend && pytest tests/test_tantra_convergence.py -v",
+      "expected": "6 passed"
+    },
+    "frontend_e2e": {
+      "file": "../../frontend/e2e/gravitas.spec.ts",
+      "command": "cd frontend && npm run test:e2e",
+      "note": "Playwright HTML report: frontend/playwright-report/"
+    }
+  },
+  "screenshot_capture_checklist": [
+    "POST /nyaya/query response in Postman or browser Network tab (schema_version tantra_v3)",
+    "GET /nyaya/trace/{trace_id} replay with non-empty event_chain",
+    "GET /nyaya/output/{trace_id} bucket verification",
+    "Legal Decisions UI showing trace_id and recommendation.type"
+  ]
+}

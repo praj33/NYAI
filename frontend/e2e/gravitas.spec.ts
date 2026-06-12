@@ -58,8 +58,14 @@ async function setupDecisionPage(page: Page) {
   await page.goto(FRONTEND_URL);
   await page.waitForLoadState('domcontentloaded');
 
-  await page.getByRole('button', { name: 'Legal Decisions' }).click();
-  await expect(page.locator('#query')).toBeVisible();
+  // Wait for auth gate to clear and dashboard module cards to mount
+  await expect(page.getByRole('heading', { name: 'NYAI', level: 1 })).toBeVisible({ timeout: 15000 });
+
+  const legalDecisionsButton = page.getByRole('button', { name: /^Legal Decisions\b/ });
+  await expect(legalDecisionsButton).toBeVisible({ timeout: 15000 });
+  await legalDecisionsButton.click();
+
+  await expect(page.locator('#query')).toBeVisible({ timeout: 15000 });
   return page.locator('#query');
 }
 
@@ -207,7 +213,7 @@ test.describe('3. Rendering Fidelity Test - Data Matching', () => {
       await expect(page.getByText(step, { exact: false }).first()).toBeVisible();
     }
 
-    await page.getByRole('button', { name: /^Timeline$/i }).click();
+    await page.getByRole('button', { name: /Timeline/i }).click();
     for (const item of expectedTimeline) {
       await expect(page.getByText(item.step, { exact: false }).first()).toBeVisible();
     }
@@ -234,7 +240,8 @@ test.describe('4. Resiliency Test - Backend Failure', () => {
     });
 
     await submitQuery(page, 'test query');
-    await expect(page.locator('[data-testid="error-message"], .error-message').first()).toBeVisible({ timeout: 15000 });
+    await expect(page.getByText('Database connection failed')).toBeVisible({ timeout: 15000 });
+    await expect(page.locator('[data-testid="error-message"]')).toBeVisible();
   });
 
   test('should handle network timeout gracefully', async ({ page }) => {

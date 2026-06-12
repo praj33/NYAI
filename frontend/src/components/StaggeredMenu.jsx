@@ -125,7 +125,12 @@ const StaggeredMenu = forwardRef(({ items = [], onItemClick, accentColor = '#667
         </button>
       </header>
 
-      <aside ref={panelRef} className="staggered-menu-panel" aria-hidden={!open}>
+      <aside
+        ref={panelRef}
+        className="staggered-menu-panel"
+        aria-hidden={!open}
+        style={{ pointerEvents: open ? 'auto' : 'none' }}
+      >
         <div className="sm-panel-inner">
           <ul className="sm-panel-list" role="list">
             {items.map((it, idx) => (

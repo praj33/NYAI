@@ -116,18 +116,23 @@ class RLSignalRequest(BaseModel):
     outcome_tag: Optional[str] = "pending"
 
 
+def _resolve_trace_id(http_request: Optional[Request]) -> str:
+    """Return middleware trace_id when present, else a deterministic fallback."""
+    middleware_trace = (
+        getattr(getattr(http_request, 'state', None), 'trace_id', None)
+        if http_request is not None else None
+    )
+    return middleware_trace or f"trace_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:6]}"
+
+
 @router.post("/query", response_model=NyayaResponse)
 async def query_legal(request: QueryRequest, http_request: Request):
     """Execute a single-jurisdiction legal query with deterministic reasoning."""
+    _temp_trace = _resolve_trace_id(http_request)
     try:
         cleaned_query = clean_query(request.query)
 
         # ─── TANTRA: Initialize Observer Pipeline ───
-        # Unified trace: main.py middleware sets request.state.trace_id → http_request.state.trace_id
-        _temp_trace = (
-            (getattr(http_request, 'state', None) and getattr(http_request.state, 'trace_id', None))
-            if http_request is not None else None
-        ) or f"trace_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:6]}"
         observer = ObserverPipeline(trace_id=_temp_trace)
         observer.record("query_received", {"raw_query": request.query})
 
@@ -217,7 +222,7 @@ async def query_legal(request: QueryRequest, http_request: Request):
                 detail={
                     "error_code": "ADVISOR_NOT_INITIALIZED",
                     "message": "Legal advisor failed to initialize. Check server logs.",
-                    "trace_id": str(uuid.uuid4())
+                    "trace_id": _temp_trace
                 }
             )
         
@@ -718,7 +723,7 @@ async def query_legal(request: QueryRequest, http_request: Request):
             detail={
                 "error_code": "QUERY_PROCESSING_ERROR",
                 "message": f"Error processing legal query: {str(e)}",
-                "trace_id": str(uuid.uuid4())
+                "trace_id": _temp_trace
             }
         )
 
@@ -775,12 +780,12 @@ def _calculate_structured_confidence(
     )
 
 @router.post("/multi_jurisdiction", response_model=MultiJurisdictionResponse)
-async def multi_jurisdiction_query(request: MultiJurisdictionRequest):
+async def multi_jurisdiction_query(request: MultiJurisdictionRequest, http_request: Request):
     """Multi Jurisdiction Query"""
     return MultiJurisdictionResponse(
         comparative_analysis={},
         confidence=0.5,
-        trace_id=str(uuid.uuid4())
+        trace_id=_resolve_trace_id(http_request)
     )
 
 @router.post("/explain_reasoning", response_model=ExplainReasoningResponse)
