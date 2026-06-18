@@ -6,16 +6,23 @@
  */
 
 import axios from 'axios'
-
-const NYAYA_API_BASE = 'https://nyaya-ai-0f02.onrender.com'
+import { BASE_URL, NYAI_API_KEY } from '../lib/apiConfig'
 
 // Create axios instance for Nyaya API
 const nyayaClient = axios.create({
-  baseURL: NYAYA_API_BASE,
+  baseURL: BASE_URL,
   timeout: 30000,
   headers: {
     'Content-Type': 'application/json'
   }
+})
+
+nyayaClient.interceptors.request.use((config) => {
+  const path = config.url || ''
+  if (NYAI_API_KEY && path.startsWith('/nyaya/')) {
+    config.headers['X-API-Key'] = NYAI_API_KEY
+  }
+  return config
 })
 
 // Response interceptor for error handling

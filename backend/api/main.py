@@ -17,10 +17,16 @@ from fastapi.middleware.cors import CORSMiddleware
 try:
     from api.router import router
 except ImportError:
-    # Fallback for import issues
     from .router import router
+
+from api.health import health_router
+from api.metrics import metrics_router
+from api.structured_logger import StructuredLoggingMiddleware
+from api.rate_limiter import RateLimiterMiddleware
+from api.security import APIKeyAuthMiddleware
+from api.trace_middleware import TraceIdMiddleware
+
 import uvicorn
-import os
 
 # Create FastAPI app
 app = FastAPI(
@@ -31,24 +37,14 @@ app = FastAPI(
     redoc_url="/redoc"
 )
 
-# Add CORS middleware
 allowed_origins = [
-    "http://localhost:3000",          # Vite dev server
-    "http://localhost:5173",          # Vite default port
+    "http://localhost:3000",
+    "http://localhost:5173",
     "http://127.0.0.1:3000",
     "http://127.0.0.1:5173",
-    os.getenv("FRONTEND_URL", ""),    # Configurable production URL
+    os.getenv("FRONTEND_URL", ""),
 ]
-# Filter out empty strings
 allowed_origins = [o for o in allowed_origins if o]
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=allowed_origins or ["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 # Global exception handler — FAIL CLOSED
 @app.exception_handler(Exception)
@@ -64,16 +60,22 @@ async def global_exception_handler(request: Request, exc: Exception):
         }
     )
 
-# Middleware to add trace_id to request state
-@app.middleware("http")
-async def add_trace_id_middleware(request: Request, call_next):
-    import uuid
-    trace_id = str(uuid.uuid4())
-    request.state.trace_id = trace_id
-    response = await call_next(request)
-    return response
+# Production hardening middleware (innermost registered first)
+app.add_middleware(APIKeyAuthMiddleware)
+app.add_middleware(RateLimiterMiddleware)
+app.add_middleware(StructuredLoggingMiddleware)
+app.add_middleware(TraceIdMiddleware)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=allowed_origins or ["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-# Include routers
+# Routers — health and metrics before nyaya (no auth required)
+app.include_router(health_router)
+app.include_router(metrics_router)
 app.include_router(router)
 
 # Include procedure router
@@ -81,26 +83,20 @@ try:
     from api.procedure_router import procedure_router
     app.include_router(procedure_router)
 except ImportError:
-    pass  # Procedure router not available
+    pass
 
 # Include enhanced legal database endpoints
 try:
     from legal_database.enhanced_procedure_endpoints import *
 except ImportError:
-    pass  # Enhanced endpoints not available
+    pass
 
 # Include debug router (for development only)
 try:
     from api.debug_router import debug_router
     app.include_router(debug_router)
 except ImportError:
-    pass  # Debug router not available
-
-# Health check endpoint
-@app.get("/health")
-async def health_check():
-    """Health check endpoint."""
-    return {"status": "healthy", "service": "nyaya-api-gateway"}
+    pass
 
 # Root endpoint
 @app.get("/")
@@ -134,12 +130,14 @@ async def root():
             "domain_classification": "GET /nyaya/procedures/domain_classification/{jurisdiction}",
             "legal_sections": "GET /nyaya/procedures/legal_sections/{jurisdiction}/{domain}",
             "health": "GET /health",
+            "health_live": "GET /health/live",
+            "health_ready": "GET /health/ready",
+            "metrics": "GET /metrics",
             "docs": "GET /docs"
         }
     }
 
 if __name__ == "__main__":
-    # Get port from environment or default to 8000
     port = int(os.getenv("PORT", 8000))
     host = os.getenv("HOST", "0.0.0.0")
 

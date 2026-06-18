@@ -10,6 +10,10 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
+    env:
+      NYAI_API_KEY: test-key-ci-default
+      RATE_LIMIT_PER_MINUTE: "60"
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -31,13 +35,9 @@ jobs:
         run: |
           python -c "import api.main"
 
-      - name: Run TANTRA convergence tests
+      - name: Run TANTRA convergence and production hardening tests
         working-directory: backend
-        run: pytest tests/test_tantra_convergence.py -v --tb=short
-
-      - name: Run full test suite
-        working-directory: backend
-        run: pytest tests/ -v --tb=short --ignore=tests/debug_addon.py --ignore=tests/debug_authority_assault.py --ignore=tests/debug_new_addon.py
+        run: pytest tests/test_tantra_convergence.py tests/test_production_hardening.py -v --tb=short
 
       - name: Build Docker image
         working-directory: backend

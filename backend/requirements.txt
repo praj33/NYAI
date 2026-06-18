@@ -17,3 +17,7 @@ python-multipart
 pyyaml
 tqdm
 python-dotenv
+
+# Production hardening
+slowapi>=0.1.9
+python-json-logger>=2.0

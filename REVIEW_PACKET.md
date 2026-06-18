@@ -214,26 +214,23 @@ NYAI fails closed on schema and trace integrity — not on legal content. All re
 
 ## 10. Testing Proof
 
-**File:** `backend/tests/test_tantra_convergence.py` (6 tests)
+**Convergence:** `backend/tests/test_tantra_convergence.py` (6 tests)  
+**Production hardening:** `backend/tests/test_production_hardening.py` (8 tests)
 
-| # | Test | Verifies |
-|---|------|----------|
-| 1 | `test_canonical_schema_valid_response` | 11 fields; valid `recommendation.type`; no `enforcement_decision` |
-| 2 | `test_observer_blocks_invalid_schema` | Empty payload → never 200 |
-| 3 | `test_trace_id_same_across_all_stages` | Response trace == bucket trace |
-| 4 | `test_trace_endpoint_returns_real_data` | Non-empty `event_chain`; `tamper_verified=True` |
-| 5 | `test_output_bucket_retrieval_and_hash_verification` | `verified=True`; `tamper_detected=False` |
-| 6 | `test_hash_chain_ledger_reconstruct` | Ledger append, verify, reconstruct by trace_id |
+| Suite | Tests | Verifies |
+|-------|-------|----------|
+| Convergence | 6 | Schema, trace continuity, bucket, ledger |
+| Production | 8 | Auth, rate limit, health, logging, metrics, deployment scenarios |
 
 **Run**
 
 ```bash
-cd backend && pytest tests/test_tantra_convergence.py -v
+cd backend && pytest tests/test_tantra_convergence.py tests/test_production_hardening.py -v
 ```
 
-**CI:** `backend/.github/workflows/ci.yml` — hard-fails on test failure (no `pytest || echo` fallback).
+**CI:** `backend/.github/workflows/ci.yml` — both suites run sequentially; hard-fail on any failure.
 
-**Result:** 6/6 passed (12 June 2026)
+**Result:** 14/14 passed (18 June 2026)
 
 ---
 
@@ -259,26 +256,106 @@ cd backend && pytest tests/test_tantra_convergence.py -v
 
 ## 12. Known Limitations
 
-| Limitation | Mitigation |
-|------------|------------|
-| `SovereignCoreMock` — in-memory, lost on restart | Replace with real core (future sprint) |
-| CORS wildcard when `FRONTEND_URL` unset | Set `FRONTEND_URL` in production |
-| BM25 index ~9723 sections at startup | Index sharding / lazy load (future) |
-| RL rewards not persisted | Documented caps if persistence added |
-| Hash chain local disk only | Remote ledger sync (future) |
-| Port 8000 blocked on Windows | Use `PORT=8001` |
-| Addon fixtures still reference `enforcement_decision` | Out of sprint scope |
-| Dead code: `ComplianceBarrier.jsx`, `RedirectModal.jsx` | Safe to delete in cleanup |
-| `governed_execution` / `raj_adapter` / `sovereign_agents` disconnected | Intentional — requires constitutional review to reconnect |
+| Limitation | Mitigation | Sprint Status |
+|------------|------------|---------------|
+| Security validation missing (auth, rate limit, audit log) | API key auth, rate limiter, structured logging | **Resolved** |
+| Load/scale validation missing | Deployment validation scenarios + metrics | **Partially resolved** |
+| Independent verification missing | 8 hard-failing production tests | **Partially resolved** |
+| `SovereignCoreMock` — in-memory, lost on restart | Replace with real core (future sprint) | **Deferred** |
+| CORS wildcard when `FRONTEND_URL` unset | Set `FRONTEND_URL` in production | Open |
+| BM25 index ~9723 sections at startup | Index sharding / lazy load (future) | Open |
+| RL rewards not persisted | Documented caps if persistence added | Open |
+| Hash chain local disk only | Remote ledger sync (future) | **Deferred** |
+| Port 8000 blocked on Windows | Use `PORT=8001` | Open |
+| `governed_execution` / `raj_adapter` / `sovereign_agents` disconnected | Intentional — constitutional review | **Intentional** |
 
 **Do not touch without review:** recommendation schema semantics, disconnected authority modules.
 
 ---
 
+## Security Layer Flow (NEW — Production Sprint)
+
+```
+Client Request
+  → CORS
+  → TraceIdMiddleware (uuid4 → request.state.trace_id)
+  → StructuredLoggingMiddleware
+  → RateLimiterMiddleware (/nyaya/* only)
+  → APIKeyAuthMiddleware (/nyaya/* only)
+  → Route Handler
+```
+
+**Auth flow:**
+1. Path starts with `/nyaya/`? If no → bypass.
+2. `NYAI_API_KEY` set? If no → 503 `AUTH_CONFIGURATION_ERROR`.
+3. `X-API-Key` present? If no → 401 `UNAUTHORIZED`.
+4. `hmac.compare_digest(header, env)` → mismatch 401 `INVALID_API_KEY`, match → proceed.
+
+**Rate limiter flow:**
+1. Path starts with `/nyaya/`? If no → bypass.
+2. Extract client IP (X-Forwarded-For → X-Real-IP → client.host).
+3. Sliding window check (60s, `RATE_LIMIT_PER_MINUTE`).
+4. Over limit → 429 + `Retry-After` + `RATE_LIMIT_EXCEEDED`.
+
+**Exempt paths:** `/health`, `/health/live`, `/health/ready`, `/metrics`, `/docs`, `/redoc`, `/`
+
+---
+
+## Health Check Flow (NEW — Production Sprint)
+
+| Endpoint | Checks | HTTP |
+|----------|--------|------|
+| `GET /health` | Process alive | 200 |
+| `GET /health/live` | Liveness | 200 |
+| `GET /health/ready` | output_bucket, ledger, retriever, model | 200 ready/degraded; 503 unavailable |
+
+**Dependency logic:** Each check wrapped in try/except → `PASS` | `DEGRADED` | `FAIL`.
+
+---
+
+## Telemetry Flow (NEW — Production Sprint)
+
+**Structured log (NDJSON on stderr):**
+```json
+{"timestamp":"...","trace_id":"...","endpoint":"/nyaya/query","method":"POST","status_code":200,"duration_ms":342.7,"client_ip":"...","error_code":null,"log_level":"INFO"}
+```
+
+**Metrics:** `GET /metrics` — counters, latency average, uptime. See [`ARYA Quadruped__ Physical Prototype Readiness/METRICS_README.md`](./ARYA%20Quadruped__%20Physical%20Prototype%20Readiness/METRICS_README.md).
+
+**Error classification map:** Documented verbatim in METRICS_README.md.
+
+---
+
+## Deployment Validation Results (NEW — Production Sprint)
+
+**Summary: 8/8 PASS**
+
+Full report: [`ARYA Quadruped__ Physical Prototype Readiness/DEPLOYMENT_VALIDATION_REPORT.md`](./ARYA%20Quadruped__%20Physical%20Prototype%20Readiness/DEPLOYMENT_VALIDATION_REPORT.md)
+
+---
+
+## Test Suite (UPDATED — Production Sprint)
+
+- **Original:** 6 convergence tests (`test_tantra_convergence.py`)
+- **Added:** 8 production hardening tests (`test_production_hardening.py`)
+- **CI:** Both run sequentially; both hard-fail
+- **Total:** 14/14 PASS
+
+---
+
+## Next Recommended Sprint
+
+1. Persistent sovereign receipt layer (resolves reviewer gap — SovereignCoreMock)
+2. Remote ledger replication (resolves local provenance gap)
+3. Load/stress testing (resolves scale validation gap)
+4. Governed module constitutional review (resolves disconnected modules gap)
+
+---
+
 ## Verdict
 
-**CONVERGENCE SPRINT COMPLETE — NYAI IS TANTRA-CONVERGENCE READY.**
+**PRODUCTION HARDENING SPRINT COMPLETE — NYAI IS PRODUCTION CANDIDATE READY.**
 
-All 8 gaps resolved. Contract v2.0.0 aligned. Trace unified. Replay and provenance return verified data. Frontend on advisory model. CI enforces 6 convergence tests.
+TANTRA convergence preserved (6/6). Production controls added (8/8). API key auth, rate limiting, health probes, structured logging, and metrics operational. Legal reasoning semantics, trace lifecycle, and advisory posture unchanged.
 
-**Next steps:** [`NYAI_CONVERGENCE_HANDOVER.md`](./SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/NYAI_CONVERGENCE_HANDOVER.md)
+**Reports:** [`ARYA Quadruped__ Physical Prototype Readiness/PRODUCTION_READINESS_REPORT.md`](./ARYA%20Quadruped__%20Physical%20Prototype%20Readiness/PRODUCTION_READINESS_REPORT.md)

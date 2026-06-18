@@ -44,6 +44,5 @@ provenance_ledger.json
 storybook-static/
 
 #Task md files
-NYAI Full Convergence Remediation Sprint (NYAI__ Canonical Convergence Build).md
-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN.md 
-NYAI_CONVERGENCE_REMEDIATION_GUIDE.md
+ARYA Quadruped__ Physical Prototype Readiness.md
+IMPLEMENTATION.md

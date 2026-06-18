@@ -3,7 +3,7 @@
 // Includes global interceptor for 5xx errors that routes to ServiceOutage
 
 import axios from 'axios'
-import { BASE_URL } from '../lib/apiConfig'
+import { BASE_URL, NYAI_API_KEY } from '../lib/apiConfig'
 
 const API_BASE_URL = BASE_URL
 
@@ -50,6 +50,10 @@ apiClient.interceptors.request.use((config) => {
   const traceId = window.__gravitas_active_trace_id
   if (traceId) {
     config.headers['X-Trace-ID'] = traceId
+  }
+  const path = config.url || ''
+  if (NYAI_API_KEY && path.startsWith('/nyaya/')) {
+    config.headers['X-API-Key'] = NYAI_API_KEY
   }
   return config
 })
