@@ -13,6 +13,8 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
 from starlette.responses import Response
 
+from api.error_codes import ErrorCode
+
 
 class JsonFormatter(logging.Formatter):
     """Emit log records as single-line JSON objects."""
@@ -147,7 +149,7 @@ class StructuredLoggingMiddleware(BaseHTTPMiddleware):
                 request=request,
                 status_code=500,
                 duration_ms=duration_ms,
-                error_code="INTERNAL_ERROR",
+                error_code=ErrorCode.INTERNAL_ERROR,
                 log_level="ERROR",
             )
             metrics_store.record_request(

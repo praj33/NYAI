@@ -5,10 +5,10 @@ Input → NYAI → Mock Sovereign Core → Output Bucket → Verification
 Same trace_id, same input_hash, no mutation between stages.
 """
 import json
-import hashlib
+import os
 import urllib.request
 from datetime import datetime
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 
 from tantra.sovereign_core_mock import SovereignCoreMock
 from tantra.output_bucket import OutputBucket
@@ -18,6 +18,7 @@ def run_tantra_flow(
     query: str,
     jurisdiction_hint: str = "India",
     nyai_url: str = "http://127.0.0.1:8000/nyaya/query",
+    api_key: Optional[str] = None,
 ) -> Dict[str, Any]:
     """
     Execute a full TANTRA flow:
@@ -35,10 +36,15 @@ def run_tantra_flow(
         "user_context": {"role": "citizen", "confidence_required": True}
     }
 
+    headers = {"Content-Type": "application/json"}
+    resolved_key = api_key or os.environ.get("NYAI_API_KEY")
+    if resolved_key:
+        headers["X-API-Key"] = resolved_key
+
     req = urllib.request.Request(
         nyai_url,
-        json.dumps(payload).encode('utf-8'),
-        {'Content-Type': 'application/json'}
+        json.dumps(payload).encode("utf-8"),
+        headers,
     )
     resp = urllib.request.urlopen(req, timeout=120)
     nyai_output = json.loads(resp.read())

@@ -16,6 +16,7 @@ _SKIP_AUTH_INJECT = (
     "bypass",
     "metrics_endpoint",
     "deployment_validation",
+    "rate_limit_triggers_on",
 )
 
 from fastapi.testclient import TestClient as _TestClient

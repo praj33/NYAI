@@ -16,6 +16,7 @@ from fastapi.testclient import TestClient
 
 from api.main import app
 from api.metrics import metrics_store
+from api.error_codes import ErrorCode
 
 client = TestClient(app, raise_server_exceptions=False)
 
@@ -25,6 +26,28 @@ VALID_QUERY_PAYLOAD = {
     "user_context": {"role": "citizen", "confidence_required": True},
 }
 
+FEEDBACK_PAYLOAD = {
+    "trace_id": "550e8400-e29b-41d4-a716-446655440000",
+    "rating": 5,
+    "feedback_type": "clarity",
+}
+
+MOCK_TANTRA_FLOW_RESULT = {
+    "flow_status": "PASS",
+    "trace_id": "test-trace-id",
+    "input_hash": "abc",
+    "stages": {
+        "sovereign_core": {"accepted": True, "trace_id": "test-trace-id"},
+        "nyai_response": {},
+        "output_bucket": {},
+        "verification": {},
+    },
+    "trace_continuity": True,
+    "input_hash_continuity": True,
+    "sovereign_accepted": True,
+    "bucket_verified": True,
+}
+
 AUTH_HEADERS = {"X-API-Key": "test-key-production-hardening"}
 
 
@@ -32,7 +55,7 @@ def test_authentication_enforced():
     response = client.post("/nyaya/query", json=VALID_QUERY_PAYLOAD)
     assert response.status_code == 401
     body = response.json()
-    assert body["error_code"] in ("UNAUTHORIZED",)
+    assert body["error_code"] in (ErrorCode.UNAUTHORIZED,)
     assert "trace_id" in body
 
 
@@ -69,7 +92,7 @@ def test_rate_limit_triggers():
     sixth = responses[5]
     assert sixth.status_code == 429
     body = sixth.json()
-    assert body["error_code"] == "RATE_LIMIT_EXCEEDED"
+    assert body["error_code"] == ErrorCode.RATE_LIMIT_EXCEEDED
     assert "Retry-After" in sixth.headers
 
 
@@ -101,8 +124,30 @@ def test_health_endpoint_detects_dependency_failure():
         assert body["dependencies"]["output_bucket"]["status"] == "FAIL"
         assert body["status"] in ("degraded", "unavailable")
         assert response.status_code in (200, 503)
+        if response.status_code == 503:
+            assert body["error_code"] == ErrorCode.DEPENDENCY_FAILURE
     finally:
         output_bucket_module.output_bucket.retrieve = original
+
+
+def test_health_endpoint_detects_ledger_failure():
+    from provenance_chain.hash_chain_ledger import HashChainLedger
+
+    original = HashChainLedger.verify_chain_integrity
+
+    def failing_verify(self):
+        raise RuntimeError("simulated ledger failure")
+
+    HashChainLedger.verify_chain_integrity = failing_verify
+    try:
+        response = client.get("/health/ready")
+        body = response.json()
+        assert body["dependencies"]["ledger"]["status"] == "FAIL"
+        assert body["status"] == "unavailable"
+        assert response.status_code == 503
+        assert body["error_code"] == ErrorCode.DEPENDENCY_FAILURE
+    finally:
+        HashChainLedger.verify_chain_integrity = original
 
 
 def test_structured_logging_contains_trace_id(caplog):
@@ -173,9 +218,93 @@ def test_deployment_validation_scenarios_pass():
         headers={"X-API-Key": "invalid"},
     )
     assert invalid.status_code == 401
-    assert invalid.json()["error_code"] == "INVALID_API_KEY"
+    assert invalid.json()["error_code"] == ErrorCode.INVALID_API_KEY
 
     ready = client.get("/health/ready")
     assert ready.status_code in (200, 503)
     body = ready.json()
     assert "status" in body
+
+
+def test_tantra_flow_authentication_enforced():
+    response = client.post("/nyaya/tantra_flow", json=VALID_QUERY_PAYLOAD)
+    assert response.status_code == 401
+    body = response.json()
+    assert body["error_code"] == ErrorCode.UNAUTHORIZED
+    assert "trace_id" in body
+
+
+def test_feedback_authentication_enforced():
+    response = client.post("/nyaya/feedback", json=FEEDBACK_PAYLOAD)
+    assert response.status_code == 401
+    body = response.json()
+    assert body["error_code"] == ErrorCode.UNAUTHORIZED
+    assert "trace_id" in body
+
+
+def test_tantra_flow_authentication_bypass_impossible():
+    cases = [
+        {"X-API-Key": "wrong-key"},
+        {"X-API-Key": ""},
+        None,
+    ]
+    for headers in cases:
+        kwargs = {"json": VALID_QUERY_PAYLOAD}
+        if headers is not None:
+            kwargs["headers"] = headers
+        response = client.post("/nyaya/tantra_flow", **kwargs)
+        assert response.status_code == 401
+
+
+def test_feedback_authentication_bypass_impossible():
+    cases = [
+        {"X-API-Key": "wrong-key"},
+        {"X-API-Key": ""},
+        None,
+    ]
+    for headers in cases:
+        kwargs = {"json": FEEDBACK_PAYLOAD}
+        if headers is not None:
+            kwargs["headers"] = headers
+        response = client.post("/nyaya/feedback", **kwargs)
+        assert response.status_code == 401
+
+
+def test_rate_limit_triggers_on_feedback():
+    responses = []
+    for _ in range(6):
+        responses.append(
+            client.post(
+                "/nyaya/feedback",
+                json=FEEDBACK_PAYLOAD,
+                headers=AUTH_HEADERS,
+            )
+        )
+
+    for response in responses[:5]:
+        assert response.status_code != 429
+
+    sixth = responses[5]
+    assert sixth.status_code == 429
+    assert sixth.json()["error_code"] == ErrorCode.RATE_LIMIT_EXCEEDED
+
+
+def test_rate_limit_triggers_on_tantra_flow(monkeypatch):
+    monkeypatch.setattr("api.router.run_tantra_flow", lambda *args, **kwargs: MOCK_TANTRA_FLOW_RESULT)
+
+    responses = []
+    for _ in range(6):
+        responses.append(
+            client.post(
+                "/nyaya/tantra_flow",
+                json=VALID_QUERY_PAYLOAD,
+                headers=AUTH_HEADERS,
+            )
+        )
+
+    for response in responses[:5]:
+        assert response.status_code != 429
+
+    sixth = responses[5]
+    assert sixth.status_code == 429
+    assert sixth.json()["error_code"] == ErrorCode.RATE_LIMIT_EXCEEDED

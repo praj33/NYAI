@@ -6,6 +6,8 @@ from provenance_chain.event_signer import signer
 from provenance_chain.lineage_tracer import tracer
 from provenance_chain.context_fingerprint import fingerprint_generator
 
+from api.error_codes import ErrorCode
+
 async def get_trace_id() -> str:
     """Generate a unique trace ID for request tracking."""
     return str(uuid.uuid4())
@@ -20,7 +22,7 @@ async def validate_nonce(nonce: Optional[str] = None) -> str:
         raise HTTPException(
             status_code=400,
             detail={
-                "error_code": "INVALID_NONCE",
+                "error_code": ErrorCode.INVALID_NONCE,
                 "message": "Nonce is invalid or expired",
                 "trace_id": "unknown"
             }

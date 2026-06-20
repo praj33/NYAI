@@ -19,6 +19,8 @@ from collections import OrderedDict
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeout
 
+from api.error_codes import ErrorCode
+
 # Import enhanced components
 from clean_legal_advisor import EnhancedLegalAdvisor, LegalQuery
 
@@ -220,7 +222,7 @@ async def query_legal(request: QueryRequest, http_request: Request):
             raise HTTPException(
                 status_code=500,
                 detail={
-                    "error_code": "ADVISOR_NOT_INITIALIZED",
+                    "error_code": ErrorCode.ADVISOR_NOT_INITIALIZED,
                     "message": "Legal advisor failed to initialize. Check server logs.",
                     "trace_id": _temp_trace
                 }
@@ -691,7 +693,7 @@ async def query_legal(request: QueryRequest, http_request: Request):
         raise HTTPException(
             status_code=500,
             detail={
-                "error_code": "SCHEMA_VALIDATION_ERROR",
+                "error_code": ErrorCode.SCHEMA_VALIDATION_ERROR,
                 "message": str(sve),
                 "violations": sve.violations,
                 "trace_id": sve.trace_id
@@ -701,7 +703,7 @@ async def query_legal(request: QueryRequest, http_request: Request):
         raise HTTPException(
             status_code=500,
             detail={
-                "error_code": "HASH_MISMATCH_ERROR",
+                "error_code": ErrorCode.HASH_MISMATCH_ERROR,
                 "message": str(hme),
                 "trace_id": hme.trace_id
             }
@@ -710,7 +712,7 @@ async def query_legal(request: QueryRequest, http_request: Request):
         raise HTTPException(
             status_code=500,
             detail={
-                "error_code": "TRACE_CONTINUITY_ERROR",
+                "error_code": ErrorCode.TRACE_CONTINUITY_ERROR,
                 "message": str(tce),
                 "trace_id": tce.original
             }
@@ -721,7 +723,7 @@ async def query_legal(request: QueryRequest, http_request: Request):
         raise HTTPException(
             status_code=500,
             detail={
-                "error_code": "QUERY_PROCESSING_ERROR",
+                "error_code": ErrorCode.QUERY_PROCESSING_ERROR,
                 "message": f"Error processing legal query: {str(e)}",
                 "trace_id": _temp_trace
             }
@@ -888,18 +890,19 @@ async def get_output(trace_id: str):
 
 
 @router.post("/tantra_flow")
-async def execute_tantra_flow(request: QueryRequest):
+async def execute_tantra_flow(request: QueryRequest, http_request: Request):
     """Execute full TANTRA flow. Advisory participation only. No authority transfer."""
     try:
         jurisdiction_hint = request.jurisdiction_hint.value if request.jurisdiction_hint else "India"
         port = os.getenv("PORT", "8000")
         nyai_url = f"http://127.0.0.1:{port}/nyaya/query"
-        # Run in thread pool so event loop stays free for nested /query HTTP call
+        api_key = http_request.headers.get("X-API-Key") or os.environ.get("NYAI_API_KEY", "")
         flow_proof = await asyncio.to_thread(
             run_tantra_flow,
             request.query,
             jurisdiction_hint,
             nyai_url,
+            api_key,
         )
         return {
             "status": flow_proof.get("flow_status"),

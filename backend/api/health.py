@@ -9,6 +9,8 @@ from typing import Any, Dict
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
+from api.error_codes import ErrorCode
+
 health_router = APIRouter(tags=["health"])
 
 SERVICE_NAME = "nyaya-api-gateway"
@@ -107,4 +109,7 @@ async def health_ready() -> JSONResponse:
         "checks_passed": checks_passed,
         "checks_total": checks_total,
     }
+    if http_status == 503:
+        body["error_code"] = ErrorCode.DEPENDENCY_FAILURE
+        body["message"] = "One or more required dependencies are unavailable"
     return JSONResponse(status_code=http_status, content=body)

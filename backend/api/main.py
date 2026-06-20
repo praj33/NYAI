@@ -25,6 +25,7 @@ from api.structured_logger import StructuredLoggingMiddleware
 from api.rate_limiter import RateLimiterMiddleware
 from api.security import APIKeyAuthMiddleware
 from api.trace_middleware import TraceIdMiddleware
+from api.error_codes import ErrorCode
 
 import uvicorn
 
@@ -54,7 +55,7 @@ async def global_exception_handler(request: Request, exc: Exception):
     return JSONResponse(
         status_code=500,
         content={
-            "error_code": "INTERNAL_ERROR",
+            "error_code": ErrorCode.INTERNAL_ERROR,
             "message": f"TANTRA FAIL CLOSED: {str(exc)}",
             "trace_id": trace_id
         }

@@ -12,6 +12,8 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
 from starlette.responses import JSONResponse
 
+from api.error_codes import ErrorCode
+
 logger = logging.getLogger(__name__)
 
 _PROTECTED_PREFIX = "/nyaya/"
@@ -80,7 +82,7 @@ class APIKeyAuthMiddleware(BaseHTTPMiddleware):
             return _auth_error_response(
                 request,
                 status_code=503,
-                error_code="AUTH_CONFIGURATION_ERROR",
+                error_code=ErrorCode.AUTH_CONFIGURATION_ERROR,
                 message="API authentication is not configured",
             )
 
@@ -89,7 +91,7 @@ class APIKeyAuthMiddleware(BaseHTTPMiddleware):
             return _auth_error_response(
                 request,
                 status_code=401,
-                error_code="UNAUTHORIZED",
+                error_code=ErrorCode.UNAUTHORIZED,
                 message="Missing or empty X-API-Key header",
             )
 
@@ -97,7 +99,7 @@ class APIKeyAuthMiddleware(BaseHTTPMiddleware):
             return _auth_error_response(
                 request,
                 status_code=401,
-                error_code="INVALID_API_KEY",
+                error_code=ErrorCode.INVALID_API_KEY,
                 message="Invalid API key",
             )
 
