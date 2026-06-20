@@ -1,3 +1,5 @@
+# Render: set PYTHON_VERSION=3.11.9 in dashboard AND keep runtime.txt (python-3.11.9).
+# torch 2.1.2 does not support Python 3.12+ or 3.14.
 fastapi>=0.104.0
 uvicorn>=0.24.0
 pydantic>=2.0.0
