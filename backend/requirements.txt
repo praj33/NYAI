@@ -21,3 +21,16 @@ python-dotenv
 
 # Production hardening
 python-json-logger>=2.0
+
+# ── Production Hardening (Phase 2 Sprint) ─────────────────────────────────
+# Rate limiting: stdlib sliding window used (no slowapi needed).
+# Uncomment if switching to slowapi-based implementation in future:
+# slowapi>=0.1.9
+#
+# Structured logging: custom JsonFormatter used (no python-json-logger needed).
+# Uncomment if switching to python-json-logger in future:
+# python-json-logger>=2.0
+#
+# Test tooling (install separately — not required at runtime):
+# pytest>=7.0
+# httpx>=0.24.0

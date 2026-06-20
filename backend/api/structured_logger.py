@@ -124,10 +124,16 @@ class StructuredLoggingMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next) -> Response:
         from api.metrics import metrics_store
 
+        trace_id = getattr(request.state, "trace_id", "unknown")
+        if trace_id == "unknown":
+            trace_id = str(uuid.uuid4())
+            request.state.trace_id = trace_id
+
         start = time.perf_counter()
         metrics_store.increment_active()
         try:
             response = await call_next(request)
+            response.headers["X-Trace-Id"] = trace_id
             duration_ms = (time.perf_counter() - start) * 1000
             status_code = response.status_code
             error_code = _extract_error_code(response)
@@ -142,6 +148,14 @@ class StructuredLoggingMiddleware(BaseHTTPMiddleware):
                 status_code=status_code,
                 duration_ms=duration_ms,
             )
+            if status_code == 401:
+                try:
+                    with metrics_store._lock:
+                        metrics_store.auth_failure_count = max(
+                            0, metrics_store.auth_failure_count - 1
+                        )
+                except Exception:
+                    pass
             return response
         except Exception:
             duration_ms = (time.perf_counter() - start) * 1000

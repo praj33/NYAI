@@ -36,6 +36,22 @@ def _client_ip(request: Request) -> str:
     return "unknown"
 
 
+def _increment_auth_failure() -> None:
+    try:
+        from api.metrics import metrics_store
+
+        if not hasattr(metrics_store, "increment_auth_failure"):
+            def increment_auth_failure() -> None:
+                with metrics_store._lock:
+                    metrics_store.auth_failure_count += 1
+
+            metrics_store.increment_auth_failure = increment_auth_failure
+
+        metrics_store.increment_auth_failure()
+    except Exception:
+        pass
+
+
 def _auth_error_response(
     request: Request,
     *,
@@ -43,6 +59,7 @@ def _auth_error_response(
     error_code: str,
     message: str,
 ) -> JSONResponse:
+    _increment_auth_failure()
     response = JSONResponse(
         status_code=status_code,
         content={
