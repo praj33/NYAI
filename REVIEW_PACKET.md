@@ -1,201 +1,286 @@
-# NYAI — REVIEW PACKET (Post-Convergence)
+# NYAI — REVIEW PACKET (BHIV Submission)
 
-**Sprint:** NYAI Canonical Convergence Build  
-**Branch:** `feature/tantra-convergence-ready`  
-**Date:** 12 June 2026  
-**Status:** TANTRA-CONVERGENCE READY (20/20 checklist passed)
+**Sprint:** Constitutional Evidence Infrastructure — Phase IV Production Transition  
+**Date:** 23 June 2026  
+**Status:** COMPLETE — **34/34** tests PASS  
+**Contract:** `final_decision_contract.json` v2.0.0 · `schema_version: tantra_v3` · `evidence_v1`
 
 > **Authoritative operational review packet** (project root).  
-> Proof artifacts: [`SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/`](./SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/)  
-> Audit sign-off: [`CONVERGENCE_AUDIT_REPORT.md`](./SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/CONVERGENCE_AUDIT_REPORT.md)
+> **Phase IV deliverables:** [`Shashank-Constitutional Evidence Infrastructure (NYAI__ Phase IV Production Transition)/`](./Shashank-Constitutional%20Evidence%20Infrastructure%20(NYAI__%20Phase%20IV%20Production%20Transition)/)  
+> **Prior sprint proofs:** [`SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/`](./SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/)
 
 ---
 
-## 1. Entry Point
+## BHIV Onboarding Index
 
-**Start the server**
+Every BHIV submission must include the six sections below. Start here.
+
+| # | Section | Jump |
+|---|---------|------|
+| 1 | [Entry Points](#1-entry-points) | How to run the server, env vars, primary URLs |
+| 2 | [Flow](#2-flow) | Request → evidence → replay → audit paths |
+| 3 | [Files](#3-files) | Every new/changed file and its role |
+| 4 | [Testing](#4-testing) | Suites, commands, what each test proves |
+| 5 | [Failure Modes](#5-failure-modes) | HTTP codes, fail-closed behavior, degraded paths |
+| 6 | [Evidence](#6-evidence) | Proof artifacts, live trace_ids, verification steps |
+
+---
+
+## 1. Entry Points
+
+### Start the server
 
 ```bash
-cd backend && uvicorn api.main:app --reload --port 8000
-# Windows: use PORT=8001 if 8000 is blocked
+cd backend
+export NYAI_API_KEY=your-secret-key        # required — both /nyaya/* and /evidence/*
+export RATE_LIMIT_PER_MINUTE=60            # optional, default 60
+uvicorn api.main:app --reload --port 8000
+# Windows: use --port 8001 if 8000 is blocked
 ```
+
+### Environment variables
+
+| Variable | Required | Purpose |
+|----------|----------|---------|
+| `NYAI_API_KEY` | **Yes** (production) | Fail-closed auth for `/nyaya/*` and `/evidence/*` |
+| `RATE_LIMIT_PER_MINUTE` | No | Per-IP sliding window (default 60) |
+| `RATE_LIMIT_BURST` | No | Burst cap per second (default 10) |
+| `FRONTEND_URL` | No | CORS origin (wildcard if unset) |
+
+### Application entry
 
 | Item | Location |
 |------|----------|
 | FastAPI app | `backend/api/main.py` |
-| Router prefix | `/nyaya` (`main.py` → `include_router`) |
-| Trace middleware | `main.py` — assigns `uuid4` → `request.state.trace_id` on every request |
-| Fail-closed handler | `main.py` — unhandled errors → HTTP 500 + `TANTRA FAIL CLOSED` |
+| Legal query router | `backend/api/router.py` — prefix `/nyaya` |
+| Evidence router | `backend/api/evidence_router.py` — prefix `/evidence` |
+| Trace middleware | `main.py` — `uuid4` → `request.state.trace_id` |
+| Global fail-closed | `main.py` — unhandled errors → HTTP 500 |
 
-**Key endpoints**
+### Middleware stack (order)
 
-| Method | Path | Purpose |
-|--------|------|---------|
-| `POST` | `/nyaya/query` | Primary legal query pipeline |
-| `POST` | `/nyaya/tantra_flow` | TANTRA participation proof |
-| `GET` | `/nyaya/trace/{trace_id}` | Observer replay + tamper check |
-| `GET` | `/nyaya/output/{trace_id}` | Stored output + hash proof |
-| `POST` | `/nyaya/feedback` | RL signal intake (stateless) |
+```
+CORS → TraceIdMiddleware → StructuredLoggingMiddleware → RateLimiterMiddleware → APIKeyAuthMiddleware → Route Handler
+```
 
-**Frontend:** `frontend/src/services/nyayaApi.js` → `GravitasResponseTransformer.js` → `RecommendationGatekeeper.jsx` / `RecommendationStatusCard.jsx`
+**Protected prefixes:** `/nyaya/*`, `/evidence/*`  
+**Exempt:** `/health`, `/health/live`, `/health/ready`, `/metrics`, `/docs`, `/redoc`, `/`
+
+### Primary endpoints
+
+| Method | Path | Auth | Purpose |
+|--------|------|------|---------|
+| `POST` | `/nyaya/query` | Yes | Primary legal query pipeline |
+| `POST` | `/nyaya/tantra_flow` | Yes | TANTRA participation proof |
+| `GET` | `/nyaya/trace/{trace_id}` | Yes | Observer replay + tamper check |
+| `GET` | `/nyaya/output/{trace_id}` | Yes | Stored output + hash proof |
+| `GET` | `/evidence/{trace_id}` | Yes | Canonical `EvidencePackage` |
+| `GET` | `/evidence/search` | Yes | Multi-filter evidence search |
+| `POST` | `/evidence/verify` | Yes | Entry integrity check |
+| `POST` | `/evidence/compare` | Yes | Determinism comparison |
+| `POST` | `/evidence/export` | Yes | JSON or summary export |
+| `GET` | `/health/ready` | No | Readiness incl. `evidence_repository` |
+
+Full evidence API: [`Evidence_API.md`](./Shashank-Constitutional%20Evidence%20Infrastructure%20(NYAI__%20Phase%20IV%20Production%20Transition)/Evidence_API.md) (12 routes).
+
+### Frontend integration
+
+`frontend/src/services/nyayaApi.js` → `GravitasResponseTransformer.js` → `RecommendationGatekeeper.jsx` / `RecommendationStatusCard.jsx`
 
 ---
 
-## 2. Core Flow
+## 2. Flow
 
-`POST /nyaya/query` runs a deterministic pipeline. Each stage records to `ObserverPipeline` for replay.
-
-**Steps**
-
-1. **Ingest** — `clean_query()` → `analyze_query()` → `expand_query()`
-2. **Retrieve** — `hybrid_search()` (12s timeout) → `rerank_sections()` (8s timeout)
-3. **Reason** — `apply_reasoning_rules()` → `provide_legal_advice()` (uses `_temp_trace` from middleware)
-4. **Assemble** — Build Facts, Analysis, `Recommendation` (INFORM / REVIEW / ESCALATE / INSUFFICIENT_DATA)
-5. **Hash** — Compute `input_hash` + `output_hash` → `DeterminismProof`
-6. **Validate** — `ObserverPipeline.validate_response()` → `ResponseBuilder.build()` (both fail-closed)
-7. **Guard** — `trace_guard`: response `trace_id` must equal `_temp_trace`
-8. **Persist** — `output_bucket.store()` → `ledger.append_event()` (warnings only on failure)
-9. **Return** — `NyayaResponse` (11 canonical fields)
-
-**Handler:** `backend/api/router.py` (`query_legal`, line ~117)
-
-**Gates:** `observer/pipeline.py` + `api/response_builder.py` validate against `final_decision_contract.json` v2.0.0. No `enforcement_decision` anywhere in active paths.
-
----
-
-## 3. Live Flow
-
-### A. Standard query
+### A. Query → Evidence (primary path)
 
 ```
-Client POST /nyaya/query
-  → CORS → trace_id middleware (uuid4)
-  → 20-step pipeline (§2)
-  → NyayaResponse JSON (unified trace_id)
+Client POST /nyaya/query  [X-API-Key]
+  → trace_id middleware (uuid4)
+  → query_legal() deterministic pipeline
+      Ingest → Retrieve → Reason → Assemble → Hash → Validate → Guard → Persist
+  → output_bucket.store()          [JSONL append + entry_hash]
+  → response_cache.set()           [L1 write-through]
+  → NyayaResponse JSON returned
 ```
 
-### B. TANTRA participation
+On demand, any stored entry reconstructs as `EvidencePackage` via `EvidenceRepository.get_by_trace_id()`.
+
+### B. Evidence read path
 
 ```
-Client POST /nyaya/tantra_flow
-  → asyncio.to_thread(run_tantra_flow)     [backend/tantra/flow.py]
-  → POST /nyaya/query (same server)
-  → SovereignCoreMock.receive()            [trace + input_hash continuity]
-  → OutputBucket.store() + verify()
-  → flow_status: PASS | FAIL + authority_note
+Client GET /evidence/{trace_id}  [X-API-Key]
+  → evidence_router → evidence_service
+  → EvidenceRepository → FileSystemBackend → OutputBucket [O(1) line seek]
+  → EvidencePackage.from_stored_entry()
+  → JSON response
 ```
 
-**Live evidence (12 June 2026):** `trace_id` `e20fb600-7104-43c5-9869-9c4aa8423d82` — `flow_status: PASS`, sovereign accepted, bucket verified, `schema_version: tantra_v3`, `answer_disclaimer` present.  
-JSON: [`tantra_flow_proof.json`](./SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/tantra_flow_proof.json)
-
-### C. Post-query replay
+### C. Replay path (reconstruct, not re-execute)
 
 ```
-GET /nyaya/trace/{id}  → event_chain + tamper_verified
-GET /nyaya/output/{id} → stored_output + hash_proof + verification
+trace_id
+  → replay_service.replay_by_trace()
+  → EvidenceRepository.get_by_trace_id()
+  → verification_service.verify_by_trace_id()
+  → {replayed: true, evidence: {...}, integrity_status, tamper_detected}
 ```
 
----
+Replay does **not** call `POST /nyaya/query` again. Details: [`Replay_Architecture.md`](./Shashank-Constitutional%20Evidence%20Infrastructure%20(NYAI__%20Phase%20IV%20Production%20Transition)/Replay_Architecture.md).
 
-## 4. Contract Version
-
-| Property | Value |
-|----------|-------|
-| File | `final_decision_contract.json` (repo root) |
-| Version | `2.0.0` / `schema_version: tantra_v3` |
-| Replaces | v1.0.0 (`enforcement_decision` removed) |
-
-**Breaking change:** `enforcement_decision` (ALLOW/BLOCK/RESTRICT) → `recommendation.type` (INFORM/REVIEW/ESCALATE/INSUFFICIENT_DATA)
-
-**11 API fields:** `trace_id`, `request_id`, `input_hash`, `legal_context`, `facts`, `analysis`, `recommendation`, `explanation_chain`, `risk_flags`, `determinism_proof`, `timestamp`
-
-**Verify:** `grep -rn "enforcement_decision" backend/api/ frontend/src/` → 0 results
-
-Full report: [`CONTRACT_ALIGNMENT_REPORT.md`](./SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/CONTRACT_ALIGNMENT_REPORT.md)
-
----
-
-## 5. Trace Lifecycle
-
-**One trace_id from HTTP through sovereign receipt.**
+### D. Secondary `/nyaya/*` read path (L1 → L2 fallback)
 
 ```
-HTTP request
-  → middleware: request.state.trace_id = uuid4()
-  → router: _temp_trace = http_request.state.trace_id
-  → ObserverPipeline(trace_id=_temp_trace)
-  → LegalQuery(trace_id=_temp_trace)
-  → NyayaResponse.trace_id = _temp_trace
-  → trace_guard (TraceContinuityError on mismatch)
-  → output_bucket.store() + ledger.append_event()
-  → SovereignCoreMock receipt (via /tantra_flow)
+GET /nyaya/case_summary?trace_id=
+  → resolve_cached_response(trace_id, response_cache)
+      L1: response_cache.get()
+      L2: evidence_repository.get_raw_by_trace_id()   [survives restart]
+  → 200 with summary JSON  |  404 if not in bucket
 ```
 
-**Checkpoints:** generation (`main.py`) → handler read (`router.py:~124`) → pipeline propagation → `trace_guard` (`router.py:~645`)
+Applies to: `case_summary`, `legal_routes`, `timeline`, `glossary`, `recommendation_status`.
+
+### E. TANTRA participation (unchanged)
+
+```
+POST /nyaya/tantra_flow → run_tantra_flow() → POST /nyaya/query
+  → SovereignCoreMock.receive() → bucket verify → flow_status PASS|FAIL
+```
+
+### F. Security gate
+
+```
+Request to /nyaya/* or /evidence/*
+  → NYAI_API_KEY set?          No → 503 AUTH_CONFIGURATION_ERROR
+  → X-API-Key present?         No → 401 UNAUTHORIZED
+  → hmac.compare_digest?       No → 401 INVALID_API_KEY
+  → Rate limit check           Over → 429 RATE_LIMIT_EXCEEDED
+  → Proceed to handler
+```
+
+### G. Trace continuity (unchanged)
+
+One `trace_id` from HTTP middleware through `ObserverPipeline` → `NyayaResponse` → `output_bucket.store()` → ledger append.
 
 Proof: [`TRACE_CONTINUITY_PROOF.md`](./SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/TRACE_CONTINUITY_PROOF.md)
 
 ---
 
-## 6. Replay Lifecycle
+## 3. Files
 
-**`GET /nyaya/trace/{trace_id}`** (`router.py:~799`)
+### Phase IV — New files
 
-1. `output_bucket.retrieve(trace_id)` — 404 if missing
-2. `output_bucket.verify(trace_id)`
-3. Build `event_chain` from `observer_steps`
-4. Return `TraceResponse` with hashes, `tamper_verified`, `provenance_chain`
+| File | Role |
+|------|------|
+| `backend/evidence/__init__.py` | Package export: `EvidencePackage`, `EVIDENCE_SCHEMA_VERSION` |
+| `backend/evidence/models.py` | Canonical `EvidencePackage` — 8 dataclasses, `from_stored_entry()` |
+| `backend/evidence/storage_backend.py` | `EvidenceStorageBackend` Protocol; `FileSystemBackend`; Redis/S3 stubs |
+| `backend/evidence/repository.py` | Single source of truth — read, search, date/version filters, ledger lookup |
+| `backend/evidence/integrity.py` | Entry hash recomputation + ledger chain verification |
+| `backend/evidence/replay_engine.py` | Replay by trace/hash/recommendation/jurisdiction/statute; `compare_evidence()` |
+| `backend/evidence/search.py` | Multi-filter search with pagination |
+| `backend/evidence/exporter.py` | JSON and summary export formats |
+| `backend/api/evidence_router.py` | 12 `/evidence/*` routes — thin orchestration only |
+| `backend/services/evidence_service.py` | API orchestration + `resolve_cached_response()` L2 helper |
+| `backend/services/replay_service.py` | Replay and compare operations |
+| `backend/services/verification_service.py` | Integrity and chain verification |
+| `backend/services/query_executor.py` | Shared ThreadPoolExecutor pools (hybrid retrieval + reranker) |
+| `backend/tests/test_evidence_infrastructure.py` | 13 evidence infrastructure tests |
 
-**`GET /nyaya/output/{trace_id}`** (`router.py:~850`)
+### Phase IV — Patched files
 
-Returns `stored_output`, `verification`, `hash_proof` (input/output hashes, tamper flag).
+| File | Change |
+|------|--------|
+| `backend/tantra/output_bucket.py` | O(1) line-number index; `retrieve_as_evidence()`; `list_all()` |
+| `backend/api/router.py` | Shared thread pools; L2 fallback via `resolve_cached_response()` on 5 endpoints |
+| `backend/api/main.py` | `include_router(evidence_router)` |
+| `backend/api/health.py` | `evidence_repository` readiness check |
+| `backend/api/security.py` | Auth extended to `/evidence/*` |
+| `backend/api/rate_limiter.py` | Rate limit extended to `/evidence/*` |
+| `backend/README.md` | Phase IV section added |
 
-**Provenance:** `HashChainLedger.append_event()` → `backend/provenance_ledger.json` after each store.
+### Phase IV — Documentation deliverables
 
-Live JSON: [`trace_replay_proof.json`](./SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/trace_replay_proof.json), [`output_proof.json`](./SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/output_proof.json)
+| File | Role |
+|------|------|
+| `Shashank-.../README.md` | Deliverables index + proof artifact links |
+| `Shashank-.../Architecture.md` | Before/after, component map, security |
+| `Shashank-.../Evidence_Model.md` | Dataclass reference + JSON example |
+| `Shashank-.../Evidence_API.md` | Full API reference (12 routes) |
+| `Shashank-.../Replay_Architecture.md` | Replay semantics and compare |
+| `Shashank-.../Migration_Guide.md` | L1/L2 migration, no URL changes |
+| `Shashank-.../Future_Extensibility.md` | Redis, S3, Governance Console paths |
 
-Report: [`REPLAY_PROOF_REPORT.md`](./SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/REPLAY_PROOF_REPORT.md)
+### Protected — do not modify without review
+
+`api/schemas.py`, `api/response_builder.py`, `observer/pipeline.py`, `tantra/flow.py`, recommendation semantics, `governed_execution`, `raj_adapter`, `sovereign_agents`.
+
+### Runtime data (generated)
+
+| Path | Content |
+|------|---------|
+| `backend/output_logs/nyai_output_log.jsonl` | Append-only evidence store |
+| `backend/provenance_ledger.json` | Hash chain ledger |
 
 ---
 
-## 7. Output Bucket Lifecycle
+## 4. Testing
 
-**Module:** `backend/tantra/output_bucket.py` (singleton)  
-**Storage:** `backend/output_logs/nyai_output_log.jsonl`
+### Run all sprint suites
 
-| Phase | Trigger | Endpoint |
-|-------|---------|----------|
-| **Store** | After successful `/query` | — |
-| **Retrieve** | On replay request | `GET /nyaya/output/{id}`, `GET /nyaya/trace/{id}` |
-| **Verify** | On replay request | Included in both endpoints |
-| **Ledger append** | After store | Writes `provenance_ledger.json` |
+```bash
+cd backend
+pytest tests/test_evidence_infrastructure.py tests/test_production_hardening.py tests/test_tantra_convergence.py -v
+```
 
-Store/ledger failures log warnings — they do not block the HTTP response.
+### Results (23 June 2026)
+
+| Phase | Suite | Tests | Status |
+|-------|-------|-------|--------|
+| Phase I — TANTRA Convergence | `test_tantra_convergence.py` | 6/6 | PASS |
+| Phase II — Production Hardening | `test_production_hardening.py` | 15/15 | PASS |
+| Phase IV — Evidence Infrastructure | `test_evidence_infrastructure.py` | 13/13 | PASS |
+| **Total** | | **34/34** | **PASS** |
+
+### What each evidence test proves
+
+| Test | Proves |
+|------|--------|
+| `test_1_evidence_package_model` | `EvidencePackage.from_stored_entry()` builds all required fields |
+| `test_2_evidence_repository_get_by_trace_id` | Repository reads from persistent OutputBucket |
+| `test_3_get_evidence_endpoint` | `GET /evidence/{id}` returns 200 + canonical package |
+| `test_4_evidence_search` | `GET /evidence/search` returns paginated results |
+| `test_5_evidence_integrity_verify` | `POST /evidence/verify` returns integrity status |
+| `test_6_replay_by_trace` | Replay reconstructs evidence with integrity check |
+| `test_7_secondary_endpoints_use_persistent_storage` | `/case_summary` works after cache clear (L2) |
+| `test_8_evidence_export` | JSON and summary export formats |
+| `test_9_evidence_authentication_enforced` | `/evidence/*` returns 401 without key |
+| `test_10_evidence_authentication_invalid_key` | Wrong key returns 401 `INVALID_API_KEY` |
+| `test_11_evidence_compare` | `POST /evidence/compare` returns determinism diff |
+| `test_12_evidence_search_date_and_version` | Date-range and version filters work |
+| `test_13_get_ledger_entry_for_trace` | Ledger cross-reference helper callable |
+
+### CI
+
+`backend/.github/workflows/ci.yml` — convergence + production suites; hard-fail on any failure.
+
+### Manual smoke (requires running server + `NYAI_API_KEY`)
+
+```bash
+# Must return 401 without key
+curl -s -o /dev/null -w "%{http_code}" http://localhost:8000/evidence/search?limit=1
+# Expected: 401
+
+# With key — replace TRACE_ID from output_logs
+curl -H "X-API-Key: $NYAI_API_KEY" http://localhost:8000/evidence/TRACE_ID
+curl -X POST -H "X-API-Key: $NYAI_API_KEY" -H "Content-Type: application/json" \
+  -d '{"trace_id":"TRACE_ID"}' http://localhost:8000/evidence/verify
+```
 
 ---
 
-## 8. Sovereign Participation
+## 5. Failure Modes
 
-**Chain:** `POST /nyaya/tantra_flow` → `run_tantra_flow()` → `/nyaya/query` → `SovereignCoreMock.receive()` → bucket verify → `flow_status`
-
-**Authority boundaries (summary)**
-
-| Dimension | NYAI |
-|-----------|------|
-| Owns | Advisory recommendation, trace, schema gating, provenance |
-| Does NOT own | Enforcement, content blocking, binding jurisdiction |
-| Ceiling | Maximum unilateral action = advisory recommendation |
-| Verdict | Cannot accidentally become authority |
-
-Every `/tantra_flow` response includes: `"authority_note": "Advisory participation only. No enforcement authority transferred."`
-
-**Frontend migrated:** `RecommendationStatusCard`, `RecommendationGatekeeper`, `normalizeRecommendation()` — all 4 recommendation types render full document (no BLOCK gate).
-
-Full matrix: [`AUTHORITY_MATRIX_V2.md`](./SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/AUTHORITY_MATRIX_V2.md)
-
----
-
-## 9. Failure Modes
+### Legal query pipeline (`/nyaya/query`)
 
 | Condition | HTTP | Behavior |
 |-----------|------|----------|
@@ -203,159 +288,128 @@ Full matrix: [`AUTHORITY_MATRIX_V2.md`](./SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATI
 | Hash mismatch | 500 | Fail-closed |
 | Trace ID mutated mid-pipeline | 500 | `TRACE_CONTINUITY_ERROR` |
 | Invalid payload | 422 | Rejected before pipeline |
-| Trace not in bucket | 404 | Replay endpoints only |
-| TANTRA flow exception | 500 | No flow proof returned |
 | Unhandled exception | 500 | `TANTRA FAIL CLOSED` (global handler) |
-| Bucket / ledger store fail | — | Warning logged; response still returned |
+| Bucket / ledger store fail | — | Warning logged; HTTP response still returned |
+
+### Replay endpoints (`/nyaya/trace`, `/nyaya/output`)
+
+| Condition | HTTP | Behavior |
+|-----------|------|----------|
+| Trace not in bucket | 404 | `trace_id not found in output bucket` |
+| Entry hash mismatch on verify | 200 | `tamper_detected: true` in response body |
+
+### Evidence endpoints (`/evidence/*`)
+
+| Condition | HTTP | `error_code` |
+|-----------|------|--------------|
+| Missing `X-API-Key` | 401 | `UNAUTHORIZED` |
+| Wrong API key | 401 | `INVALID_API_KEY` |
+| `NYAI_API_KEY` not configured | 503 | `AUTH_CONFIGURATION_ERROR` |
+| Rate limit exceeded | 429 | `RATE_LIMIT_EXCEEDED` |
+| Evidence not found | 404 | `EVIDENCE_NOT_FOUND` |
+| Invalid recommendation filter | 400 | `INVALID_RECOMMENDATION_TYPE` |
+| Integrity tamper detected | 200 | `integrity_status: TAMPERED` (fail-open for audit visibility) |
+
+### Secondary read endpoints (post-restart)
+
+| Condition | HTTP | Behavior |
+|-----------|------|----------|
+| In L1 cache | 200 | Fast path |
+| Cache miss, in OutputBucket | 200 | L2 `EvidenceRepository` fallback |
+| Not in cache or bucket | 404 | `trace_id not found` |
+
+### Health readiness
+
+| Dependency | Degraded signal |
+|------------|-----------------|
+| `evidence_repository` | `DEGRADED` in `/health/ready` |
+| `output_bucket` / ledger / retriever | `FAIL` → 503 unavailable |
 
 NYAI fails closed on schema and trace integrity — not on legal content. All recommendation types deliver the full advisory document.
 
 ---
 
-## 10. Testing Proof
+## 6. Evidence
 
-**Convergence:** `backend/tests/test_tantra_convergence.py` (6 tests)  
-**Production hardening:** `backend/tests/test_production_hardening.py` (8 tests)
+### Proof artifacts (Phase IV)
 
-| Suite | Tests | Verifies |
-|-------|-------|----------|
-| Convergence | 6 | Schema, trace continuity, bucket, ledger |
-| Production | 8 | Auth, rate limit, health, logging, metrics, deployment scenarios |
+Located in [`Shashank-Constitutional Evidence Infrastructure (NYAI__ Phase IV Production Transition)/`](./Shashank-Constitutional%20Evidence%20Infrastructure%20(NYAI__%20Phase%20IV%20Production%20Transition)/):
 
-**Run**
+| Artifact | Proves | Live trace_id |
+|----------|--------|---------------|
+| [`smoke_test_evidence.json`](./Shashank-Constitutional%20Evidence%20Infrastructure%20(NYAI__%20Phase%20IV%20Production%20Transition)/smoke_test_evidence.json) | GET evidence → verify → search chain (all 200) | `b5c037ef-c877-4972-8517-3d212b4e6220` |
+| [`replay_proof.json`](./Shashank-Constitutional%20Evidence%20Infrastructure%20(NYAI__%20Phase%20IV%20Production%20Transition)/replay_proof.json) | `replay_by_trace()` with `integrity_status: VERIFIED` | `b5c037ef-c877-4972-8517-3d212b4e6220` |
+| [`example_exported_evidence.json`](./Shashank-Constitutional%20Evidence%20Infrastructure%20(NYAI__%20Phase%20IV%20Production%20Transition)/example_exported_evidence.json) | Full `POST /evidence/export` JSON response | `b5c037ef-c877-4972-8517-3d212b4e6220` |
+
+### Prior sprint proofs (TANTRA convergence)
+
+| Artifact | Proves |
+|----------|--------|
+| [`tantra_flow_proof.json`](./SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/tantra_flow_proof.json) | TANTRA flow PASS — trace `e20fb600-7104-43c5-9869-9c4aa8423d82` |
+| [`trace_replay_proof.json`](./SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/trace_replay_proof.json) | Observer replay + tamper verification |
+| [`output_proof.json`](./SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/output_proof.json) | Output bucket hash proof |
+| [`CONVERGENCE_AUDIT_REPORT.md`](./SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/CONVERGENCE_AUDIT_REPORT.md) | 8/8 convergence gaps PASS |
+
+### Acceptance criteria sign-off
+
+| Criterion | Status | Evidence |
+|-----------|--------|----------|
+| Runtime replay no longer depends on cache alone | PASS | `test_7_secondary_endpoints_use_persistent_storage` |
+| Every response produces canonical evidence | PASS | `EvidencePackage.from_stored_entry()` on all bucket entries |
+| Evidence independently replayable | PASS | `replay_proof.json` + `test_6_replay_by_trace` |
+| Evidence integrity verifiable | PASS | `smoke_test_evidence.json` verify step + `test_5` |
+| Replay deterministic | PASS | `test_11_evidence_compare` |
+| `/evidence/*` auth enforced | PASS | `test_9`, `test_10` |
+| APIs backward compatible | PASS | All `/nyaya/*` tests still PASS (6/6) |
+| Documentation enables onboarding | PASS | This packet + 7 deliverable docs |
+
+### Contract verification
 
 ```bash
-cd backend && pytest tests/test_tantra_convergence.py tests/test_production_hardening.py -v
+grep -rn "enforcement_decision" backend/api/ frontend/src/
+# Expected: 0 results in active paths
 ```
 
-**CI:** `backend/.github/workflows/ci.yml` — both suites run sequentially; hard-fail on any failure.
+---
 
-**Result:** 14/14 passed (18 June 2026)
+## Appendix A — Contract & Recommendation Semantics
+
+| Property | Value |
+|----------|-------|
+| Contract file | `final_decision_contract.json` v2.0.0 |
+| Schema | `tantra_v3` |
+| Evidence schema | `evidence_v1` / format `1.0.0` |
+| Recommendation types | INFORM · REVIEW · ESCALATE · INSUFFICIENT_DATA (advisory only) |
+
+**11 API fields:** `trace_id`, `request_id`, `input_hash`, `legal_context`, `facts`, `analysis`, `recommendation`, `explanation_chain`, `risk_flags`, `determinism_proof`, `timestamp`
 
 ---
 
-## 11. Convergence Proof
+## Appendix B — Known Limitations
 
-**Signal → Intelligence → Recommendation → Contract → Output Bucket → Sovereign Receipt → Replay → Observability** — one `trace_id`, one schema, one provenance chain.
-
-| Gap | Status | Evidence |
-|-----|--------|----------|
-| 1 Stale contract v1.0.0 | PASS | `final_decision_contract.json` v2.0.0 |
-| 2 Orphan middleware trace | PASS | `router.py` reads `request.state.trace_id` |
-| 3 Trace endpoint stub | PASS | Real `output_bucket` retrieval |
-| 4 Hash chain disconnected | PASS | `ledger.append_event()` after store |
-| 5 `tantra_flow` script-only | PASS | `POST /nyaya/tantra_flow` |
-| 6 SovereignCoreMock unwired | PASS | Called via `tantra/flow.py` |
-| 7 Frontend enforcement semantics | PASS | Recommendation model; grep clean |
-| 8 CI silent pass | PASS | 6/6 tests; hard-failing CI |
-
-**Deliverables index:** [`README.md`](./SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/README.md)  
-**End-to-end proof:** [`TANTRA_CONVERGENCE_PROOF.md`](./SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_PLAN/TANTRA_CONVERGENCE_PROOF.md)
+| Limitation | Status |
+|------------|--------|
+| `SovereignCoreMock` in-memory | Deferred |
+| OutputBucket local filesystem only | Deferred (S3 stub in `storage_backend.py`) |
+| EvidenceSearch sequential scan | Open — no inverted index |
+| Rate limiter in-memory (no Redis) | Open |
+| `governed_execution` / `raj_adapter` / `sovereign_agents` | Intentionally disconnected |
 
 ---
 
-## 12. Known Limitations
+## Appendix C — Next Recommended Sprint
 
-| Limitation | Mitigation | Sprint Status |
-|------------|------------|---------------|
-| Security validation missing (auth, rate limit, audit log) | API key auth, rate limiter, structured logging | **Resolved** |
-| Load/scale validation missing | Deployment validation scenarios + metrics | **Partially resolved** |
-| Independent verification missing | 8 hard-failing production tests | **Partially resolved** |
-| `SovereignCoreMock` — in-memory, lost on restart | Replace with real core (future sprint) | **Deferred** |
-| CORS wildcard when `FRONTEND_URL` unset | Set `FRONTEND_URL` in production | Open |
-| BM25 index ~9723 sections at startup | Index sharding / lazy load (future) | Open |
-| RL rewards not persisted | Documented caps if persistence added | Open |
-| Hash chain local disk only | Remote ledger sync (future) | **Deferred** |
-| Port 8000 blocked on Windows | Use `PORT=8001` | Open |
-| `governed_execution` / `raj_adapter` / `sovereign_agents` disconnected | Intentional — constitutional review | **Intentional** |
-
-**Do not touch without review:** recommendation schema semantics, disconnected authority modules.
-
----
-
-## Security Layer Flow (NEW — Production Sprint)
-
-```
-Client Request
-  → CORS
-  → TraceIdMiddleware (uuid4 → request.state.trace_id)
-  → StructuredLoggingMiddleware
-  → RateLimiterMiddleware (/nyaya/* only)
-  → APIKeyAuthMiddleware (/nyaya/* only)
-  → Route Handler
-```
-
-**Auth flow:**
-1. Path starts with `/nyaya/`? If no → bypass.
-2. `NYAI_API_KEY` set? If no → 503 `AUTH_CONFIGURATION_ERROR`.
-3. `X-API-Key` present? If no → 401 `UNAUTHORIZED`.
-4. `hmac.compare_digest(header, env)` → mismatch 401 `INVALID_API_KEY`, match → proceed.
-
-**Rate limiter flow:**
-1. Path starts with `/nyaya/`? If no → bypass.
-2. Extract client IP (X-Forwarded-For → X-Real-IP → client.host).
-3. Sliding window check (60s, `RATE_LIMIT_PER_MINUTE`).
-4. Over limit → 429 + `Retry-After` + `RATE_LIMIT_EXCEEDED`.
-
-**Exempt paths:** `/health`, `/health/live`, `/health/ready`, `/metrics`, `/docs`, `/redoc`, `/`
-
----
-
-## Health Check Flow (NEW — Production Sprint)
-
-| Endpoint | Checks | HTTP |
-|----------|--------|------|
-| `GET /health` | Process alive | 200 |
-| `GET /health/live` | Liveness | 200 |
-| `GET /health/ready` | output_bucket, ledger, retriever, model | 200 ready/degraded; 503 unavailable |
-
-**Dependency logic:** Each check wrapped in try/except → `PASS` | `DEGRADED` | `FAIL`.
-
----
-
-## Telemetry Flow (NEW — Production Sprint)
-
-**Structured log (NDJSON on stderr):**
-```json
-{"timestamp":"...","trace_id":"...","endpoint":"/nyaya/query","method":"POST","status_code":200,"duration_ms":342.7,"client_ip":"...","error_code":null,"log_level":"INFO"}
-```
-
-**Metrics:** `GET /metrics` — counters, latency average, uptime. See [`ARYA Quadruped__ Physical Prototype Readiness/METRICS_README.md`](./ARYA%20Quadruped__%20Physical%20Prototype%20Readiness/METRICS_README.md).
-
-**Error classification map:** Documented verbatim in METRICS_README.md.
-
----
-
-## Deployment Validation Results (NEW — Production Sprint)
-
-**Summary: 8/8 PASS**
-
-Full report: [`ARYA Quadruped__ Physical Prototype Readiness/DEPLOYMENT_VALIDATION_REPORT.md`](./ARYA%20Quadruped__%20Physical%20Prototype%20Readiness/DEPLOYMENT_VALIDATION_REPORT.md)
-
----
-
-## Test Suite (UPDATED — Production Sprint)
-
-- **Original:** 6 convergence tests (`test_tantra_convergence.py`)
-- **Added:** 8 production hardening tests (`test_production_hardening.py`)
-- **CI:** Both run sequentially; both hard-fail
-- **Total:** 14/14 PASS
-
----
-
-## Next Recommended Sprint
-
-1. Persistent sovereign receipt layer (resolves reviewer gap — SovereignCoreMock)
-2. Remote ledger replication (resolves local provenance gap)
-3. Load/stress testing (resolves scale validation gap)
-4. Governed module constitutional review (resolves disconnected modules gap)
+1. Redis for rate limiter and evidence index
+2. Persistent sovereign receipt layer
+3. Distributed OutputBucket (S3/GCS)
+4. Evidence stream for downstream real-time consumers
 
 ---
 
 ## Verdict
 
-**PRODUCTION HARDENING SPRINT COMPLETE — NYAI IS PRODUCTION CANDIDATE READY.**
+**PHASE IV CONSTITUTIONAL EVIDENCE INFRASTRUCTURE — BHIV SUBMISSION COMPLETE.**
 
-TANTRA convergence preserved (6/6). Production controls added (8/8). API key auth, rate limiting, health probes, structured logging, and metrics operational. Legal reasoning semantics, trace lifecycle, and advisory posture unchanged.
+TANTRA convergence preserved (6/6). Production controls preserved (15/15). Evidence infrastructure operational (13/13). Every query execution is a permanent, replayable evidence object. Legal reasoning semantics, trace lifecycle, and advisory posture unchanged.
 
-**Reports:** [`ARYA Quadruped__ Physical Prototype Readiness/PRODUCTION_READINESS_REPORT.md`](./ARYA%20Quadruped__%20Physical%20Prototype%20Readiness/PRODUCTION_READINESS_REPORT.md)
+**Start onboarding here:** Sections [1](#1-entry-points) → [6](#6-evidence) above.

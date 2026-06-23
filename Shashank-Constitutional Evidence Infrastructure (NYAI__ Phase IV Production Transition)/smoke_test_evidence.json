@@ -1,0 +1,22 @@
+{
+  "description": "End-to-end evidence smoke test using real OutputBucket trace_id",
+  "trace_id": "b5c037ef-c877-4972-8517-3d212b4e6220",
+  "steps": {
+    "GET /evidence/{trace_id}": {
+      "status_code": 200,
+      "has_identity": true
+    },
+    "POST /evidence/verify": {
+      "verified": true,
+      "trace_id": "b5c037ef-c877-4972-8517-3d212b4e6220",
+      "stored_entry_hash": "676f756c152d75f9b05f0b147a98597cec184e63904bf3d38854c44621322dcc",
+      "recomputed_entry_hash": "676f756c152d75f9b05f0b147a98597cec184e63904bf3d38854c44621322dcc",
+      "tamper_detected": false,
+      "integrity_status": "VERIFIED"
+    },
+    "GET /evidence/search?limit=1": {
+      "status_code": 200,
+      "total": 500
+    }
+  }
+}

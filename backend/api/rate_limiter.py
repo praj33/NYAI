@@ -1,5 +1,5 @@
 """
-Per-IP sliding window rate limiter for /nyaya/* routes.
+Per-IP sliding window rate limiter for /nyaya/* and /evidence/* routes.
 
 Window: 60 seconds (RATE_LIMIT_PER_MINUTE)
 Burst: 1 second (RATE_LIMIT_BURST) — limits rapid-fire requests per IP
@@ -16,7 +16,11 @@ from starlette.responses import JSONResponse
 
 from api.error_codes import ErrorCode
 
-_PROTECTED_PREFIX = "/nyaya/"
+_PROTECTED_PREFIXES = ("/nyaya/", "/evidence/")
+
+
+def _is_protected_path(path: str) -> bool:
+    return any(path.startswith(prefix) for prefix in _PROTECTED_PREFIXES)
 _WINDOW_SECONDS = 60
 _BURST_WINDOW_SECONDS = 1
 _PRUNE_INTERVAL_SECONDS = 300
@@ -152,10 +156,10 @@ def reset_rate_limiter() -> None:
 
 
 class RateLimiterMiddleware(BaseHTTPMiddleware):
-    """Sliding-window per-IP rate limiter with burst protection for /nyaya/* routes."""
+    """Sliding-window per-IP rate limiter with burst protection for protected routes."""
 
     async def dispatch(self, request: Request, call_next):
-        if not request.url.path.startswith(_PROTECTED_PREFIX):
+        if not _is_protected_path(request.url.path):
             return await call_next(request)
 
         limit = _limit_per_minute()

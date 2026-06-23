@@ -1,7 +1,7 @@
 """
 API Key Authentication Middleware for NYAI.
 
-Protected routes: /nyaya/*
+Protected routes: /nyaya/*, /evidence/*
 Exempt routes: /health, /health/live, /health/ready, /metrics, /docs, /redoc, /
 """
 import hmac
@@ -16,11 +16,11 @@ from api.error_codes import ErrorCode
 
 logger = logging.getLogger(__name__)
 
-_PROTECTED_PREFIX = "/nyaya/"
+_PROTECTED_PREFIXES = ("/nyaya/", "/evidence/")
 
 
 def _is_protected_path(path: str) -> bool:
-    return path.startswith(_PROTECTED_PREFIX)
+    return any(path.startswith(prefix) for prefix in _PROTECTED_PREFIXES)
 
 
 def _trace_id(request: Request) -> str:
@@ -82,7 +82,7 @@ def _auth_error_response(
 
 
 class APIKeyAuthMiddleware(BaseHTTPMiddleware):
-    """Fail-closed API key gate for /nyaya/* routes."""
+    """Fail-closed API key gate for /nyaya/* and /evidence/* routes."""
 
     async def dispatch(self, request: Request, call_next):
         if not _is_protected_path(request.url.path):
@@ -93,7 +93,7 @@ class APIKeyAuthMiddleware(BaseHTTPMiddleware):
             if not getattr(APIKeyAuthMiddleware, "_degraded_logged", False):
                 logger.critical(
                     "NYAI_API_KEY is not set — auth running in DEGRADED mode; "
-                    "all /nyaya/* requests will receive 503"
+                    "all protected requests will receive 503"
                 )
                 APIKeyAuthMiddleware._degraded_logged = True
             return _auth_error_response(

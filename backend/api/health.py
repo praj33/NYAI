@@ -69,6 +69,15 @@ def model_check() -> Dict[str, str]:
     return {"status": "DEGRADED", "detail": "GROQ_API_KEY not set; LLM calls may fail"}
 
 
+def _check_evidence_repository() -> dict:
+    try:
+        from evidence.repository import evidence_repository
+        count = evidence_repository.count()
+        return {"status": "PASS", "detail": f"Evidence repository accessible ({count} packages stored)"}
+    except Exception as e:
+        return {"status": "DEGRADED", "detail": f"Evidence repository: {str(e)[:200]}"}
+
+
 @health_router.get("/health")
 async def health() -> Dict[str, Any]:
     return _basic_health_payload()
@@ -86,6 +95,7 @@ async def health_ready() -> JSONResponse:
         "ledger": ledger_check(),
         "retriever": retriever_check(),
         "model": model_check(),
+        "evidence_repository": _check_evidence_repository(),
     }
 
     statuses = [dep["status"] for dep in dependencies.values()]

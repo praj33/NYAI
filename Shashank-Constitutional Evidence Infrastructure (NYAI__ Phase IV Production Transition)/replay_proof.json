@@ -1,0 +1,1048 @@
+{
+  "replayed": true,
+  "trace_id": "b5c037ef-c877-4972-8517-3d212b4e6220",
+  "integrity_status": "VERIFIED",
+  "tamper_detected": false,
+  "evidence": {
+    "identity": {
+      "trace_id": "b5c037ef-c877-4972-8517-3d212b4e6220",
+      "request_id": "req_780eafc1be76",
+      "evidence_id": "3013553e3dcde309f085c2719ad5cb79c8f6327d22f8dbf041c1954b469c5222",
+      "schema_version": "evidence_v1",
+      "evidence_version": "1.0.0",
+      "origin": "nyai-legal-engine",
+      "created_at": "2026-06-23T05:23:24.466472"
+    },
+    "input": {
+      "raw_query": "",
+      "cleaned_query": "",
+      "jurisdiction_hint": "INDIA",
+      "domain_hint": "criminal",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330"
+    },
+    "decision": {
+      "recommendation_type": "INFORM",
+      "confidence": 0.75,
+      "rationale": "Query resolved with 2 statute(s) at 75% confidence",
+      "jurisdiction": "IN",
+      "domain": "criminal",
+      "jurisdiction_confidence": 1.0
+    },
+    "reasoning": {
+      "facts": [
+        {
+          "fact_id": "F1",
+          "source": "input",
+          "statement": "User query: theft of mobile phone"
+        },
+        {
+          "fact_id": "F2",
+          "source": "JurisdictionDetector",
+          "statement": "Jurisdiction detected: INDIA (confidence: 1.00)"
+        },
+        {
+          "fact_id": "F3",
+          "source": "DomainClassifier",
+          "statement": "Domain classified: criminal"
+        },
+        {
+          "fact_id": "F4",
+          "source": "BM25Search",
+          "statement": "Statutes matched: 2"
+        },
+        {
+          "fact_id": "F5",
+          "source": "CaseLawRetriever",
+          "statement": "Case laws found: 0"
+        }
+      ],
+      "applicable_statutes": [
+        "act='Indian Penal Code' year=1860 section='378' title='Theft'",
+        "act='Indian Penal Code' year=1860 section='379' title='Punishment for theft'"
+      ],
+      "case_laws": [],
+      "explanation_chain": [
+        {
+          "description": "Query received and cleaned: 'theft of mobile phone'",
+          "source": "QueryCleaner",
+          "step_number": 1
+        },
+        {
+          "description": "Jurisdiction detected: INDIA (confidence: 1.00)",
+          "source": "JurisdictionDetector",
+          "step_number": 2
+        },
+        {
+          "description": "Domain classified: criminal",
+          "source": "DomainClassifier",
+          "step_number": 3
+        },
+        {
+          "description": "BM25 full-text search executed across N/A sections",
+          "source": "BM25Search",
+          "step_number": 4
+        },
+        {
+          "description": "Statute overrides checked for keyword matches",
+          "source": "ReasoningEngine",
+          "step_number": 5
+        },
+        {
+          "description": "2 relevant statute(s) identified",
+          "source": "StatuteMerger",
+          "step_number": 6
+        },
+        {
+          "description": "0 case law(s) retrieved",
+          "source": "CaseLawRetriever",
+          "step_number": 7
+        },
+        {
+          "description": "Recommendation: INFORM \u2014 Query resolved with 2 statute(s) at 75% confidence",
+          "source": "RecommendationEngine",
+          "step_number": 8
+        }
+      ],
+      "rule_application": [
+        {
+          "application": "Theft",
+          "law_id": "Indian Penal Code:378"
+        },
+        {
+          "application": "Punishment for theft",
+          "law_id": "Indian Penal Code:379"
+        }
+      ],
+      "observer_steps": [
+        {
+          "observed": {
+            "raw_query": "theft of mobile phone"
+          },
+          "stage": "query_received",
+          "timestamp": "2026-06-23T05:23:23.958733",
+          "trace_id": "b5c037ef-c877-4972-8517-3d212b4e6220"
+        },
+        {
+          "observed": {
+            "domain": "criminal",
+            "source": "local_fallback"
+          },
+          "stage": "query_understanding",
+          "timestamp": "2026-06-23T05:23:24.003585",
+          "trace_id": "b5c037ef-c877-4972-8517-3d212b4e6220"
+        },
+        {
+          "observed": {
+            "expanded_count": 4
+          },
+          "stage": "query_expansion",
+          "timestamp": "2026-06-23T05:23:24.066201",
+          "trace_id": "b5c037ef-c877-4972-8517-3d212b4e6220"
+        },
+        {
+          "observed": {
+            "candidates_found": 0
+          },
+          "stage": "hybrid_retrieval",
+          "timestamp": "2026-06-23T05:23:24.068202",
+          "trace_id": "b5c037ef-c877-4972-8517-3d212b4e6220"
+        },
+        {
+          "observed": {
+            "reranked_top": 0
+          },
+          "stage": "cross_encoder_reranking",
+          "timestamp": "2026-06-23T05:23:24.068202",
+          "trace_id": "b5c037ef-c877-4972-8517-3d212b4e6220"
+        },
+        {
+          "observed": {
+            "domain": "criminal",
+            "jurisdiction": "IN",
+            "sections": 2
+          },
+          "stage": "clean_legal_advisor",
+          "timestamp": "2026-06-23T05:23:24.465471",
+          "trace_id": "b5c037ef-c877-4972-8517-3d212b4e6220"
+        },
+        {
+          "observed": {
+            "cases_found": 0
+          },
+          "stage": "case_law_retriever",
+          "timestamp": "2026-06-23T05:23:24.465471",
+          "trace_id": "b5c037ef-c877-4972-8517-3d212b4e6220"
+        },
+        {
+          "observed": {
+            "has_answer": true
+          },
+          "stage": "response_enriched",
+          "timestamp": "2026-06-23T05:23:24.465471",
+          "trace_id": "b5c037ef-c877-4972-8517-3d212b4e6220"
+        }
+      ],
+      "observer_validation": {
+        "determinism_verified": true,
+        "schema_valid": true,
+        "trace_continuity_check": true,
+        "validated_at": "2026-06-23T05:23:24.466472",
+        "validation_status": "PASS",
+        "violations": []
+      }
+    },
+    "hashes": {
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+      "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+      "entry_hash": "676f756c152d75f9b05f0b147a98597cec184e63904bf3d38854c44621322dcc",
+      "determinism_version": "3.0.0"
+    },
+    "storage": {
+      "stored_at": "2026-06-23T05:23:24.466472",
+      "storage_file": "output_logs/nyai_output_log.jsonl",
+      "ledger_index": null,
+      "replay_source": "output_bucket"
+    },
+    "replay": {
+      "is_replayable": true,
+      "replay_inputs": {
+        "trace_id": "b5c037ef-c877-4972-8517-3d212b4e6220",
+        "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330"
+      },
+      "last_replayed_at": null,
+      "replay_count": 0
+    },
+    "integrity_status": "VERIFIED",
+    "attachments": {
+      "timeline": [
+        {
+          "eta": "Varies",
+          "step": "Filing of FIR"
+        },
+        {
+          "eta": "Varies",
+          "step": "Investigation"
+        },
+        {
+          "eta": "Varies",
+          "step": "Bail Hearing"
+        },
+        {
+          "eta": "Varies",
+          "step": "Filing of Charge Sheet or Closure Report"
+        }
+      ],
+      "glossary": [
+        {
+          "definition": "Dishonestly taking movable property",
+          "term": "Theft"
+        }
+      ],
+      "legal_route": [
+        "query_cleaning",
+        "query_understanding",
+        "query_expansion",
+        "hybrid_retrieval",
+        "cross_encoder_reranking",
+        "legal_reasoning_engine",
+        "clean_legal_advisor",
+        "case_law_retriever"
+      ],
+      "risk_flags": [],
+      "procedural_steps": [
+        "Filing of FIR: Information relating to the commission of a cognizable offence is recorded by the police under Section 154 of the CrPC.",
+        "Investigation: Police conduct investigation including evidence collection, witness examination, and arrests where necessary.",
+        "Bail Hearing: Court considers bail application and determines whether the accused should be released or remanded to custody. | Possible outcomes: Bail granted -> Accused released subject to bail conditions; Bail rejected -> Accused remanded to custody | Typical outcomes: Regular bail granted, Interim bail granted | Key risks: Incomplete investigation",
+        "Filing of Charge Sheet or Closure Report: Police submit a charge sheet under Section 173 CrPC or file a closure report if evidence is insufficient. | Possible outcomes: Charge sheet filed -> Prosecution initiated; Closure report filed -> Proceedings terminated unless contested | Typical outcomes: Charge sheet accepted, Further investigation ordered | Key risks: Insufficient evidence",
+        "Cognizance by Magistrate: Magistrate takes cognizance of the offence and issues process to the accused.",
+        "Framing of Charges: Court frames charges against the accused if sufficient grounds exist to proceed with trial.",
+        "Trial: Evidence is led by prosecution and defence, witnesses are examined, and arguments are heard.",
+        "Judgment: Court delivers judgment acquitting or convicting the accused.",
+        "Appeal: Aggrieved party may appeal the judgment before a higher court as per law.",
+        "Expected Timeline: Best case: 6\u201312 months, Average: 1\u20133 years, Worst case: 5+ years"
+      ],
+      "remedies": [
+        "Criminal prosecution for theft, robbery, or related offences with imprisonment/fine as applicable",
+        "Recovery or return of stolen property through police investigation and court process",
+        "Victim compensation or restitution for financial loss where supported by the record",
+        "Seizure, preservation, and release of recovered property by court order",
+        "Free legal aid and victim support services if eligible"
+      ],
+      "answer": "Relevant statutes were not identified from the available corpus. Please provide more details or consult a legal professional.",
+      "answer_source": "local_fallback",
+      "reasoning_trace": {
+        "case_laws_found": 0,
+        "confidence_factors": {
+          "domain_confidence": 0.75,
+          "jurisdiction_confidence": 1.0,
+          "sections_matched": 2,
+          "statute_match": 0.5
+        },
+        "explanation_generation": {
+          "model": null,
+          "reason": "no_statutes",
+          "source": "local_fallback"
+        },
+        "hybrid_retrieval": {
+          "candidates": [],
+          "query_logs": [],
+          "sections_found": 0
+        },
+        "intent_domain_understanding": {
+          "domain": "criminal",
+          "intent": "general legal inquiry",
+          "keywords": [
+            "theft",
+            "mobile",
+            "phone"
+          ],
+          "model": null,
+          "source": "local_fallback"
+        },
+        "jurisdiction_detection": {
+          "confidence": 1.0,
+          "detected": "INDIA",
+          "user_provided": true
+        },
+        "legal_analysis": "Legal Analysis for IN Jurisdiction:\n\nApplicable Legal Provisions:\n==================================================\n\n1. Section 378 of Indian Penal Code, 1860:\n   Theft\n\n2. Section 379 of Indian Penal Code, 1860:\n   Punishment for theft\n\n",
+        "procedural_steps": [
+          "Filing of FIR: Information relating to the commission of a cognizable offence is recorded by the police under Section 154 of the CrPC.",
+          "Investigation: Police conduct investigation including evidence collection, witness examination, and arrests where necessary.",
+          "Bail Hearing: Court considers bail application and determines whether the accused should be released or remanded to custody. | Possible outcomes: Bail granted -> Accused released subject to bail conditions; Bail rejected -> Accused remanded to custody | Typical outcomes: Regular bail granted, Interim bail granted | Key risks: Incomplete investigation",
+          "Filing of Charge Sheet or Closure Report: Police submit a charge sheet under Section 173 CrPC or file a closure report if evidence is insufficient. | Possible outcomes: Charge sheet filed -> Prosecution initiated; Closure report filed -> Proceedings terminated unless contested | Typical outcomes: Charge sheet accepted, Further investigation ordered | Key risks: Insufficient evidence",
+          "Cognizance by Magistrate: Magistrate takes cognizance of the offence and issues process to the accused.",
+          "Framing of Charges: Court frames charges against the accused if sufficient grounds exist to proceed with trial.",
+          "Trial: Evidence is led by prosecution and defence, witnesses are examined, and arguments are heard.",
+          "Judgment: Court delivers judgment acquitting or convicting the accused.",
+          "Appeal: Aggrieved party may appeal the judgment before a higher court as per law.",
+          "Expected Timeline: Best case: 6\u201312 months, Average: 1\u20133 years, Worst case: 5+ years"
+        ],
+        "query_cleaning": {
+          "cleaned": "theft of mobile phone",
+          "original": "theft of mobile phone"
+        },
+        "query_expansion": {
+          "domain": "criminal",
+          "search_queries": [
+            "theft of mobile phone",
+            "theft of mobile phone law India",
+            "theft of mobile phone legal rights",
+            "theft of mobile phone court procedure"
+          ]
+        },
+        "query_understanding": {
+          "act_hints": [],
+          "excluded_title_terms": [
+            "robbery",
+            "robbed",
+            "gunpoint",
+            "knife",
+            "weapon"
+          ],
+          "intent": "general",
+          "issue_profile": {
+            "domains": [
+              "criminal"
+            ],
+            "excluded_title_terms": [
+              "robbery",
+              "robbed",
+              "gunpoint",
+              "knife",
+              "weapon"
+            ],
+            "legal_issue": "theft",
+            "preferred_act_fragments": [
+              "bns_sections",
+              "ipc_sections"
+            ],
+            "preferred_act_names": [
+              "Bharatiya Nyaya Sanhita",
+              "Indian Penal Code"
+            ],
+            "preferred_section_acts": {
+              "303": [
+                "bharatiya nyaya sanhita"
+              ],
+              "379": [
+                "indian penal code"
+              ]
+            },
+            "preferred_sections": [
+              "303",
+              "379"
+            ],
+            "preferred_title_terms": [
+              "stole",
+              "stolen",
+              "theft",
+              "took my",
+              "missing"
+            ],
+            "statutes": [
+              {
+                "act": "Bharatiya Nyaya Sanhita",
+                "section": "303",
+                "title": "Theft"
+              },
+              {
+                "act": "Indian Penal Code",
+                "section": "379",
+                "title": "Theft"
+              }
+            ]
+          },
+          "keywords": [
+            "theft",
+            "mobile",
+            "phone"
+          ],
+          "legal_issue": "theft",
+          "model": null,
+          "preferred_act_fragments": [
+            "bns_sections",
+            "ipc_sections"
+          ],
+          "preferred_act_names": [
+            "Bharatiya Nyaya Sanhita",
+            "Indian Penal Code"
+          ],
+          "preferred_section_acts": {
+            "303": [
+              "bharatiya nyaya sanhita"
+            ],
+            "379": [
+              "indian penal code"
+            ]
+          },
+          "preferred_sections": [
+            "303",
+            "379"
+          ],
+          "preferred_title_terms": [
+            "stole",
+            "stolen",
+            "theft",
+            "took my",
+            "missing"
+          ],
+          "search_queries": [
+            "theft of mobile phone",
+            "theft mobile phone"
+          ],
+          "section_hints": [],
+          "source": "local_fallback",
+          "suggested_domain": "criminal",
+          "suggested_jurisdiction": "IN",
+          "summary": "criminal issue | theft, mobile, phone"
+        },
+        "reasoning_engine": {
+          "added_sections": 0,
+          "final_statutes": [
+            {
+              "act": "Indian Penal Code",
+              "section": "378",
+              "source": "advisor_fallback",
+              "title": "Theft",
+              "year": 1860
+            },
+            {
+              "act": "Indian Penal Code",
+              "section": "379",
+              "source": "advisor_fallback",
+              "title": "Punishment for theft",
+              "year": 1860
+            }
+          ]
+        },
+        "remedies": [
+          "Criminal prosecution for theft, robbery, or related offences with imprisonment/fine as applicable",
+          "Recovery or return of stolen property through police investigation and court process",
+          "Victim compensation or restitution for financial loss where supported by the record",
+          "Seizure, preservation, and release of recovered property by court order",
+          "Free legal aid and victim support services if eligible"
+        ],
+        "retrieval_metadata": {
+          "bm25_queries_run": 2,
+          "expanded_queries": [
+            "theft of mobile phone",
+            "theft of mobile phone law India",
+            "theft of mobile phone legal rights",
+            "theft of mobile phone court procedure"
+          ],
+          "hybrid_sections_found": 0,
+          "reasoning_added_sections": 0,
+          "rerank_model": null,
+          "rerank_reason": "fallback deterministic ranking",
+          "rerank_source": "local_fallback",
+          "reranked_top": 0,
+          "search_queries": [
+            "theft of mobile phone",
+            "theft mobile phone"
+          ],
+          "understanding_model": null,
+          "understanding_source": "local_fallback"
+        },
+        "sections_found": 2,
+        "statute_source": "advisor_fallback",
+        "top_statutes": [
+          {
+            "act": "Indian Penal Code",
+            "section": "378",
+            "source": "advisor_fallback",
+            "title": "Theft",
+            "year": 1860
+          },
+          {
+            "act": "Indian Penal Code",
+            "section": "379",
+            "source": "advisor_fallback",
+            "title": "Punishment for theft",
+            "year": 1860
+          }
+        ]
+      },
+      "confidence_sources": {
+        "base_confidence": 0.8,
+        "domain_confidence": 0.75,
+        "jurisdiction_confidence": 1.0,
+        "sections_found": 2,
+        "statute_match": 0.5,
+        "statute_source": "advisor_fallback",
+        "understanding_source": "local_fallback"
+      },
+      "full_response": {
+        "analysis": {
+          "conflicts": [],
+          "issues_identified": [],
+          "rule_application": [
+            {
+              "application": "Theft",
+              "law_id": "Indian Penal Code:378"
+            },
+            {
+              "application": "Punishment for theft",
+              "law_id": "Indian Penal Code:379"
+            }
+          ]
+        },
+        "answer": "Relevant statutes were not identified from the available corpus. Please provide more details or consult a legal professional.",
+        "answer_disclaimer": "NYAI output is advisory only and does not constitute legal advice, a binding determination, or enforcement authority. Consult a qualified legal professional before acting on this information.",
+        "answer_model": null,
+        "answer_source": "local_fallback",
+        "case_laws": [],
+        "confidence": "overall=0.75 jurisdiction=1.0 domain=0.75 statute_match=0.5 procedural_match=0.8",
+        "confidence_sources": {
+          "base_confidence": 0.8,
+          "domain_confidence": 0.75,
+          "jurisdiction_confidence": 1.0,
+          "sections_found": 2,
+          "statute_match": 0.5,
+          "statute_source": "advisor_fallback",
+          "understanding_source": "local_fallback"
+        },
+        "constitutional_articles": [],
+        "determinism_proof": {
+          "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+          "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
+          "version": "3.0.0"
+        },
+        "domain": "criminal",
+        "domains": [
+          "criminal"
+        ],
+        "evidence_requirements": [
+          "FIR",
+          "Police case diary",
+          "Charge sheet or closure report",
+          "Witness statements",
+          "Forensic reports",
+          "Court orders and judgments"
+        ],
+        "explanation_chain": [
+          {
+            "description": "Query received and cleaned: 'theft of mobile phone'",
+            "source": "QueryCleaner",
+            "step_number": 1
+          },
+          {
+            "description": "Jurisdiction detected: INDIA (confidence: 1.00)",
+            "source": "JurisdictionDetector",
+            "step_number": 2
+          },
+          {
+            "description": "Domain classified: criminal",
+            "source": "DomainClassifier",
+            "step_number": 3
+          },
+          {
+            "description": "BM25 full-text search executed across N/A sections",
+            "source": "BM25Search",
+            "step_number": 4
+          },
+          {
+            "description": "Statute overrides checked for keyword matches",
+            "source": "ReasoningEngine",
+            "step_number": 5
+          },
+          {
+            "description": "2 relevant statute(s) identified",
+            "source": "StatuteMerger",
+            "step_number": 6
+          },
+          {
+            "description": "0 case law(s) retrieved",
+            "source": "CaseLawRetriever",
+            "step_number": 7
+          },
+          {
+            "description": "Recommendation: INFORM \u2014 Query resolved with 2 statute(s) at 75% confidence",
+            "source": "RecommendationEngine",
+            "step_number": 8
+          }
+        ],
+        "facts": [
+          {
+            "fact_id": "F1",
+            "source": "input",
+            "statement": "User query: theft of mobile phone"
+          },
+          {
+            "fact_id": "F2",
+            "source": "JurisdictionDetector",
+            "statement": "Jurisdiction detected: INDIA (confidence: 1.00)"
+          },
+          {
+            "fact_id": "F3",
+            "source": "DomainClassifier",
+            "statement": "Domain classified: criminal"
+          },
+          {
+            "fact_id": "F4",
+            "source": "BM25Search",
+            "statement": "Statutes matched: 2"
+          },
+          {
+            "fact_id": "F5",
+            "source": "CaseLawRetriever",
+            "statement": "Case laws found: 0"
+          }
+        ],
+        "glossary": [
+          {
+            "definition": "Dishonestly taking movable property",
+            "term": "Theft"
+          }
+        ],
+        "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
+        "jurisdiction": "IN",
+        "jurisdiction_confidence": 1.0,
+        "jurisdiction_detected": "INDIA",
+        "legal_context": {
+          "applicable_laws": [
+            "Indian Penal Code"
+          ],
+          "domain": "criminal",
+          "jurisdiction": "IN"
+        },
+        "legal_route": [
+          "query_cleaning",
+          "query_understanding",
+          "query_expansion",
+          "hybrid_retrieval",
+          "cross_encoder_reranking",
+          "legal_reasoning_engine",
+          "clean_legal_advisor",
+          "case_law_retriever"
+        ],
+        "metadata": {
+          "canonical_fields_validated": 11,
+          "formatted": true,
+          "formatted_at": "2026-06-23T05:23:24.466472",
+          "formatter_version": "3.0.0",
+          "schema": "tantra_v3",
+          "schema_compliant": true,
+          "structural_fields_validated": 4,
+          "validation_mode": "FAIL_CLOSED"
+        },
+        "observer_steps": [
+          {
+            "observed": {
+              "raw_query": "theft of mobile phone"
+            },
+            "stage": "query_received",
+            "timestamp": "2026-06-23T05:23:23.958733",
+            "trace_id": "b5c037ef-c877-4972-8517-3d212b4e6220"
+          },
+          {
+            "observed": {
+              "domain": "criminal",
+              "source": "local_fallback"
+            },
+            "stage": "query_understanding",
+            "timestamp": "2026-06-23T05:23:24.003585",
+            "trace_id": "b5c037ef-c877-4972-8517-3d212b4e6220"
+          },
+          {
+            "observed": {
+              "expanded_count": 4
+            },
+            "stage": "query_expansion",
+            "timestamp": "2026-06-23T05:23:24.066201",
+            "trace_id": "b5c037ef-c877-4972-8517-3d212b4e6220"
+          },
+          {
+            "observed": {
+              "candidates_found": 0
+            },
+            "stage": "hybrid_retrieval",
+            "timestamp": "2026-06-23T05:23:24.068202",
+            "trace_id": "b5c037ef-c877-4972-8517-3d212b4e6220"
+          },
+          {
+            "observed": {
+              "reranked_top": 0
+            },
+            "stage": "cross_encoder_reranking",
+            "timestamp": "2026-06-23T05:23:24.068202",
+            "trace_id": "b5c037ef-c877-4972-8517-3d212b4e6220"
+          },
+          {
+            "observed": {
+              "domain": "criminal",
+              "jurisdiction": "IN",
+              "sections": 2
+            },
+            "stage": "clean_legal_advisor",
+            "timestamp": "2026-06-23T05:23:24.465471",
+            "trace_id": "b5c037ef-c877-4972-8517-3d212b4e6220"
+          },
+          {
+            "observed": {
+              "cases_found": 0
+            },
+            "stage": "case_law_retriever",
+            "timestamp": "2026-06-23T05:23:24.465471",
+            "trace_id": "b5c037ef-c877-4972-8517-3d212b4e6220"
+          },
+          {
+            "observed": {
+              "has_answer": true
+            },
+            "stage": "response_enriched",
+            "timestamp": "2026-06-23T05:23:24.465471",
+            "trace_id": "b5c037ef-c877-4972-8517-3d212b4e6220"
+          }
+        ],
+        "observer_validation": {
+          "determinism_verified": true,
+          "schema_valid": true,
+          "trace_continuity_check": true,
+          "validated_at": "2026-06-23T05:23:24.466472",
+          "validation_status": "PASS",
+          "violations": []
+        },
+        "procedural_steps": [
+          "Filing of FIR: Information relating to the commission of a cognizable offence is recorded by the police under Section 154 of the CrPC.",
+          "Investigation: Police conduct investigation including evidence collection, witness examination, and arrests where necessary.",
+          "Bail Hearing: Court considers bail application and determines whether the accused should be released or remanded to custody. | Possible outcomes: Bail granted -> Accused released subject to bail conditions; Bail rejected -> Accused remanded to custody | Typical outcomes: Regular bail granted, Interim bail granted | Key risks: Incomplete investigation",
+          "Filing of Charge Sheet or Closure Report: Police submit a charge sheet under Section 173 CrPC or file a closure report if evidence is insufficient. | Possible outcomes: Charge sheet filed -> Prosecution initiated; Closure report filed -> Proceedings terminated unless contested | Typical outcomes: Charge sheet accepted, Further investigation ordered | Key risks: Insufficient evidence",
+          "Cognizance by Magistrate: Magistrate takes cognizance of the offence and issues process to the accused.",
+          "Framing of Charges: Court frames charges against the accused if sufficient grounds exist to proceed with trial.",
+          "Trial: Evidence is led by prosecution and defence, witnesses are examined, and arguments are heard.",
+          "Judgment: Court delivers judgment acquitting or convicting the accused.",
+          "Appeal: Aggrieved party may appeal the judgment before a higher court as per law.",
+          "Expected Timeline: Best case: 6\u201312 months, Average: 1\u20133 years, Worst case: 5+ years"
+        ],
+        "provenance_chain": [
+          {
+            "agent": "clean_legal_advisor",
+            "case_laws_found": 0,
+            "domains": [
+              "criminal"
+            ],
+            "event": "query_processed",
+            "jurisdiction_confidence": 1.0,
+            "jurisdiction_detected": "INDIA",
+            "observer_steps_count": 7,
+            "ontology_filtered": true,
+            "sections_found": 2,
+            "timestamp": "2026-06-23T05:23:24.465471"
+          }
+        ],
+        "reasoning_trace": {
+          "case_laws_found": 0,
+          "confidence_factors": {
+            "domain_confidence": 0.75,
+            "jurisdiction_confidence": 1.0,
+            "sections_matched": 2,
+            "statute_match": 0.5
+          },
+          "explanation_generation": {
+            "model": null,
+            "reason": "no_statutes",
+            "source": "local_fallback"
+          },
+          "hybrid_retrieval": {
+            "candidates": [],
+            "query_logs": [],
+            "sections_found": 0
+          },
+          "intent_domain_understanding": {
+            "domain": "criminal",
+            "intent": "general legal inquiry",
+            "keywords": [
+              "theft",
+              "mobile",
+              "phone"
+            ],
+            "model": null,
+            "source": "local_fallback"
+          },
+          "jurisdiction_detection": {
+            "confidence": 1.0,
+            "detected": "INDIA",
+            "user_provided": true
+          },
+          "legal_analysis": "Legal Analysis for IN Jurisdiction:\n\nApplicable Legal Provisions:\n==================================================\n\n1. Section 378 of Indian Penal Code, 1860:\n   Theft\n\n2. Section 379 of Indian Penal Code, 1860:\n   Punishment for theft\n\n",
+          "procedural_steps": [
+            "Filing of FIR: Information relating to the commission of a cognizable offence is recorded by the police under Section 154 of the CrPC.",
+            "Investigation: Police conduct investigation including evidence collection, witness examination, and arrests where necessary.",
+            "Bail Hearing: Court considers bail application and determines whether the accused should be released or remanded to custody. | Possible outcomes: Bail granted -> Accused released subject to bail conditions; Bail rejected -> Accused remanded to custody | Typical outcomes: Regular bail granted, Interim bail granted | Key risks: Incomplete investigation",
+            "Filing of Charge Sheet or Closure Report: Police submit a charge sheet under Section 173 CrPC or file a closure report if evidence is insufficient. | Possible outcomes: Charge sheet filed -> Prosecution initiated; Closure report filed -> Proceedings terminated unless contested | Typical outcomes: Charge sheet accepted, Further investigation ordered | Key risks: Insufficient evidence",
+            "Cognizance by Magistrate: Magistrate takes cognizance of the offence and issues process to the accused.",
+            "Framing of Charges: Court frames charges against the accused if sufficient grounds exist to proceed with trial.",
+            "Trial: Evidence is led by prosecution and defence, witnesses are examined, and arguments are heard.",
+            "Judgment: Court delivers judgment acquitting or convicting the accused.",
+            "Appeal: Aggrieved party may appeal the judgment before a higher court as per law.",
+            "Expected Timeline: Best case: 6\u201312 months, Average: 1\u20133 years, Worst case: 5+ years"
+          ],
+          "query_cleaning": {
+            "cleaned": "theft of mobile phone",
+            "original": "theft of mobile phone"
+          },
+          "query_expansion": {
+            "domain": "criminal",
+            "search_queries": [
+              "theft of mobile phone",
+              "theft of mobile phone law India",
+              "theft of mobile phone legal rights",
+              "theft of mobile phone court procedure"
+            ]
+          },
+          "query_understanding": {
+            "act_hints": [],
+            "excluded_title_terms": [
+              "robbery",
+              "robbed",
+              "gunpoint",
+              "knife",
+              "weapon"
+            ],
+            "intent": "general",
+            "issue_profile": {
+              "domains": [
+                "criminal"
+              ],
+              "excluded_title_terms": [
+                "robbery",
+                "robbed",
+                "gunpoint",
+                "knife",
+                "weapon"
+              ],
+              "legal_issue": "theft",
+              "preferred_act_fragments": [
+                "bns_sections",
+                "ipc_sections"
+              ],
+              "preferred_act_names": [
+                "Bharatiya Nyaya Sanhita",
+                "Indian Penal Code"
+              ],
+              "preferred_section_acts": {
+                "303": [
+                  "bharatiya nyaya sanhita"
+                ],
+                "379": [
+                  "indian penal code"
+                ]
+              },
+              "preferred_sections": [
+                "303",
+                "379"
+              ],
+              "preferred_title_terms": [
+                "stole",
+                "stolen",
+                "theft",
+                "took my",
+                "missing"
+              ],
+              "statutes": [
+                {
+                  "act": "Bharatiya Nyaya Sanhita",
+                  "section": "303",
+                  "title": "Theft"
+                },
+                {
+                  "act": "Indian Penal Code",
+                  "section": "379",
+                  "title": "Theft"
+                }
+              ]
+            },
+            "keywords": [
+              "theft",
+              "mobile",
+              "phone"
+            ],
+            "legal_issue": "theft",
+            "model": null,
+            "preferred_act_fragments": [
+              "bns_sections",
+              "ipc_sections"
+            ],
+            "preferred_act_names": [
+              "Bharatiya Nyaya Sanhita",
+              "Indian Penal Code"
+            ],
+            "preferred_section_acts": {
+              "303": [
+                "bharatiya nyaya sanhita"
+              ],
+              "379": [
+                "indian penal code"
+              ]
+            },
+            "preferred_sections": [
+              "303",
+              "379"
+            ],
+            "preferred_title_terms": [
+              "stole",
+              "stolen",
+              "theft",
+              "took my",
+              "missing"
+            ],
+            "search_queries": [
+              "theft of mobile phone",
+              "theft mobile phone"
+            ],
+            "section_hints": [],
+            "source": "local_fallback",
+            "suggested_domain": "criminal",
+            "suggested_jurisdiction": "IN",
+            "summary": "criminal issue | theft, mobile, phone"
+          },
+          "reasoning_engine": {
+            "added_sections": 0,
+            "final_statutes": [
+              {
+                "act": "Indian Penal Code",
+                "section": "378",
+                "source": "advisor_fallback",
+                "title": "Theft",
+                "year": 1860
+              },
+              {
+                "act": "Indian Penal Code",
+                "section": "379",
+                "source": "advisor_fallback",
+                "title": "Punishment for theft",
+                "year": 1860
+              }
+            ]
+          },
+          "remedies": [
+            "Criminal prosecution for theft, robbery, or related offences with imprisonment/fine as applicable",
+            "Recovery or return of stolen property through police investigation and court process",
+            "Victim compensation or restitution for financial loss where supported by the record",
+            "Seizure, preservation, and release of recovered property by court order",
+            "Free legal aid and victim support services if eligible"
+          ],
+          "retrieval_metadata": {
+            "bm25_queries_run": 2,
+            "expanded_queries": [
+              "theft of mobile phone",
+              "theft of mobile phone law India",
+              "theft of mobile phone legal rights",
+              "theft of mobile phone court procedure"
+            ],
+            "hybrid_sections_found": 0,
+            "reasoning_added_sections": 0,
+            "rerank_model": null,
+            "rerank_reason": "fallback deterministic ranking",
+            "rerank_source": "local_fallback",
+            "reranked_top": 0,
+            "search_queries": [
+              "theft of mobile phone",
+              "theft mobile phone"
+            ],
+            "understanding_model": null,
+            "understanding_source": "local_fallback"
+          },
+          "sections_found": 2,
+          "statute_source": "advisor_fallback",
+          "top_statutes": [
+            {
+              "act": "Indian Penal Code",
+              "section": "378",
+              "source": "advisor_fallback",
+              "title": "Theft",
+              "year": 1860
+            },
+            {
+              "act": "Indian Penal Code",
+              "section": "379",
+              "source": "advisor_fallback",
+              "title": "Punishment for theft",
+              "year": 1860
+            }
+          ]
+        },
+        "recommendation": {
+          "confidence": 0.75,
+          "rationale": "Query resolved with 2 statute(s) at 75% confidence",
+          "type": "INFORM"
+        },
+        "remedies": [
+          "Criminal prosecution for theft, robbery, or related offences with imprisonment/fine as applicable",
+          "Recovery or return of stolen property through police investigation and court process",
+          "Victim compensation or restitution for financial loss where supported by the record",
+          "Seizure, preservation, and release of recovered property by court order",
+          "Free legal aid and victim support services if eligible"
+        ],
+        "request_id": "req_780eafc1be76",
+        "risk_flags": [],
+        "schema_version": "tantra_v3",
+        "statutes": [
+          "act='Indian Penal Code' year=1860 section='378' title='Theft'",
+          "act='Indian Penal Code' year=1860 section='379' title='Punishment for theft'"
+        ],
+        "timeline": [
+          {
+            "eta": "Varies",
+            "step": "Filing of FIR"
+          },
+          {
+            "eta": "Varies",
+            "step": "Investigation"
+          },
+          {
+            "eta": "Varies",
+            "step": "Bail Hearing"
+          },
+          {
+            "eta": "Varies",
+            "step": "Filing of Charge Sheet or Closure Report"
+          }
+        ],
+        "timestamp": "2026-06-23T05:23:24.465471Z",
+        "trace_id": "b5c037ef-c877-4972-8517-3d212b4e6220"
+      }
+    }
+  },
+  "replay_source": "output_bucket"
+}

@@ -13,12 +13,11 @@ from typing import Dict, Any, List, Optional
 import uuid
 import hashlib
 import json
+import re
 import threading
 import asyncio
 from collections import OrderedDict
 from datetime import datetime
-from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeout
-
 from api.error_codes import ErrorCode
 
 # Import enhanced components
@@ -151,43 +150,13 @@ async def query_legal(request: QueryRequest, http_request: Request):
         hybrid_result = {"candidates": [], "sections_found": 0, "query_logs": []}
         candidate_records = []
 
-        hybrid_enabled = os.getenv("HYBRID_RETRIEVER_ENABLED", "true").lower() not in {"0", "false", "no"}
-        hybrid_timeout = float(os.getenv("HYBRID_RETRIEVER_TIMEOUT_SECONDS", "12"))
-        if hybrid_enabled:
-            executor = ThreadPoolExecutor(max_workers=1)
-            try:
-                future = executor.submit(
-                    lambda: get_hybrid_retriever().hybrid_search(expanded_queries, top_k=10)
-                )
-                hybrid_result = future.result(timeout=hybrid_timeout)
-            except FutureTimeout:
-                logger.warning("Hybrid retrieval timed out after %ss", hybrid_timeout)
-            except Exception as exc:
-                logger.warning("Hybrid retrieval unavailable: %s", exc)
-            finally:
-                executor.shutdown(wait=False, cancel_futures=True)
+        from services.query_executor import run_hybrid_retrieval
+        hybrid_result = run_hybrid_retrieval(expanded_queries, top_k=10)
         candidate_records = hybrid_result.get("candidate_records") or hybrid_result.get("candidates") or []
         observer.record("hybrid_retrieval", {"candidates_found": len(candidate_records)})
 
-        reranker_enabled = os.getenv("RERANKER_ENABLED", "true").lower() not in {"0", "false", "no"}
-        reranker_timeout = float(os.getenv("RERANKER_TIMEOUT_SECONDS", "8"))
-        if reranker_enabled and candidate_records:
-            executor = ThreadPoolExecutor(max_workers=1)
-            try:
-                future = executor.submit(
-                    lambda: rerank_sections(cleaned_query, candidate_records, top_k=5)
-                )
-                top_sections = future.result(timeout=reranker_timeout)
-            except FutureTimeout:
-                logger.warning("Reranker timed out after %ss", reranker_timeout)
-                top_sections = candidate_records[:5]
-            except Exception as exc:
-                logger.warning("Reranker unavailable: %s", exc)
-                top_sections = candidate_records[:5]
-            finally:
-                executor.shutdown(wait=False, cancel_futures=True)
-        else:
-            top_sections = candidate_records[:5]
+        from services.query_executor import run_reranker
+        top_sections = run_reranker(cleaned_query, candidate_records, top_k=5) if candidate_records else []
         observer.record("cross_encoder_reranking", {"reranked_top": len(top_sections)})
         final_sections = apply_reasoning_rules(cleaned_query, understanding_domain, top_sections)
         reasoning_added = sum(
@@ -729,6 +698,43 @@ async def query_legal(request: QueryRequest, http_request: Request):
             }
         )
 
+_STATUTE_REPR_FIELD = re.compile(r"(\w+)='([^']*)'")
+
+
+def _normalize_statute_summary(statute: Any) -> Dict[str, str]:
+    """Normalize statute entries from L1 cache, L2 bucket (repr strings), or Pydantic models."""
+    if isinstance(statute, dict):
+        return {
+            "act": str(statute.get("act") or ""),
+            "section": str(statute.get("section") or ""),
+            "title": str(statute.get("title") or ""),
+        }
+    if isinstance(statute, str):
+        fields = dict(_STATUTE_REPR_FIELD.findall(statute))
+        if fields:
+            return {
+                "act": fields.get("act", ""),
+                "section": fields.get("section", ""),
+                "title": fields.get("title", ""),
+            }
+        return {"act": "", "section": "", "title": statute}
+    if hasattr(statute, "model_dump"):
+        dumped = statute.model_dump()
+        return {
+            "act": str(dumped.get("act") or ""),
+            "section": str(dumped.get("section") or ""),
+            "title": str(dumped.get("title") or ""),
+        }
+
+    def _safe_attr(name: str) -> str:
+        value = getattr(statute, name, "")
+        if callable(value):
+            return ""
+        return str(value or "")
+
+    return {"act": _safe_attr("act"), "section": _safe_attr("section"), "title": _safe_attr("title")}
+
+
 def _build_qualified_analysis(query: str, statutes: List, jurisdiction: str) -> str:
     """Build legal analysis with fully qualified statute references"""
     if not statutes:
@@ -927,16 +933,12 @@ async def execute_tantra_flow(request: QueryRequest, http_request: Request):
 @router.get("/case_summary")
 async def get_case_summary(trace_id: str = Query(..., description="Trace ID from a previous /query call")):
     """Return a summarised view of a cached query response."""
-    cached = response_cache.get(trace_id)
+    from services.evidence_service import resolve_cached_response
+    cached = resolve_cached_response(trace_id, response_cache)
     if not cached:
-        raise HTTPException(status_code=404, detail={"error": "trace_id not found in cache", "trace_id": trace_id})
+        raise HTTPException(status_code=404, detail={"error": "trace_id not found", "trace_id": trace_id})
     statutes = cached.get("statutes", [])
-    statute_list = []
-    for s in (statutes or []):
-        if isinstance(s, dict):
-            statute_list.append({"act": s.get("act"), "section": s.get("section"), "title": s.get("title")})
-        else:
-            statute_list.append({"act": getattr(s, "act", ""), "section": getattr(s, "section", ""), "title": getattr(s, "title", "")})
+    statute_list = [_normalize_statute_summary(s) for s in (statutes or [])]
     return {
         "trace_id": trace_id,
         "jurisdiction": cached.get("jurisdiction_detected") or cached.get("jurisdiction"),
@@ -951,9 +953,10 @@ async def get_case_summary(trace_id: str = Query(..., description="Trace ID from
 @router.get("/legal_routes")
 async def get_legal_routes(trace_id: str = Query(..., description="Trace ID from a previous /query call")):
     """Return the legal processing route for a cached query."""
-    cached = response_cache.get(trace_id)
+    from services.evidence_service import resolve_cached_response
+    cached = resolve_cached_response(trace_id, response_cache)
     if not cached:
-        raise HTTPException(status_code=404, detail={"error": "trace_id not found in cache", "trace_id": trace_id})
+        raise HTTPException(status_code=404, detail={"error": "trace_id not found", "trace_id": trace_id})
     legal_route = cached.get("legal_route", [])
     routes = []
     for step in legal_route:
@@ -973,9 +976,10 @@ async def get_legal_routes(trace_id: str = Query(..., description="Trace ID from
 @router.get("/timeline")
 async def get_timeline(trace_id: str = Query(..., description="Trace ID from a previous /query call")):
     """Return the procedural timeline for a cached query."""
-    cached = response_cache.get(trace_id)
+    from services.evidence_service import resolve_cached_response
+    cached = resolve_cached_response(trace_id, response_cache)
     if not cached:
-        raise HTTPException(status_code=404, detail={"error": "trace_id not found in cache", "trace_id": trace_id})
+        raise HTTPException(status_code=404, detail={"error": "trace_id not found", "trace_id": trace_id})
     timeline = cached.get("timeline", [])
     steps = []
     for idx, item in enumerate(timeline, 1):
@@ -992,9 +996,10 @@ async def get_timeline(trace_id: str = Query(..., description="Trace ID from a p
 @router.get("/glossary")
 async def get_glossary(trace_id: str = Query(..., description="Trace ID from a previous /query call")):
     """Return the legal glossary terms for a cached query."""
-    cached = response_cache.get(trace_id)
+    from services.evidence_service import resolve_cached_response
+    cached = resolve_cached_response(trace_id, response_cache)
     if not cached:
-        raise HTTPException(status_code=404, detail={"error": "trace_id not found in cache", "trace_id": trace_id})
+        raise HTTPException(status_code=404, detail={"error": "trace_id not found", "trace_id": trace_id})
     glossary = cached.get("glossary", [])
     terms = []
     for item in glossary:
@@ -1058,9 +1063,10 @@ async def get_jurisdiction_info(jurisdiction: str = Query(..., description="Juri
 @router.get("/recommendation_status")
 async def get_recommendation_status(trace_id: str = Query(..., description="Trace ID from a previous /query call")):
     """Return the recommendation details for a cached query."""
-    cached = response_cache.get(trace_id)
+    from services.evidence_service import resolve_cached_response
+    cached = resolve_cached_response(trace_id, response_cache)
     if not cached:
-        raise HTTPException(status_code=404, detail={"error": "trace_id not found in cache", "trace_id": trace_id})
+        raise HTTPException(status_code=404, detail={"error": "trace_id not found", "trace_id": trace_id})
     provenance = cached.get("provenance_chain", [{}])
     first_prov = provenance[0] if provenance else {}
     return {

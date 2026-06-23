@@ -77,6 +77,8 @@ app.add_middleware(
 # Routers — health and metrics before nyaya (no auth required)
 app.include_router(health_router)
 app.include_router(metrics_router)
+from api.evidence_router import evidence_router
+app.include_router(evidence_router)
 app.include_router(router)
 
 # Include procedure router

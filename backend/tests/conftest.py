@@ -1,50 +1,45 @@
-"""
-Shared pytest configuration for NYAI backend tests.
-
-Ensures NYAI_API_KEY is set before application import and injects the API key
-into TestClient requests for convergence tests, while leaving auth-hardening
-tests free to omit or override the header.
-"""
+"""Shared pytest hooks for NYAI sprint test suites."""
 import os
-
 import pytest
 
-os.environ.setdefault("NYAI_API_KEY", "test-key-ci-default")
-
-_SKIP_AUTH_INJECT = (
-    "authentication",
-    "bypass",
-    "metrics_endpoint",
-    "deployment_validation",
-    "rate_limit_triggers_on",
-)
-
-from fastapi.testclient import TestClient as _TestClient
-
-_original_request = _TestClient.request
+_TEST_API_KEY = "test-key-production-hardening"
 
 
-def _patched_request(self, method, url, **kwargs):
-    headers = dict(kwargs.get("headers") or {})
-    current_test = os.environ.get("PYTEST_CURRENT_TEST", "")
-    should_skip = any(token in current_test for token in _SKIP_AUTH_INJECT)
-    if (
-        not should_skip
-        and "X-API-Key" not in headers
-        and os.environ.get("NYAI_API_KEY")
-    ):
-        headers["X-API-Key"] = os.environ["NYAI_API_KEY"]
-        kwargs["headers"] = headers
-    return _original_request(self, method, url, **kwargs)
-
-
-_TestClient.request = _patched_request
+def pytest_configure(config):
+    """Use a consistent test API key before test modules import the app."""
+    os.environ["NYAI_API_KEY"] = _TEST_API_KEY
 
 
 @pytest.fixture(autouse=True)
-def _reset_rate_limiter_between_tests():
+def _isolate_rate_limiter():
+    """Reset in-memory rate limit buckets between tests."""
     from api.rate_limiter import reset_rate_limiter
-
     reset_rate_limiter()
     yield
     reset_rate_limiter()
+
+
+@pytest.fixture(autouse=True)
+def _inject_nyaya_auth_for_convergence(request, monkeypatch):
+    """Convergence tests call /nyaya/* without headers; inject the test key."""
+    if request.module.__name__ != "test_tantra_convergence":
+        return
+    monkeypatch.setenv("NYAI_API_KEY", _TEST_API_KEY)
+    client = request.module.client
+    original_post = client.post
+    original_get = client.get
+
+    def _with_auth(kwargs):
+        headers = dict(kwargs.get("headers") or {})
+        headers.setdefault("X-API-Key", _TEST_API_KEY)
+        kwargs["headers"] = headers
+        return kwargs
+
+    def post(url, **kwargs):
+        return original_post(url, **_with_auth(kwargs))
+
+    def get(url, **kwargs):
+        return original_get(url, **_with_auth(kwargs))
+
+    monkeypatch.setattr(client, "post", post)
+    monkeypatch.setattr(client, "get", get)

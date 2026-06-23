@@ -27,17 +27,17 @@ class OutputBucket:
         self._rebuild_index()
 
     def _rebuild_index(self):
-        """Rebuild in-memory index from existing log file."""
+        """Rebuild in-memory index: trace_id -> line_number (0-based)."""
         if not os.path.exists(self._log_file):
             return
         try:
             with open(self._log_file, 'r', encoding='utf-8') as f:
-                for offset, line in enumerate(f):
+                for line_num, line in enumerate(f):
                     try:
                         entry = json.loads(line.strip())
                         tid = entry.get("trace_id")
                         if tid:
-                            self._index[tid] = offset
+                            self._index[tid] = line_num
                     except json.JSONDecodeError:
                         continue
         except Exception:
@@ -72,7 +72,12 @@ class OutputBucket:
         with self._lock:
             with open(self._log_file, 'a', encoding='utf-8') as f:
                 f.write(json.dumps(entry, sort_keys=True, default=str) + "\n")
-            self._index[trace_id] = len(self._index)
+            try:
+                with open(self._log_file, 'r', encoding='utf-8') as count_f:
+                    new_line_num = sum(1 for _ in count_f) - 1
+                self._index[trace_id] = new_line_num
+            except Exception:
+                self._index[trace_id] = len(self._index)
 
         return {
             "stored": "true",
@@ -82,19 +87,22 @@ class OutputBucket:
         }
 
     def retrieve(self, trace_id: str) -> Optional[Dict[str, Any]]:
-        """Retrieve a stored response by trace_id."""
+        """Retrieve stored response by trace_id using line-number index."""
         if not os.path.exists(self._log_file):
             return None
-
+        if trace_id not in self._index:
+            self._rebuild_index()
+        if trace_id not in self._index:
+            return None
+        target_line = self._index[trace_id]
         with self._lock:
             with open(self._log_file, 'r', encoding='utf-8') as f:
-                for line in f:
-                    try:
-                        entry = json.loads(line.strip())
-                        if entry.get("trace_id") == trace_id:
-                            return entry
-                    except json.JSONDecodeError:
-                        continue
+                for idx, line in enumerate(f):
+                    if idx == target_line:
+                        try:
+                            return json.loads(line.strip())
+                        except json.JSONDecodeError:
+                            return None
         return None
 
     def verify(self, trace_id: str) -> Dict[str, Any]:
@@ -123,6 +131,36 @@ class OutputBucket:
             "output_hash": stored_output_hash,
             "tamper_detected": recomputed != stored_entry_hash,
         }
+
+
+    def retrieve_as_evidence(self, trace_id: str):
+        """Retrieve and wrap as EvidencePackage. Returns None if not found."""
+        entry = self.retrieve(trace_id)
+        if not entry:
+            return None
+        try:
+            from evidence.models import EvidencePackage
+            return EvidencePackage.from_stored_entry(entry)
+        except Exception:
+            return None
+
+    def list_all(self, limit: int = None, offset: int = 0) -> list:
+        """Return stored entries as list with optional pagination."""
+        if not os.path.exists(self._log_file):
+            return []
+        entries = []
+        with self._lock:
+            with open(self._log_file, 'r', encoding='utf-8') as f:
+                for idx, line in enumerate(f):
+                    if idx < offset:
+                        continue
+                    if limit is not None and len(entries) >= limit:
+                        break
+                    try:
+                        entries.append(json.loads(line.strip()))
+                    except json.JSONDecodeError:
+                        continue
+        return entries
 
 
 # Module-level singleton

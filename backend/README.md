@@ -1,5 +1,53 @@
 # Nyaya AI - Sovereign Legal Intelligence Platform
 
+## Phase IV: Constitutional Evidence Infrastructure (23 June 2026)
+
+| | |
+|--|--|
+| **Status** | PHASE IV COMPLETE — evidence is the primary architectural product |
+| **Contract** | `final_decision_contract.json` v2.0.0 · `schema_version` `tantra_v3` |
+| **Evidence schema** | `evidence_v1` / format `1.0.0` |
+| **Tests** | 13 evidence + 15 production + 6 convergence = **34/34** |
+| **Review packet** | [`REVIEW_PACKET.md`](../REVIEW_PACKET.md) |
+| **Phase IV docs** | [`../Shashank-Constitutional Evidence Infrastructure (NYAI__ Phase IV Production Transition)/`](../Shashank-Constitutional%20Evidence%20Infrastructure%20(NYAI__%20Phase%20IV%20Production%20Transition)/) |
+
+### Evidence Architecture
+
+```
+POST /nyaya/query → OutputBucket (JSONL) → EvidencePackage (on demand)
+                      ↓
+              EvidenceRepository (L2 persistent)
+                      ↓
+              /evidence/* API (auth required)
+```
+
+Secondary `/nyaya/*` endpoints use `response_cache` (L1) with `EvidenceRepository` fallback after restart.
+
+### Evidence API (`/evidence/*` — requires `X-API-Key`)
+
+| Method | Path | Purpose |
+|--------|------|---------|
+| GET | `/evidence/{trace_id}` | Full EvidencePackage |
+| GET | `/evidence/search` | Multi-filter search (`date_from`, `date_to`, `evidence_version`) |
+| GET | `/evidence/hash/{input_hash}` | Lookup by input hash |
+| GET | `/evidence/recommendation/{type}` | Filter by recommendation |
+| GET | `/evidence/jurisdiction/{country}` | Filter by jurisdiction |
+| GET | `/evidence/statute?keyword=` | Statute keyword search |
+| GET | `/evidence/version/{version}` | Filter by evidence format version |
+| POST | `/evidence/verify` | Entry integrity check |
+| POST | `/evidence/verify/chain` | Ledger chain check |
+| POST | `/evidence/compare` | Determinism comparison between two traces |
+| POST | `/evidence/export` | JSON or summary export |
+
+### Run Tests
+
+```bash
+cd backend
+pytest tests/test_evidence_infrastructure.py tests/test_production_hardening.py tests/test_tantra_convergence.py -v
+```
+
+---
+
 ## TANTRA Convergence Status (12 June 2026)
 
 | | |
