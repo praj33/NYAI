@@ -115,5 +115,16 @@ class HashChainLedger:
             })
         return reconstructed
 
+
+def _resolve_ledger_path() -> str:
+    configured = os.getenv("PROVENANCE_LEDGER_PATH", "").strip()
+    if configured:
+        return configured
+    output_dir = os.environ.get("OUTPUT_DIRECTORY", "").strip()
+    if output_dir:
+        return os.path.join(output_dir, "provenance_ledger.json")
+    return "provenance_ledger.json"
+
+
 # Global instance
-ledger = HashChainLedger(os.getenv("PROVENANCE_LEDGER_PATH", "provenance_ledger.json"))
+ledger = HashChainLedger(_resolve_ledger_path())

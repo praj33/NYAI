@@ -163,5 +163,12 @@ class OutputBucket:
         return entries
 
 
+def _resolve_bucket_dir() -> str:
+    configured = os.environ.get("OUTPUT_DIRECTORY", "").strip()
+    if configured:
+        return configured
+    return os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "output_logs")
+
+
 # Module-level singleton
-output_bucket = OutputBucket()
+output_bucket = OutputBucket(bucket_dir=_resolve_bucket_dir())

@@ -30,6 +30,7 @@ build/
 # Ledger files (generated at runtime)
 enforcement_ledger.json
 provenance_ledger.json
+backend/output_logs/
 
 # Gemini
 .gemini/

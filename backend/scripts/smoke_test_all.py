@@ -176,7 +176,8 @@ def main() -> int:
         LOG_PATH.unlink()
 
     key = _load_api_key()
-    base = "http://localhost:8000"
+    base = os.environ.get("SMOKE_BASE_URL", "http://localhost:8000").rstrip("/")
+    render_base = os.environ.get("RENDER_BASE_URL", "https://nyaya-ai-0f02.onrender.com").rstrip("/")
 
     print("=== TestClient (L2 persistence) ===")
     tc_results = _test_testclient(run_id)
@@ -184,7 +185,7 @@ def main() -> int:
         mark = "PASS" if r["ok"] else "FAIL"
         print(f"  [{mark}] {r['name']} ({r['status']}) {r['detail']}")
 
-    print("\n=== Live server smoke ===")
+    print("\n=== Live server smoke (local) ===")
     try:
         live_results = _test_live(base, key, run_id)
         for r in live_results:
@@ -194,7 +195,17 @@ def main() -> int:
         print(f"  [SKIP] Live server not reachable at {base}: {e}")
         live_results = []
 
-    all_results = tc_results + live_results
+    print(f"\n=== Render smoke ({render_base}) ===")
+    try:
+        render_results = _test_live(render_base, key, run_id)
+        for r in render_results:
+            mark = "PASS" if r["ok"] else "FAIL"
+            print(f"  [{mark}] {r['name']} ({r['status']}) {r['detail']}")
+    except urllib.error.URLError as e:
+        print(f"  [SKIP] Render not reachable at {render_base}: {e}")
+        render_results = []
+
+    all_results = tc_results + live_results + render_results
     passed = sum(1 for r in all_results if r["ok"])
     total = len(all_results)
     print(f"\n=== SUMMARY: {passed}/{total} passed ===")

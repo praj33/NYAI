@@ -94,12 +94,13 @@ try:
 except ImportError:
     pass
 
-# Include debug router (for development only)
-try:
-    from api.debug_router import debug_router
-    app.include_router(debug_router)
-except ImportError:
-    pass
+# Include debug router (development only)
+if os.getenv("ENABLE_DEBUG_ROUTES", "false").lower() in {"1", "true", "yes"}:
+    try:
+        from api.debug_router import debug_router
+        app.include_router(debug_router)
+    except ImportError:
+        pass
 
 # Root endpoint
 @app.get("/")

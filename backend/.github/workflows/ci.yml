@@ -21,7 +21,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: "3.11"
 
       - name: Install dependencies
         working-directory: backend
@@ -38,7 +38,7 @@ jobs:
 
       - name: Run TANTRA convergence and production hardening tests
         working-directory: backend
-        run: pytest tests/test_tantra_convergence.py tests/test_production_hardening.py -v --tb=short
+        run: pytest tests/test_tantra_convergence.py tests/test_production_hardening.py tests/test_evidence_infrastructure.py -v --tb=short
 
       - name: Build Docker image
         working-directory: backend
