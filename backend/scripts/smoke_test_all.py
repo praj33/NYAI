@@ -159,6 +159,22 @@ def _test_testclient(run_id: str) -> list[dict]:
         response_cache.cache.clear()
 
     r = client.get(f"/nyaya/case_summary?trace_id={tid}", headers={"X-API-Key": key})
+    if r.status_code == 404:
+        q = client.post(
+            "/nyaya/query",
+            json={
+                "query": "assault case in India",
+                "jurisdiction_hint": "India",
+                "user_context": {"role": "citizen", "confidence_required": True},
+            },
+            headers={"X-API-Key": key},
+        )
+        if q.status_code == 200:
+            tid = q.json().get("trace_id", tid)
+            with response_cache.lock:
+                response_cache.cache.clear()
+            r = client.get(f"/nyaya/case_summary?trace_id={tid}", headers={"X-API-Key": key})
+
     body = r.json()
     statutes = body.get("key_statutes") or []
     title_ok = bool(statutes) and isinstance(statutes[0].get("title"), str)
@@ -177,7 +193,7 @@ def main() -> int:
 
     key = _load_api_key()
     base = os.environ.get("SMOKE_BASE_URL", "http://localhost:8000").rstrip("/")
-    render_base = os.environ.get("RENDER_BASE_URL", "https://nyaya-ai-0f02.onrender.com").rstrip("/")
+    render_base = os.environ.get("RENDER_BASE_URL", "https://nyai-backend-n9h8.onrender.com").rstrip("/")
 
     print("=== TestClient (L2 persistence) ===")
     tc_results = _test_testclient(run_id)

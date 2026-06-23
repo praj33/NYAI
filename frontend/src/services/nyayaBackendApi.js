@@ -1,7 +1,7 @@
 /**
  * Nyaya AI Backend API Integration
  * 
- * Connects to deployed Nyaya backend at https://nyaya-ai-0f02.onrender.com
+ * Connects to deployed Nyaya backend (see ../lib/apiConfig)
  * Handles real legal decision queries and responses
  */
 
