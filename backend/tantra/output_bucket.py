@@ -23,16 +23,19 @@ class OutputBucket:
         os.makedirs(self.bucket_dir, exist_ok=True)
         self._log_file = os.path.join(self.bucket_dir, "nyai_output_log.jsonl")
         self._index: Dict[str, int] = {}  # trace_id → line offset
+        self._line_count: int = 0
         self._lock = threading.Lock()
         self._rebuild_index()
 
     def _rebuild_index(self):
         """Rebuild in-memory index: trace_id -> line_number (0-based)."""
+        self._line_count = 0
         if not os.path.exists(self._log_file):
             return
         try:
             with open(self._log_file, 'r', encoding='utf-8') as f:
                 for line_num, line in enumerate(f):
+                    self._line_count = line_num + 1
                     try:
                         entry = json.loads(line.strip())
                         tid = entry.get("trace_id")
@@ -70,14 +73,11 @@ class OutputBucket:
         entry["entry_hash"] = entry_hash
 
         with self._lock:
+            new_line_num = self._line_count
             with open(self._log_file, 'a', encoding='utf-8') as f:
                 f.write(json.dumps(entry, sort_keys=True, default=str) + "\n")
-            try:
-                with open(self._log_file, 'r', encoding='utf-8') as count_f:
-                    new_line_num = sum(1 for _ in count_f) - 1
-                self._index[trace_id] = new_line_num
-            except Exception:
-                self._index[trace_id] = len(self._index)
+            self._index[trace_id] = new_line_num
+            self._line_count += 1
 
         return {
             "stored": "true",

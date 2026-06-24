@@ -57,6 +57,17 @@ def test_1_evidence_package_model():
     for k in ("identity", "decision", "reasoning", "hashes", "storage", "replay"):
         assert k in d
 
+def test_1b_output_bucket_sequential_store_index():
+    """Sequential stores must index each trace_id to the correct JSONL line."""
+    tid_first = _make_entry()
+    tid_second = _make_entry()
+    first = output_bucket.retrieve(tid_first)
+    second = output_bucket.retrieve(tid_second)
+    assert first is not None and second is not None
+    assert first["trace_id"] == tid_first
+    assert second["trace_id"] == tid_second
+    assert output_bucket._index[tid_second] == output_bucket._index[tid_first] + 1
+
 def test_2_evidence_repository_get_by_trace_id():
     tid = _make_entry()
     repo = EvidenceRepository()

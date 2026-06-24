@@ -109,18 +109,29 @@ UNVERIFIED  →  (verify_by_trace_id)  →  VERIFIED | TAMPERED | UNKNOWN
 - **TAMPERED**: Hash mismatch detected
 - **UNKNOWN**: Evidence not found in bucket
 
-## Example JSON (abbreviated)
+## Complete EvidencePackage JSON Example
+
+Structurally complete example with all top-level sections. Arrays are condensed to one representative item each.
+
+> For a production-scale export (full statutes, observer_steps, attachments), see [`example_exported_evidence.json`](./example_exported_evidence.json) (`export_format: nyai_evidence_v1`).
 
 ```json
 {
   "identity": {
     "trace_id": "097792dd-40f3-443b-905d-10208e89a138",
     "request_id": "req_780eafc1be76",
-    "evidence_id": "a1b2c3...",
+    "evidence_id": "a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456",
     "schema_version": "evidence_v1",
     "evidence_version": "1.0.0",
     "origin": "nyai-legal-engine",
     "created_at": "2026-06-11T06:07:00.965329"
+  },
+  "input": {
+    "raw_query": "theft of mobile phone",
+    "cleaned_query": "theft of mobile phone",
+    "jurisdiction_hint": "India",
+    "domain_hint": "criminal",
+    "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330"
   },
   "decision": {
     "recommendation_type": "INFORM",
@@ -130,12 +141,87 @@ UNVERIFIED  →  (verify_by_trace_id)  →  VERIFIED | TAMPERED | UNKNOWN
     "domain": "criminal",
     "jurisdiction_confidence": 1.0
   },
+  "reasoning": {
+    "facts": [
+      {
+        "fact_id": "F1",
+        "statement": "User query: theft of mobile phone",
+        "source": "input"
+      }
+    ],
+    "applicable_statutes": [
+      {
+        "act": "Indian Penal Code",
+        "year": 1860,
+        "section": "378",
+        "title": "Theft"
+      }
+    ],
+    "case_laws": [],
+    "explanation_chain": [
+      {
+        "step_number": 1,
+        "description": "Query received and cleaned",
+        "source": "QueryCleaner"
+      }
+    ],
+    "rule_application": [
+      {
+        "application": "Theft",
+        "law_id": "Indian Penal Code:378"
+      }
+    ],
+    "observer_steps": [
+      {
+        "stage": "query_received",
+        "trace_id": "097792dd-40f3-443b-905d-10208e89a138",
+        "timestamp": "2026-06-11T06:07:00.965329",
+        "observed": {"raw_query": "theft of mobile phone"}
+      }
+    ],
+    "observer_validation": {
+      "schema_valid": true,
+      "determinism_verified": true,
+      "validation_status": "PASS",
+      "violations": []
+    }
+  },
   "hashes": {
     "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330",
     "output_hash": "461b94d02f3b43ab3769ab88ad37d4fce9822095cf24cd0feec44abca095d1c6",
     "entry_hash": "cb88284c78f65c7515bed693e06538070942220123042d8e0de8cca506e4a55c",
     "determinism_version": "3.0.0"
   },
-  "integrity_status": "VERIFIED"
+  "storage": {
+    "stored_at": "2026-06-11T06:07:00.965329",
+    "storage_file": "output_logs/nyai_output_log.jsonl",
+    "ledger_index": null,
+    "replay_source": "output_bucket"
+  },
+  "replay": {
+    "is_replayable": true,
+    "replay_inputs": {
+      "trace_id": "097792dd-40f3-443b-905d-10208e89a138",
+      "input_hash": "780eafc1be76cfb8cb22ea90bfc20e01ec2b5e27a26de424f69ba0038e804330"
+    },
+    "last_replayed_at": null,
+    "replay_count": 0
+  },
+  "integrity_status": "VERIFIED",
+  "attachments": {
+    "timeline": [
+      {"step": "Filing of FIR", "eta": "Varies"}
+    ],
+    "glossary": [
+      {"term": "Theft", "definition": "Dishonestly taking movable property"}
+    ],
+    "legal_route": [
+      "query_cleaning",
+      "query_understanding",
+      "hybrid_retrieval"
+    ],
+    "risk_flags": [],
+    "full_response": {}
+  }
 }
 ```

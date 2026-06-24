@@ -2,7 +2,7 @@
 
 **Sprint:** Constitutional Evidence Infrastructure — Phase IV Production Transition  
 **Date:** 23 June 2026  
-**Status:** COMPLETE — **34/34** tests PASS  
+**Status:** COMPLETE — **35/35** tests PASS  
 **Contract:** `final_decision_contract.json` v2.0.0 · `schema_version: tantra_v3` · `evidence_v1`
 
 > **Authoritative operational review packet** (project root).  
@@ -184,13 +184,13 @@ Proof: [`TRACE_CONTINUITY_PROOF.md`](./SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_
 | `backend/services/replay_service.py` | Replay and compare operations |
 | `backend/services/verification_service.py` | Integrity and chain verification |
 | `backend/services/query_executor.py` | Shared ThreadPoolExecutor pools (hybrid retrieval + reranker) |
-| `backend/tests/test_evidence_infrastructure.py` | 13 evidence infrastructure tests |
+| `backend/tests/test_evidence_infrastructure.py` | 14 evidence infrastructure tests |
 
 ### Phase IV — Patched files
 
 | File | Change |
 |------|--------|
-| `backend/tantra/output_bucket.py` | O(1) line-number index; `retrieve_as_evidence()`; `list_all()` |
+| `backend/tantra/output_bucket.py` | O(1) line-number index via `_line_count` counter; `retrieve_as_evidence()`; `list_all()` |
 | `backend/api/router.py` | Shared thread pools; L2 fallback via `resolve_cached_response()` on 5 endpoints |
 | `backend/api/main.py` | `include_router(evidence_router)` |
 | `backend/api/health.py` | `evidence_repository` readiness check |
@@ -204,11 +204,11 @@ Proof: [`TRACE_CONTINUITY_PROOF.md`](./SHASHANK-NYAI_CONVERGENCE_IMPLEMENTATION_
 |------|------|
 | `Shashank-.../README.md` | Deliverables index + proof artifact links |
 | `Shashank-.../Architecture.md` | Before/after, component map, security |
-| `Shashank-.../Evidence_Model.md` | Dataclass reference + JSON example |
+| `Shashank-.../Evidence_Model.md` | Dataclass reference + complete `EvidencePackage` JSON example |
 | `Shashank-.../Evidence_API.md` | Full API reference (12 routes) |
 | `Shashank-.../Replay_Architecture.md` | Replay semantics and compare |
-| `Shashank-.../Migration_Guide.md` | L1/L2 migration, no URL changes |
-| `Shashank-.../Future_Extensibility.md` | Redis, S3, Governance Console paths |
+| `Shashank-.../Migration_Guide.md` | L1/L2 migration, before/after JSONL vs EvidencePackage examples |
+| `Shashank-.../Future_Extensibility.md` | Redis, S3, versioning, Governance Console, Replay Center paths |
 
 ### Protected — do not modify without review
 
@@ -238,14 +238,15 @@ pytest tests/test_evidence_infrastructure.py tests/test_production_hardening.py 
 |-------|-------|-------|--------|
 | Phase I — TANTRA Convergence | `test_tantra_convergence.py` | 6/6 | PASS |
 | Phase II — Production Hardening | `test_production_hardening.py` | 15/15 | PASS |
-| Phase IV — Evidence Infrastructure | `test_evidence_infrastructure.py` | 13/13 | PASS |
-| **Total** | | **34/34** | **PASS** |
+| Phase IV — Evidence Infrastructure | `test_evidence_infrastructure.py` | 14/14 | PASS |
+| **Total** | | **35/35** | **PASS** |
 
 ### What each evidence test proves
 
 | Test | Proves |
 |------|--------|
 | `test_1_evidence_package_model` | `EvidencePackage.from_stored_entry()` builds all required fields |
+| `test_1b_output_bucket_sequential_store_index` | Sequential `store()` assigns correct JSONL line indices |
 | `test_2_evidence_repository_get_by_trace_id` | Repository reads from persistent OutputBucket |
 | `test_3_get_evidence_endpoint` | `GET /evidence/{id}` returns 200 + canonical package |
 | `test_4_evidence_search` | `GET /evidence/search` returns paginated results |
@@ -317,6 +318,7 @@ curl -X POST -H "X-API-Key: $NYAI_API_KEY" -H "Content-Type: application/json" \
 | In L1 cache | 200 | Fast path |
 | Cache miss, in OutputBucket | 200 | L2 `EvidenceRepository` fallback |
 | Not in cache or bucket | 404 | `trace_id not found` |
+| Concurrent bucket writes | — | `_line_count` counter avoids post-write file re-read race |
 
 ### Health readiness
 
@@ -410,6 +412,6 @@ grep -rn "enforcement_decision" backend/api/ frontend/src/
 
 **PHASE IV CONSTITUTIONAL EVIDENCE INFRASTRUCTURE — BHIV SUBMISSION COMPLETE.**
 
-TANTRA convergence preserved (6/6). Production controls preserved (15/15). Evidence infrastructure operational (13/13). Every query execution is a permanent, replayable evidence object. Legal reasoning semantics, trace lifecycle, and advisory posture unchanged.
+TANTRA convergence preserved (6/6). Production controls preserved (15/15). Evidence infrastructure operational (14/14). Every query execution is a permanent, replayable evidence object. Legal reasoning semantics, trace lifecycle, and advisory posture unchanged.
 
 **Start onboarding here:** Sections [1](#1-entry-points) → [6](#6-evidence) above.

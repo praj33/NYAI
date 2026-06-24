@@ -7,9 +7,9 @@
 | **Status** | PHASE IV COMPLETE — evidence is the primary architectural product |
 | **Contract** | `final_decision_contract.json` v2.0.0 · `schema_version` `tantra_v3` |
 | **Evidence schema** | `evidence_v1` / format `1.0.0` |
-| **Tests** | 13 evidence + 15 production + 6 convergence = **34/34** |
+| **Tests** | 14 evidence + 15 production + 6 convergence = **35/35** |
 | **Review packet** | [`REVIEW_PACKET.md`](../REVIEW_PACKET.md) |
-| **Phase IV docs** | [`../Shashank-Constitutional Evidence Infrastructure (NYAI__ Phase IV Production Transition)/`](../Shashank-Constitutional%20Evidence%20Infrastructure%20(NYAI__%20Phase%20IV%20Production%20Transition)/) |
+| **Phase IV docs** | [`../Shashank-Constitutional Evidence Infrastructure (NYAI__ Phase IV Production Transition)/`](../Shashank-Constitutional%20Evidence%20Infrastructure%20(NYAI__%20Phase%20IV%20Production%20Transition)/) — includes complete `EvidencePackage` JSON in `Evidence_Model.md` |
 
 ### Evidence Architecture
 
