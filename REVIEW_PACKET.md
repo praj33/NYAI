@@ -1,4 +1,135 @@
-# NYAI — REVIEW PACKET (BHIV Submission)
+# NYAI — REVIEW PACKET
+
+## LATEST: Platform Infrastructure Expansion (Phase V)
+
+**Sprint:** Platform Infrastructure Expansion — Phase V
+**Date:** 27 June 2026
+**Status:** COMPLETE — **101/101** tests PASS (35 Phase IV preserved + 66 new Phase V)
+**Prior Sprint:** Phase IV Constitutional Evidence Infrastructure — 35/35 PASS (preserved, see below)
+**Contract:** `schema_version: tantra_v3` · evidence via frozen `OutputBucket` + `ResponseBuilder`
+
+> Phase V adds a governed knowledge layer (repository, ingestion, workspace,
+> graph runtime, promotion) on top of the frozen Phase IV evidence
+> infrastructure. Every Phase V operation produces a TANTRA-canonical evidence
+> record, so it is visible/replayable/verifiable through the existing
+> `/evidence/*` API. Full docs: [`Platform Infrastructure Expansion/`](./Platform%20Infrastructure%20Expansion/).
+
+### 1. Entry Points (Phase V)
+
+New router prefixes (all protected by the **existing** `APIKeyAuthMiddleware` +
+rate limiter; require `X-API-Key`):
+
+| Prefix | Router | Purpose |
+|--------|--------|---------|
+| `/knowledge/*` | `api/knowledge_router.py` | Assets, versions, integrity, ingestion, promotion, rollback |
+| `/workspace/*` | `api/workspace_router.py` | Document upload/versioning, annotations, diff, audit |
+| `/graph/*` | `api/graph_router.py` | Entities, relationships, dependency/impact/citation/path |
+
+Mounted **after** all Phase IV routers in `api/main.py` via try/except (same as
+`procedure_router`). `/health/ready` now reports `knowledge_repository`.
+
+New optional env vars (all defaulted): `KNOWLEDGE_STORE_DIRECTORY`,
+`INGESTION_LOG_DIRECTORY`, `PROMOTION_LOG_DIRECTORY`, `WORKSPACE_STORE_DIRECTORY`.
+No new **required** vars; `NYAI_API_KEY` now also gates Phase V routes.
+
+### 2. Flow (Phase V)
+
+```
+ingest → KnowledgeRepository (DRAFT/PENDING, v1)
+       → workspace review (documents + annotations)
+       → promotion pipeline (DRAFT→REVIEW→APPROVED→ARCHIVED, explicit actor+rationale)
+       → graph runtime (entities/relationships, BFS traversal)
+   every op → evidence_bridge.record_knowledge_operation()
+            → ResponseBuilder.build() (fail closed)
+            → OutputBucket.store()  → /evidence/* (get / verify / replay / search)
+```
+
+### 3. Files (Phase V)
+
+| File | Role |
+|------|------|
+| `backend/knowledge/models.py` | `KnowledgeAsset` + identity/metadata/integrity/governance dataclasses |
+| `backend/knowledge/storage_backend.py` | `KnowledgeStorageBackend` protocol + `FileSystemKnowledgeBackend` (+ Redis stub) |
+| `backend/knowledge/integrity.py` | Content hash + integrity/chain verification (pure functions) |
+| `backend/knowledge/evidence_bridge.py` | `record_knowledge_operation()` → frozen `ResponseBuilder` → `OutputBucket` |
+| `backend/knowledge/repository.py` | `KnowledgeRepository` (register/update/get/versions/integrity/count) |
+| `backend/ingestion/{logger,extractor,validator,pipeline}.py` | Governed ingestion (validate, dedupe, log, evidence) |
+| `backend/workspace/{annotation_store,diff,document_store}.py` | Documents, annotations, diff, audit |
+| `backend/knowledge/graph/{models,registry,traversal}.py` | Generic entity/relationship graph + BFS |
+| `backend/promotion/{states,approval,rollback,pipeline}.py` | State machine + approval audit + rollback |
+| `backend/services/{knowledge,ingestion,graph,promotion}_service.py` | Thin orchestration layers |
+| `backend/api/{knowledge,workspace,graph}_router.py` | Thin transport routers |
+| `backend/tests/test_*` (9 new suites) | 66 Phase V tests |
+| `Platform Infrastructure Expansion/*.md` (9 docs) | Architecture, modules, integration, testing, extensibility |
+
+Additive edits to frozen-ish files: `api/main.py` (router registration + root
+dict), `api/health.py` (knowledge readiness check), `api/security.py` +
+`api/rate_limiter.py` (added new prefixes to `_PROTECTED_PREFIXES`).
+
+### 4. Testing (Phase V)
+
+```powershell
+cd backend
+python -m pytest tests/test_knowledge_repository.py tests/test_ingestion_pipeline.py `
+  tests/test_workspace_apis.py tests/test_graph_runtime.py tests/test_promotion_pipeline.py `
+  tests/test_knowledge_integration.py tests/test_replay_knowledge.py `
+  tests/test_determinism_knowledge.py tests/test_knowledge_failure.py -v
+```
+
+| Suite | Tests | Status |
+|-------|-------|--------|
+| Knowledge repository | 10 | PASS |
+| Ingestion pipeline | 8 | PASS |
+| Workspace APIs | 8 | PASS |
+| Graph runtime | 8 | PASS |
+| Promotion pipeline | 8 | PASS |
+| Knowledge integration | 6 | PASS |
+| Replay knowledge | 5 | PASS |
+| Determinism knowledge | 5 | PASS |
+| Knowledge failure | 8 | PASS |
+| **Phase V total** | **66** | **PASS** |
+| Phase IV (preserved) | 35 | PASS |
+| **Combined** | **101** | **PASS** |
+
+### 5. Failure Modes (Phase V)
+
+| Condition | HTTP |
+|-----------|------|
+| Missing required body field (e.g. asset `title`, upload `content`) | 422 |
+| Invalid/unknown promotion state (e.g. `PUBLISHED`) | 400 |
+| Invalid state transition (e.g. DRAFT→APPROVED, out of ARCHIVED) | 400 |
+| Promote/rollback missing `actor`/`rationale` | 400 |
+| Invalid annotation type | 400 |
+| Asset / version / document / entity not found | 404 |
+| Relationship referencing nonexistent entity | 404 |
+| Rollback to nonexistent version | 404 |
+| Missing / invalid `X-API-Key` | 401 |
+| Duplicate ingestion (identical content hash) | `DUPLICATE_REJECTED` result |
+| Integrity tamper | `status: TAMPERED` in integrity report |
+
+Fail-closed throughout; the evidence bridge validates every record via the
+frozen `ResponseBuilder` before persistence.
+
+### 6. Evidence (Phase V)
+
+Every create/update/promote/rollback/ingest/graph/workspace operation writes one
+TANTRA-canonical record to `OutputBucket` with `recommendation.type="INFORM"`,
+`schema_version="tantra_v3"`, `determinism_proof.version="3.0.0"`, plus
+`knowledge_operation`, `asset_id`, `version_id`, `content_hash`. The returned
+evidence `trace_id` is stored on the domain object. Verify via:
+
+```
+GET  /evidence/{trace_id}        # reconstruct EvidencePackage
+POST /evidence/verify            # {trace_id} → verified: true
+GET  /evidence/search?recommendation=INFORM
+```
+
+Replay is **stored-record replay** (reconstruct the evidence record from
+storage), not re-execution of the originating operation.
+
+---
+
+# NYAI — REVIEW PACKET (BHIV Submission) — Phase IV
 
 **Sprint:** Constitutional Evidence Infrastructure — Phase IV Production Transition  
 **Date:** 23 June 2026  

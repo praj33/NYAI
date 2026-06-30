@@ -78,6 +78,16 @@ def _check_evidence_repository() -> dict:
         return {"status": "DEGRADED", "detail": f"Evidence repository: {str(e)[:200]}"}
 
 
+def _check_knowledge_repository() -> dict:
+    # Phase V — governed knowledge repository readiness.
+    try:
+        from knowledge.repository import knowledge_repository
+        count = knowledge_repository.count()
+        return {"status": "PASS", "detail": f"Knowledge repository accessible ({count} assets stored)"}
+    except Exception as e:
+        return {"status": "DEGRADED", "detail": f"Knowledge repository: {str(e)[:200]}"}
+
+
 @health_router.get("/health")
 async def health() -> Dict[str, Any]:
     return _basic_health_payload()
@@ -96,6 +106,7 @@ async def health_ready() -> JSONResponse:
         "retriever": retriever_check(),
         "model": model_check(),
         "evidence_repository": _check_evidence_repository(),
+        "knowledge_repository": _check_knowledge_repository(),
     }
 
     statuses = [dep["status"] for dep in dependencies.values()]

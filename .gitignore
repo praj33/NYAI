@@ -45,7 +45,15 @@ backend/output_logs/
 storybook-static/
 
 #Task md files
-ARYA Quadruped__ Physical Prototype Readiness.md
-IMPLEMENTATION.md
 Constitutional Evidence Infrastructure (NYAI__ Phase IV Production Transition).md
 PHASE4_IMPLEMENTATION.md
+Platform Infrastructure Expansion.md
+Implementation.md
+AGENT_PROMPT.md
+
+# Phase V runtime data stores (generated at runtime — never commit test/run data)
+backend/knowledge_store/
+backend/ingestion_logs/
+backend/promotion_logs/
+backend/workspace_store/
+backend/output/

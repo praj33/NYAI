@@ -16,7 +16,7 @@ from starlette.responses import JSONResponse
 
 from api.error_codes import ErrorCode
 
-_PROTECTED_PREFIXES = ("/nyaya/", "/evidence/")
+_PROTECTED_PREFIXES = ("/nyaya/", "/evidence/", "/knowledge/", "/workspace/", "/graph/")
 
 
 def _is_protected_path(path: str) -> bool:

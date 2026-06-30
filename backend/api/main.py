@@ -102,6 +102,28 @@ if os.getenv("ENABLE_DEBUG_ROUTES", "false").lower() in {"1", "true", "yes"}:
     except ImportError:
         pass
 
+# Phase V: Platform Infrastructure Expansion — mounted AFTER existing routers
+import logging as _logging
+_phase_v_logger = _logging.getLogger("nyai.phase_v")
+
+try:
+    from api.knowledge_router import knowledge_router
+    app.include_router(knowledge_router)
+except ImportError as e:
+    _phase_v_logger.warning("knowledge_router not available: %s", e)
+
+try:
+    from api.workspace_router import workspace_router
+    app.include_router(workspace_router)
+except ImportError as e:
+    _phase_v_logger.warning("workspace_router not available: %s", e)
+
+try:
+    from api.graph_router import graph_router
+    app.include_router(graph_router)
+except ImportError as e:
+    _phase_v_logger.warning("graph_router not available: %s", e)
+
 # Root endpoint
 @app.get("/")
 async def root():
@@ -137,7 +159,25 @@ async def root():
             "health_live": "GET /health/live",
             "health_ready": "GET /health/ready",
             "metrics": "GET /metrics",
-            "docs": "GET /docs"
+            "docs": "GET /docs",
+            "knowledge": {
+                "register_asset": "POST /knowledge/assets",
+                "get_asset": "GET /knowledge/assets/{asset_id}",
+                "ingest": "POST /knowledge/ingest",
+                "promote": "POST /knowledge/assets/{asset_id}/promote",
+                "rollback": "POST /knowledge/assets/{asset_id}/rollback",
+            },
+            "workspace": {
+                "upload": "POST /workspace/documents/upload",
+                "annotate": "POST /workspace/annotations",
+                "compare": "GET /workspace/documents/{doc_id_a}/compare/{doc_id_b}",
+            },
+            "graph": {
+                "register_entity": "POST /graph/entities",
+                "register_relationship": "POST /graph/relationships",
+                "dependencies": "GET /graph/entities/{entity_id}/dependencies",
+                "impact": "GET /graph/entities/{entity_id}/impact",
+            },
         }
     }
 
