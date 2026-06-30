@@ -40,6 +40,10 @@ jobs:
         working-directory: backend
         run: pytest tests/test_tantra_convergence.py tests/test_production_hardening.py tests/test_evidence_infrastructure.py -v --tb=short
 
+      - name: Run Phase V platform infrastructure tests
+        working-directory: backend
+        run: pytest tests/test_knowledge_repository.py tests/test_ingestion_pipeline.py tests/test_workspace_apis.py tests/test_graph_runtime.py tests/test_promotion_pipeline.py tests/test_knowledge_integration.py tests/test_replay_knowledge.py tests/test_determinism_knowledge.py tests/test_knowledge_failure.py -v --tb=short
+
       - name: Build Docker image
         working-directory: backend
         run: |
